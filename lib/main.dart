@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Mini InstaPay",
+      title: "Mini InsatPay",
       onGenerateRoute: RouteGenerator.generateRoutes,
       debugShowCheckedModeBanner: false,
       theme: AppThemeManager.mainTheme,
