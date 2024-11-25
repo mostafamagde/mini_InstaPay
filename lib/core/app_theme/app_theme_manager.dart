@@ -3,6 +3,7 @@ import 'package:untitled2/core/utils/Constants.dart';
 
 class AppThemeManager {
   static ThemeData mainTheme = ThemeData(
+    scaffoldBackgroundColor: Constants.backgroundColor,
     primaryColor: Constants.primaryMouveColor,
     secondaryHeaderColor: Constants.secondaryOrangeColor,
     elevatedButtonTheme: ElevatedButtonThemeData(
