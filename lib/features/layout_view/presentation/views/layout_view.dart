@@ -21,9 +21,7 @@ class _LayoutViewState extends State<LayoutView> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: theme.primaryColor,
-      ),
+
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -42,7 +40,7 @@ class _LayoutViewState extends State<LayoutView> {
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled),
+                icon: Icon(Icons.home_outlined),
                 label: "Home",
               ),
               BottomNavigationBarItem(
