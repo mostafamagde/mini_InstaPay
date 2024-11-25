@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 
 class ProfileView extends StatelessWidget {
@@ -32,7 +33,7 @@ Management''',style:theme.textTheme.titleLarge),
               label: "Full Name",
               icon: Icons.person,
               inputType: TextInputType.name,
-              valid: validateRegularTextField,
+              valid: Validation.validateRegularTextField,
 
             ),
             SizedBox(height: 20),
@@ -40,21 +41,21 @@ Management''',style:theme.textTheme.titleLarge),
               label: "Address",
               icon: Icons.location_on,
               inputType: TextInputType.streetAddress,
-              valid: validateRegularTextField,
+              valid: Validation.validateRegularTextField,
             ),
             SizedBox(height: 20),
             CustomTextField(
               label: "Email",
               icon: Icons.email,
               inputType: TextInputType.emailAddress,
-              valid: validateEmailTextField,
+              valid: Validation.validateEmailTextField,
             ),
             SizedBox(height: 20),
             CustomTextField(
               label: "Phone Number",
               icon: Icons.phone,
               inputType: TextInputType.phone,
-              valid: validateNumberTextField,
+              valid: Validation.validateNumberTextField,
             ),
             SizedBox(height: 40),
             Padding(
@@ -86,32 +87,4 @@ Management''',style:theme.textTheme.titleLarge),
   }
 }
 
-String? validateEmailTextField(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Please enter your email';
-  }
-  final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-  if (!emailRegex.hasMatch(value)) {
-    return 'Please enter a valid email address';
-  }
-  return null;
-}
 
-String? validateNumberTextField(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Please enter your Number';
-  }
-  final phoneRegex = RegExp(r'^01\d{9}$');
-  if (!phoneRegex.hasMatch(value)) {
-    return 'Please enter a valid Number';
-  }
-  return null;
-}
-
-String? validateRegularTextField(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Please fill this field';
-  }
-
-  return null;
-}
