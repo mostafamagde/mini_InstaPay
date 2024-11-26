@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
+import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
 
+import '../../../../core/utils/Constants.dart';
 import '../../../../core/widgets/CustomTitleContainer.dart';
 import '../../../../core/widgets/custom_small_button.dart';
 
@@ -11,12 +13,13 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var media = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             CustomTitleContainer(
-              title: "Your Name",
+              title: "Mostafa Magdy",
             ),
             SizedBox(
               height: 50,
@@ -55,15 +58,23 @@ class HomeView extends StatelessWidget {
                 ),
                 Text("Services"),
                 Spacer(),
-               TextButton(onPressed: () {
-        
-               }, child:  Text("view all",style: theme.textTheme.bodyMedium?.copyWith(
-                   color: theme.secondaryHeaderColor,fontWeight: FontWeight.w400
-               ),),),
-                SizedBox(width: 15,)
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "view all",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.secondaryHeaderColor,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
+                SizedBox(
+                  width: 15,
+                )
               ],
             ),
-            SizedBox(height: 10 ,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -81,7 +92,9 @@ class HomeView extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -99,11 +112,43 @@ class HomeView extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Last Transaction"),
+                Spacer(),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "view all",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.secondaryHeaderColor,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
+                SizedBox(
+                  width: 15,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TransactionCard(),
+            TransactionCard(),
+            TransactionCard(),
+            TransactionCard(),
+            TransactionCard(),
 
-        
           ],
         ),
       ),
     );
   }
 }
+

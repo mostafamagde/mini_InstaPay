@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/home_view/presentation/views/home_view.dart';
 
 import '../../../profile_managment/presentation/views/profile_view.dart';
@@ -35,7 +36,7 @@ class _LayoutViewState extends State<LayoutView> {
           color: Colors.transparent,
           padding: EdgeInsets.zero,
           child: BottomNavigationBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Constants.backgroundColor,
             currentIndex: currentIndex,
             onTap: (value) {
               currentIndex = value;
