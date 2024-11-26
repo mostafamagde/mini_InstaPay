@@ -11,7 +11,7 @@ class BankAccountManagment extends StatelessWidget {
     Size media = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     return Container(
-      width: media.width * .85,
+      width: media.width * .9,
       height: media.height * .15,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -28,7 +28,7 @@ class BankAccountManagment extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: 10,
+                width: 15,
               ),
               Image.asset(
                 "assets/images/banktest.jpg",
@@ -51,7 +51,7 @@ class BankAccountManagment extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                width: 8,
+                width: 22,
               ),
               IconButton(
                   onPressed: () {},
@@ -69,7 +69,7 @@ class BankAccountManagment extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(
-                  width: 30,
+                  width: 40,
                 ),
                 InkWell(
                   child: CustomAccountCardButton(
@@ -79,7 +79,7 @@ class BankAccountManagment extends StatelessWidget {
                   onTap: () {},
                 ),
                 SizedBox(
-                  width: 40,
+                  width: 30,
                 ),
                 Container(
                   width: 2,
