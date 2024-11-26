@@ -17,7 +17,21 @@ class AppThemeManager {
           fontSize: 35,
           color: Colors.white,
           fontWeight: FontWeight.w700,
-        )
-      )
+        ),
+        bodyMedium: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w500,
+          fontSize: 18,
+
+        ),
+        bodySmall: TextStyle(
+          color: Colors.grey,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+
+        ),
+
+      ),
+
   );
 }

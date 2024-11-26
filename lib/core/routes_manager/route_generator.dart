@@ -3,6 +3,7 @@ import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
 
+import '../../features/account_managment/presentation/add_account_view.dart';
 import '../../features/layout_view/presentation/views/layout_view.dart';
 import '../../features/splash_view/presentation/views/splash_view.dart';
 
@@ -12,6 +13,11 @@ class RouteGenerator {
       case RoutesNames.splashView:
         return MaterialPageRoute(
           builder: (context) => const SplashView(),
+          settings: settings,
+        );
+      case RoutesNames.AddAccountView:
+        return MaterialPageRoute(
+          builder: (context) => const AddAccountView(),
           settings: settings,
         );
 
@@ -25,7 +31,7 @@ class RouteGenerator {
           builder: (context) => const LoginView(),
           settings: settings,
         );
-        case RoutesNames.signupView:
+      case RoutesNames.signupView:
         return MaterialPageRoute(
           builder: (context) => const SignupView(),
           settings: settings,

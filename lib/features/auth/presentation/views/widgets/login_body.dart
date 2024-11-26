@@ -71,7 +71,7 @@ class LoginBody extends StatelessWidget {
               ),
               CusttomButton(
                 onTap: () {
-                 if(formKey.currentState!.validate())
+
                   Navigator.pushReplacementNamed(context, RoutesNames.layoutView);
                 },
                 label: "Login",
