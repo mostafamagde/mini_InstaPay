@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
+import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -8,33 +9,24 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
-    Size media = MediaQuery.of(context).size;
-    var theme = Theme.of(context);
+
     return SingleChildScrollView(
       child: Form(
         key: formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: media.height*.2,
-             width: double.infinity,
-              decoration: BoxDecoration(color: theme.secondaryHeaderColor),
-              child: Padding(
-
-
-                padding: const EdgeInsets.only(top: 50,left: 15),
-                child: Text('''Profile
-Management''',style:theme.textTheme.titleLarge),
-              ),
+            CustomTitleContainer(
+              title: "Profile Management",
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             CustomTextField(
               label: "Full Name",
               icon: Icons.person,
               inputType: TextInputType.name,
               valid: Validation.validateRegularTextField,
-
             ),
             SizedBox(height: 20),
             CustomTextField(
@@ -64,8 +56,8 @@ Management''',style:theme.textTheme.titleLarge),
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))
-                  ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15))),
                   onPressed: () {
                     formKey.currentState!.validate();
                   },
@@ -86,5 +78,3 @@ Management''',style:theme.textTheme.titleLarge),
     );
   }
 }
-
-

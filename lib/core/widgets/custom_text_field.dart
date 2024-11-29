@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {super.key,
-      required this.label,
-      required this.icon,
-      required this.inputType,required this.valid});
+  const CustomTextField({super.key,
+    required this.label,
+    required this.icon,
+    required this.inputType, required this.valid, this.function,});
 
   final String label;
   final IconData icon;
   final TextInputType inputType;
   final FormFieldValidator<String> valid;
+  final void Function (String)? function;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: TextFormField(
+        onChanged:function,
 
         validator: valid,
         keyboardType: inputType,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(
-            color: Colors.grey
+              color: Colors.grey
           ),
 
           prefixIcon: Icon(icon, color: Colors.grey),
