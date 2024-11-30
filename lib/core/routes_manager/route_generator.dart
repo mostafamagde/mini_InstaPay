@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
+import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
 
 import '../../features/account_managment/presentation/add_account_view.dart';
@@ -36,6 +37,11 @@ class RouteGenerator {
           builder: (context) => const SignupView(),
           settings: settings,
         );
+      // case RoutesNames.OtpView:
+      //   return MaterialPageRoute(
+      //     builder: (context) =>  OtpView(),
+      //     settings: settings,
+      //   );
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashView(),
