@@ -37,7 +37,7 @@ class Validation {
     if (value.length < 8) {
       return 'Password must be at least 8 characters long';
     }
-    final passwordRegex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+final passwordRegex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d[^\W]{8,}$');
     if (!passwordRegex.hasMatch(value)) {
       return 'Password must contain at least one small letter, one capital letter, one number and one special character';
     }

@@ -37,11 +37,11 @@ class RouteGenerator {
           builder: (context) => const SignupView(),
           settings: settings,
         );
-             case RoutesNames.OtpView:
-        return MaterialPageRoute(
-          builder: (context) =>  OtpView(),
-          settings: settings,
-        );
+      // case RoutesNames.OtpView:
+      //   return MaterialPageRoute(
+      //     builder: (context) =>  OtpView(),
+      //     settings: settings,
+      //   );
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashView(),
