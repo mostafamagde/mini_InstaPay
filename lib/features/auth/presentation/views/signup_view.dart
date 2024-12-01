@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:untitled2/features/auth/presentation/views/widgets/signup_body.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/features/auth/presentation/cubit/auth_cubit.dart';
 
 class SignupView extends StatelessWidget {
   const SignupView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SignupBody(),
+    return BlocProvider<AuthCubit>(
+      create: (context) => AuthCubit(AuthRepoImpl()),
+      child: const Scaffold(
+        body: SignupBody(),
+      ),
     );
   }
 }
