@@ -30,4 +30,13 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthFail(e.toString()));
     }
   }
+  Future<void> forgetPassword(String email) async {
+    emit(AuthLoading());
+    try {
+      final otpModel = await _authRepository.forgetPassword(email);
+      emit(AuthSuccess(otpModel));
+    } catch (e) {
+      emit(AuthFail(e.toString()));
+    }
+  }
 }

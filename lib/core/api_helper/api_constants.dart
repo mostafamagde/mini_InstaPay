@@ -4,5 +4,8 @@ class ApiConstants {
   static const String preLogin ="auth/preLogin";
   static const String loginEndPoint = 'auth/login/';
   static const String vetifyEmailEndPoint = 'auth/verifyEmail/';
+  static const String preForgotPasswordEndPoint = 'auth/preForgetPassword';
+  static const String forgotPasswordEndPoint = 'auth/forgetPassword';
+  
 }
 

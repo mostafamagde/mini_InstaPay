@@ -7,11 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/auth/data/models/signup_model.dart';
-import 'package:untitled2/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
 import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/widgets/auth_header.dart';
 import 'package:untitled2/features/auth/presentation/views/widgets/custom_text_button.dart';
@@ -49,15 +51,10 @@ class _SignupBodyState extends State<SignupBody> {
         listener: (context, state) {
           if (state is AuthSuccess) {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => OtpView(userToken: state.otpModel.token,)),
+              MaterialPageRoute(builder: (context) => OtpView(userToken: state.otpModel.token,function: Constants.signupString,)),
             );
           } else if (state is AuthFail) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.red,
-              ),
-            );
+           snackBar(content: state.message, context: context);
           }
         },
         builder: (context, state) {

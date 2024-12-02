@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
@@ -42,6 +43,11 @@ class RouteGenerator {
       //     builder: (context) =>  OtpView(),
       //     settings: settings,
       //   );
+        case RoutesNames.ForgetPasswordView:
+        return MaterialPageRoute(
+          builder: (context) => const ForgetPasswordView(),
+          settings: settings,
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashView(),
