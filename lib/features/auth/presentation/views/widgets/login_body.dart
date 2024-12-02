@@ -1,16 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
+import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
 import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/widgets/auth_header.dart';
 import 'package:untitled2/features/auth/presentation/views/widgets/custom_text_button.dart';
-
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
 
@@ -33,98 +37,92 @@ class _LoginBodyState extends State<LoginBody> {
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              AuthHeader(),
-              SizedBox(
-                height: 30.h,
-              ),
-              CustomTextField(
-                label: "email",
-                icon: Icons.email,
-                inputType: TextInputType.emailAddress,
-                controller: _emailController,
-                valid: Validation.validateEmailTextField,
-              ),
-              CustomTextField(
-                label: "Password",
-                icon: Icons.lock_outline_rounded,
-                inputType: TextInputType.visiblePassword,
-                controller: _passwordController,
-                valid: Validation.validatePasswordTextField,
-              ),
-              CustomTextButton(
-                label: "Forget Password",
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              CusttomButton(
-                onTap: () {
-                  if (formKey.currentState!.validate()){
-                     final apiManager = ApiManager();
-                    final body = {
-                    "email": _emailController.text,
-                    "password": _passwordController.text
-};
-                    apiManager.post(ApiConstants.preLogin, body).then((response) {
-                      print("$response sssssssssssssssssssssssssssssssssssssssss ${response.statusCode}");
-                      if (response.statusCode == 201) {
-                          final Map<String, dynamic> responseBody = response.data;
-                    final String userToken = responseBody['token'];
-                    print(userToken);
-                       Navigator.push(context, MaterialPageRoute(builder: (context) => OtpView(userToken: userToken,login: true,)));
-                        print("Signup successful");
-                      } else {
-                        print("Failed to signup");
-                      }
-                    }).catchError((error) {
-                      if (error is DioException) {
-                        if (error.response != null) {
-                          print("Error during signin: ${error.response?.data}");
-                        } else {
-                          print("Error during signin: ${error.message}");
-                        }
-                      } else {
-                        print(error);
-                      }
-                    });
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is AuthSuccess) {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => OtpView(userToken: state.otpModel.token,function: Constants.loginString,)),
+          );
+          } else if (state is AuthFail) {
+            snackBar(content: state.message, context: context);
+          }
+        },
+        builder: (context, state) {
+          bool isLoading = state is AuthLoading; 
 
-                  }
-                },
-                label: "Login",
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account?",
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
+          return ModalProgressHUD(
+            inAsyncCall: isLoading, 
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    AuthHeader(),
+                    SizedBox(
+                      height: 30.h,
                     ),
-                  ),
-                  CustomTextButton(
-                    label: "Sign Up",
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, RoutesNames.signupView);
-                    },
-                  ),
-                ],
-              )
-            
-            ],
-          ),
-        ),
+                    CustomTextField(
+                      label: "email",
+                      icon: Icons.email,
+                      inputType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      valid: Validation.validateEmailTextField,
+                    ),
+                    CustomTextField(
+                      label: "Password",
+                      icon: Icons.lock_outline_rounded,
+                      inputType: TextInputType.visiblePassword,
+                      controller: _passwordController,
+                      valid: Validation.validatePasswordTextField,
+                    ),
+                    CustomTextButton(
+                      label: "Forget Password",
+                      onTap: () {
+                        Navigator.pushNamed(context, RoutesNames.ForgetPasswordView);
+                      },
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    CusttomButton(
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          context.read<AuthCubit>().login(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                        }
+                      },
+                      label: "Login",
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        CustomTextButton(
+                          label: "Sign Up",
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RoutesNames.signupView);
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
