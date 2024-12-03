@@ -18,9 +18,15 @@ class ChangeCredintials extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
-    var token =ModalRoute.of(context)?.settings.arguments as String;
+    var token = ModalRoute.of(context)?.settings.arguments as String;
+    var theme = Theme.of(context);
+
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: theme.secondaryHeaderColor,
+
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
@@ -73,18 +79,23 @@ class ChangeCredintials extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
-                    onPressed: ()  async{
+                    onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         ApiManager service = ApiManager();
-                       var response= await service.patch(ApiConstants.changeCredintialsEndPoint, {
-                          "firstName": firstNameController.text,
-                          "lastName": lastNameController.text,
-                          "mobileNumber": phoneNumberController.text,
-                        },{
-                          "token":token,
-                         'Content-Type': 'application/x-www-form-urlencoded'
-                        });
-
+                        var response = await service.patch(
+                          ApiConstants.changeCredintialsEndPoint,
+                          data: {
+                            "firstName": firstNameController.text,
+                            "lastName": lastNameController.text,
+                            "mobileNumber": phoneNumberController.text,
+                            "address": addressController.text,
+                          },
+                          headers: {
+                            "token": token,
+                          },
+                        ).then((value) {
+                          print(value.statusMessage);
+                        },);
                       }
                     },
                     child: Text(

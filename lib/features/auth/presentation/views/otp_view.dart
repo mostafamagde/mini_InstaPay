@@ -43,6 +43,7 @@ class _OTPScreenState extends State<OtpView> {
         if (response.statusCode == 201) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('OTP Verified')),
+
           );
           Navigator.pushReplacementNamed(context, RoutesNames.loginView);
         } else {
@@ -99,7 +100,8 @@ class _OTPScreenState extends State<OtpView> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Login Successful')),
           );
-          Navigator.pushReplacementNamed(context, RoutesNames.layoutView,arguments:widget.userToken ,);
+          Navigator.pushReplacementNamed(context, RoutesNames.layoutView,arguments:response.data["token"]
+            ,);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to login')),

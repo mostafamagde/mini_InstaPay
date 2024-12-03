@@ -20,8 +20,8 @@ class CustomTitleContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title.split(" ")[0],style:theme.textTheme.titleLarge,),
-            Text(title.split(" ")[1],style:theme.textTheme.titleLarge,),
+
+            Text(title,style:theme.textTheme.titleLarge,),
           ],
         ),
       ),
