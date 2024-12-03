@@ -8,7 +8,8 @@ import 'package:untitled2/core/utils/Constants.dart';
 class OtpView extends StatefulWidget {
   final String userToken;
   final String function ;
-  OtpView({required this.userToken, required this.function});
+  final String? password;
+  OtpView({required this.userToken, required this.function,  this.password});
 
   @override
   _OTPScreenState createState() => _OTPScreenState();
@@ -38,6 +39,7 @@ class _OTPScreenState extends State<OtpView> {
       try {
         final response = await apiManager.post(ApiConstants.forgotPasswordEndPoint, {
           "token": widget.userToken,
+          "password": widget.password,
           "otp": int.parse(otp),
         });
         if (response.statusCode == 201) {

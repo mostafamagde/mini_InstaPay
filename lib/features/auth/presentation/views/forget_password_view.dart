@@ -9,6 +9,7 @@ import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
+import 'package:untitled2/features/auth/presentation/views/enter_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 
 class ForgetPasswordView extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
           listener: (context, state) {
              if (state is AuthSuccess) {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => OtpView(userToken: state.otpModel.token,function: Constants.forgetPasswordString,)),
+                MaterialPageRoute(builder: (context) => EnterPasswordView(token: state.otpModel.token)),
               );
             } else if (state is AuthFail) {
                 snackBar(content: state.message, context: context);
