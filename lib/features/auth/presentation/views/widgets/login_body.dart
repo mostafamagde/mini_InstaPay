@@ -123,14 +123,7 @@ class _LoginBodyState extends State<LoginBody> {
                         ),
                       ],
                     ),
-                    FilledButton(
-                        onPressed: () => Navigator.pushReplacementNamed(
-                              context,
-                              RoutesNames.layoutView,
-                              arguments:
-                                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzRlNDUxM2M5YTllNzVmMDhjOTIzMTEiLCJlbWFpbCI6Im1vc3RhZmFtYWdkZTIyN0BnbWFpbC5jb20iLCJpYXQiOjE3MzMxODUxNDB9.9WPLC6n0zy4AUWIXi9vkI_RMM4FrefMLpJSuP-ahIaY",
-                            ),
-                        child: Text("escape from login"))
+
                   ],
                 ),
               ),

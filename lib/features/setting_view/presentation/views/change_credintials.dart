@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/models/user_model.dart';
 
 import '../../../../core/utils/validation.dart';
 import '../../../../core/widgets/CustomTitleContainer.dart';
+import '../../../../core/widgets/custom_snackbar.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 
 class ChangeCredintials extends StatelessWidget {
@@ -18,14 +20,14 @@ class ChangeCredintials extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
-    var token = ModalRoute.of(context)?.settings.arguments as String;
+   UserModel user = UserModel.getInstance();
     var theme = Theme.of(context);
 
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.secondaryHeaderColor,
-
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -82,7 +84,7 @@ class ChangeCredintials extends StatelessWidget {
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         ApiManager service = ApiManager();
-                        var response = await service.patch(
+                        await service.patch(
                           ApiConstants.changeCredintialsEndPoint,
                           data: {
                             "firstName": firstNameController.text,
@@ -91,11 +93,17 @@ class ChangeCredintials extends StatelessWidget {
                             "address": addressController.text,
                           },
                           headers: {
-                            "token": token,
+                            "token": user.token,
                           },
-                        ).then((value) {
-                          print(value.statusMessage);
-                        },);
+                        ).then(
+                          (value) {
+                            if (value.statusCode == 200) {
+                              snackBar(content: "Updated Successfully", context: context);
+                            } else {
+                              snackBar(content: value.statusMessage!, context: context);
+                            }
+                          },
+                        );
                       }
                     },
                     child: Text(

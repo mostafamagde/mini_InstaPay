@@ -5,7 +5,10 @@ class AppThemeManager {
   static ThemeData mainTheme = ThemeData(
     scaffoldBackgroundColor: Constants.backgroundColor,
     appBarTheme: AppBarTheme(
-      color: Constants.secondaryOrangeColor,
+      iconTheme: IconThemeData(
+        color: Colors.black
+      ),
+
       backgroundColor: Constants.secondaryOrangeColor,
       foregroundColor:  Constants.secondaryOrangeColor,
     ),

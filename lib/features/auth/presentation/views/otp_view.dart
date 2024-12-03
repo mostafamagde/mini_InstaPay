@@ -2,14 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 
 class OtpView extends StatefulWidget {
   final String userToken;
-  final String function ;
+  final String function;
+
   final String? password;
-  OtpView({required this.userToken, required this.function,  this.password});
+
+  OtpView({required this.userToken, required this.function, this.password});
 
   @override
   _OTPScreenState createState() => _OTPScreenState();
@@ -21,23 +24,26 @@ class _OTPScreenState extends State<OtpView> {
     6,
     (index) => TextEditingController(),
   );
-  void _submitFunction(){
-    if(widget.function==Constants.signupString){
-        _signUpFunction();
-    }
-    else if(widget.function==Constants.loginString){
-        _loginFunction();
-    }
-    else if(widget.function==Constants.forgetPasswordString){
-        _forgetPasswordFunction();
+
+  void _submitFunction() {
+    if (widget.function == Constants.signupString) {
+      _signUpFunction();
+    } else if (widget.function == Constants.loginString) {
+      _loginFunction();
+    } else if (widget.function == Constants.forgetPasswordString) {
+      _forgetPasswordFunction();
+    } else if (widget.function == Constants.changeEmailString) {
+      _changeEmailFunction();
     }
   }
-  void _forgetPasswordFunction()async{
-  if (_formKey.currentState?.validate() ?? false) {
+
+  void _forgetPasswordFunction() async {
+    if (_formKey.currentState?.validate() ?? false) {
       final otp = _otpControllers.map((controller) => controller.text).join();
       final apiManager = ApiManager();
       try {
-        final response = await apiManager.post(ApiConstants.forgotPasswordEndPoint, {
+        final response =
+            await apiManager.post(ApiConstants.forgotPasswordEndPoint, {
           "token": widget.userToken,
           "password": widget.password,
           "otp": int.parse(otp),
@@ -45,7 +51,6 @@ class _OTPScreenState extends State<OtpView> {
         if (response.statusCode == 201) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('OTP Verified')),
-
           );
           Navigator.pushReplacementNamed(context, RoutesNames.loginView);
         } else {
@@ -55,20 +60,21 @@ class _OTPScreenState extends State<OtpView> {
         }
       } catch (e) {
         if (e is DioException) {
-          if (e.response !=null)
-          print(e.response!.data["message"]);
-         print("Sssssssssssssssssss ${e.message}");
+          if (e.response != null) print(e.response!.data["message"]);
+          print("Sssssssssssssssssss ${e.message}");
         }
       }
     }
   }
+
   void _signUpFunction() async {
     print('otp');
     if (_formKey.currentState?.validate() ?? false) {
       final otp = _otpControllers.map((controller) => controller.text).join();
       final apiManager = ApiManager();
       try {
-        final response = await apiManager.post(ApiConstants.vetifyEmailEndPoint, {
+        final response =
+            await apiManager.post(ApiConstants.vetifyEmailEndPoint, {
           "token": widget.userToken,
           "otp": int.parse(otp),
         });
@@ -84,11 +90,12 @@ class _OTPScreenState extends State<OtpView> {
         }
       } catch (e) {
         if (e is DioException) {
-         print("Sssssssssssssssssss ${e.message}");
+          print("Sssssssssssssssssss ${e.message}");
         }
       }
     }
   }
+
   void _loginFunction() async {
     if (_formKey.currentState?.validate() ?? false) {
       final otp = _otpControllers.map((controller) => controller.text).join();
@@ -102,8 +109,12 @@ class _OTPScreenState extends State<OtpView> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Login Successful')),
           );
-          Navigator.pushReplacementNamed(context, RoutesNames.layoutView,arguments:response.data["token"]
-            ,);
+          Navigator.pushReplacementNamed(
+            context,
+            RoutesNames.layoutView,
+          );
+          UserModel user = UserModel.getInstance();
+          user.token = response.data["token"];
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to login')),
@@ -111,8 +122,48 @@ class _OTPScreenState extends State<OtpView> {
         }
       } catch (e) {
         if (e is DioException) {
-          if (e.response!=null ){
-            print (e.response);
+          if (e.response != null) {
+            print(e.response);
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${e.message}')),
+          );
+        }
+      }
+    }
+  }
+
+  void _changeEmailFunction() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      UserModel user = UserModel.getInstance();
+      final otp = _otpControllers.map((controller) => controller.text).join();
+      final apiManager = ApiManager();
+      try {
+        final response =
+            await apiManager.post(ApiConstants.ConfirmChangeEmail, {
+          "token": user.token,
+          "otp": int.parse(otp),
+        });
+        if (response.statusCode == 201||response.statusCode==200) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Email Changed Successful')),
+          );
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesNames.layoutView,
+            (route) => false,
+          );
+
+
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to login')),
+          );
+        }
+      } catch (e) {
+        if (e is DioException) {
+          if (e.response != null) {
+            print(e.response);
           }
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error: ${e.message}')),
@@ -136,6 +187,7 @@ class _OTPScreenState extends State<OtpView> {
       appBar: AppBar(
         title: Text('Enter OTP'),
         centerTitle: true,
+        backgroundColor: Constants.backgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -166,7 +218,8 @@ class _OTPScreenState extends State<OtpView> {
                         return null;
                       },
                       onChanged: (value) {
-                        if (value.isNotEmpty && index < _otpControllers.length - 1) {
+                        if (value.isNotEmpty &&
+                            index < _otpControllers.length - 1) {
                           FocusScope.of(context).nextFocus();
                         } else if (value.isEmpty && index > 0) {
                           FocusScope.of(context).previousFocus();

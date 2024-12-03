@@ -5,6 +5,8 @@ import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_credintials.dart';
+import 'package:untitled2/features/setting_view/presentation/views/change_email_view.dart';
+import 'package:untitled2/features/setting_view/presentation/views/change_password_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
 
 import '../../features/account_managment/presentation/add_account_view.dart';
@@ -53,6 +55,16 @@ class RouteGenerator {
       case RoutesNames.privacySetting:
         return MaterialPageRoute(
           builder: (context) => PrivacySettingView(),
+          settings: settings,
+        );
+      case RoutesNames.changeEmail:
+        return MaterialPageRoute(
+          builder: (context) =>  ChangeEmailView(),
+          settings: settings,
+        );
+      case RoutesNames.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => const ChangePassword(),
           settings: settings,
         );
       default:

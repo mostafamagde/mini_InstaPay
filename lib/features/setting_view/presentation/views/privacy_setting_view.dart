@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
@@ -11,7 +12,6 @@ class PrivacySettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var token = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -29,12 +29,19 @@ class PrivacySettingView extends StatelessWidget {
                   padding: 25,
                   name: "Change Email",
                   icon: Icons.email,
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    RoutesNames.changeEmail,
+                  ),
                 ),
                 CustomSmallButton(
                   padding: 25,
                   name: "Change Password",
                   icon: Icons.password,
-
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    RoutesNames.changeEmail,
+                  ),
                 ),
               ],
             ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/home_view/presentation/views/home_view.dart';
 
-
 import '../../../setting_view/presentation/views/setting_view.dart';
 import '../../../transaction_module/presentation/views/receive_money_view.dart';
 import '../../../transaction_module/presentation/views/send_money_view.dart';
@@ -19,14 +18,11 @@ class _LayoutViewState extends State<LayoutView> {
 
   @override
   Widget build(BuildContext context) {
-     var token = ModalRoute.of(context)?.settings.arguments as String;
-
-
     final List<Widget> screens = [
       const HomeView(),
       const SendMoneyView(),
       const ReceiveMoneyView(),
-       SettingView(token: token,),
+      const SettingView(),
     ];
 
     var theme = Theme.of(context);

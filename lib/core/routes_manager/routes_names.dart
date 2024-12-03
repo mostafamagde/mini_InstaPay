@@ -8,4 +8,6 @@ class RoutesNames {
   static const String ForgetPasswordView="ForgetPasswordView";
   static const String changeCridintials="changeCridintials";
   static const String privacySetting="privacySetting";
+  static const String changePassword="changePassword";
+  static const String changeEmail="changeEmail";
 }
