@@ -15,6 +15,7 @@ import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/widgets/auth_header.dart';
 import 'package:untitled2/features/auth/presentation/views/widgets/custom_text_button.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
 
@@ -40,18 +41,22 @@ class _LoginBodyState extends State<LoginBody> {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => OtpView(userToken: state.otpModel.token,function: Constants.loginString,)),
-          );
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (context) => OtpView(
+                        userToken: state.otpModel.token,
+                        function: Constants.loginString,
+                      )),
+            );
           } else if (state is AuthFail) {
             snackBar(content: state.message, context: context);
           }
         },
         builder: (context, state) {
-          bool isLoading = state is AuthLoading; 
+          bool isLoading = state is AuthLoading;
 
           return ModalProgressHUD(
-            inAsyncCall: isLoading, 
+            inAsyncCall: isLoading,
             child: SingleChildScrollView(
               child: Form(
                 key: formKey,
@@ -78,7 +83,8 @@ class _LoginBodyState extends State<LoginBody> {
                     CustomTextButton(
                       label: "Forget Password",
                       onTap: () {
-                        Navigator.pushNamed(context, RoutesNames.ForgetPasswordView);
+                        Navigator.pushNamed(
+                            context, RoutesNames.ForgetPasswordView);
                       },
                     ),
                     SizedBox(
@@ -88,9 +94,9 @@ class _LoginBodyState extends State<LoginBody> {
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           context.read<AuthCubit>().login(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          );
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
                         }
                       },
                       label: "Login",
@@ -116,7 +122,15 @@ class _LoginBodyState extends State<LoginBody> {
                           },
                         ),
                       ],
-                    )
+                    ),
+                    FilledButton(
+                        onPressed: () => Navigator.pushReplacementNamed(
+                              context,
+                              RoutesNames.layoutView,
+                              arguments:
+                                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzRlNDUxM2M5YTllNzVmMDhjOTIzMTEiLCJlbWFpbCI6Im1vc3RhZmFtYWdkZTIyN0BnbWFpbC5jb20iLCJpYXQiOjE3MzMxODUxNDB9.9WPLC6n0zy4AUWIXi9vkI_RMM4FrefMLpJSuP-ahIaY",
+                            ),
+                        child: Text("escape from login"))
                   ],
                 ),
               ),
@@ -127,4 +141,3 @@ class _LoginBodyState extends State<LoginBody> {
     );
   }
 }
-

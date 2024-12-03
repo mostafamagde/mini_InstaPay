@@ -99,7 +99,7 @@ class _OTPScreenState extends State<OtpView> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Login Successful')),
           );
-          Navigator.pushReplacementNamed(context, RoutesNames.layoutView);
+          Navigator.pushReplacementNamed(context, RoutesNames.layoutView,arguments:widget.userToken ,);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to login')),

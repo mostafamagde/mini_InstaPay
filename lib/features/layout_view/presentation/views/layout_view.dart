@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/home_view/presentation/views/home_view.dart';
 
-import '../../../profile_managment/presentation/views/profile_view.dart';
+
+import '../../../setting_view/presentation/views/setting_view.dart';
 import '../../../transaction_module/presentation/views/receive_money_view.dart';
 import '../../../transaction_module/presentation/views/send_money_view.dart';
 
@@ -15,16 +16,21 @@ class LayoutView extends StatefulWidget {
 
 class _LayoutViewState extends State<LayoutView> {
   int currentIndex = 0;
-  static const List<Widget> screens = [
-    HomeView(),
-    SendMoneyView(),
-    ReceiveMoneyView(),
-     ProfileView(),
-  ];
 
   @override
   Widget build(BuildContext context) {
+     var token = ModalRoute.of(context)?.settings.arguments as String;
+
+
+    final List<Widget> screens = [
+      const HomeView(),
+      const SendMoneyView(),
+      const ReceiveMoneyView(),
+       SettingView(token: token,),
+    ];
+
     var theme = Theme.of(context);
+
     return Scaffold(
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -39,8 +45,9 @@ class _LayoutViewState extends State<LayoutView> {
             backgroundColor: Constants.backgroundColor,
             currentIndex: currentIndex,
             onTap: (value) {
-              currentIndex = value;
-              setState(() {});
+              setState(() {
+                currentIndex = value;
+              });
             },
             items: const [
               BottomNavigationBarItem(
@@ -48,9 +55,7 @@ class _LayoutViewState extends State<LayoutView> {
                 label: "Home",
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.call_made_outlined,
-                ),
+                icon: Icon(Icons.call_made_outlined),
                 label: "Send",
               ),
               BottomNavigationBarItem(
@@ -58,8 +63,8 @@ class _LayoutViewState extends State<LayoutView> {
                 label: "Receive",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.perm_identity_rounded),
-                label: "Profile",
+                icon: Icon(Icons.settings),
+                label: "Setting",
               ),
             ],
             selectedItemColor: theme.primaryColor,

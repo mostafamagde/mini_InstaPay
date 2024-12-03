@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+import '../../../../core/widgets/custom_small_button.dart';
+
+class SettingView extends StatelessWidget {
+  const SettingView({super.key, required this.token});
+
+  final String token;
 
   @override
   Widget build(BuildContext context) {
-    var formKey = GlobalKey<FormState>();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CustomSmallButton(
+          name: "Profile Management",
+          icon: Icons.settings,
+          onTap: () {
+            Navigator.pushNamed(context, RoutesNames.changeCridintials,
+                arguments: token);
+          },
+        ),
+      ],
+    );
+  }
+}
+/*var formKey = GlobalKey<FormState>();
 
     return SingleChildScrollView(
       child: Form(
@@ -75,6 +96,4 @@ class ProfileView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
+    );*/

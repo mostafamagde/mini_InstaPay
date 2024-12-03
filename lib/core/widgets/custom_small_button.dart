@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import '../utils/Constants.dart';
 
 class CustomSmallButton extends StatelessWidget {
-  const CustomSmallButton({
+   CustomSmallButton({
     super.key,
     required this.name,
     required this.icon,
+     this.onTap,
   });
 
   final String name;
   final IconData icon;
+  void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
     return InkWell(
-      onTap: () {
-
-      },
+      onTap: onTap,
       borderRadius: BorderRadius.circular(17),
 
       child: Container(

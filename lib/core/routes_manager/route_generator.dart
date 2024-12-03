@@ -4,6 +4,7 @@ import 'package:untitled2/features/auth/presentation/views/forget_password_view.
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
+import 'package:untitled2/features/setting_view/presentation/views/change_credintials.dart';
 
 import '../../features/account_managment/presentation/add_account_view.dart';
 import '../../features/layout_view/presentation/views/layout_view.dart';
@@ -38,14 +39,14 @@ class RouteGenerator {
           builder: (context) => const SignupView(),
           settings: settings,
         );
-      // case RoutesNames.OtpView:
-      //   return MaterialPageRoute(
-      //     builder: (context) =>  OtpView(),
-      //     settings: settings,
-      //   );
         case RoutesNames.ForgetPasswordView:
         return MaterialPageRoute(
           builder: (context) => const ForgetPasswordView(),
+          settings: settings,
+        );
+      case RoutesNames.changeCridintials:
+        return MaterialPageRoute(
+          builder: (context) =>  ChangeCredintials(),
           settings: settings,
         );
       default:

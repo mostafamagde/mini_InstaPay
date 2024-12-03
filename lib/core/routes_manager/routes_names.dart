@@ -6,4 +6,5 @@ class RoutesNames {
   static const String OtpView="/otpView";
   static const String AddAccountView="AddAccountView";
   static const String ForgetPasswordView="ForgetPasswordView";
+  static const String changeCridintials="changeCridintials";
 }
