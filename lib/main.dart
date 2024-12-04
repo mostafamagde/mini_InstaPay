@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled2/core/utils/service_locator.dart';
 
 import 'core/app_theme/app_theme_manager.dart';
 
 import 'core/routes_manager/route_generator.dart';
 
 void main() {
+  ServiceLocator.setup();
   runApp(const MyApp());
 }
 

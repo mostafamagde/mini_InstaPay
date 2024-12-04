@@ -160,6 +160,7 @@ class _OTPScreenState extends State<OtpView> {
           );
         }
       } catch (e) {
+
         if (e is DioException) {
           if (e.response != null) {
             print(e.response);
