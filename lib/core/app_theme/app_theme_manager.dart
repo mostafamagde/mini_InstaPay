@@ -4,6 +4,14 @@ import 'package:untitled2/core/utils/Constants.dart';
 class AppThemeManager {
   static ThemeData mainTheme = ThemeData(
     scaffoldBackgroundColor: Constants.backgroundColor,
+    appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(
+        color: Colors.black
+      ),
+
+      backgroundColor: Constants.secondaryOrangeColor,
+      foregroundColor:  Constants.secondaryOrangeColor,
+    ),
     primaryColor: Constants.primaryMouveColor,
     secondaryHeaderColor: Constants.secondaryOrangeColor,
     elevatedButtonTheme: ElevatedButtonThemeData(

@@ -1,0 +1,86 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/features/setting_view/data/models/credinitials_model.dart';
+import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
+
+import '../../../../core/api_helper/api_constants.dart';
+import '../../../../core/api_helper/api_manger.dart';
+import '../../../../core/errors/errors.dart';
+
+class SettingRepoImpl implements SettingRepo {
+  SettingRepoImpl(ApiManager apiManager);
+
+  @override
+  Future<Either<Errors, String>> changeCredintials(
+      {required CredinitialsModel model}) async {
+    ApiManager service = ApiManager();
+    try {
+      var data = await service.patch(
+        ApiConstants.changeCredintialsEndPoint,
+        data: {
+          "firstName": model.firstName,
+          "lastName": model.lastName,
+          "mobileNumber": model.phoneNumber,
+          "address": model.address,
+        },
+        headers: {
+          "token": UserModel.getInstance().token,
+        },
+      );
+      return right(data.statusMessage!);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerError.fromDioError(e));
+      }
+      return left(ServerError(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Errors, String>> changeEmail({required String email}) async {
+    ApiManager service = ApiManager();
+    try {
+      final response = await service.post(
+        ApiConstants.changeEmail,
+        headers: {
+          "token": UserModel.getInstance().token,
+        },
+        {
+          "email": email,
+        },
+      );
+      UserModel.getInstance().userToken=response.data["token"];
+      return right(response.statusMessage!);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerError.fromDioError(e));
+      }
+      return left(ServerError(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Errors, String>> changePassword(
+      {required String oldPass, required String newPass}) async {
+    try {
+      ApiManager service = ApiManager();
+      final response = await service.patch(
+        ApiConstants.updatePassword,
+        headers: {
+          "token": UserModel.getInstance().token,
+        },
+        data: {
+          "newPassword": newPass,
+          "oldPassword": oldPass,
+        },
+      );
+      return Right("Updated successfully");
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerError.fromDioError(e));
+      }
+      return left(ServerError(e.toString()));
+    }
+  }
+}

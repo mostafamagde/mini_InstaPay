@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/service_locator.dart';
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
+import 'package:untitled2/features/setting_view/presentation/views/change_credintials.dart';
+import 'package:untitled2/features/setting_view/presentation/views/change_email_view.dart';
+import 'package:untitled2/features/setting_view/presentation/views/change_password_view.dart';
+import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
 
 import '../../features/account_managment/presentation/add_account_view.dart';
 import '../../features/layout_view/presentation/views/layout_view.dart';
+import '../../features/setting_view/data/repos/setting_repo_impl.dart';
+import '../../features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
 import '../../features/splash_view/presentation/views/splash_view.dart';
 
 class RouteGenerator {
@@ -38,14 +48,41 @@ class RouteGenerator {
           builder: (context) => const SignupView(),
           settings: settings,
         );
-      // case RoutesNames.OtpView:
-      //   return MaterialPageRoute(
-      //     builder: (context) =>  OtpView(),
-      //     settings: settings,
-      //   );
-        case RoutesNames.ForgetPasswordView:
+      case RoutesNames.ForgetPasswordView:
         return MaterialPageRoute(
           builder: (context) => const ForgetPasswordView(),
+          settings: settings,
+        );
+      case RoutesNames.changeCridintials:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => ChangeCredinitialsCubit(
+                ServiceLocator.getIt<SettingRepoImpl>()),
+            child: ChangeCredintials(),
+          ),
+          settings: settings,
+        );
+      case RoutesNames.privacySetting:
+        return MaterialPageRoute(
+          builder: (context) => PrivacySettingView(),
+          settings: settings,
+        );
+      case RoutesNames.changeEmail:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                ChangeEmailCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+            child: ChangeEmailView(),
+          ),
+          settings: settings,
+        );
+      case RoutesNames.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                ChangePasswordCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+            child: ChangePassword(),
+          ),
           settings: settings,
         );
       default:

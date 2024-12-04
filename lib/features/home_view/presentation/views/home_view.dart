@@ -10,6 +10,7 @@ import '../../../../core/widgets/custom_small_button.dart';
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
