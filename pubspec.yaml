@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_launcher_icons: ^0.14.1
   flutter_screenutil: ^5.9.3
+  dartz: ^0.10.1
   dio: ^5.7.0
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6

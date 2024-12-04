@@ -8,8 +8,8 @@ class ApiManager {
     _dio.options.baseUrl = ApiConstants.baseUrl;
   }
 
-  Future<Response> post(String endPoint, dynamic data) async {
-    return await _dio.post(endPoint, data: data);
+  Future<Response> post(String endPoint, dynamic data,{dynamic headers}) async {
+    return await _dio.post(endPoint, data: data,options: Options(headers: headers));
   }
 
   Future<Response> get(String endPoint) async {

@@ -3,6 +3,7 @@ class UserModel {
   String? lastName;
   String? email;
   String? token;
+  String? userToken;
 
 
   static final UserModel _singleton = UserModel._internal();

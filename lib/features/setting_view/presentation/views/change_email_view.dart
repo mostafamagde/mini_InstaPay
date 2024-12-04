@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,32 +44,44 @@ class ChangeEmailView extends StatelessWidget {
             ),
             CusttomButton(
               label: "Submit",
-              onTap: ()async {
+              onTap: () async {
                 if (formKey.currentState!.validate()) {
-
-                  print(user.token);
-                  ApiManager service = ApiManager();
-                 await service.patch(ApiConstants.changeEmail,headers: {
-                   "token": user.token,
-
-                 },data: {
-                   "email": emailController.text,
-                 }).then(
-                    (value) {
-                      if (value.statusCode == 201||value.statusCode ==200) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OtpView(
-                                userToken: user.token!,
-                                function: Constants.changeEmailString),
-                          ),
-                        );
-                      } else {
-                        snackBar(content: "Invalid email", context: context);
+                  try {
+                    ApiManager service = ApiManager();
+                    final response = await service.post(
+                      ApiConstants.changeEmail,
+                      headers: {
+                        "token": user.token,
+                      },
+                      {
+                        "email": emailController.text,
+                      },
+                    );
+                    if (response.statusCode == 201 ||
+                        response.statusCode == 200) {
+                      UserModel.getInstance().userToken =
+                          response.data["token"];
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OtpView(
+                              userToken: user.token!,
+                              function: Constants.ConfirmChangeEmailString),
+                        ),
+                      );
+                    } else {
+                      snackBar(content: "Invalid email", context: context);
+                    }
+                  } catch (e) {
+                    if (e is DioException) {
+                      if (e.response != null) {
+                        print(e.response);
                       }
-                    },
-                  );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error: ${e.message}')),
+                      );
+                    }
+                  }
                 }
               },
             )

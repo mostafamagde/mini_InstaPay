@@ -8,5 +8,5 @@ class ApiConstants {
   static const String forgotPasswordEndPoint = 'auth/forgetPassword';
   static const String changeCredintialsEndPoint = 'user';
   static const String changeEmail = 'user/changeEmail';
-  static const String ConfirmChangeEmail = 'auth/confirmChangeEmail';
+  static const String ConfirmChangeEmail = 'user/confirmChangeEmail';
 }

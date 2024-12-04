@@ -32,7 +32,7 @@ class _OTPScreenState extends State<OtpView> {
       _loginFunction();
     } else if (widget.function == Constants.forgetPasswordString) {
       _forgetPasswordFunction();
-    } else if (widget.function == Constants.changeEmailString) {
+    } else if (widget.function == Constants.ConfirmChangeEmailString) {
       _changeEmailFunction();
     }
   }
@@ -135,16 +135,17 @@ class _OTPScreenState extends State<OtpView> {
 
   void _changeEmailFunction() async {
     if (_formKey.currentState?.validate() ?? false) {
-      UserModel user = UserModel.getInstance();
       final otp = _otpControllers.map((controller) => controller.text).join();
       final apiManager = ApiManager();
       try {
         final response =
-            await apiManager.post(ApiConstants.ConfirmChangeEmail, {
-          "token": user.token,
+            await apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
+          "token": UserModel.getInstance().userToken,
           "otp": int.parse(otp),
+        }, headers: {
+          "token": UserModel.getInstance().token
         });
-        if (response.statusCode == 201||response.statusCode==200) {
+        if (response.statusCode == 201 || response.statusCode == 200) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Email Changed Successful')),
           );
@@ -153,11 +154,9 @@ class _OTPScreenState extends State<OtpView> {
             RoutesNames.layoutView,
             (route) => false,
           );
-
-
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to login')),
+            SnackBar(content: Text('Failed to change email')),
           );
         }
       } catch (e) {
