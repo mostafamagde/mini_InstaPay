@@ -9,4 +9,5 @@ class ApiConstants {
   static const String changeCredintialsEndPoint = 'user';
   static const String changeEmail = 'user/changeEmail';
   static const String ConfirmChangeEmail = 'user/confirmChangeEmail';
+  static const String updatePassword = 'user/updatePassword';
 }

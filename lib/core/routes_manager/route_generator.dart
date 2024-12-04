@@ -64,7 +64,7 @@ class RouteGenerator {
         );
       case RoutesNames.changePassword:
         return MaterialPageRoute(
-          builder: (context) => const ChangePassword(),
+          builder: (context) =>  ChangePassword(),
           settings: settings,
         );
       default:

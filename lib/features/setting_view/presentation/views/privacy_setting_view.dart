@@ -40,7 +40,7 @@ class PrivacySettingView extends StatelessWidget {
                   icon: Icons.password,
                   onTap: () => Navigator.pushNamed(
                     context,
-                    RoutesNames.changeEmail,
+                    RoutesNames.changePassword,
                   ),
                 ),
               ],
