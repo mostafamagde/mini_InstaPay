@@ -28,7 +28,7 @@ class SettingRepoImpl implements SettingRepo {
           "token": UserModel.getInstance().token,
         },
       );
-      return right(data.statusMessage!);
+      return right("Chang");
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
@@ -50,8 +50,8 @@ class SettingRepoImpl implements SettingRepo {
           "email": email,
         },
       );
-      UserModel.getInstance().userToken=response.data["token"];
-      return right(response.statusMessage!);
+      UserModel.getInstance().userToken = response.data["token"];
+      return right("Email Changed Successfully");
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
@@ -65,7 +65,7 @@ class SettingRepoImpl implements SettingRepo {
       {required String oldPass, required String newPass}) async {
     try {
       ApiManager service = ApiManager();
-      final response = await service.patch(
+      await service.patch(
         ApiConstants.updatePassword,
         headers: {
           "token": UserModel.getInstance().token,
@@ -76,6 +76,26 @@ class SettingRepoImpl implements SettingRepo {
         },
       );
       return Right("Updated successfully");
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerError.fromDioError(e));
+      }
+      return left(ServerError(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Errors, String>> logOut() async {
+    try {
+      ApiManager service = ApiManager();
+       await service.post(
+        ApiConstants.logOut,
+        {},
+        headers: {
+          "token": UserModel.getInstance().token,
+        },
+      );
+      return Right("LogOut successfully");
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));

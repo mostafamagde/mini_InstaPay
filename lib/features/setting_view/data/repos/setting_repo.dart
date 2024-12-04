@@ -7,4 +7,5 @@ abstract class SettingRepo{
   Future<Either<Errors,String >> changeCredintials({required CredinitialsModel model});
   Future<Either<Errors,String >> changePassword({required String oldPass, required String newPass});
   Future<Either<Errors,String >> changeEmail({required String email});
+  Future<Either<Errors,String >> logOut();
 }

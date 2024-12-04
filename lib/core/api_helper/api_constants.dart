@@ -10,4 +10,5 @@ class ApiConstants {
   static const String changeEmail = 'user/changeEmail';
   static const String ConfirmChangeEmail = 'user/confirmChangeEmail';
   static const String updatePassword = 'user/updatePassword';
+  static const String logOut = 'user/logout';
 }
