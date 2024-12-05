@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:untitled2/core/models/user_model.dart';
 
 import '../../../../../core/routes_manager/routes_names.dart';
 import 'AnimatedBuilder.dart';
@@ -53,9 +55,26 @@ class _SplashBodyState extends State<SplashBody>
   void navigatingToHome() {
     Future.delayed(
       const Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(context,
-        RoutesNames.loginView,
-      ),
+      ()  async{
+        final storage = new FlutterSecureStorage();
+        try{
+       final token= await storage.read(key: "token");
+       print(token);
+       if (token!=null){
+
+        UserModel.getInstance().token=token;
+               Navigator.pushReplacementNamed(context,
+        RoutesNames.layoutView,);
+       }
+    else{  Navigator.pushReplacementNamed(context,
+        RoutesNames.loginView,);}
+        } catch (e) {
+          print("sssssssss");
+          print(e.toString());
+          Navigator.pushReplacementNamed(context,
+        RoutesNames.loginView,);
+        }
+        }
     );
   }
 
