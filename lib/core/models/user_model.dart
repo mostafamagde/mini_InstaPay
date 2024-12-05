@@ -11,6 +11,11 @@ class UserModel {
   factory UserModel.getInstance() {
     return _singleton;
   }
+  setFromjson(Map<String, dynamic> json) {
+    firstName = json['firstName'];
+    lastName = json['lastName'];
+    email = json['email'];
+  }
 
   UserModel._internal();
 }

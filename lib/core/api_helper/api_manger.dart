@@ -12,8 +12,11 @@ class ApiManager {
     return await _dio.post(endPoint, data: data,options: Options(headers: headers));
   }
 
-  Future<Response> get(String endPoint) async {
-    return await _dio.get(endPoint);
+  Future<Response> get(String endPoint,{dynamic headers}) async {
+    return await _dio.get(endPoint,
+    options: Options(headers: headers)
+    
+    );
   }
 
   Future<Response> delete(String endPoint) async {
