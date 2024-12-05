@@ -19,6 +19,7 @@ class OtpView extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OtpView> {
+
   final _formKey = GlobalKey<FormState>();
   final List<TextEditingController> _otpControllers = List.generate(
     6,
@@ -90,7 +91,12 @@ class _OTPScreenState extends State<OtpView> {
         }
       } catch (e) {
         if (e is DioException) {
-          print("Sssssssssssssssssss ${e.message}");
+          if (e.response != null) {
+            print(e.response);
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${e.message}')),
+          );
         }
       }
     }
@@ -183,6 +189,7 @@ class _OTPScreenState extends State<OtpView> {
 
   @override
   Widget build(BuildContext context) {
+      print("token: ${widget.userToken}");
     return Scaffold(
       appBar: AppBar(
         title: Text('Enter OTP'),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:untitled2/features/account_managment/data/bank_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class BanksListItem extends StatelessWidget {
-  const BanksListItem({super.key});
+
+  final BankModel bank;
+  const BanksListItem({super.key, required this.bank});
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +12,7 @@ class BanksListItem extends StatelessWidget {
     var theme = Theme.of(context);
     return InkWell(
       onTap: () {
-
+        
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -31,20 +34,21 @@ class BanksListItem extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
-                    width: 10,
+                    width: 16,
                   ),
-                  Image.asset(
-                    "assets/images/banktest.jpg",
-                    height: 50,
+                  Image.network(
+                    bank.logo,
+                    height: 40.h,
+                    width: 60.h,
                   ),
                   SizedBox(
-                    width: 12,
+                    width: 32,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "National Bank of Egypt",
+                        bank.name,
                         style: theme.textTheme.bodyMedium,
                       ),
 
@@ -56,8 +60,6 @@ class BanksListItem extends StatelessWidget {
 
                 ],
               ),
-
-
             ],
           ),
         ),
