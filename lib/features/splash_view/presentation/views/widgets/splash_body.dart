@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:untitled2/core/models/user_model.dart';
@@ -37,7 +35,7 @@ class _SplashBodyState extends State<SplashBody>
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image.asset(
-             "assets/images/InstaSplash.png",
+              "assets/images/InstaSplash.png",
             ),
             const SizedBox(
               height: 20,
@@ -53,29 +51,29 @@ class _SplashBodyState extends State<SplashBody>
   }
 
   void navigatingToHome() {
-    Future.delayed(
-      const Duration(seconds: 3),
-      ()  async{
-        final storage = new FlutterSecureStorage();
-        try{
-       final token= await storage.read(key: "token");
-       print(token);
-       if (token!=null){
-
-        UserModel.getInstance().token=token;
-               Navigator.pushReplacementNamed(context,
-        RoutesNames.layoutView,);
-       }
-    else{  Navigator.pushReplacementNamed(context,
-        RoutesNames.loginView,);}
-        } catch (e) {
-          print("sssssssss");
-          print(e.toString());
-          Navigator.pushReplacementNamed(context,
-        RoutesNames.loginView,);
+    Future.delayed(const Duration(seconds: 3), () async {
+      final storage = new FlutterSecureStorage();
+      try {
+        final token = await storage.read(key: "token");
+        if (token != null&& token.isNotEmpty) {
+          UserModel.getInstance().token = token;
+          Navigator.pushReplacementNamed(
+            context,
+            RoutesNames.layoutView,
+          );
+        } else {
+          Navigator.pushReplacementNamed(
+            context,
+            RoutesNames.loginView,
+          );
         }
-        }
-    );
+      } catch (e) {
+        Navigator.pushReplacementNamed(
+          context,
+          RoutesNames.loginView,
+        );
+      }
+    });
   }
 
   void initSlidingAnimation() {
@@ -85,7 +83,7 @@ class _SplashBodyState extends State<SplashBody>
     );
     slidingAnimation = Tween<Offset>(
       begin: const Offset(0, 2),
-      end: const Offset(0,-2),
+      end: const Offset(0, -2),
     ).animate(animationController);
     animationController.forward();
   }
