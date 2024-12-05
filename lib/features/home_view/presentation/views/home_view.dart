@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
@@ -13,6 +14,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserModel user=UserModel.getInstance();
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
     return Scaffold(
@@ -20,7 +22,7 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: [
             CustomTitleContainer(
-              title: "Mostafa Magdy",
+              title: "${user.firstName}",
             ),
             SizedBox(
               height: 50,

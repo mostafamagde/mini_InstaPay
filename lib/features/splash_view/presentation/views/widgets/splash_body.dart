@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:untitled2/core/api_helper/api_constants.dart';
+import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
 
 import '../../../../../core/routes_manager/routes_names.dart';
@@ -56,7 +59,16 @@ class _SplashBodyState extends State<SplashBody>
       try {
         final token = await storage.read(key: "token");
         if (token != null&& token.isNotEmpty) {
-          UserModel.getInstance().token = token;
+          UserModel user=  UserModel.getInstance();
+         user.token = token;
+            final apiManager = ApiManager();
+          final userDataResponse = await apiManager.get(
+            ApiConstants.getUserData,
+             headers: {
+            "token": token,
+        }, 
+        ) ;            
+            user.setFromjson(userDataResponse.data["data"]);      
           Navigator.pushReplacementNamed(
             context,
             RoutesNames.layoutView,
@@ -68,6 +80,11 @@ class _SplashBodyState extends State<SplashBody>
           );
         }
       } catch (e) {
+        if (e is DioException) {
+          print(e.response?.data['message']);
+        } else {
+          print(e);
+        }
         Navigator.pushReplacementNamed(
           context,
           RoutesNames.loginView,
