@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
@@ -121,6 +122,8 @@ class _OTPScreenState extends State<OtpView> {
           );
           UserModel user = UserModel.getInstance();
           user.token = response.data["token"];
+          final storage = new FlutterSecureStorage();
+          storage.write(key: "token", value: user.token);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to login')),
