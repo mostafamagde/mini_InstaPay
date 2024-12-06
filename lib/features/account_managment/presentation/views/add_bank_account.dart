@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: AddBankAccount(),
-  ));
-}
+
 
 class AddBankAccount extends StatefulWidget {
   @override
@@ -14,12 +10,17 @@ class AddBankAccount extends StatefulWidget {
 class _AddBankAccountState extends State<AddBankAccount> {
   final List<TextEditingController> _cardNumberControllers =
   List.generate(4, (_) => TextEditingController());
+  final List<TextEditingController> _pinControllers =
+  List.generate(4, (_) => TextEditingController());
   final List<FocusNode> _cardNumberFocusNodes = List.generate(4, (_) => FocusNode());
+  final List<FocusNode> _pinFocusNodes = List.generate(4, (_) => FocusNode());
   final TextEditingController _cardHolderController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
   final TextEditingController _expirationController = TextEditingController();
   final FocusNode _cvvFocusNode = FocusNode();
   final FocusNode _expirationFocusNode = FocusNode();
+
+  bool _isPinVisible = false; // Variable to toggle PIN visibility
 
   @override
   void dispose() {
@@ -27,6 +28,12 @@ class _AddBankAccountState extends State<AddBankAccount> {
       controller.dispose();
     }
     for (var node in _cardNumberFocusNodes) {
+      node.dispose();
+    }
+    for (var controller in _pinControllers) {
+      controller.dispose();
+    }
+    for (var node in _pinFocusNodes) {
       node.dispose();
     }
     _cardHolderController.dispose();
@@ -42,7 +49,17 @@ class _AddBankAccountState extends State<AddBankAccount> {
       if (index < 3) {
         _cardNumberFocusNodes[index + 1].requestFocus(); // Move to the next card number field
       } else {
-        _cvvFocusNode.requestFocus(); // Jump to CVV after the last card number field
+        _pinFocusNodes[0].requestFocus(); // Jump to PIN after the last card number field
+      }
+    }
+  }
+
+  void _onPinChanged(int index) {
+    if (_pinControllers[index].text.length == 1) {
+      if (index < 3) {
+        _pinFocusNodes[index + 1].requestFocus(); // Move to the next PIN field
+      } else {
+        _cvvFocusNode.requestFocus(); // Jump to CVV after the last PIN field
       }
     }
   }
@@ -65,11 +82,18 @@ class _AddBankAccountState extends State<AddBankAccount> {
     }
   }
 
+  // Toggle PIN visibility
+  void _togglePinVisibility() {
+    setState(() {
+      _isPinVisible = !_isPinVisible;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Card Entry'),
+        title: Text('Add Bank Account'),
         centerTitle: true,
       ),
       body: Padding(
@@ -108,6 +132,38 @@ class _AddBankAccountState extends State<AddBankAccount> {
                   ),
                 );
               }),
+            ),
+            SizedBox(height: 20),
+            // PIN Fields (4 digits)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(4, (index) {
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: TextField(
+                      controller: _pinControllers[index],
+                      focusNode: _pinFocusNodes[index],
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      maxLength: 1,
+                      obscureText: !_isPinVisible, // Toggle visibility based on _isPinVisible
+                      decoration: InputDecoration(
+                        counterText: "", // Removes character counter
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (_) => _onPinChanged(index),
+                    ),
+                  ),
+                );
+              }),
+            ),
+            IconButton(
+              icon: Icon(
+                _isPinVisible ? Icons.visibility : Icons.visibility_off,
+                color: Colors.blue,
+              ),
+              onPressed: _togglePinVisibility, // Toggle PIN visibility when clicked
             ),
             SizedBox(height: 20),
             // CVV and Expiration Date in the same row
@@ -151,12 +207,14 @@ class _AddBankAccountState extends State<AddBankAccount> {
                 String cardHolderName = _cardHolderController.text;
                 String cardNumber =
                 _cardNumberControllers.map((controller) => controller.text).join();
+                String pin = _pinControllers.map((controller) => controller.text).join();
                 String cvv = _cvvController.text;
                 String expirationDate = _expirationController.text;
 
                 // Log or use the collected information
                 print("Card Holder Name: $cardHolderName");
                 print("Card Number: $cardNumber");
+                print("PIN: $pin");
                 print("CVV: $cvv");
                 print("Expiration Date: $expirationDate");
               },
