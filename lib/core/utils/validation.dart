@@ -29,6 +29,33 @@ class Validation {
 
     return null;
   }
+  static String? validateCardNumberTextField(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please fill this field';
+    }else if (value.length<4){
+      return 'please enter 4 digits';
+    }
+
+    return null;
+  }
+  static String? validateCVVNumberTextField(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please fill this field';
+    }else if (value.length<3){
+      return 'please enter CVV correctly';
+    }
+
+    return null;
+  }
+  static String? validateExpDateTextField(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please fill this field';
+    }else if (value.length<5){
+      return 'please enter Expiration date correctly';
+    }
+
+    return null;
+  }
 
   static String? validatePasswordTextField(String? value) {
     if (value == null || value.isEmpty) {

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:untitled2/core/api_helper/api_constants.dart';
+import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/core/utils/validation.dart';
+import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
+import 'package:untitled2/core/widgets/custom_text_field.dart';
+import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 
 class AddBankAccount extends StatefulWidget {
   @override
@@ -9,10 +14,11 @@ class AddBankAccount extends StatefulWidget {
 
 class _AddBankAccountState extends State<AddBankAccount> {
   final List<TextEditingController> _cardNumberControllers =
-  List.generate(4, (_) => TextEditingController());
+      List.generate(4, (_) => TextEditingController());
   final List<TextEditingController> _pinControllers =
-  List.generate(4, (_) => TextEditingController());
-  final List<FocusNode> _cardNumberFocusNodes = List.generate(4, (_) => FocusNode());
+      List.generate(4, (_) => TextEditingController());
+  final List<FocusNode> _cardNumberFocusNodes =
+      List.generate(4, (_) => FocusNode());
   final List<FocusNode> _pinFocusNodes = List.generate(4, (_) => FocusNode());
   final TextEditingController _cardHolderController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
@@ -47,9 +53,9 @@ class _AddBankAccountState extends State<AddBankAccount> {
   void _onCardNumberChanged(int index) {
     if (_cardNumberControllers[index].text.length == 4) {
       if (index < 3) {
-        _cardNumberFocusNodes[index + 1].requestFocus(); // Move to the next card number field
+        _cardNumberFocusNodes[index + 1].requestFocus();
       } else {
-        _pinFocusNodes[0].requestFocus(); // Jump to PIN after the last card number field
+        _pinFocusNodes[0].requestFocus();
       }
     }
   }
@@ -57,32 +63,27 @@ class _AddBankAccountState extends State<AddBankAccount> {
   void _onPinChanged(int index) {
     if (_pinControllers[index].text.length == 1) {
       if (index < 3) {
-        _pinFocusNodes[index + 1].requestFocus(); // Move to the next PIN field
+        _pinFocusNodes[index + 1].requestFocus();
       } else {
-        _cvvFocusNode.requestFocus(); // Jump to CVV after the last PIN field
+        _cvvFocusNode.requestFocus();
       }
     }
   }
 
   void _onCvvChanged(String value) {
     if (value.length == 3) {
-      _expirationFocusNode.requestFocus(); // Move to expiration date after entering CVV
+      _expirationFocusNode.requestFocus();
     }
   }
 
   void _onExpirationChanged(String value) {
     if (value.length == 2 && !value.contains('/')) {
-      // Automatically insert "/"
       _expirationController.text = "$value/";
       _expirationController.selection = TextSelection.fromPosition(
           TextPosition(offset: _expirationController.text.length));
-    } else if (value.length == 5) {
-      // Close keyboard when MM/YY is fully entered
-      _expirationFocusNode.unfocus();
     }
   }
 
-  // Toggle PIN visibility
   void _togglePinVisibility() {
     setState(() {
       _isPinVisible = !_isPinVisible;
@@ -91,40 +92,41 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
   @override
   Widget build(BuildContext context) {
+    var bank =ModalRoute.of(context)?.settings.arguments as BankModel;
+    var formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Bank Account'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Form(
+        key: formKey,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Card Holder Name Field
-            TextField(
+            CustomTitleContainer(title: "Enter card Info"),
+            CustomTextField(
+              label: 'Card Holder Name',
+              icon: Icons.person,
+              inputType: TextInputType.name,
+              valid: Validation.validateRegularTextField,
               controller: _cardHolderController,
-              decoration: InputDecoration(
-                labelText: 'Card Holder Name',
-                border: OutlineInputBorder(),
-              ),
             ),
-            SizedBox(height: 20),
-            // Card Number Fields
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(4, (index) {
                 return Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: TextField(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: TextFormField(
+                      validator: Validation.validateCardNumberTextField,
                       controller: _cardNumberControllers[index],
                       focusNode: _cardNumberFocusNodes[index],
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       maxLength: 4,
                       decoration: InputDecoration(
-                        counterText: "", // Removes character counter
+                        counterText: "",
                         border: OutlineInputBorder(),
                       ),
                       onChanged: (_) => _onCardNumberChanged(index),
@@ -133,23 +135,35 @@ class _AddBankAccountState extends State<AddBankAccount> {
                 );
               }),
             ),
-            SizedBox(height: 20),
-            // PIN Fields (4 digits)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    _isPinVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.grey,
+                  ),
+                  onPressed: _togglePinVisibility,
+                ),
+              ],
+            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(4, (index) {
                 return Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: TextField(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: TextFormField(
+                      validator: Validation.validateRegularTextField,
                       controller: _pinControllers[index],
                       focusNode: _pinFocusNodes[index],
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       maxLength: 1,
-                      obscureText: !_isPinVisible, // Toggle visibility based on _isPinVisible
+                      obscureText: !_isPinVisible,
                       decoration: InputDecoration(
-                        counterText: "", // Removes character counter
+                        counterText: "",
                         border: OutlineInputBorder(),
                       ),
                       onChanged: (_) => _onPinChanged(index),
@@ -158,20 +172,15 @@ class _AddBankAccountState extends State<AddBankAccount> {
                 );
               }),
             ),
-            IconButton(
-              icon: Icon(
-                _isPinVisible ? Icons.visibility : Icons.visibility_off,
-                color: Colors.blue,
-              ),
-              onPressed: _togglePinVisibility, // Toggle PIN visibility when clicked
-            ),
+
             SizedBox(height: 20),
-            // CVV and Expiration Date in the same row
+
             Row(
               children: [
                 Expanded(
                   flex: 2,
-                  child: TextField(
+                  child: TextFormField(
+                    validator: Validation.validateCVVNumberTextField,
                     controller: _cvvController,
                     focusNode: _cvvFocusNode,
                     keyboardType: TextInputType.number,
@@ -187,7 +196,8 @@ class _AddBankAccountState extends State<AddBankAccount> {
                 SizedBox(width: 10),
                 Expanded(
                   flex: 3,
-                  child: TextField(
+                  child: TextFormField(
+                    validator: Validation.validateExpDateTextField,
                     controller: _expirationController,
                     focusNode: _expirationFocusNode,
                     keyboardType: TextInputType.datetime,
@@ -196,30 +206,43 @@ class _AddBankAccountState extends State<AddBankAccount> {
                       border: OutlineInputBorder(),
                     ),
                     onChanged: _onExpirationChanged,
+                    onFieldSubmitted: (value) async {
+                      if (formKey.currentState!.validate()) {
+                        String cardHolderName = _cardHolderController.text;
+                        String cardNumber = _cardNumberControllers
+                            .map((controller) => controller.text)
+                            .join();
+                        String pin = _pinControllers
+                            .map((controller) => controller.text)
+                            .join();
+                        String cvv = _cvvController.text;
+                        String expirationDate = _expirationController.text;
+
+                        ApiManager service = ApiManager();
+                        await service.post(
+                          ApiConstants.addBankAccount,
+                          {
+                            "bankId":bank.id,
+                            "cardNo":int.parse(cardNumber),
+                            "date":{
+                              "year":expirationDate.substring(3),
+                              "month":expirationDate.substring(0,1),
+                            },
+                            "CVV":int.parse(cvv),
+                            "PIN":pin
+                          },
+                          headers: {
+                            "token": UserModel.getInstance().token,
+                          },
+                        );
+                      }
+                    },
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            // Submit Button
-            ElevatedButton(
-              onPressed: () {
-                String cardHolderName = _cardHolderController.text;
-                String cardNumber =
-                _cardNumberControllers.map((controller) => controller.text).join();
-                String pin = _pinControllers.map((controller) => controller.text).join();
-                String cvv = _cvvController.text;
-                String expirationDate = _expirationController.text;
 
-                // Log or use the collected information
-                print("Card Holder Name: $cardHolderName");
-                print("Card Number: $cardNumber");
-                print("PIN: $pin");
-                print("CVV: $cvv");
-                print("Expiration Date: $expirationDate");
-              },
-              child: Text('Submit'),
-            ),
+            // Submit Button
           ],
         ),
       ),
