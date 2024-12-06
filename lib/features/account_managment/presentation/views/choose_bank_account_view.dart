@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/features/account_managment/data/repository/bank_repo_impl.dart';
-import 'package:untitled2/features/account_managment/presentation/banks_cubit/banks_cubit.dart';
-import 'package:untitled2/features/account_managment/presentation/widgets/bank_list_view.dart';
-import 'package:untitled2/features/account_managment/presentation/widgets/logo_container.dart';
 
-import '../../../core/utils/validation.dart';
-import '../../../core/widgets/custom_text_field.dart';
+import 'package:untitled2/features/account_managment/presentation/views/widgets/bank_list_view.dart';
+import 'package:untitled2/features/account_managment/presentation/views/widgets/logo_container.dart';
 
-class AddAccountView extends StatelessWidget {
-  const AddAccountView({super.key});
+
+import '../../../../core/utils/validation.dart';
+import '../../../../core/widgets/custom_text_field.dart';
+import '../../data/repos/bamk_cubit/bank_repo_impl.dart';
+import '../manager/banks_cubit.dart';
+
+class ChooseAccountView extends StatelessWidget {
+  const ChooseAccountView({super.key});
 
   @override
   Widget build(BuildContext context) {

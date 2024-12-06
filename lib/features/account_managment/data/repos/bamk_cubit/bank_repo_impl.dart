@@ -1,7 +1,9 @@
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
-import 'package:untitled2/features/account_managment/data/repository/bank_repo.dart';
-import 'package:untitled2/features/account_managment/data/bank_model.dart';
+
+import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
+
+import 'bank_repo.dart';
 
 class BankRepoImpl implements BankRepository {
   @override
