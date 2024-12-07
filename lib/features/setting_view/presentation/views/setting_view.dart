@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled2/core/api_helper/api_constants.dart';
+import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/models/user_model.dart';
+
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 
 import '../../../../core/widgets/CustomTitleContainer.dart';
@@ -11,6 +18,7 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     var cubit = LogOutCubit.get(context);
     return BlocListener<LogOutCubit, LogOutState>(
       listener: (context, state) {
@@ -29,7 +37,8 @@ class SettingView extends StatelessWidget {
         children: [
           CustomTitleContainer(
             title: "Setting",
-          ),
+),
+   
           Expanded(
             child: GridView(
               gridDelegate:

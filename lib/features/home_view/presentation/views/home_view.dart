@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
-
-import '../../../../core/utils/Constants.dart';
 import '../../../../core/widgets/CustomTitleContainer.dart';
 import '../../../../core/widgets/custom_small_button.dart';
 
@@ -13,6 +12,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserModel user=UserModel.getInstance();
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
     return Scaffold(
@@ -20,7 +20,8 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: [
             CustomTitleContainer(
-              title: "Mostafa Magdy",
+              title: '''${user.firstName![0].toUpperCase()+user.firstName!.substring(1)}
+${user.lastName![0].toUpperCase()+user.lastName!.substring(1)}''',
             ),
             SizedBox(
               height: 50,
@@ -34,7 +35,7 @@ class HomeView extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, RoutesNames.AddAccountView);
+                    Navigator.pushNamed(context, RoutesNames.ManageAccounts);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),

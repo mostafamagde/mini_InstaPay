@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/models/user_model.dart';
 
 import 'custom_card_button.dart';
 
@@ -12,7 +13,7 @@ class BankAccountManagment extends StatelessWidget {
     var theme = Theme.of(context);
     return Container(
       width: media.width * .9,
-      height: media.height * .15,
+      padding: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
@@ -37,18 +38,22 @@ class BankAccountManagment extends StatelessWidget {
               SizedBox(
                 width: 12,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "mostafamagde227@instaPay",
-                    style: theme.textTheme.bodyMedium,
-                  ),
-                  Text(
-                    "PREPAID****1234",
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      UserModel.getInstance().email!,
+                      style: theme.textTheme.bodyMedium,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    Text(
+                      "PREPAID****1234",
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 width: 22,
@@ -65,12 +70,11 @@ class BankAccountManagment extends StatelessWidget {
             height: 10,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 10),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: 40,
-                ),
+             
                 InkWell(
                   child: CustomAccountCardButton(
                     icon: Icons.qr_code,
@@ -78,17 +82,13 @@ class BankAccountManagment extends StatelessWidget {
                   ),
                   onTap: () {},
                 ),
-                SizedBox(
-                  width: 30,
-                ),
+              
                 Container(
                   width: 2,
                   height: 45,
                   color: Colors.grey,
                 ),
-                SizedBox(
-                  width: 20,
-                ),
+            
                 InkWell(
                   child: CustomAccountCardButton(
                     icon: Icons.balance,

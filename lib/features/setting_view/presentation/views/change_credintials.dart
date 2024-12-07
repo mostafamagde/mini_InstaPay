@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/models/user_model.dart';
 
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 
@@ -12,11 +13,15 @@ import '../manager/change_credintials_cubit/change_credinitials_cubit.dart';
 class ChangeCredintials extends StatelessWidget {
   ChangeCredintials({super.key});
 
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController firstNameController =
+      TextEditingController(text: UserModel.getInstance().firstName);
+  final TextEditingController lastNameController =
+      TextEditingController(text: UserModel.getInstance().lastName);
 
-  final TextEditingController addressController = TextEditingController();
-  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController addressController =
+      TextEditingController(text: UserModel.getInstance().address);
+  final TextEditingController phoneNumberController =
+      TextEditingController(text: UserModel.getInstance().mobileNumber);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +97,7 @@ class ChangeCredintials extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
-                        onPressed: ()  {
+                        onPressed: () {
                           if (formKey.currentState!.validate()) {
                             cubit.changeCredinitials(CredinitialsModel(
                               lastName: lastNameController.text,

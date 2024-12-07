@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
@@ -19,6 +20,7 @@ class OtpView extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OtpView> {
+
   final _formKey = GlobalKey<FormState>();
   final List<TextEditingController> _otpControllers = List.generate(
     6,
@@ -90,7 +92,12 @@ class _OTPScreenState extends State<OtpView> {
         }
       } catch (e) {
         if (e is DioException) {
-          print("Sssssssssssssssssss ${e.message}");
+          if (e.response != null) {
+            print(e.response);
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${e.message}')),
+          );
         }
       }
     }
@@ -109,12 +116,21 @@ class _OTPScreenState extends State<OtpView> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Login Successful')),
           );
+          UserModel user = UserModel.getInstance();
+          user.token = response.data["token"];
+          final storage = new FlutterSecureStorage();
+          await storage.write(key: "token", value: user.token);
+          final userDataResponse = await apiManager.get(ApiConstants.getUserData,headers: {
+            "token":user.token
+          } ); ;
+          if(userDataResponse.statusCode==200){
+            user.setFromjson(userDataResponse.data["data"]);      
+          }
+
           Navigator.pushReplacementNamed(
             context,
             RoutesNames.layoutView,
           );
-          UserModel user = UserModel.getInstance();
-          user.token = response.data["token"];
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Failed to login')),
@@ -183,6 +199,7 @@ class _OTPScreenState extends State<OtpView> {
 
   @override
   Widget build(BuildContext context) {
+      print("token: ${widget.userToken}");
     return Scaffold(
       appBar: AppBar(
         title: Text('Enter OTP'),
