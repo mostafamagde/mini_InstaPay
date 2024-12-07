@@ -17,7 +17,7 @@ class ManageBankAccountsCubit extends Cubit<ManageBankAccountsState> {
     try {
       final banks = await bankRepository.getAllBankAccounts();
 
-      emit(ManageBankAccountsSuccess());
+      emit(ManageBankAccountsSuccess(message: "You have ${banks.data?.length} bank accounts"));
     } catch (e) {
       if (e is DioException) {
         emit(ManageBankAccountsFailed(e.response?.data['message'] ?? e.message));
@@ -30,13 +30,13 @@ class ManageBankAccountsCubit extends Cubit<ManageBankAccountsState> {
 
   Future<void> deleteBankAccount(BankAccountModel model, int index, TextEditingController inputController) async {
 
-    late BankAccountModel banks;
+
     try {
       await bankRepository.deleteBankAccounts(model, index, inputController);
 
 
 
-      emit(ManageBankAccountsSuccess( message: "deleted successfully"));
+      emit(ManageBankAccountsSuccess( message: "Delete Bank Account"));
     } catch (e) {
       if (e is DioException) {
         emit(ManageBankAccountsFailed(e.response?.data['message'] ?? e.message));

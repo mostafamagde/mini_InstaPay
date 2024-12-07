@@ -21,6 +21,8 @@ class ManageAccounts extends StatelessWidget {
         }
         if (state is ManageBankAccountsDeleteFailed) {
           snackBar(content: state.message, context: context);
+        }if (state is ManageBankAccountsSuccess) {
+          snackBar(content: state.message, context: context);
         }
       },
       builder: (context, state) {
@@ -33,6 +35,7 @@ class ManageAccounts extends StatelessWidget {
             appBar: AppBar(),
             body: () {
               if (state is ManageBankAccountsSuccess) {
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
