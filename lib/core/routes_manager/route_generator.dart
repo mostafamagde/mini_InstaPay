@@ -39,7 +39,7 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-      case RoutesNames.AddAccountView:
+      case RoutesNames.chooseBank:
         return MaterialPageRoute(
           builder: (context) => const ChooseAccountView(),
           settings: settings,

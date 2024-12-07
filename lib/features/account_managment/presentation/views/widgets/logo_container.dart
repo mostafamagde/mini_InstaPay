@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/routes_manager/routes_names.dart';
+
 class LogoContainer extends StatelessWidget {
   const LogoContainer({super.key});
 
@@ -21,7 +23,7 @@ class LogoContainer extends StatelessWidget {
 
         ),
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () =>   Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (route) => false,),
           child: Text(
             "Skip to Home",
             style: theme.textTheme.bodyMedium,

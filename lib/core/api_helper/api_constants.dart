@@ -14,5 +14,6 @@ class ApiConstants {
   static const String getUserData="user/";
   static const String addGetBankAccount="account/";
   static const String logOut="user/logout";
+  static const String deleteAccount="/account/";
 
 }

@@ -14,7 +14,7 @@ final class GetAllUserBankAccountsFailed extends GetAllUserBankAccountsState {
 }
 
 final class GetAllUserBankAccountsSuccess extends GetAllUserBankAccountsState {
-  final List<BankAccountModel> bankAccounts;
+  final BankAccountModel bankAccounts;
 
   GetAllUserBankAccountsSuccess(this.bankAccounts);
 }

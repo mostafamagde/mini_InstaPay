@@ -19,8 +19,8 @@ class ApiManager {
     );
   }
 
-  Future<Response> delete(String endPoint) async {
-    return await _dio.delete(endPoint);
+  Future<Response> delete(String endPoint ,{dynamic headers,dynamic body}) async {
+    return await _dio.delete(endPoint,options: Options(headers: headers),data: body);
   }
 
   Future<Response> patch(String endPoint, {  dynamic data, dynamic headers}) async {

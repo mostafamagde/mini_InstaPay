@@ -32,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: TextFormField(
+
         textAlign: centerText?TextAlign.center:TextAlign.start,
         focusNode: node,
         controller: controller,
