@@ -12,9 +12,12 @@ class UserAccountsListView extends StatelessWidget {
   const UserAccountsListView({
     super.key,
     required this.bank,
+    required this.onLongPressed,
   });
 
   final BankAccountModel bank;
+  final Future<void> Function(BankAccountModel model, int index,
+      TextEditingController inputController) onLongPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class UserAccountsListView extends StatelessWidget {
                         "Are you sure you want to delete this account",
                       ),
                       content: CustomTextField(
-                        controller:inputController ,
+                          controller: inputController,
                           label: "IPIN",
                           icon: Icons.pin,
                           inputType: TextInputType.visiblePassword,
@@ -48,16 +51,9 @@ class UserAccountsListView extends StatelessWidget {
                           child: Text("Cancel"),
                         ),
                         TextButton(
-                          onPressed: () async {
-                          var data=  await ApiManager().delete(
-                                '${ApiConstants.deleteAccount + bank.data![index].id!}',
-                                headers: {
-                                  "token": UserModel.getInstance().token
-                                },
-                                body: {
-                                  "PIN":inputController.text
-                                });
-                           Navigator.pop(context);
+                          onPressed: () {
+                            onLongPressed(bank, index, inputController);
+                            Navigator.pop(context);
                           },
                           child: Text(
                             "Confirm",

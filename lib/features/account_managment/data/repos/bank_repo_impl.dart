@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
@@ -22,7 +23,15 @@ class BankRepoImpl implements BankRepository {
 
     print(response.statusCode);
 
-    return  BankAccountModel.fromJson(response.data);
+    return BankAccountModel.fromJson(response.data);
+  }
 
+  @override
+  Future<void> deleteBankAccounts(BankAccountModel bank, int index,
+      TextEditingController inputController) async {
+   await ApiManager().delete(
+        '${ApiConstants.deleteAccount + bank.data![index].id!}',
+        body: {"PIN": inputController.text},
+        headers: {"token": UserModel.getInstance().token});
   }
 }

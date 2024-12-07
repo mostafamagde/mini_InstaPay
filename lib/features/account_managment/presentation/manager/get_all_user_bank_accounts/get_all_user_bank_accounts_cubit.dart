@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
@@ -17,12 +18,13 @@ class GetAllUserBankAccountsCubit extends Cubit<GetAllUserBankAccountsState> {
   static GetAllUserBankAccountsCubit get(context) => BlocProvider.of(context);
 
   Future<void> fetchUserBanks() async {
-
     emit(GetAllUserBankAccountsLoading());
     try {
       final banks = await bankRepository.getAllBankAccounts();
 
-      emit(GetAllUserBankAccountsSuccess(banks));
+      emit(GetAllUserBankAccountsSuccess(
+        banks,
+      ));
     } catch (e) {
       if (e is DioException) {
         emit(GetAllUserBankAccountsFailed(
@@ -33,4 +35,19 @@ class GetAllUserBankAccountsCubit extends Cubit<GetAllUserBankAccountsState> {
       }
     }
   }
-}
+
+  Future<void> deleteBankAccount(BankAccountModel model, int index,
+      TextEditingController inputController) async {
+    emit(GetAllUserBankAccountsDeleteLoading());
+   late BankAccountModel banks ;
+    try {
+      await bankRepository.deleteBankAccounts(model, index, inputController);
+      banks = await bankRepository.getAllBankAccounts();
+
+      emit(GetAllUserBankAccountsSuccess(banks,
+          message: "deleted successfully"));
+    } catch (e) {
+      emit(GetAllUserBankAccountsSuccess(banks,
+          message: "Something went wrong"));
+    }
+  }}

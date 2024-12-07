@@ -32,9 +32,15 @@ class RouteGenerator {
         );
       case RoutesNames.ManageAccounts:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => GetAllUserBankAccountsCubit(
-                ServiceLocator.getIt<BankRepoImpl>())..fetchUserBanks(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => GetAllUserBankAccountsCubit(
+                    ServiceLocator.getIt<BankRepoImpl>())
+                  ..fetchUserBanks(),
+              ),
+
+            ],
             child: ManageAccounts(),
           ),
           settings: settings,

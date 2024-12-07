@@ -26,14 +26,17 @@ class ManageAccounts extends StatelessWidget {
       listener: (context, state) {
         if (state is GetAllUserBankAccountsFailed) {
           snackBar(content: state.message, context: context);
+        }  if (state is GetAllUserBankAccountsDeleteFailed) {
+          snackBar(content: state.message, context: context);
         }
       },
       builder: (context, state) {
+        var cubit = GetAllUserBankAccountsCubit.get(context);
         if (state is GetAllUserBankAccountsLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state is GetAllUserBankAccountsSuccess) {
+        } else if (state is GetAllUserBankAccountsSuccess ) {
           return Scaffold(
             appBar: AppBar(),
             body: Padding(
@@ -42,7 +45,7 @@ class ManageAccounts extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   UserAccountsListView(
-
+                    onLongPressed: cubit.deleteBankAccount,
                     bank: state.bankAccounts,
                   )
                 ],
