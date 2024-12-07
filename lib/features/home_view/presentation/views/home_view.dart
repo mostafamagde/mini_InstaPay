@@ -35,7 +35,7 @@ ${user.lastName![0].toUpperCase()+user.lastName!.substring(1)}''',
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, RoutesNames.AddAccountView);
+                    Navigator.pushNamed(context, RoutesNames.ManageAccounts);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),

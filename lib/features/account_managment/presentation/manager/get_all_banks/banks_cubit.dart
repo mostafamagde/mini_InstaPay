@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 
-import '../../data/repos/bamk_cubit/bank_repo.dart';
+import '../../../data/repos/bank_repo.dart';
 
 part 'banks_state.dart';
 

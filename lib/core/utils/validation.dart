@@ -32,7 +32,7 @@ class Validation {
   static String? validateCardNumberTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
-    }else if (value.length<4){
+    }else if (value.length!=4){
       return 'please enter 4 digits';
     }
 
@@ -41,7 +41,7 @@ class Validation {
   static String? validateCVVNumberTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
-    }else if (value.length<3){
+    }else if (value.length!=3){
       return 'please enter CVV correctly';
     }
 
@@ -50,8 +50,14 @@ class Validation {
   static String? validateExpDateTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
-    }else if (value.length<5){
+    }else if (value.length!=5){
       return 'please enter Expiration date correctly';
+    }else if (int.parse(value.split("/")[0])<=0){
+      return 'Cant enter negative or zero month';
+    }else if (int.parse(value.split("/")[0])>12){
+      return 'Cant enter month greater than 12';
+    }else if (int.parse(value.split("/")[1])<24){
+      return 'That card is not a valid';
     }
 
     return null;

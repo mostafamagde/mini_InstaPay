@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
+import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 
@@ -92,7 +94,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
   @override
   Widget build(BuildContext context) {
-    var bank =ModalRoute.of(context)?.settings.arguments as BankModel;
+    var bank = ModalRoute.of(context)?.settings.arguments as BankModel;
     var formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
@@ -119,6 +121,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: TextFormField(
+                      maxLines: 1,
                       validator: Validation.validateCardNumberTextField,
                       controller: _cardNumberControllers[index],
                       focusNode: _cardNumberFocusNodes[index],
@@ -127,6 +130,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                       maxLength: 4,
                       decoration: InputDecoration(
                         counterText: "",
+                        labelText: 'Card',
                         border: OutlineInputBorder(),
                       ),
                       onChanged: (_) => _onCardNumberChanged(index),
@@ -155,6 +159,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: TextFormField(
+                      maxLines: 1,
                       validator: Validation.validateRegularTextField,
                       controller: _pinControllers[index],
                       focusNode: _pinFocusNodes[index],
@@ -163,7 +168,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                       maxLength: 1,
                       obscureText: !_isPinVisible,
                       decoration: InputDecoration(
-                        counterText: "",
+                        labelText: 'Pin',
                         border: OutlineInputBorder(),
                       ),
                       onChanged: (_) => _onPinChanged(index),
@@ -180,6 +185,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                 Expanded(
                   flex: 2,
                   child: TextFormField(
+                    maxLines: 1,
                     validator: Validation.validateCVVNumberTextField,
                     controller: _cvvController,
                     focusNode: _cvvFocusNode,
@@ -197,6 +203,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                 Expanded(
                   flex: 3,
                   child: TextFormField(
+                    maxLines: 1,
                     validator: Validation.validateExpDateTextField,
                     controller: _expirationController,
                     focusNode: _expirationFocusNode,
@@ -219,22 +226,24 @@ class _AddBankAccountState extends State<AddBankAccount> {
                         String expirationDate = _expirationController.text;
 
                         ApiManager service = ApiManager();
-                        await service.post(
-                          ApiConstants.addBankAccount,
+                        var data = await service.post(
+                          ApiConstants.addGetBankAccount,
                           {
-                            "bankId":bank.id,
-                            "cardNo":int.parse(cardNumber),
-                            "date":{
-                              "year":expirationDate.substring(3),
-                              "month":expirationDate.substring(0,1),
+                            "holderName":cardHolderName,
+                            "bankId": bank.id,
+                            "cardNo": cardNumber,
+                            "date": {
+                              "year": "20" + expirationDate.split("/")[1],
+                              "month": expirationDate.split("/")[0],
                             },
-                            "CVV":int.parse(cvv),
-                            "PIN":pin
+                            "CVV": cvv,
+                            "PIN": pin
                           },
                           headers: {
                             "token": UserModel.getInstance().token,
                           },
                         );
+                        print(data.statusCode);
                       }
                     },
                   ),
@@ -242,7 +251,6 @@ class _AddBankAccountState extends State<AddBankAccount> {
               ],
             ),
 
-            // Submit Button
           ],
         ),
       ),

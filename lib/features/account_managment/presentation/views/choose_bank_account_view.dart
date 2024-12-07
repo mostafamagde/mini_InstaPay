@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/bank_list_view.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/logo_container.dart';
 
-
 import '../../../../core/utils/validation.dart';
 import '../../../../core/widgets/custom_text_field.dart';
-import '../../data/repos/bamk_cubit/bank_repo_impl.dart';
-import '../manager/banks_cubit.dart';
+
+import '../../data/repos/bank_repo_impl.dart';
+import '../manager/get_all_banks/banks_cubit.dart';
 
 class ChooseAccountView extends StatelessWidget {
   const ChooseAccountView({super.key});
@@ -17,7 +17,8 @@ class ChooseAccountView extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return BlocProvider<BanksCubit>(
-      create: (context) => BanksCubit(bankRepository: BankRepoImpl())..fetchBanks(),
+      create: (context) =>
+          BanksCubit(bankRepository: BankRepoImpl())..fetchBanks(),
       child: Scaffold(
         body: SafeArea(
           child: Column(
@@ -56,7 +57,9 @@ class ChooseAccountView extends StatelessWidget {
                             label: 'Search for specific bank name',
                           ),
                           BankListView(),
-                          SizedBox(height: 32,)
+                          SizedBox(
+                            height: 32,
+                          )
                         ],
                       ),
                     )

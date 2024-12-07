@@ -2,6 +2,7 @@ class BankModel {
   final String logo;
   final String name;
   final String id;
+
   BankModel(this.id, {required this.logo, required this.name});
 
   factory BankModel.fromJson(Map<String, dynamic> json) {
