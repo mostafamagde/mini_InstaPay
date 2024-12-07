@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/utils/Constants.dart';
+import 'package:untitled2/core/utils/service_locator.dart';
 import 'package:untitled2/features/home_view/presentation/views/home_view.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/log_out_cubit/log_out_cubit.dart';
 
+import '../../../setting_view/data/repos/setting_repo_impl.dart';
 import '../../../setting_view/presentation/views/setting_view.dart';
 import '../../../transaction_module/presentation/views/receive_money_view.dart';
 import '../../../transaction_module/presentation/views/send_money_view.dart';
@@ -22,7 +26,11 @@ class _LayoutViewState extends State<LayoutView> {
       const HomeView(),
       const SendMoneyView(),
       const ReceiveMoneyView(),
-      const SettingView(),
+      BlocProvider(
+        create: (context) =>
+            LogOutCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
+        child: SettingView(),
+      ),
     ];
 
     var theme = Theme.of(context);
