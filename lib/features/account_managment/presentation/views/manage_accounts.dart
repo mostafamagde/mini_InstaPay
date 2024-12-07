@@ -22,38 +22,34 @@ class ManageAccounts extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = ManageBankAccountsCubit.get(context);
-        if (state is ManageBankAccountsLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (state is ManageBankAccountsSuccess) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  UserAccountsListView(
-                    onLongPressed: cubit.deleteBankAccount,
-                    bank: state.bankAccounts,
-                  )
-                ],
-              ),
-            ),
+        return Scaffold(
             bottomNavigationBar: CusttomButton(
               onTap: () => Navigator.pushNamed(context, RoutesNames.chooseBank),
               label: "Add Account",
             ),
-          );
-        }else if(state is ManageBankAccountsLoading){
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        else {
-          return Text("Something went wrong"); 
-        }
+            appBar: AppBar(),
+            body: () {
+              if (state is ManageBankAccountsSuccess) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      UserAccountsListView(
+                        onLongPressed: cubit.deleteBankAccount,
+                        bank: state.bankAccounts,
+                      )
+                    ],
+                  ),
+                );
+              } else if (state is ManageBankAccountsLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return Text("Something went wrong");
+              }
+            }.call());
       },
     );
   }
