@@ -4,7 +4,6 @@ import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/service_locator.dart';
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
-import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
@@ -13,7 +12,11 @@ import 'package:untitled2/features/setting_view/presentation/views/change_email_
 import 'package:untitled2/features/setting_view/presentation/views/change_password_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
 
-import '../../features/account_managment/presentation/add_account_view.dart';
+import '../../features/account_managment/data/repos/bank_repo_impl.dart';
+import '../../features/account_managment/presentation/manager/get_all_user_bank_accounts/get_all_user_bank_accounts_cubit.dart';
+import '../../features/account_managment/presentation/views/add_bank_account.dart';
+import '../../features/account_managment/presentation/views/choose_bank_account_view.dart';
+import '../../features/account_managment/presentation/views/manage_accounts.dart';
 import '../../features/layout_view/presentation/views/layout_view.dart';
 import '../../features/setting_view/data/repos/setting_repo_impl.dart';
 import '../../features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
@@ -27,9 +30,18 @@ class RouteGenerator {
           builder: (context) => const SplashView(),
           settings: settings,
         );
+      case RoutesNames.ManageAccounts:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => GetAllUserBankAccountsCubit(
+                ServiceLocator.getIt<BankRepoImpl>())..fetchUserBanks(),
+            child: ManageAccounts(),
+          ),
+          settings: settings,
+        );
       case RoutesNames.AddAccountView:
         return MaterialPageRoute(
-          builder: (context) => const AddAccountView(),
+          builder: (context) => const ChooseAccountView(),
           settings: settings,
         );
 
@@ -51,6 +63,11 @@ class RouteGenerator {
       case RoutesNames.ForgetPasswordView:
         return MaterialPageRoute(
           builder: (context) => const ForgetPasswordView(),
+          settings: settings,
+        );
+      case RoutesNames.AddBankAccount:
+        return MaterialPageRoute(
+          builder: (context) => AddBankAccount(),
           settings: settings,
         );
       case RoutesNames.changeCridintials:
@@ -85,6 +102,7 @@ class RouteGenerator {
           ),
           settings: settings,
         );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashView(),

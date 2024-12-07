@@ -12,4 +12,6 @@ class ApiConstants {
   static const String updatePassword = 'user/updatePassword';
   static const String getAllBanks = 'bank/';
   static const String getUserData="user/";
+  static const String addGetBankAccount="account/";
+  static const String logOut="user/logout";
 }

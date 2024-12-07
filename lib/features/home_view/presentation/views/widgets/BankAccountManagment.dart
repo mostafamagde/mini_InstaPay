@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/models/user_model.dart';
 
 import 'custom_card_button.dart';
 
@@ -42,7 +43,7 @@ class BankAccountManagment extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "mostafamagde227@instaPay",
+                      UserModel.getInstance().email!,
                       style: theme.textTheme.bodyMedium,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,

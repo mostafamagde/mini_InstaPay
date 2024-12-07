@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/features/account_managment/presentation/banks_cubit/banks_cubit.dart';
 
+
+import '../../manager/get_all_banks/banks_cubit.dart';
 import 'banks_list_item.dart';
 
 class BankListView extends StatelessWidget {

@@ -10,4 +10,6 @@ class RoutesNames {
   static const String privacySetting="privacySetting";
   static const String changePassword="changePassword";
   static const String changeEmail="changeEmail";
+  static const String AddBankAccount="AddBankAccount";
+  static const String ManageAccounts="ManageAccounts";
 }
