@@ -46,12 +46,13 @@ class ManageAccounts extends StatelessWidget {
               label: "Add Account",
             ),
           );
-        } else {
-          return Container(
-            width: 100,
-            height: 100,
-            color: Colors.red,
+        }else if(state is ManageBankAccountsLoading){
+          return Center(
+            child: CircularProgressIndicator(),
           );
+        }
+        else {
+          return Text("Something went wrong"); 
         }
       },
     );

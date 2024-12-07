@@ -7,7 +7,7 @@ final class ManageBankAccountsInitial extends ManageBankAccountsState {}
 
 final class ManageBankAccountsLoading extends ManageBankAccountsState {}
 
-final class ManageBankAccountsDeleteLoading extends ManageBankAccountsState {}
+
 
 final class ManageBankAccountsFailed extends ManageBankAccountsState {
   final String message;
