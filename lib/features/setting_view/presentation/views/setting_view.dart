@@ -47,15 +47,7 @@ class SettingView extends StatelessWidget {
                   );
                 },
               ),
-              CustomSmallButton(
-                padding: 25,
-                name: "Log out",
-                icon: Icons.logout,
-                onTap: () async {
-                  await ApiManager().post(ApiConstants.logOut, {},
-                      headers: UserModel.getInstance().token);
-                },
-              ),
+
             ],
           ),
         ),
