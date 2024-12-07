@@ -16,10 +16,10 @@ final class ManageBankAccountsFailed extends ManageBankAccountsState {
 }
 
 final class ManageBankAccountsSuccess extends ManageBankAccountsState {
-  final BankAccountModel bankAccounts;
+
   final String? message;
 
-  ManageBankAccountsSuccess({required this.bankAccounts, this.message});
+  ManageBankAccountsSuccess({ this.message});
 }
 
 final class ManageBankAccountsDeleteFailed extends ManageBankAccountsState {

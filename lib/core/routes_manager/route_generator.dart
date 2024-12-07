@@ -13,7 +13,7 @@ import 'package:untitled2/features/setting_view/presentation/views/change_passwo
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
 
 import '../../features/account_managment/data/repos/bank_repo_impl.dart';
-import '../../features/account_managment/presentation/manager/get_all_user_bank_accounts/manage_bank_accounts_cubit.dart';
+import '../../features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
 import '../../features/account_managment/presentation/views/add_bank_account.dart';
 import '../../features/account_managment/presentation/views/choose_bank_account_view.dart';
 import '../../features/account_managment/presentation/views/manage_accounts.dart';

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_view.dart';
-import '../manager/get_all_user_bank_accounts/manage_bank_accounts_cubit.dart';
+
+import '../manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
+
 
 class ManageAccounts extends StatelessWidget {
   const ManageAccounts({super.key});
@@ -37,7 +40,7 @@ class ManageAccounts extends StatelessWidget {
                     children: [
                       UserAccountsListView(
                         onLongPressed: cubit.deleteBankAccount,
-                        bank: state.bankAccounts,
+                        bank: UserModel.getInstance().bankAccounts!,
                       )
                     ],
                   ),

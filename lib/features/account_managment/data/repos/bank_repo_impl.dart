@@ -22,16 +22,27 @@ class BankRepoImpl implements BankRepository {
         headers: {"token": UserModel.getInstance().token});
 
     print(response.statusCode);
-
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      UserModel.getInstance().bankAccounts =
+          BankAccountModel.fromJson(response.data);
+    }
     return BankAccountModel.fromJson(response.data);
   }
 
   @override
   Future<void> deleteBankAccounts(BankAccountModel bank, int index,
       TextEditingController inputController) async {
-   await ApiManager().delete(
+    final date = await ApiManager().delete(
         '${ApiConstants.deleteAccount + bank.data![index].id!}',
         body: {"PIN": inputController.text},
         headers: {"token": UserModel.getInstance().token});
+    if (date.statusCode == 200 || date.statusCode == 201) {
+     for(var item in UserModel.getInstance().bankAccounts!.data!) {
+       if(item.id ==  bank.data![index].id!){
+         UserModel.getInstance().bankAccounts!.data!.remove(item);
+         break;
+       }
+     }
+    }
   }
 }

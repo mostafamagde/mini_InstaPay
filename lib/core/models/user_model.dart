@@ -1,3 +1,5 @@
+import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
+
 class UserModel {
   String? firstName;
   String? lastName;
@@ -7,6 +9,7 @@ class UserModel {
   String? mobileNumber;
   String? address;
   String? last4Digits;
+  BankAccountModel? bankAccounts;
 
 
 
