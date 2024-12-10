@@ -3,19 +3,20 @@ import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 
+import '../../../data/repos/bank_list_proxy.dart';
 import '../../../data/repos/bank_repo.dart';
 
 part 'banks_state.dart';
 
 class BanksCubit extends Cubit<BanksState> {
-  final BankRepository bankRepository;
+  final BankListProxy bankProxy;
 
-  BanksCubit({required this.bankRepository}) : super(BanksInitial());
+  BanksCubit({required this.bankProxy}) : super(BanksInitial());
 
   Future<void> fetchBanks() async {
     emit(BanksLoading());
     try {
-      final banks = await bankRepository.getAllBanks();
+      final banks = await bankProxy.getBankList();
       print(banks);
       emit(BanksLoaded(banks));
     } catch (e) {

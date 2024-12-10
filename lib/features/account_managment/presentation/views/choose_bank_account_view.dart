@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/features/account_managment/data/repos/bank_list_proxy.dart';
 
 import 'package:untitled2/features/account_managment/presentation/views/widgets/bank_list_view.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/logo_container.dart';
@@ -27,7 +28,7 @@ class _ChooseAccountViewState extends State<ChooseAccountView> {
     var theme = Theme.of(context);
     return BlocProvider<BanksCubit>(
       create: (context) =>
-          BanksCubit(bankRepository: BankRepoImpl())..fetchBanks(),
+          BanksCubit(bankProxy:BankListProxy())..fetchBanks(),
       child: Scaffold(
         body: SafeArea(
           child: Column(
