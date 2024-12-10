@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/Constants.dart';
 
+// ignore: must_be_immutable
 class CustomSmallButton extends StatelessWidget {
    CustomSmallButton({
     super.key,

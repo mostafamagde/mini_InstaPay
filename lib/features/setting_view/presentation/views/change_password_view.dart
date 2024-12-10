@@ -11,6 +11,7 @@ import '../../../../core/widgets/custom_snackbar.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../manager/change_password_cubit/change_password_cubit.dart';
 
+// ignore: must_be_immutable
 class ChangePassword extends StatelessWidget {
   ChangePassword({super.key});
 

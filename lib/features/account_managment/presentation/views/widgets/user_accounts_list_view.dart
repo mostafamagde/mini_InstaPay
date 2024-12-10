@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_item.dart';
-
-import '../../../../../core/api_helper/api_constants.dart';
-import '../../../../../core/api_helper/api_manger.dart';
 import '../../../../../core/utils/validation.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 
