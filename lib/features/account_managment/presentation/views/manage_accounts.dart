@@ -8,7 +8,6 @@ import 'package:untitled2/features/account_managment/presentation/views/widgets/
 
 import '../manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
 
-
 class ManageAccounts extends StatelessWidget {
   const ManageAccounts({super.key});
 
@@ -21,7 +20,8 @@ class ManageAccounts extends StatelessWidget {
         }
         if (state is ManageBankAccountsDeleteFailed) {
           snackBar(content: state.message, context: context);
-        }if (state is ManageBankAccountsSuccess) {
+        }
+        if (state is ManageBankAccountsSuccess) {
           snackBar(content: state.message, context: context);
         }
       },
@@ -34,8 +34,13 @@ class ManageAccounts extends StatelessWidget {
             ),
             appBar: AppBar(),
             body: () {
-              if (state is ManageBankAccountsSuccess) {
-
+              if (state is ManageBankAccountsFailed) {
+                return Container();
+              } else if (state is ManageBankAccountsLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
@@ -48,12 +53,6 @@ class ManageAccounts extends StatelessWidget {
                     ],
                   ),
                 );
-              } else if (state is ManageBankAccountsLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return Text("Something went wrong");
               }
             }.call());
       },
