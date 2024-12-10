@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_factory.dart';
@@ -39,6 +40,10 @@ class _OTPScreenState extends State<OtpView> {
       BlocProvider.of<OtpCubit>(context)
           .submit(repository, otp, widget.userToken);
     }
+  }
+
+  void _resendOtp() {
+    BlocProvider.of<OtpCubit>(context).resendOtp(repository, widget.userToken);
   }
 
   // void _forgetPasswordFunction() async {
@@ -201,6 +206,8 @@ class _OTPScreenState extends State<OtpView> {
 
   @override
   Widget build(BuildContext context) {
+    print(UserModel.getInstance().userToken);
+       print(UserModel.getInstance().token);
     context;
     return Scaffold(
       appBar: AppBar(
@@ -212,6 +219,9 @@ class _OTPScreenState extends State<OtpView> {
         listener: (context, state) {
           if(state is OtpError){
             snackBar(content: state.message, context: context);
+          }
+          else if(state is OtpResendSuccess){
+            snackBar(content: "Otp Sent", context: context,color: Colors.green);
           }
         },
         builder: (context, state) {
@@ -262,6 +272,11 @@ class _OTPScreenState extends State<OtpView> {
                     ElevatedButton(
                       onPressed: _submitFunction,
                       child: Text('Submit'),
+                    ),
+                    const SizedBox(height: 10),
+                    TextButton(
+                      onPressed: _resendOtp,
+                      child: Text('Resend OTP'),
                     ),
                   ],
                 ),
