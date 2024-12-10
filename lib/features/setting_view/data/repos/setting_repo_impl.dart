@@ -16,7 +16,7 @@ class SettingRepoImpl implements SettingRepo {
       {required CredinitialsModel model}) async {
     ApiManager service = ApiManager();
     try {
-      var data = await service.patch(
+     await service.patch(
         ApiConstants.changeCredintialsEndPoint,
         data: {
           "firstName": model.firstName,

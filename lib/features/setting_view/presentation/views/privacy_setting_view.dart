@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
-import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
-import 'package:untitled2/core/widgets/custom_text_field.dart';
 
 class PrivacySettingView extends StatelessWidget {
   const PrivacySettingView({super.key});

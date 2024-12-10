@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
-import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 

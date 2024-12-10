@@ -4,7 +4,7 @@ import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
-import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
+import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
 
 class EnterPasswordView extends StatelessWidget {
   

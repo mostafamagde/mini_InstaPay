@@ -16,4 +16,6 @@ class ApiConstants {
   static const String logOut="user/logout";
   static const String deleteAccount="/account/";
 
+  static String resendOtpEndPoint= 'auth/resendOTP';
+
 }

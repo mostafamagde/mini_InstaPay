@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:untitled2/features/account_managment/data/repos/bank_repo_impl.dart';
 
