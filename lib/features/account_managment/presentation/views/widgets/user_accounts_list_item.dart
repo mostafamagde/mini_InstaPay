@@ -26,10 +26,12 @@ class UserAccountsListItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-
           if (index == 0)
             Align(
-              child: Text('    Default',style: theme.textTheme.bodySmall,),
+              child: Text(
+                '    Default',
+                style: theme.textTheme.bodySmall,
+              ),
               alignment: Alignment.centerLeft,
             ),
           SizedBox(
