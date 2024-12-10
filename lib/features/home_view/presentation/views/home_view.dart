@@ -9,10 +9,9 @@ import '../../../../core/widgets/custom_small_button.dart';
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    UserModel user=UserModel.getInstance();
+    UserModel user = UserModel.getInstance();
     var theme = Theme.of(context);
     // var media = MediaQuery.of(context).size;
     return Scaffold(
@@ -20,8 +19,9 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: [
             CustomTitleContainer(
-              title: '''${user.firstName![0].toUpperCase()+user.firstName!.substring(1)}
-${user.lastName![0].toUpperCase()+user.lastName!.substring(1)}''',
+              title:
+                  '''${user.firstName![0].toUpperCase() + user.firstName!.substring(1)}
+${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
             ),
             SizedBox(
               height: 50,
@@ -146,11 +146,9 @@ ${user.lastName![0].toUpperCase()+user.lastName!.substring(1)}''',
             TransactionCard(),
             TransactionCard(),
             TransactionCard(),
-
           ],
         ),
       ),
     );
   }
 }
-

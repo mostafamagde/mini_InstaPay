@@ -7,7 +7,8 @@ import 'package:untitled2/features/account_managment/data/repos/bank_repo.dart';
 part 'manage_bank_accounts_state.dart';
 
 class ManageBankAccountsCubit extends Cubit<ManageBankAccountsState> {
-  ManageBankAccountsCubit(this.bankRepository) : super(ManageBankAccountsInitial());
+  ManageBankAccountsCubit(this.bankRepository)
+      : super(ManageBankAccountsInitial());
   BankRepository bankRepository;
 
   static ManageBankAccountsCubit get(context) => BlocProvider.of(context);
@@ -17,10 +18,12 @@ class ManageBankAccountsCubit extends Cubit<ManageBankAccountsState> {
     try {
       final banks = await bankRepository.getAllBankAccounts();
 
-      emit(ManageBankAccountsSuccess(message: "You have ${banks.data?.length} bank accounts"));
+      emit(ManageBankAccountsSuccess(
+          message: "You have ${banks.data?.length} bank accounts"));
     } catch (e) {
       if (e is DioException) {
-        emit(ManageBankAccountsFailed(e.response?.data['message'] ?? e.message));
+        emit(
+            ManageBankAccountsFailed(e.response?.data['message'] ?? e.message));
         print(e.response?.data['message']);
       } else {
         emit(ManageBankAccountsFailed(e.toString()));
@@ -28,21 +31,23 @@ class ManageBankAccountsCubit extends Cubit<ManageBankAccountsState> {
     }
   }
 
-  Future<void> deleteBankAccount(BankAccountModel model, int index, TextEditingController inputController) async {
-
-
+  Future<void> deleteBankAccount(BankAccountModel model, int index,
+      TextEditingController inputController) async {
     try {
       await bankRepository.deleteBankAccounts(model, index, inputController);
 
-
-
-      emit(ManageBankAccountsSuccess( message: "Delete Bank Account"));
+      emit(ManageBankAccountsSuccess(message: "Delete Bank Account"));
     } catch (e) {
       if (e is DioException) {
-        emit(ManageBankAccountsFailed(e.response?.data['message'] ?? e.message));
-        print(e.response?.data['message']);
+        print("a7aaaaaaaaaa");
+        print(e);
+        emit(
+            ManageBankAccountsDeleteFailed(e.response?.data['message'] ?? e.message));
+
       } else {
-        emit(ManageBankAccountsFailed(e.toString()));
+
+
+        emit(ManageBankAccountsDeleteFailed("Deleted Successfully"));
       }
     }
   }

@@ -3,7 +3,6 @@ import 'package:untitled2/core/models/user_model.dart';
 
 import 'custom_card_button.dart';
 
-
 class BankAccountManagment extends StatelessWidget {
   const BankAccountManagment({super.key});
 
@@ -48,10 +47,7 @@ class BankAccountManagment extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    Text(
-                      "PREPAID****1234",
-                      style: theme.textTheme.bodySmall,
-                    ),
+
                   ],
                 ),
               ),
@@ -74,7 +70,6 @@ class BankAccountManagment extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-             
                 InkWell(
                   child: CustomAccountCardButton(
                     icon: Icons.qr_code,
@@ -82,13 +77,11 @@ class BankAccountManagment extends StatelessWidget {
                   ),
                   onTap: () {},
                 ),
-              
                 Container(
                   width: 2,
                   height: 45,
                   color: Colors.grey,
                 ),
-            
                 InkWell(
                   child: CustomAccountCardButton(
                     icon: Icons.balance,
@@ -99,11 +92,8 @@ class BankAccountManagment extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
     );
   }
 }
-
-

@@ -30,6 +30,7 @@ class UserAccountsListView extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
+
                       title: Text(
                         "Are you sure you want to delete this account",
                       ),
