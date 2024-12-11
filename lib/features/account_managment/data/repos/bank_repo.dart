@@ -6,5 +6,6 @@ abstract class BankRepository {
   Future<List<BankModel>> getAllBanks();
   Future<BankAccountModel> getAllBankAccounts();
   Future<void> deleteBankAccounts(BankAccountModel model ,int index,TextEditingController inputController);
+  Future<int> getBalance(String accId,String pin);
 }
 

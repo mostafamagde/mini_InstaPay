@@ -38,6 +38,15 @@ class Validation {
 
     return null;
   }
+  static String? validatePinTextField(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please fill this field';
+    }else if (value.length!=1){
+      return 'please enter 1 digits';
+    }
+
+    return null;
+  }
   static String? validateCVVNumberTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';

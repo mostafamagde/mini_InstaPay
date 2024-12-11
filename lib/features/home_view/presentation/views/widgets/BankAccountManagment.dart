@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/api_helper/api_constants.dart';
+import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 
 import '../../../../../core/widgets/custom_alert_dialoge.dart';
@@ -50,9 +53,9 @@ class BankAccountManagment extends StatelessWidget {
                       maxLines: 1,
                     ),
                     Text(
-                      UserModel.getInstance().last4Digits == null
-                          ? ""
-                          : "************${UserModel.getInstance().last4Digits!}",
+
+
+                           "************${UserModel.getInstance().bankAccounts!.data?[0].cardNo}",
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
@@ -94,16 +97,10 @@ class BankAccountManagment extends StatelessWidget {
                     icon: Icons.balance,
                     text: "Check Balance",
                   ),
-                  onTap: () {
-                    if (UserModel.getInstance().last4Digits == null) {
-                      CustomAlertDialoge.dialog(
-                          context,
-                          theme.textTheme.bodyMedium!
-                              .copyWith(color: Constants.secondaryOrangeColor),
-                          "Warning",
-                          "You Don't have Bank account");
-                    }
-
+                  onTap: () async {
+                    Navigator.pushNamed(context, RoutesNames.pinView,
+                        arguments:
+                            UserModel.getInstance().bankAccounts!.data?[0].id);
                   },
                 ),
               ],
@@ -114,3 +111,14 @@ class BankAccountManagment extends StatelessWidget {
     );
   }
 }
+/*final data = await ApiManager().post(
+                          "${ApiConstants.getBalance}${UserModel.getInstance().bankAccounts!.data?[0].id}",
+                          {
+                            "PIN": "111111"
+                          },
+                          headers: {
+                            "token": UserModel.getInstance().token,
+                          });
+                      if (data.statusCode == 201) {
+                        print(data.data["data"]);
+                      }*/

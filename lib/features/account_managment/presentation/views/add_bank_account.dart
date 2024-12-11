@@ -292,15 +292,12 @@ class _AddBankAccountState extends State<AddBankAccount> {
                           );
                           if (data.statusCode == 200 ||
                               data.statusCode == 201) {
-                            if(UserModel.getInstance().last4Digits==null) {
-                              UserModel.getInstance().last4Digits =
-                                  _cardNumberControllers[3].text;
-                            }
+
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              RoutesNames.layoutView,
+                              RoutesNames.ManageAccounts,
                               (route) => false,
-                              arguments: bank
+
                             );
                           }
                         }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
 import '../../../../core/widgets/CustomTitleContainer.dart';
@@ -49,7 +50,26 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                 )
               ],
             ),
-            BankAccountManagment(),
+            if (UserModel.getInstance().bankAccounts != null &&
+                UserModel.getInstance().bankAccounts?.data?.length != 0)
+              BankAccountManagment(),
+            if (UserModel.getInstance().bankAccounts == null ||
+                UserModel.getInstance().bankAccounts?.data?.length == 0)
+              Container(
+                child: Center(
+                  child: TextButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, RoutesNames.chooseBank),
+                    child: Column(
+                      children: [
+                        Text("Add Account",style: theme.textTheme.bodyMedium,),
+                        SizedBox(height: 10,),
+                        Icon(Icons.add,color: Constants.secondaryOrangeColor,size: 30,)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             SizedBox(
               height: 40,
             ),

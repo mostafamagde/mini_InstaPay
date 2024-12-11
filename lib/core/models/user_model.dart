@@ -8,7 +8,7 @@ class UserModel {
   String? userToken;
   String? mobileNumber;
   String? address;
-  String? last4Digits;
+
   BankAccountModel? bankAccounts;
 
 
