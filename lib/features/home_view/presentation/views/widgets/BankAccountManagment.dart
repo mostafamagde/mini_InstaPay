@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 
+import '../../../../../core/widgets/custom_alert_dialoge.dart';
 import 'custom_card_button.dart';
 
 class BankAccountManagment extends StatelessWidget {
@@ -47,7 +49,12 @@ class BankAccountManagment extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-
+                    Text(
+                      UserModel.getInstance().last4Digits == null
+                          ? ""
+                          : "************${UserModel.getInstance().last4Digits!}",
+                      style: theme.textTheme.bodySmall,
+                    ),
                   ],
                 ),
               ),
@@ -87,7 +94,17 @@ class BankAccountManagment extends StatelessWidget {
                     icon: Icons.balance,
                     text: "Check Balance",
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    if (UserModel.getInstance().last4Digits == null) {
+                      CustomAlertDialoge.dialog(
+                          context,
+                          theme.textTheme.bodyMedium!
+                              .copyWith(color: Constants.secondaryOrangeColor),
+                          "Warning",
+                          "You Don't have Bank account");
+                    }
+
+                  },
                 ),
               ],
             ),

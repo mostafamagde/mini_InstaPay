@@ -39,8 +39,7 @@ class ManageBankAccountsCubit extends Cubit<ManageBankAccountsState> {
       emit(ManageBankAccountsSuccess(message: "Delete Bank Account"));
     } catch (e) {
       if (e is DioException) {
-        print("a7aaaaaaaaaa");
-        print(e);
+
         emit(
             ManageBankAccountsDeleteFailed(e.response?.data['message'] ?? e.message));
 

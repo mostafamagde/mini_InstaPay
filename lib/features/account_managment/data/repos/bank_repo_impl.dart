@@ -37,6 +37,8 @@ class BankRepoImpl implements BankRepository {
         body: {"PIN": inputController.text},
         headers: {"token": UserModel.getInstance().token});
     if (date.statusCode == 200 || date.statusCode == 201) {
+      UserModel.getInstance().last4Digits = null;
+
       for (var item in UserModel.getInstance().bankAccounts!.data!) {
         if (item.id == bank.data![index].id!) {
           UserModel.getInstance().bankAccounts!.data!.remove(item);

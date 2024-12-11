@@ -24,6 +24,9 @@ class UserAccountsListView extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         itemBuilder: (context, index) {
+          if(index==0){
+            UserModel.getInstance().last4Digits= bank.data?[0].cardNo;
+          }
           return Padding(
             padding: const EdgeInsets.only(top: 15),
             child: InkWell(

@@ -18,17 +18,16 @@ class AddBankAccount extends StatefulWidget {
 
 class _AddBankAccountState extends State<AddBankAccount> {
   final List<TextEditingController> _cardNumberControllers =
-  List.generate(4, (_) => TextEditingController());
+      List.generate(4, (_) => TextEditingController());
   final List<TextEditingController> _pinControllers =
-  List.generate(6, (_) => TextEditingController());
+      List.generate(6, (_) => TextEditingController());
   final List<TextEditingController> _additionalFieldControllers =
-  List.generate(4, (_) => TextEditingController());
+      List.generate(4, (_) => TextEditingController());
   final List<FocusNode> _cardNumberFocusNodes =
-  List.generate(4, (_) => FocusNode());
-  final List<FocusNode> _pinFocusNodes =
-  List.generate(6, (_) => FocusNode());
+      List.generate(4, (_) => FocusNode());
+  final List<FocusNode> _pinFocusNodes = List.generate(6, (_) => FocusNode());
   final List<FocusNode> _additionalFieldFocusNodes =
-  List.generate(4, (_) => FocusNode());
+      List.generate(4, (_) => FocusNode());
   final TextEditingController _cardHolderController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
   final TextEditingController _expirationController = TextEditingController();
@@ -87,7 +86,8 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
   void _onPinChanged(int index) {
     if (_pinControllers[index].text.length == 1) {
-      if (index < 5) { // Adjust for 6 fields
+      if (index < 5) {
+        // Adjust for 6 fields
         _pinFocusNodes[index + 1].requestFocus();
       } else {
         _cvvFocusNode.requestFocus();
@@ -100,7 +100,6 @@ class _AddBankAccountState extends State<AddBankAccount> {
       _expirationFocusNode.requestFocus();
     }
   }
-
 
   void _onExpirationChanged(String value) {
     if (value.length == 2 && !value.contains('/')) {
@@ -118,6 +117,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
   @override
   Widget build(BuildContext context) {
+
     var bank = ModalRoute.of(context)?.settings.arguments as BankModel;
     var formKey = GlobalKey<FormState>();
     return Scaffold(
@@ -138,7 +138,6 @@ class _AddBankAccountState extends State<AddBankAccount> {
                 valid: Validation.validateRegularTextField,
                 controller: _cardHolderController,
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(4, (index) {
@@ -201,10 +200,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                   );
                 }),
               ),
-
-
               SizedBox(height: 10),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(6, (index) {
@@ -230,9 +226,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                   );
                 }),
               ),
-
               SizedBox(height: 20),
-
               Row(
                 children: [
                   Expanded(
@@ -279,7 +273,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                           String expirationDate = _expirationController.text;
 
                           ApiManager service = ApiManager();
-                          await service.post(
+                          final data = await service.post(
                             ApiConstants.addGetBankAccount,
                             {
                               "holderName": cardHolderName,
@@ -296,11 +290,19 @@ class _AddBankAccountState extends State<AddBankAccount> {
                               "token": UserModel.getInstance().token,
                             },
                           );
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            RoutesNames.layoutView,
-                                (route) => false,
-                          );
+                          if (data.statusCode == 200 ||
+                              data.statusCode == 201) {
+                            if(UserModel.getInstance().last4Digits==null) {
+                              UserModel.getInstance().last4Digits =
+                                  _cardNumberControllers[3].text;
+                            }
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              RoutesNames.layoutView,
+                              (route) => false,
+                              arguments: bank
+                            );
+                          }
                         }
                       },
                     ),
