@@ -12,9 +12,10 @@ import 'package:untitled2/core/widgets/custom_text_field.dart';
 import '../../../../core/utils/Constants.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_snackbar.dart';
-import '../../../auth/presentation/views/otp_view.dart';
+import '../../../otp/presentation/views/otp_view.dart';
 import '../manager/change_email_cubit/change_email_cubit.dart';
 
+// ignore: must_be_immutable
 class ChangeEmailView extends StatelessWidget {
   ChangeEmailView({super.key});
 

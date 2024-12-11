@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/features/auth/data/models/otp_model.dart';
 import 'package:untitled2/features/auth/data/models/signup_model.dart';
 import 'package:untitled2/features/auth/data/repository/auth_repo.dart';
-import 'package:untitled2/features/auth/presentation/views/otp_view.dart';
 
 class AuthRepoImpl implements AuthRepository {
      final apiManager = ApiManager();
