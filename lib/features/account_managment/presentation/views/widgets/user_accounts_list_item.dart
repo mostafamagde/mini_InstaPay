@@ -27,6 +27,7 @@ class UserAccountsListItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           if (index == 0)
+
             Align(
               child: Text(
                 '    Default',

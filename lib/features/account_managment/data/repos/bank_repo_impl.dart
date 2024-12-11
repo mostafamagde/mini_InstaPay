@@ -25,6 +25,7 @@ class BankRepoImpl implements BankRepository {
     if (response.statusCode == 200 || response.statusCode == 201) {
       UserModel.getInstance().bankAccounts =
           BankAccountModel.fromJson(response.data);
+
     }
     return BankAccountModel.fromJson(response.data);
   }
@@ -37,11 +38,31 @@ class BankRepoImpl implements BankRepository {
         body: {"PIN": inputController.text},
         headers: {"token": UserModel.getInstance().token});
     if (date.statusCode == 200 || date.statusCode == 201) {
+
+
       for (var item in UserModel.getInstance().bankAccounts!.data!) {
         if (item.id == bank.data![index].id!) {
           UserModel.getInstance().bankAccounts!.data!.remove(item);
         }
       }
+    }
+  }
+
+  @override
+  Future<int> getBalance(String accId, String pin) async{
+    final data = await ApiManager().post(
+        "${ApiConstants.getBalance}${accId}",
+        {
+          "PIN": pin
+
+        },
+        headers: {
+          "token": UserModel.getInstance().token,
+        });
+    if (data.statusCode == 200 || data.statusCode == 201) {
+      return data.data['data'];
+    } else {
+      return 0;
     }
   }
 }

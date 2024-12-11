@@ -32,7 +32,18 @@ class ManageAccounts extends StatelessWidget {
               onTap: () => Navigator.pushNamed(context, RoutesNames.chooseBank),
               label: "Add Account",
             ),
-            appBar: AppBar(),
+            appBar: AppBar(
+              leading: IconButton(
+                  onPressed: () {
+
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      RoutesNames.layoutView,
+                      (route) => false,
+                    );
+                  },
+                  icon: Icon(Icons.arrow_back)),
+            ),
             body: () {
               if (state is ManageBankAccountsFailed) {
                 return Container();

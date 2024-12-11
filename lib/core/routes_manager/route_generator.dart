@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/service_locator.dart';
+import 'package:untitled2/features/account_managment/presentation/views/pin_view.dart';
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
@@ -13,8 +14,10 @@ import 'package:untitled2/features/setting_view/presentation/views/change_passwo
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
 
 import '../../features/account_managment/data/repos/bank_repo_impl.dart';
+import '../../features/account_managment/presentation/manager/balance_cubit/get_balance_cubit.dart';
 import '../../features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
 import '../../features/account_managment/presentation/views/add_bank_account.dart';
+
 import '../../features/account_managment/presentation/views/choose_bank_account_view.dart';
 import '../../features/account_managment/presentation/views/manage_accounts.dart';
 import '../../features/layout_view/presentation/views/layout_view.dart';
@@ -39,7 +42,6 @@ class RouteGenerator {
                     ServiceLocator.getIt<BankRepoImpl>())
                   ..fetchUserBanks(),
               ),
-
             ],
             child: ManageAccounts(),
           ),
@@ -48,6 +50,15 @@ class RouteGenerator {
       case RoutesNames.chooseBank:
         return MaterialPageRoute(
           builder: (context) => const ChooseAccountView(),
+          settings: settings,
+        );
+      case RoutesNames.pinView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                GetBalanceCubit(ServiceLocator.getIt<BankRepoImpl>()),
+            child: PinCodeScreen(),
+          ),
           settings: settings,
         );
 
