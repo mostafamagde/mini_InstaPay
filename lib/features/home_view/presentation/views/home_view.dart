@@ -50,11 +50,9 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                 )
               ],
             ),
-            if (UserModel.getInstance().bankAccounts != null &&
-                UserModel.getInstance().bankAccounts?.data?.length != 0)
+            if (UserModel.getInstance().defaultAcc != null )
               BankAccountManagment(),
-            if (UserModel.getInstance().bankAccounts == null ||
-                UserModel.getInstance().bankAccounts?.data?.length == 0)
+            if (UserModel.getInstance().defaultAcc == null )
               Container(
                 child: Center(
                   child: TextButton(

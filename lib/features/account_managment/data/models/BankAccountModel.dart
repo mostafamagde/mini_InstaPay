@@ -8,6 +8,7 @@ class BankAccountModel {
 
   BankAccountModel.fromJson(dynamic json) {
     message = json['message'];
+
     status = json['status'];
     if (json['data'] != null) {
       data = [];
@@ -17,6 +18,7 @@ class BankAccountModel {
     }
   }
   String? message;
+
   bool? status;
   List<Data>? data;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/utils/service_locator.dart';
 import 'package:untitled2/features/otp/presentation/manger/cubit/otp_cubit.dart';
 
@@ -9,6 +10,7 @@ import 'core/routes_manager/route_generator.dart';
 
 void main() {
   ServiceLocator.setup();
+
   runApp(const MyApp());
 }
 

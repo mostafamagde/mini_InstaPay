@@ -18,6 +18,7 @@ class OtpLoginRepo extends OtpRepository {
   @override
   Future<void> submitOtp({required String token, required String otp}) async {
     try {
+
       final response = await _apiManager.post(
         ApiConstants.loginEndPoint,
         {
@@ -25,17 +26,22 @@ class OtpLoginRepo extends OtpRepository {
           "otp": int.parse(otp),
         },
       );
-      if (response.statusCode != 201) {
+
+      if (response.statusCode != 201&& response.statusCode!=200) {
+
         throw Exception(response.data["message"]);
       } else {
+
         UserModel user = UserModel.getInstance();
         user.token = response.data["token"];
         final storage = new FlutterSecureStorage();
         await storage.write(key: "token", value: user.token);
         final userDataResponse = await _apiManager
             .get(ApiConstants.getUserData, headers: {"token": user.token});
-        ;
-        if (userDataResponse.statusCode != 200 && userDataResponse.statusCode != 201) {
+
+        if (userDataResponse.statusCode != 200 &&
+            userDataResponse.statusCode != 201) {
+
           throw Exception(response.data["message"]);
         } else {
           user.setFromjson(userDataResponse.data["data"]);
@@ -47,10 +53,13 @@ class OtpLoginRepo extends OtpRepository {
       }
     } catch (e) {
       if (e is DioException) {
+
         throw Exception(e.response?.data["message"] ?? e.message);
       }
+      print(e.toString());
       throw Exception(e.toString());
     }
+
   }
 
   @override

@@ -35,8 +35,8 @@ class BankAccountManagment extends StatelessWidget {
               SizedBox(
                 width: 15,
               ),
-              Image.asset(
-                "assets/images/banktest.jpg",
+              Image.network(
+                UserModel.getInstance().defaultAcc!.bankId!.logo!,
                 height: 50,
               ),
               SizedBox(
@@ -55,7 +55,7 @@ class BankAccountManagment extends StatelessWidget {
                     Text(
 
 
-                           "************${UserModel.getInstance().bankAccounts!.data?[0].cardNo}",
+                           "************${UserModel.getInstance().defaultAcc?.bankId?.name!}",
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
@@ -100,7 +100,7 @@ class BankAccountManagment extends StatelessWidget {
                   onTap: () async {
                     Navigator.pushNamed(context, RoutesNames.pinView,
                         arguments:
-                            UserModel.getInstance().bankAccounts!.data?[0].id);
+                            UserModel.getInstance().defaultAcc?.bankId?.id);
                   },
                 ),
               ],
