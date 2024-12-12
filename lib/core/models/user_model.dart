@@ -7,7 +7,6 @@ class UserModel {
   String? lastName;
   String? email;
   String? token;
-  String? userToken;
   String? mobileNumber;
   String? address;
 

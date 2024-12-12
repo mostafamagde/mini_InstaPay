@@ -16,49 +16,11 @@ class OtpChangeEmailRepo extends OtpRepository {
 
   @override
   Future<void> submitOtp({required String token, required String otp}) async {
-  //     void _changeEmailFunction() async {
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     final otp = _otpControllers.map((controller) => controller.text).join();
-  //     final apiManager = ApiManager();
-  //     try {
-  //       final response =
-  //           await apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
-  //         "token": UserModel.getInstance().userToken,
-  //         "otp": int.parse(otp),
-  //       }, headers: {
-  //         "token": UserModel.getInstance().token
-  //       });
-  //       if (response.statusCode == 201 || response.statusCode == 200) {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Email Changed Successful')),
-  //         );
-  //         Navigator.pushNamedAndRemoveUntil(
-  //           context,
-  //           RoutesNames.layoutView,
-  //           (route) => false,
-  //         );
-  //       } else {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Failed to change email')),
-  //         );
-  //       }
-  //     } catch (e) {
 
-  //       if (e is DioException) {
-  //         if (e.response != null) {
-  //           print(e.response);
-  //         }
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Error: ${e.message}')),
-  //         );
-  //       }
-  //     }
-  //   }
-  // }
     try {
         final response =
             await _apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
-          "token": UserModel.getInstance().userToken,
+          "token": token,
           "otp": int.parse(otp),
         }, headers: {
           "token": UserModel.getInstance().token
@@ -90,6 +52,9 @@ class OtpChangeEmailRepo extends OtpRepository {
           "token": token,
           "type": Constants.ConfirmChangeEmailString
         },
+        headers: {
+          "token": UserModel.getInstance().token
+        }
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

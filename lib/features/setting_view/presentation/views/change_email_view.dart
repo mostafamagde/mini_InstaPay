@@ -32,7 +32,7 @@ class ChangeEmailView extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => OtpView(
-                  userToken: UserModel.getInstance().token!,
+                  userToken: state.message,
                   function: Constants.ConfirmChangeEmailString),
             ),
           );
