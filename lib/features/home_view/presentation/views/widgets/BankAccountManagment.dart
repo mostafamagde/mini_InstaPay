@@ -5,6 +5,7 @@ import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 
+import '../../../../../core/models/CardId.dart';
 import '../../../../../core/widgets/custom_alert_dialoge.dart';
 import 'custom_card_button.dart';
 
@@ -55,7 +56,7 @@ class BankAccountManagment extends StatelessWidget {
                     Text(
 
 
-                           "************${UserModel.getInstance().defaultAcc?.bankId?.name!}",
+                           "************${UserModel.getInstance().defaultAcc?.cardInfo?.cardNo!}",
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
@@ -100,7 +101,7 @@ class BankAccountManagment extends StatelessWidget {
                   onTap: () async {
                     Navigator.pushNamed(context, RoutesNames.pinView,
                         arguments:
-                            UserModel.getInstance().defaultAcc?.bankId?.id);
+                            UserModel.getInstance().defaultAcc?.id);
                   },
                 ),
               ],

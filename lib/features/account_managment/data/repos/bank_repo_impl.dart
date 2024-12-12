@@ -39,12 +39,14 @@ class BankRepoImpl implements BankRepository {
         headers: {"token": UserModel.getInstance().token});
     if (date.statusCode == 200 || date.statusCode == 201) {
 
-      if(UserModel.getInstance().bankAccounts?.data?.length!=0){
+      if(UserModel.getInstance().bankAccounts!=null){
       for (var item in UserModel.getInstance().bankAccounts!.data!) {
         if (item.id == bank.data![index].id!) {
           UserModel.getInstance().bankAccounts!.data!.remove(item);
         }
+
       }}
+
       UserModel.getInstance().defaultAcc = null;
     }
   }
@@ -63,7 +65,7 @@ class BankRepoImpl implements BankRepository {
     if (data.statusCode == 200 || data.statusCode == 201) {
       return data.data['data'];
     } else {
-      return 0;
+      return 10;
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 
@@ -291,6 +292,17 @@ class _AddBankAccountState extends State<AddBankAccount> {
                           );
                           if (data.statusCode == 200 ||
                               data.statusCode == 201) {
+                            UserModel user=  UserModel.getInstance();
+
+                            final apiManager = ApiManager();
+                            final userDataResponse = await apiManager.get(
+                              ApiConstants.getUserData,
+                              headers: {
+                                "token": user.token,
+                              },
+                            ) ;
+                            user.setFromjson(userDataResponse.data["data"]);
+                            snackBar(content: "Added Successfully", context: context,color: Colors.green);
 
                             Navigator.pushNamedAndRemoveUntil(
                               context,

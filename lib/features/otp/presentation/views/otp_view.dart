@@ -46,7 +46,155 @@ class _OTPScreenState extends State<OtpView> {
     BlocProvider.of<OtpCubit>(context).resendOtp(repository, widget.userToken);
   }
 
+  // void _forgetPasswordFunction() async {
+  //   if (_formKey.currentState?.validate() ?? false) {
+  //     final otp = _otpControllers.map((controller) => controller.text).join();
+  //     final apiManager = ApiManager();
+  //     try {
+  //       final response =
+  //           await apiManager.post(ApiConstants.forgotPasswordEndPoint, {
+  //         "token": widget.userToken,
+  //         "password": widget.password,
+  //         "otp": int.parse(otp),
+  //       });
+  //       if (response.statusCode == 201) {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('OTP Verified')),
+  //         );
+  //         Navigator.pushReplacementNamed(context, RoutesNames.loginView);
+  //       } else {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Failed to verify OTP')),
+  //         );
+  //       }
+  //     } catch (e) {
+  //       if (e is DioException) {
+  //         if (e.response != null) print(e.response!.data["message"]);
+  //         print("Sssssssssssssssssss ${e.message}");
+  //       }
+  //     }
+  //   }
+  // }
 
+  // void _signUpFunction() async {
+  //   print('otp');
+  //   if (_formKey.currentState?.validate() ?? false) {
+  //     final otp = _otpControllers.map((controller) => controller.text).join();
+  //     final apiManager = ApiManager();
+  //     try {
+  //       final response =
+  //           await apiManager.post(ApiConstants.vetifyEmailEndPoint, {
+  //         "token": widget.userToken,
+  //         "otp": int.parse(otp),
+  //       });
+  //       if (response.statusCode == 201) {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('OTP Verified')),
+  //         );
+  //         Navigator.pushReplacementNamed(context, RoutesNames.loginView);
+  //       } else {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Failed to verify OTP')),
+  //         );
+  //       }
+  //     } catch (e) {
+  //       if (e is DioException) {
+  //         if (e.response != null) {
+  //           print(e.response);
+  //         }
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Error: ${e.message}')),
+  //         );
+  //       }
+  //     }
+  //   }
+  // }
+
+  // void _loginFunction() async {
+  //   if (_formKey.currentState?.validate() ?? false) {
+  //     final otp = _otpControllers.map((controller) => controller.text).join();
+  //     final apiManager = ApiManager();
+  //     try {
+  //       final response = await apiManager.post(ApiConstants.loginEndPoint, {
+  //         "token": widget.userToken,
+  //         "otp": int.parse(otp),
+  //       });
+  //       if (response.statusCode == 201) {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Login Successful')),
+  //         );
+  //         UserModel user = UserModel.getInstance();
+  //         user.token = response.data["token"];
+  //         final storage = new FlutterSecureStorage();
+  //         await storage.write(key: "token", value: user.token);
+  //         final userDataResponse = await apiManager.get(ApiConstants.getUserData,headers: {
+  //           "token":user.token
+  //         } ); ;
+  //         if(userDataResponse.statusCode==200){
+  //           user.setFromjson(userDataResponse.data["data"]);
+  //         }
+
+  //         Navigator.pushReplacementNamed(
+  //           context,
+  //           RoutesNames.layoutView,
+  //         );
+  //       } else {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Failed to login')),
+  //         );
+  //       }
+  //     } catch (e) {
+  //       if (e is DioException) {
+  //         if (e.response != null) {
+  //           print(e.response);
+  //         }
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Error: ${e.message}')),
+  //         );
+  //       }
+  //     }
+  //   }
+  // }
+
+  // void _changeEmailFunction() async {
+  //   if (_formKey.currentState?.validate() ?? false) {
+  //     final otp = _otpControllers.map((controller) => controller.text).join();
+  //     final apiManager = ApiManager();
+  //     try {
+  //       final response =
+  //           await apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
+  //         "token": UserModel.getInstance().userToken,
+  //         "otp": int.parse(otp),
+  //       }, headers: {
+  //         "token": UserModel.getInstance().token
+  //       });
+  //       if (response.statusCode == 201 || response.statusCode == 200) {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Email Changed Successful')),
+  //         );
+  //         Navigator.pushNamedAndRemoveUntil(
+  //           context,
+  //           RoutesNames.layoutView,
+  //           (route) => false,
+  //         );
+  //       } else {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Failed to change email')),
+  //         );
+  //       }
+  //     } catch (e) {
+
+  //       if (e is DioException) {
+  //         if (e.response != null) {
+  //           print(e.response);
+  //         }
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Error: ${e.message}')),
+  //         );
+  //       }
+  //     }
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -58,7 +206,7 @@ class _OTPScreenState extends State<OtpView> {
 
   @override
   Widget build(BuildContext context) {
-
+    print(UserModel.getInstance().userToken);
        print(UserModel.getInstance().token);
     context;
     return Scaffold(
@@ -70,7 +218,7 @@ class _OTPScreenState extends State<OtpView> {
       body: BlocConsumer<OtpCubit, OtpState>(
         listener: (context, state) {
           if(state is OtpError){
-            snackBar(content: "ewfewfewfewfewf", context: context);
+            snackBar(content: state.message, context: context);
           }
           else if(state is OtpResendSuccess){
             snackBar(content: "Otp Sent", context: context,color: Colors.green);

@@ -13,7 +13,7 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-print(UserModel.getInstance().defaultAcc);
+print(UserModel.getInstance().token);
     var cubit = LogOutCubit.get(context);
     return BlocListener<LogOutCubit, LogOutState>(
       listener: (context, state) {
