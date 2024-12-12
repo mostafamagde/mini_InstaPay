@@ -206,7 +206,7 @@ class _OTPScreenState extends State<OtpView> {
 
   @override
   Widget build(BuildContext context) {
-    print(UserModel.getInstance().userToken);
+   
        print(UserModel.getInstance().token);
     context;
     return Scaffold(
