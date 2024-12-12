@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/auth/data/models/otp_model.dart';
 import 'package:untitled2/features/auth/data/models/signup_model.dart';
@@ -27,7 +28,10 @@ class AuthCubit extends Cubit<AuthState> {
       final otpModel = await _authRepository.signUp(signUpModel);
       emit(AuthSuccess(otpModel));
     } catch (e) {
-      emit(AuthFail(e.toString()));
+       if (e is DioException) {
+         emit(AuthFail( e.response?.data["message"] ?? e.message));
+      }
+     else emit(AuthFail(e.toString()));
     }
   }
   Future<void> forgetPassword(String email) async {

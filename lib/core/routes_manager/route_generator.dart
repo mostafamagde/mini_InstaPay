@@ -6,6 +6,8 @@ import 'package:untitled2/features/account_managment/presentation/views/pin_view
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
+import 'package:untitled2/features/home_view/data/repository/transaction_repo.dart';
+import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_credintials.dart';
@@ -64,7 +66,10 @@ class RouteGenerator {
 
       case RoutesNames.layoutView:
         return MaterialPageRoute(
-          builder: (context) => const LayoutView(),
+          builder: (context) => BlocProvider(
+            create: (context) => TransactionCubit(TransactionRepository())..getTransaction(),
+            child: const LayoutView(),
+          ),
           settings: settings,
         );
       case RoutesNames.loginView:
