@@ -10,6 +10,7 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user=UserModel.getInstance();
+    final bool isReceiver= transaction.receiver.id==user.id;
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
     return    Container(
@@ -58,7 +59,7 @@ class TransactionCard extends StatelessWidget {
                 width: 5,
               ),
               Icon(
-                Icons.arrow_forward_ios,
+              isReceiver?Icons.call_received_rounded:Icons.compare_arrows_outlined,
                 size: 20,
                 color: Colors.grey,
               ),
@@ -77,7 +78,6 @@ class TransactionCard extends StatelessWidget {
                     height: 50,
                     width: 50,
                     decoration: BoxDecoration(
-
                         color: Constants.buttonBackgroundColor,
                         borderRadius: BorderRadius.circular(20)),
                     child: Icon(
@@ -89,7 +89,7 @@ class TransactionCard extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                   "Received Money",
+                  isReceiver? "Received Money":"Sent Money",
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -101,12 +101,12 @@ class TransactionCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Mostafa Magdy Ahmed",style: theme.textTheme.bodySmall,),
+                  Text(isReceiver?transaction.sender.userName:transaction.receiver.userName,style: theme.textTheme.bodySmall,),
                   Text(
-                    "mostafamagde227@instaPay",
+                    isReceiver?transaction.sender.email:transaction.receiver.email,
                     style: theme.textTheme.bodyMedium,
                   ), Text(
-                    "20 Nov 2024 03:53 PM",
+                  "${transaction.createdAt}",
                     style: theme.textTheme.bodySmall,
                   ),
                 ],

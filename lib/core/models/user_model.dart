@@ -9,7 +9,7 @@ class UserModel {
   String? token;
   String? mobileNumber;
   String? address;
-
+  String? id;
   BankAccountModel? bankAccounts;
 
   DefaultAcc? defaultAcc;
@@ -23,7 +23,7 @@ class UserModel {
   setFromjson(Map<String, dynamic> json) {
     print(json);
     firstName = json['firstName'];
-
+    id=json['_id'];
     defaultAcc = json["defaultAcc"] == null
         ? null
         : DefaultAcc.fromJson(json["defaultAcc"]);
