@@ -23,8 +23,8 @@ class TransactionModel {
       status: json['status'],
       type: json['type'],
       amount: (json['amount'] as num).toDouble(),
-      sender: User.fromJson(json['senderId']),
-      receiver: User.fromJson(json['recieverId']),
+      sender: User.fromJson(json['sender']),
+      receiver: User.fromJson(json['reciever']), // Corrected to match JSON key
       createdAt: DateTime.parse(json['createdAt']),
     );
   }
@@ -35,8 +35,8 @@ class TransactionModel {
       'status': status,
       'type': type,
       'amount': amount,
-      'senderId': sender.toJson(),
-      'recieverId': receiver.toJson(),
+      'sender': sender.toJson(),
+      'reciever': receiver.toJson(), // Corrected to match JSON key
       'createdAt': createdAt.toIso8601String(),
     };
   }
@@ -69,7 +69,7 @@ class User {
       firstName: json['firstName'],
       lastName: json['lastName'],
       email: json['email'],
-      userName: json['userName'],
+      userName: json['userName'], // Added userName field
     );
   }
 
@@ -79,7 +79,7 @@ class User {
       'firstName': firstName,
       'lastName': lastName,
       'email': email,
-      'userName': userName,
+      'userName': userName, // Added userName field
     };
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/home_view/data/model/transaction_model.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/Constants.dart';
 
 class TransactionCard extends StatelessWidget {
@@ -13,7 +13,8 @@ class TransactionCard extends StatelessWidget {
     final bool isReceiver= transaction.receiver.id==user.id;
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
-    return    Container(
+    return  Container(
+      padding: EdgeInsets.symmetric(horizontal: 16),
 
       height: 105,
       width: media.width,
@@ -25,12 +26,10 @@ class TransactionCard extends StatelessWidget {
         color: Constants.backgroundColor,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              SizedBox(
-                width: 15,
-              ),
               Text(
                 "${transaction.amount} EGP",
                 style: TextStyle(
@@ -55,14 +54,14 @@ class TransactionCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(
-              isReceiver?Icons.call_received_rounded:Icons.compare_arrows_outlined,
-                size: 20,
-                color: Colors.grey,
-              ),
+              // SizedBox(
+              //   width: 5,
+              // ),
+              // Icon(
+              // Icons.compare_arrows_outlined,
+              //   size: 20,
+              //   color: Colors.grey,
+              // ),
               SizedBox(
                 width: 15,
               )
@@ -73,6 +72,7 @@ class TransactionCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     height: 50,
@@ -81,19 +81,24 @@ class TransactionCard extends StatelessWidget {
                         color: Constants.buttonBackgroundColor,
                         borderRadius: BorderRadius.circular(20)),
                     child: Icon(
-                      Icons.call_made_outlined,
+                     isReceiver?Icons.call_received_rounded:Icons.call_made_outlined,
                       color: theme.secondaryHeaderColor,
                     ),
                   ),
                   SizedBox(
                     height: 6,
                   ),
-                  Text(
-                  isReceiver? "Received Money":"Sent Money",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w300,
-                        fontSize: 10),
+                  SizedBox(
+                    width: 50,
+                    child: FittedBox(
+                      child: Text(
+                      isReceiver? "Received Money":"Sent Money",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 10),
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -101,7 +106,7 @@ class TransactionCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(isReceiver?transaction.sender.userName:transaction.receiver.userName,style: theme.textTheme.bodySmall,),
+                  Text(isReceiver?transaction.sender.firstName:transaction.receiver.userName,style: theme.textTheme.bodySmall,),
                   Text(
                     isReceiver?transaction.sender.email:transaction.receiver.email,
                     style: theme.textTheme.bodyMedium,
