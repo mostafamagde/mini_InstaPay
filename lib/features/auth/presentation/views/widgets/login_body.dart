@@ -87,7 +87,7 @@ class _LoginBodyState extends State<LoginBody> {
                     SizedBox(
                       height: 8,
                     ),
-                    CusttomButton(
+                    CustomButton(
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           context.read<AuthCubit>().login(

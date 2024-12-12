@@ -13,5 +13,6 @@ class RoutesNames {
   static const String AddBankAccount="AddBankAccount";
   static const String ManageAccounts="ManageAccounts";
   static const String pinView="pinView";
+  static const String pinSendView="pinSendView";
 
 }

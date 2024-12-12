@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
@@ -38,9 +39,20 @@ class BankAccountManagment extends StatelessWidget {
               SizedBox(
                 width: 15,
               ),
-              Image.network(
-                UserModel.getInstance().defaultAcc!.bankId!.logo!,
+              CachedNetworkImage(
+                imageUrl: UserModel.getInstance().defaultAcc!.bankId!.logo!,
+                placeholder: (context, _) => Center(
+                  child: CircularProgressIndicator(
+                    color: Constants.primaryMouveColor,
+                  ),
+                ),
+                errorWidget: (context, _, error) => Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
+                width: 50,
                 height: 50,
+
               ),
               SizedBox(
                 width: 12,
@@ -56,9 +68,7 @@ class BankAccountManagment extends StatelessWidget {
                       maxLines: 1,
                     ),
                     Text(
-
-
-                           "************${UserModel.getInstance().defaultAcc?.cardInfo?.cardNo!}",
+                      "************${UserModel.getInstance().defaultAcc?.cardInfo?.cardNo!}",
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
@@ -69,8 +79,13 @@ class BankAccountManagment extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(text: UserModel.getInstance().email!),);
-                    snackBar(content: "Copied to ClipBoard", context: context,color: Colors.green);
+                    Clipboard.setData(
+                      ClipboardData(text: UserModel.getInstance().email!),
+                    );
+                    snackBar(
+                        content: "Copied to ClipBoard",
+                        context: context,
+                        color: Colors.green);
                   },
                   icon: Icon(
                     Icons.copy,
@@ -105,8 +120,7 @@ class BankAccountManagment extends StatelessWidget {
                   ),
                   onTap: () async {
                     Navigator.pushNamed(context, RoutesNames.pinView,
-                        arguments:
-                            UserModel.getInstance().defaultAcc?.id);
+                        arguments: UserModel.getInstance().defaultAcc?.id);
                   },
                 ),
               ],

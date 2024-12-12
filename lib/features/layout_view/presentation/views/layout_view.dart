@@ -17,20 +17,18 @@ class LayoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     var theme = Theme.of(context);
 
     return BlocProvider(
-
       create: (context) => NavigationCubit(),
       child: BlocBuilder<NavigationCubit, NavigationState>(
         builder: (context, state) {
-          var cubit =NavigationCubit.get(context);
+          var cubit = NavigationCubit.get(context);
           final List<Widget> screens = [
-            HomeView(onTap: cubit.selectTab,),
-            const SendMoneyView(),
+            HomeView(
+              onTap: cubit.selectTab,
+            ),
+             SendMoneyView(),
             const ReceiveMoneyView(),
             BlocProvider(
               create: (context) =>
@@ -52,7 +50,7 @@ class LayoutView extends StatelessWidget {
                   backgroundColor: Constants.backgroundColor,
                   currentIndex: state.index,
                   onTap: (value) {
-                   cubit.selectTab(value);
+                    cubit.selectTab(value);
                   },
                   items: const [
                     BottomNavigationBarItem(
@@ -87,5 +85,3 @@ class LayoutView extends StatelessWidget {
     );
   }
 }
-
-

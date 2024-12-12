@@ -63,7 +63,7 @@ class ChangePassword extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                CusttomButton(
+                CustomButton(
                   label: "Submit",
                   onTap: () async {
                     if (formKey.currentState!.validate()) {

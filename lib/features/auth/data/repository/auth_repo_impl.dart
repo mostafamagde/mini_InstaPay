@@ -14,26 +14,13 @@ class AuthRepoImpl implements AuthRepository {
     };
     return apiManager.post(ApiConstants.preForgotPasswordEndPoint, body).then((response) {
       print("$response sssssssssssssssssssssssssssssssssssssssss ${response.statusCode}");
-      if (response.statusCode == 201) {
+      
         final Map<String, dynamic> responseBody = response.data;
         final String userToken = responseBody['token'];
         print(userToken);
         print("Sent successful");
         return OtpModel.fromJson(responseBody);
-      } else {
-        throw Exception("Forget password failed with status: ${response.statusCode}");
-      }
-    }).catchError((error) {
-      if (error is DioException) {
-        if (error.response != null) {
-          throw Exception("Error during ForgetPassword: ${error.response!.data['message']}");
-        } else {
-          throw Exception("Error during signin: ${error.message}");
-        }
-      } else {
-        throw Exception(error);
-      }
-    });
+      }); 
   }
 
   @override
@@ -67,27 +54,10 @@ class AuthRepoImpl implements AuthRepository {
   }
 
   @override
-  Future<OtpModel> signUp(SignUpModel signUpModel) {
+  Future<OtpModel> signUp(SignUpModel signUpModel) async{
 
-    return apiManager.post(ApiConstants.signupEndPoint, signUpModel.toJson()).then((response) {
-      print("$response sssssssssssssssssssssssssssssssssssssssss ${response.statusCode}");
-      if (response.statusCode == 201) {
-        final Map<String, dynamic> responseBody = response.data;
-        return   OtpModel.fromJson(responseBody);
-      } else {
-        throw Exception("Signup failed with status: ${response.statusCode}");
-      }
-    }).catchError((error) {
-      if (error is DioException) {
-        if (error.response != null) {
-          throw Exception("Error during signup: ${error.response!.data['message']}");
-        } else {
-          throw Exception("Error during signup: ${error.message}");
-        }
-      } else {
-        throw Exception("Something went wrong");
-      }
-    });
+   final response= await apiManager.post(ApiConstants.signupEndPoint, signUpModel.toJson());
+   return OtpModel.fromJson(response.data);
   }
 }
 

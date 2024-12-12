@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 
 import '../../../../../core/models/user_model.dart';
 import '../../../data/models/BankAccountModel.dart';
@@ -26,8 +28,6 @@ class UserAccountsListItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-
-
           SizedBox(
             height: 10,
           ),
@@ -36,9 +36,19 @@ class UserAccountsListItem extends StatelessWidget {
               SizedBox(
                 width: 15,
               ),
-              Image.asset(
-                "assets/images/banktest.jpg",
+              CachedNetworkImage(
+                imageUrl: bank.data![index].bankId!.logo!,
+                width: 50,
                 height: 50,
+                placeholder: (context, _) => Center(
+                  child: CircularProgressIndicator(
+                    color: Constants.primaryMouveColor,
+                  ),
+                ),
+                errorWidget: (context, _, error) => Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
               ),
               SizedBox(
                 width: 12,

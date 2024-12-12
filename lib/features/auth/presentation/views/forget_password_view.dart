@@ -73,7 +73,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                         controller: emailController,
                         valid: Validation.validateEmailTextField),
                     SizedBox(height: 16),
-                    CusttomButton(
+                    CustomButton(
                       onTap: () {
                         final email = emailController.text;
                         if (formKey.currentState!.validate()) {

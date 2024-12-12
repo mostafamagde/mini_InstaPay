@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/features/home_view/data/model/transaction_model.dart';
 
 import '../../../../../core/utils/Constants.dart';
 
 class TransactionCard extends StatelessWidget {
-  const TransactionCard({super.key});
-
+  const TransactionCard({super.key, required this.transaction});
+  final TransactionModel transaction;
   @override
   Widget build(BuildContext context) {
+    final user=UserModel.getInstance();
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
     return    Container(
@@ -28,7 +31,7 @@ class TransactionCard extends StatelessWidget {
                 width: 15,
               ),
               Text(
-                "123 EGP",
+                "${transaction.amount} EGP",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -86,7 +89,7 @@ class TransactionCard extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    "Received Money",
+                   "Received Money",
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
