@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
 
 import '../../../../../core/models/CardId.dart';
 import '../../../../../core/widgets/custom_alert_dialoge.dart';
@@ -66,7 +68,10 @@ class BankAccountManagment extends StatelessWidget {
                 width: 22,
               ),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: UserModel.getInstance().email!),);
+                    snackBar(content: "Copied to ClipBoard", context: context,color: Colors.green);
+                  },
                   icon: Icon(
                     Icons.copy,
                     color: Colors.grey,

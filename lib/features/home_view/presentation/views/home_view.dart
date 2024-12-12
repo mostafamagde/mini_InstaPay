@@ -8,7 +8,8 @@ import '../../../../core/widgets/CustomTitleContainer.dart';
 import '../../../../core/widgets/custom_small_button.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({super.key, required this.onTap});
+  final void Function(int) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -101,10 +102,13 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                 CustomSmallButton(
                   icon: Icons.call_made_rounded,
                   name: "Send Money",
+                  onTap: () => onTap(1),
                 ),
                 CustomSmallButton(
                   icon: Icons.call_received_rounded,
                   name: "Receive Money",
+                  onTap: () => onTap(2),
+
                 ),
                 CustomSmallButton(
                   icon: Icons.balance,
