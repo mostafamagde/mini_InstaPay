@@ -20,7 +20,7 @@ class OtpChangeEmailRepo extends OtpRepository {
     try {
         final response =
             await _apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
-          "token": UserModel.getInstance().userToken,
+          "token": token,
           "otp": int.parse(otp),
         }, headers: {
           "token": UserModel.getInstance().token

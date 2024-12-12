@@ -50,8 +50,7 @@ class SettingRepoImpl implements SettingRepo {
           "email": email,
         },
       );
-      UserModel.getInstance().userToken = response.data["token"];
-      return right("Email Changed Successfully");
+      return right(response.data["token"]);
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
