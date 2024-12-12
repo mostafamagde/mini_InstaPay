@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_item.dart';
 import '../../../../../core/utils/validation.dart';
@@ -24,6 +25,7 @@ class UserAccountsListView extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 15),
             child: InkWell(
+              onTap: () => Navigator.pushNamed(context,RoutesNames.pinView,arguments: bank.data?[index].id),
               onLongPress: () {
                 TextEditingController inputController = TextEditingController();
 
