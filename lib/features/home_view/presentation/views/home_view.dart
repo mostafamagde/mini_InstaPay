@@ -32,7 +32,7 @@ class HomeView extends StatelessWidget {
                   CustomTitleContainer(
                     title:
                         '''${user.firstName![0].toUpperCase() + user.firstName!.substring(1)}
-              ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
+${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                   ),
                   SizedBox(
                     height: 50,
