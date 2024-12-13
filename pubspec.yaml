@@ -47,6 +47,7 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   cached_network_image: ^3.4.1
   shared_preferences: ^2.3.3
+  device_preview: ^1.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

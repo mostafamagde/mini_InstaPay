@@ -16,6 +16,8 @@ import 'package:untitled2/features/notifications/data/repository/notifications_r
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 import 'package:untitled2/features/notifications/presentation/views/notification_pin_view.dart';
 import 'package:untitled2/features/notifications/presentation/views/notifications_view.dart';
+import 'package:untitled2/features/onboarding/presentation/manger/on_boarding/on_boarding_cubit.dart';
+import 'package:untitled2/features/onboarding/presentation/views/on_boarding_view.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_credintials.dart';
@@ -190,6 +192,14 @@ class RouteGenerator {
           builder: (context) => BlocProvider(
             create: (context) => AuthCubit(AuthRepoImpl()),
             child: EnterPasswordView(),
+          ),
+          settings: settings,
+        );
+        case RoutesNames.onBoarding:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => OnBoardingCubit(),
+            child: OnBoardingView(),
           ),
           settings: settings,
         );
