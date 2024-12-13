@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/core/models/user_model.dart';
@@ -11,7 +12,6 @@ import 'core/routes_manager/route_generator.dart';
 
 void main() {
   ServiceLocator.setup();
-
   runApp(
     DevicePreview(
       enabled: true,
