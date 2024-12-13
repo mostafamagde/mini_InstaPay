@@ -13,82 +13,59 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return BlocBuilder<TransactionCubit, TransactionState>(
-      builder: (context, state) {
-        if (state is TransactionSuccess) {
-          return SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    children: [
-                      const Text("Last Transactions"),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, RoutesNames.allTransaction,arguments: state.transactions);
-                        },
-                        child: Text(
-                          "view all",
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.secondaryHeaderColor,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ],
+                const Text("Last Transactions"),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, RoutesNames.allTransaction);
+                  },
+                  child: Text(
+                    "view all",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.secondaryHeaderColor,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(), 
-                  shrinkWrap: true, 
-                  itemCount: min(state.transactions.length,5),
+              ],
+            ),
+          ),
+          BlocBuilder<TransactionCubit, TransactionState>(
+            builder: (context, state) {
+              if (state is TransactionSuccess) {
+                return ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: min(state.transactions.length, 5),
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        TransactionCard(transaction: state.transactions[index],),
-                     
-                          const SizedBox(height: 16),
+                        TransactionCard(
+                          transaction: state.transactions[index],
+                        ),
+                        const SizedBox(height: 16),
                       ],
                     );
                   },
-                ),
-              ],
-            ),
-          );
-        } else if (state is TransactionError) {
-          return SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: const Text("Last Transactions"),
-                ),
-                SizedBox(height: 16,),
-                Center(
+                );
+              } else if (state is TransactionError) {
+                return Center(
                   child: Text(state.error),
-                ),
-              ],
-            ),
-          );
-        } else {
-          return SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: const Text("Last Transactions"),
-                ),
-                const Center(child: CircularProgressIndicator()),
-              ],
-            ),
-          );
-        }
-      },
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }

@@ -138,7 +138,10 @@ class RouteGenerator {
         );
       case RoutesNames.allTransaction:
         return MaterialPageRoute(
-          builder: (context) => TransactionView(),
+          builder: (context) => BlocProvider(
+            create: (context) => TransactionCubit(TransactionRepository()),
+            child: TransactionView(),
+          ),
           settings: settings,
         );
       case RoutesNames.changePassword:
@@ -170,8 +173,7 @@ class RouteGenerator {
       case RoutesNames.EnterPasswordView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                AuthCubit(AuthRepoImpl()),
+            create: (context) => AuthCubit(AuthRepoImpl()),
             child: EnterPasswordView(),
           ),
           settings: settings,
