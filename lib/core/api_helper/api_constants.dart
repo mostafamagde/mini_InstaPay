@@ -18,5 +18,6 @@ class ApiConstants {
   static const String getBalance="account/balance/";
   static const String resendOtpEndPoint= 'auth/resendOTP/';
   static const String getTransactionEndPoint="/transaction/history";
-
+  static const String getAllNotifications='/notification';
+  static const String readNotifications='/notification/markAsRead/';
 }

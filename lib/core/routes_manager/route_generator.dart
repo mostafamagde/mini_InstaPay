@@ -9,6 +9,9 @@ import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
 import 'package:untitled2/features/home_view/data/repository/transaction_repo.dart';
 import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/home_view/presentation/views/transaction_view.dart';
+import 'package:untitled2/features/notifications/data/repository/notifications_repo.dart';
+import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
+import 'package:untitled2/features/notifications/presentation/views/notifications_view.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_credintials.dart';
@@ -67,8 +70,15 @@ class RouteGenerator {
 
       case RoutesNames.layoutView:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => TransactionCubit(TransactionRepository()),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<TransactionCubit>(
+                create: (context) => TransactionCubit(TransactionRepository()),
+              ),
+              BlocProvider<NotificationsCubit>(
+                create: (context) => NotificationsCubit(NotificationsRepo()),
+              )
+            ],
             child: const LayoutView(),
           ),
           settings: settings,
@@ -117,7 +127,7 @@ class RouteGenerator {
           settings: settings,
         );
       case RoutesNames.allTransaction:
-      return MaterialPageRoute(
+        return MaterialPageRoute(
           builder: (context) => TransactionView(),
           settings: settings,
         );
@@ -130,7 +140,14 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-
+      case RoutesNames.notifications:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<NotificationsCubit>(
+          create: (context) => NotificationsCubit(NotificationsRepo()),
+            child: NotificationsView(),
+          ),
+          settings: settings,
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashView(),

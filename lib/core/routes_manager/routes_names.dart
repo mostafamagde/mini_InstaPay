@@ -14,4 +14,5 @@ class RoutesNames {
   static const String ManageAccounts="ManageAccounts";
   static const String pinView="pinView";
   static const String allTransaction="allTransaction";
+  static const String notifications="notifications";
 }

@@ -7,6 +7,7 @@ import 'package:untitled2/features/home_view/presentation/manger/cubit/transacti
 import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_list.dart';
+import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 import '../../../../core/widgets/CustomTitleContainer.dart';
 import '../../../../core/widgets/custom_small_button.dart';
 
@@ -17,13 +18,13 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<TransactionCubit>(context).getTransaction();
+    BlocProvider.of<NotificationsCubit>(context).getNotification();
     UserModel user = UserModel.getInstance();
     print(user.token);
     var theme = Theme.of(context);
-    // var media = MediaQuery.of(context).size;
     return Scaffold(
-      body: CustomScrollView(
-        slivers:[ SliverToBoxAdapter(
+      body: CustomScrollView(slivers: [
+        SliverToBoxAdapter(
           child: Stack(
             children: [
               Column(
@@ -45,7 +46,8 @@ class HomeView extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, RoutesNames.ManageAccounts);
+                          Navigator.pushNamed(
+                              context, RoutesNames.ManageAccounts);
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8),
@@ -59,19 +61,28 @@ class HomeView extends StatelessWidget {
                       )
                     ],
                   ),
-               if (UserModel.getInstance().defaultAcc != null )
-                  BankAccountManagment(),
-                if (UserModel.getInstance().defaultAcc == null )
+                  if (UserModel.getInstance().defaultAcc != null)
+                    BankAccountManagment(),
+                  if (UserModel.getInstance().defaultAcc == null)
                     Container(
                       child: Center(
                         child: TextButton(
-                          onPressed: () =>
-                              Navigator.pushNamed(context, RoutesNames.chooseBank),
+                          onPressed: () => Navigator.pushNamed(
+                              context, RoutesNames.chooseBank),
                           child: Column(
                             children: [
-                              Text("Add Account",style: theme.textTheme.bodyMedium,),
-                              SizedBox(height: 10,),
-                              Icon(Icons.add,color: Constants.secondaryOrangeColor,size: 30,)
+                              Text(
+                                "Add Account",
+                                style: theme.textTheme.bodyMedium,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Icon(
+                                Icons.add,
+                                color: Constants.secondaryOrangeColor,
+                                size: 30,
+                              )
                             ],
                           ),
                         ),
@@ -110,12 +121,12 @@ class HomeView extends StatelessWidget {
                       CustomSmallButton(
                         icon: Icons.call_made_rounded,
                         name: "Send Money",
-                        onTap: ()=> onTap(1),
+                        onTap: () => onTap(1),
                       ),
                       CustomSmallButton(
                         icon: Icons.call_received_rounded,
                         name: "Receive Money",
-                        onTap: ()=>onTap(2),
+                        onTap: () => onTap(2),
                       ),
                       CustomSmallButton(
                         icon: Icons.balance,
@@ -146,27 +157,61 @@ class HomeView extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                 
                 ],
               ),
-            Positioned(
-              top: 32,
-              right: 24,
-              child: IconButton(onPressed: (){}, icon: Icon(Icons.notifications,color: Colors.white,
-              
-              ),
-              style: IconButton.styleFrom(
-
-                
-              ),
-              )
+              Positioned(
+                top: 32,
+                right: 24,
+                child: Stack(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, RoutesNames.notifications);
+                      },
+                      icon: Icon(
+                        Icons.notifications,
+                        color: Colors.white,
+                      ),
+                    ),
+                    BlocBuilder<NotificationsCubit, NotificationsState>(
+                      builder: (context, state) {
+                        if( state is NotificationsSuccess)
+                         {
+                            final unreadCount = state.notifications
+                .where((notification) => !notification.isRead)
+                .length;
+                           return Positioned(
+                              right: 8,
+                              top: 8,
+                              child: Container(
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: Constants.primaryMouveColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Text(
+                                  '${unreadCount}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            );}
+                           else{
+                            return SizedBox();
+                           }
+                      },
+                    ),
+                  ],
+                ),
               )
             ],
           ),
         ),
         TransactionList()
-        ]
-      ),
+      ]),
     );
   }
 }

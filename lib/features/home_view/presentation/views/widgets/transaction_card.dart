@@ -46,7 +46,7 @@ class TransactionCard extends StatelessWidget {
                     color: Colors.lightBlueAccent),
                 child: Center(
                   child: Text(
-                    "Successful",
+                   transaction.status,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: Colors.black,
                       fontSize: 10,
@@ -54,14 +54,6 @@ class TransactionCard extends StatelessWidget {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   width: 5,
-              // ),
-              // Icon(
-              // Icons.compare_arrows_outlined,
-              //   size: 20,
-              //   color: Colors.grey,
-              // ),
               SizedBox(
                 width: 15,
               )
