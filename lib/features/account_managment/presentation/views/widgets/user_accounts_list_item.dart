@@ -56,22 +56,27 @@ class UserAccountsListItem extends StatelessWidget {
                 width: 12,
               ),
 
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    UserModel.getInstance().email!,
-                    style: theme.textTheme.bodyMedium,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  Text(
-                    "PREPAID****${bank.data?[index].cardNo}",
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        UserModel.getInstance().email!,
+                        style: theme.textTheme.bodyMedium,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                    Text(
+                      "PREPAID****${bank.data?[index].cardNo}",
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
               ),
-              Spacer(),
+
               IconButton(
                   onPressed: () {
                     Clipboard.setData(

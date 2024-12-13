@@ -33,7 +33,7 @@ class NotificationsView extends StatelessWidget {
             snackBar(content: state.errorMessage, context: context);
           }
           else if(state is ReadNotificationsSuccess){
-          final index=  notifications.indexOf(state.notification);
+         final index = notifications.indexWhere((notification) => notification.id == state.notificationId);
           notifications[index].isRead=true;
           }
         },

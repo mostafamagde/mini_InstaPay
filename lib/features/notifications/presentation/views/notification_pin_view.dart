@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/validation.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
-import 'package:untitled2/features/transaction_module/data/models/send_model.dart';
+import 'package:untitled2/features/notifications/data/models/notfication_model.dart';
+import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 
-import '../../../../core/utils/validation.dart';
-import '../../../../core/widgets/custom_snackbar.dart';
-import '../manager/send_cubit/send_cubit.dart';
-
-class SendPin extends StatelessWidget {
+class NotificationPinView extends StatelessWidget {
+  NotificationPinView({super.key});
   final int pinLength = 6;
   final List<TextEditingController> controllers =
       List.generate(6, (_) => TextEditingController());
   final List<FocusNode> focusNodes = List.generate(6, (_) => FocusNode());
-final TextEditingController accId =TextEditingController();
-  SendPin({
-    Key? key,
-  }) : super(key: key);
-
+  final TextEditingController accId = TextEditingController();
   void _onTextChanged(String value, int index, BuildContext context) {
     if (value.isNotEmpty && index < pinLength - 1) {
       FocusScope.of(context).requestFocus(focusNodes[index + 1]);
@@ -27,40 +25,44 @@ final TextEditingController accId =TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    var data = ModalRoute.of(context)?.settings.arguments as List<String>;
+    NotificationModel notification =
+        ModalRoute.of(context)?.settings.arguments as NotificationModel;
     var formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Enter PIN Code'),
       ),
-      body: BlocConsumer<SendCubit, SendState>(
+      body: BlocConsumer<NotificationsCubit, NotificationsState>(
         listener: (context, state) {
-          if (state is SendFailed) {
-            snackBar(content: state.error, context: context);
-          } else if (state is SendSuccess) {
-            snackBar(content: 'Money sent successfully', context: context,color: Colors.green);
+          if (state is ReadNotificationsFailed) {
+            snackBar(content: state.errorMessage, context: context);
+          } else if (state is ReadNotificationsSuccess) {
+            snackBar(
+                content: 'Money sent successfully',
+                context: context,
+                color: Colors.green);
+            Navigator.pushNamed(context, RoutesNames.notifications);
           }
         },
         builder: (context, state) {
-          var cubit = SendCubit.get(context);
-          if (state is SendLoading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return Form(
+          return ModalProgressHUD(
+            inAsyncCall: state is ReadNotificationsLoading,
+            child: Form(
               key: formKey,
               child: Column(
-
                 children: [
-                  SizedBox(height: 100,),
+                  SizedBox(
+                    height: 100,
+                  ),
                   CustomTextField(
-                      label: "Source account if blank Source Will be default",
-                      icon: Icons.call_made_rounded,
-                      inputType:TextInputType.text ,
+                    label: "Source account if blank Source Will be default",
+                    icon: Icons.call_made_rounded,
+                    inputType: TextInputType.text,
                     controller: accId,
-                      ),
-                  SizedBox(height: 50,),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(pinLength, (index) {
@@ -83,15 +85,14 @@ final TextEditingController accId =TextEditingController();
                                 _onTextChanged(value, index, context),
                             onFieldSubmitted: (value) async {
                               if (formKey.currentState!.validate()) {
-                                cubit.sendMoney(
-                                  SendModel(account: accId.text,
-                                    reiceverData: data[0],
-                                    pin: controllers
-                                        .map((controller) => controller.text)
-                                        .join(),
-                                    amount: int.parse(data[1], ),
-                                  ),
-                                );
+                                BlocProvider.of<NotificationsCubit>(context)
+                                    .acceptRequest(
+                                        notification: notification,
+                                        pin: controllers
+                                            .map(
+                                                (controller) => controller.text)
+                                            .join(),
+                                        accountId: accId.text);
                               }
                             },
                           ),
@@ -101,8 +102,8 @@ final TextEditingController accId =TextEditingController();
                   ),
                 ],
               ),
-            );
-          }
+            ),
+          );
         },
       ),
     );

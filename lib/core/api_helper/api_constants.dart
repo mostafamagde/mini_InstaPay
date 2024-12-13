@@ -22,4 +22,6 @@ class ApiConstants {
   static const String forgetPasswordEdnPoint='auth/forget-password';
   static const String ConfirmOtpForgetEdnPoint='auth/confirm-otp-forget';
   static const String SendforgetPasswordMailEdnPoint='auth/send-forget-password-mail/';
+  static const String confirmReceive="transaction/confirm-recieve/";
+  static const String rejectReceive="transaction/reject-recieve/";
 }

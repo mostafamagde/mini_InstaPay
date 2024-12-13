@@ -11,4 +11,5 @@ abstract class Constants {
   static const String forgetPasswordString="FORGET_PASSWORD";
   static const String  transactionString = 'TRANSACTION';
   static const String  ConfirmChangeEmailString = 'CHANGE_EMAIL';
+   static const String  RequestSendString = 'Request_Send';
 }

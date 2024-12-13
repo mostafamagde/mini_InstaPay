@@ -14,6 +14,7 @@ import 'package:untitled2/features/home_view/presentation/manger/cubit/transacti
 import 'package:untitled2/features/home_view/presentation/views/transaction_view.dart';
 import 'package:untitled2/features/notifications/data/repository/notifications_repo.dart';
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
+import 'package:untitled2/features/notifications/presentation/views/notification_pin_view.dart';
 import 'package:untitled2/features/notifications/presentation/views/notifications_view.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
@@ -158,6 +159,14 @@ class RouteGenerator {
           builder: (context) => BlocProvider<NotificationsCubit>(
             create: (context) => NotificationsCubit(NotificationsRepo()),
             child: NotificationsView(),
+          ),
+          settings: settings,
+        );
+         case RoutesNames.notificationsPin:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<NotificationsCubit>(
+            create: (context) => NotificationsCubit(NotificationsRepo()),
+            child: NotificationPinView(),
           ),
           settings: settings,
         );
