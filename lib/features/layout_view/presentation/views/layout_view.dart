@@ -9,6 +9,8 @@ import '../../../../core/models/user_model.dart';
 import '../../../../core/navigation_cubit/navigation_cubit.dart';
 import '../../../setting_view/data/repos/setting_repo_impl.dart';
 import '../../../setting_view/presentation/views/setting_view.dart';
+import '../../../transaction_module/data/repos/transaction_repo_impl.dart';
+import '../../../transaction_module/presentation/manager/receive_cubit/receive_cubit.dart';
 import '../../../transaction_module/presentation/views/receive_money_view.dart';
 import '../../../transaction_module/presentation/views/send_money_view.dart';
 
@@ -25,10 +27,14 @@ class LayoutView extends StatelessWidget {
         final List<Widget> screens = [
           HomeView(
             onTap: cubit.selectTab,
-
           ),
-           SendMoneyView(),
-          const ReceiveMoneyView(),
+          SendMoneyView(),
+          BlocProvider(
+            create: (context) => ReceiveCubit(
+              ServiceLocator.getIt.get<TransactionRepoImpl>(),
+            ),
+            child: ReceiveMoneyView(),
+          ),
           BlocProvider(
             create: (context) =>
                 LogOutCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
