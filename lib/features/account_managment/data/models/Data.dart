@@ -1,3 +1,5 @@
+import 'package:untitled2/core/models/BankId.dart';
+
 class Data {
   Data({
       this.id, 
@@ -7,12 +9,12 @@ class Data {
 
   Data.fromJson(dynamic json) {
     id = json['_id'];
-    bankId = json['bankId'];
+    bankId = BankId.fromJson(json['bankId']);
     userId = json['userId'];
     cardNo = json['cardNo'];
   }
   String? id;
-  String? bankId;
+  BankId? bankId;
   String? userId;
   String? cardNo;
 

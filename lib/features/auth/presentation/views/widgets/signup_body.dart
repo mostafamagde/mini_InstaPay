@@ -112,7 +112,7 @@ class _SignupBodyState extends State<SignupBody> {
                     SizedBox(
                       height: 8,
                     ),
-                    CusttomButton(
+                    CustomButton(
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           context.read<AuthCubit>().signUp(

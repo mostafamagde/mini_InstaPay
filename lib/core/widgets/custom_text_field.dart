@@ -7,7 +7,7 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     required this.icon,
     required this.inputType,
-    required this.valid,
+     this.valid,
     this.function,
     this.controller,
      this.node,
@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final IconData icon;
   final TextInputType inputType;
-  final FormFieldValidator<String> valid;
+  final FormFieldValidator<String>? valid;
 
   final void Function(String)? function;
   final TextEditingController? controller;

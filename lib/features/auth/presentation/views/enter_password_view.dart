@@ -44,7 +44,7 @@ class EnterPasswordView extends StatelessWidget {
             valid: Validation.validatePasswordTextField,
           ),
           SizedBox(height: 16),
-          CusttomButton(
+          CustomButton(
             onTap: () {
               if(formKey.currentState!.validate()){
                   Navigator.of(context).push(

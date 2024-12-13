@@ -30,6 +30,9 @@ import '../../features/layout_view/presentation/views/layout_view.dart';
 import '../../features/setting_view/data/repos/setting_repo_impl.dart';
 import '../../features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
 import '../../features/splash_view/presentation/views/splash_view.dart';
+import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
+import '../../features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
+import '../../features/transaction_module/presentation/views/send_pin.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -147,7 +150,16 @@ class RouteGenerator {
             child: NotificationsView(),
           ),
           settings: settings,
+        );      case RoutesNames.pinSendView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) =>
+            SendCubit(ServiceLocator.getIt.get<TransactionRepoImpl>()),
+            child: SendPin(),
+          ),
+          settings: settings,
         );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashView(),

@@ -60,7 +60,7 @@ class ChangeEmailView extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                CusttomButton(
+                CustomButton(
                   label: "Submit",
                   onTap: () {
                     if (formKey.currentState!.validate()) {
