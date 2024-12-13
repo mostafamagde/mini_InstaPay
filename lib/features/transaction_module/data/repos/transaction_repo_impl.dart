@@ -27,9 +27,9 @@ class TransactionRepoImpl implements TransactionRepo {
      return right(response.statusMessage??"success");
     } catch (e) {
       if (e is DioException) {
-        return Left(ServerError(e.message??"error"));
+        return Left(ServerError(e.response?.data["message"]??"error"));
       } else {
-        return left(ServerError(e.toString()));
+        return left(ServerError("Something went wrong"));
       }
     }
   }

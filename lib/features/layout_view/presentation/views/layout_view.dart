@@ -19,69 +19,67 @@ class LayoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return BlocProvider(
-      create: (context) => NavigationCubit(),
-      child: BlocBuilder<NavigationCubit, NavigationState>(
-        builder: (context, state) {
-          var cubit = NavigationCubit.get(context);
-          final List<Widget> screens = [
-            HomeView(
-              onTap: cubit.selectTab,
+    return BlocBuilder<NavigationCubit, NavigationState>(
+      builder: (context, state) {
+        var cubit = NavigationCubit.get(context);
+        final List<Widget> screens = [
+          HomeView(
+            onTap: cubit.selectTab,
+
+          ),
+           SendMoneyView(),
+          const ReceiveMoneyView(),
+          BlocProvider(
+            create: (context) =>
+                LogOutCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
+            child: SettingView(),
+          ),
+        ];
+        return Scaffold(
+          bottomNavigationBar: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-             SendMoneyView(),
-            const ReceiveMoneyView(),
-            BlocProvider(
-              create: (context) =>
-                  LogOutCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
-              child: SettingView(),
-            ),
-          ];
-          return Scaffold(
-            bottomNavigationBar: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              child: BottomAppBar(
-                height: 90,
-                color: Colors.transparent,
-                padding: EdgeInsets.zero,
-                child: BottomNavigationBar(
-                  backgroundColor: Constants.backgroundColor,
-                  currentIndex: state.index,
-                  onTap: (value) {
-                    cubit.selectTab(value);
-                  },
-                  items: const [
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.home_outlined),
-                      label: "Home",
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.call_made_outlined),
-                      label: "Send",
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.call_received_rounded),
-                      label: "Receive",
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.settings),
-                      label: "Setting",
-                    ),
-                  ],
-                  selectedItemColor: theme.primaryColor,
-                  unselectedItemColor: Colors.grey,
-                  showUnselectedLabels: false,
-                  unselectedIconTheme: const IconThemeData(size: 22),
-                  selectedIconTheme: const IconThemeData(size: 28),
-                ),
+            child: BottomAppBar(
+              height: 90,
+              color: Colors.transparent,
+              padding: EdgeInsets.zero,
+              child: BottomNavigationBar(
+                backgroundColor: Constants.backgroundColor,
+                currentIndex: state.index,
+                onTap: (value) {
+                  cubit.selectTab(value);
+                },
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_outlined),
+                    label: "Home",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.call_made_outlined),
+                    label: "Send",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.call_received_rounded),
+                    label: "Receive",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: "Setting",
+                  ),
+                ],
+                selectedItemColor: theme.primaryColor,
+                unselectedItemColor: Colors.grey,
+                showUnselectedLabels: false,
+                unselectedIconTheme: const IconThemeData(size: 22),
+                selectedIconTheme: const IconThemeData(size: 28),
               ),
             ),
-            body: screens[state.index],
-          );
-        },
-      ),
+          ),
+          body: screens[state.index],
+        );
+      },
     );
   }
 }

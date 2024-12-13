@@ -29,6 +29,15 @@ class Validation {
 
     return null;
   }
+  static String? validateAmountTextField(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please fill this field';
+    }if (int.parse(value)<1){
+      return 'Minimum amount is 1 Pound';
+    }
+
+    return null;
+  }
   static String? validateCardNumberTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';

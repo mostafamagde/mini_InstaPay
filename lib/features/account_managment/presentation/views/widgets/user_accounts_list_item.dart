@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 
 import '../../../../../core/models/user_model.dart';
+import '../../../../../core/widgets/custom_snackbar.dart';
 import '../../../data/models/BankAccountModel.dart';
 
 class UserAccountsListItem extends StatelessWidget {
@@ -53,6 +55,7 @@ class UserAccountsListItem extends StatelessWidget {
               SizedBox(
                 width: 12,
               ),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -68,6 +71,22 @@ class UserAccountsListItem extends StatelessWidget {
                   ),
                 ],
               ),
+              Spacer(),
+              IconButton(
+                  onPressed: () {
+                    Clipboard.setData(
+                      ClipboardData(text: bank.data![index].id!),
+                    );
+                    snackBar(
+                        content: "Copied to ClipBoard",
+                        context: context,
+                        color: Colors.green);
+                  },
+                  icon: Icon(
+                    Icons.copy,
+                    color: Colors.grey,
+                  )),
+              SizedBox(width: 5,)
             ],
           ),
           SizedBox(

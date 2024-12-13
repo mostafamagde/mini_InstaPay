@@ -39,7 +39,7 @@ final TextEditingController accId =TextEditingController();
           if (state is SendFailed) {
             snackBar(content: state.error, context: context);
           } else if (state is SendSuccess) {
-            snackBar(content: 'Money sent successfully', context: context);
+            snackBar(content: 'Money sent successfully', context: context,color: Colors.green);
           }
         },
         builder: (context, state) {

@@ -171,6 +171,7 @@ class HomeView extends StatelessWidget {
                       icon: Icon(
                         Icons.notifications,
                         color: Colors.white,
+                        size: 25,
                       ),
                     ),
                     BlocBuilder<NotificationsCubit, NotificationsState>(
