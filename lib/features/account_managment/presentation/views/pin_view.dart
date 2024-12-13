@@ -89,6 +89,7 @@ class PinCodeScreen extends StatelessWidget {
                      child: Padding(
                        padding: const EdgeInsets.all(8.0),
                        child: TextFormField(
+                         obscureText: true,
                          validator: Validation.validatePinTextField,
                          controller: controllers[index],
                          focusNode: focusNodes[index],
