@@ -6,22 +6,22 @@ import '../../../../../core/utils/Constants.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({super.key, required this.transaction});
+
   final TransactionModel transaction;
+
   @override
   Widget build(BuildContext context) {
-    final user=UserModel.getInstance();
-    final bool isReceiver= transaction.receiver.id==user.id;
+    final user = UserModel.getInstance();
+    final bool isReceiver = transaction.receiver.id == user.id;
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
-    return  Container(
+    return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
-
       height: 105,
       width: media.width,
       decoration: BoxDecoration(
         border: Border(
-          bottom:
-          BorderSide(color: Colors.grey, width: .5),
+          bottom: BorderSide(color: Colors.grey, width: .5),
         ),
         color: Constants.backgroundColor,
       ),
@@ -46,7 +46,7 @@ class TransactionCard extends StatelessWidget {
                     color: Colors.lightBlueAccent),
                 child: Center(
                   child: Text(
-                   transaction.status,
+                    transaction.status,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: Colors.black,
                       fontSize: 10,
@@ -59,7 +59,9 @@ class TransactionCard extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -73,7 +75,9 @@ class TransactionCard extends StatelessWidget {
                         color: Constants.buttonBackgroundColor,
                         borderRadius: BorderRadius.circular(20)),
                     child: Icon(
-                     isReceiver?Icons.call_received_rounded:Icons.call_made_outlined,
+                      isReceiver
+                          ? Icons.call_received_rounded
+                          : Icons.call_made_outlined,
                       color: theme.secondaryHeaderColor,
                     ),
                   ),
@@ -84,7 +88,7 @@ class TransactionCard extends StatelessWidget {
                     width: 50,
                     child: FittedBox(
                       child: Text(
-                      isReceiver? "Received Money":"Sent Money",
+                        isReceiver ? "Received Money" : "Sent Money",
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w300,
@@ -94,22 +98,34 @@ class TransactionCard extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(width: 10,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(isReceiver?transaction.sender.firstName:transaction.receiver.userName,style: theme.textTheme.bodySmall,),
-                  Text(
-                    isReceiver?transaction.sender.email:transaction.receiver.email,
-                    style: theme.textTheme.bodyMedium,
-                  ), Text(
-                  "${transaction.createdAt}",
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ],
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      isReceiver
+                          ? transaction.sender.firstName
+                          : transaction.receiver.userName,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                    Text(
+                      isReceiver
+                          ? transaction.sender.email
+                          : transaction.receiver.email,
+                      style: theme.textTheme.bodyMedium,
+                      overflow: TextOverflow.fade,
+                      maxLines: 1,
+                    ),
+                    Text(
+                      "${transaction.createdAt}",
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
               )
-
-
             ],
           )
         ],

@@ -20,6 +20,7 @@ class LayoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var media = MediaQuery.of(context).size;
 
     return BlocBuilder<NavigationCubit, NavigationState>(
       builder: (context, state) {
@@ -48,10 +49,11 @@ class LayoutView extends StatelessWidget {
               topRight: Radius.circular(20),
             ),
             child: BottomAppBar(
-              height: 90,
+              height: media.height*.09,
               color: Colors.transparent,
               padding: EdgeInsets.zero,
               child: BottomNavigationBar(
+                elevation: 0,
                 backgroundColor: Constants.backgroundColor,
                 currentIndex: state.index,
                 onTap: (value) {
