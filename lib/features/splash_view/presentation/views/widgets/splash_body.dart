@@ -87,7 +87,7 @@ class _SplashBodyState extends State<SplashBody>
         }
         Navigator.pushReplacementNamed(
           context,
-          RoutesNames.loginView,
+          RoutesNames.onBoarding,
         );
       }
     });
