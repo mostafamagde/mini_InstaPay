@@ -151,6 +151,9 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                       CustomSmallButton(
                         icon: Icons.compare_arrows_outlined,
                         name: "Transactions",
+                        onTap: (){
+                          Navigator.pushNamed(context, RoutesNames.allTransaction);
+                        },
                       )
                     ],
                   ),
