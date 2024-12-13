@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/transaction_module/data/models/receive_model.dart';
@@ -36,60 +37,62 @@ class ReceiveMoneyView extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = ReceiveCubit.get(context);
-        if (state is ReceiveLoading) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: Constants.primaryMouveColor,
-            ),
-          );
-        } else {
-          return Form(
-            key: formKey,
-            child: SingleChildScrollView(
-              child: SizedBox(
-                height: media.height,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CustomTitleContainer(title: "Receive request"),
-                    SizedBox(
-                      height: media.height * .1,
-                    ),
-                    TransactionBox(
-                      title: "Receive Money",
-                      amount: amount,
-                      recieverData: recieverData,
-                      send: false,
-                      id: id,
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    CustomButton(
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          cubit.receiveMoney(
-                            ReceiveModel(
-                              receiveData: recieverData.text,
-                              amount: int.parse(amount.text),
-                              accountId: id.text,
-                            ),
-                          );
-                        }
-                      },
-                      label: "Request",
-                      padding: 22,
-                    ),
-                    SizedBox(
-                      height: 80,
-                    ),
-                  ],
+      
+          return ModalProgressHUD(
+            inAsyncCall: state is ReceiveLoading,
+            progressIndicator: CircularProgressIndicator(color:  Constants.secondaryOrangeColor,),
+
+
+
+
+            child: Form(
+              key: formKey,
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  height: media.height,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomTitleContainer(title: "Receive request"),
+                      SizedBox(
+                        height: media.height * .1,
+                      ),
+                      TransactionBox(
+                        title: "Receive Money",
+                        amount: amount,
+                        recieverData: recieverData,
+                        send: false,
+                        id: id,
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      CustomButton(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            cubit.receiveMoney(
+                              ReceiveModel(
+                                receiveData: recieverData.text,
+                                amount: int.parse(amount.text),
+                                accountId: id.text,
+                              ),
+                            );
+                          }
+                        },
+                        label: "Request",
+                        padding: 22,
+                      ),
+                      SizedBox(
+                        height: 80,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           );
         }
-      },
+      
     );
   }
 }

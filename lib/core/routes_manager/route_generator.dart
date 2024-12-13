@@ -32,6 +32,7 @@ import '../../features/account_managment/presentation/views/manage_accounts.dart
 import '../../features/layout_view/presentation/views/layout_view.dart';
 import '../../features/setting_view/data/repos/setting_repo_impl.dart';
 import '../../features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
+import '../../features/setting_view/presentation/views/change_default_account.dart';
 import '../../features/splash_view/presentation/views/splash_view.dart';
 import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
 import '../../features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
@@ -111,6 +112,11 @@ class RouteGenerator {
       case RoutesNames.AddBankAccount:
         return MaterialPageRoute(
           builder: (context) => AddBankAccount(),
+          settings: settings,
+        );
+      case RoutesNames.changeDefaultAccount:
+        return MaterialPageRoute(
+          builder: (context) => ChangeDefaultAccount(),
           settings: settings,
         );
       case RoutesNames.changeCridintials:

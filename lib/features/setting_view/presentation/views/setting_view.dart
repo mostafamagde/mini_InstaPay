@@ -13,7 +13,7 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-print(UserModel.getInstance().token);
+    print(UserModel.getInstance().token);
     var cubit = LogOutCubit.get(context);
     return BlocListener<LogOutCubit, LogOutState>(
       listener: (context, state) {
@@ -32,8 +32,7 @@ print(UserModel.getInstance().token);
         children: [
           CustomTitleContainer(
             title: "Setting",
-),
-   
+          ),
           Expanded(
             child: GridView(
               gridDelegate:
@@ -66,6 +65,15 @@ print(UserModel.getInstance().token);
                   name: "Log Out",
                   icon: Icons.logout,
                   onTap: () => cubit.logOut(),
+                ),
+                CustomSmallButton(
+                  padding: 25,
+                  name: "Change Default",
+                  icon: Icons.change_circle,
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    RoutesNames.changeDefaultAccount,
+                  ),
                 ),
               ],
             ),
