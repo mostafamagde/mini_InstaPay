@@ -12,7 +12,7 @@ class AuthRepoImpl implements AuthRepository {
   final body = {
       "email": email,
     };
-    return apiManager.post(ApiConstants.preForgotPasswordEndPoint, body).then((response) {
+    return apiManager.post(ApiConstants.SendforgetPasswordMailEdnPoint, body).then((response) {
       print("$response sssssssssssssssssssssssssssssssssssssssss ${response.statusCode}");
       
         final Map<String, dynamic> responseBody = response.data;
@@ -21,6 +21,13 @@ class AuthRepoImpl implements AuthRepository {
         print("Sent successful");
         return OtpModel.fromJson(responseBody);
       }); 
+  }
+Future<void> enterPassword(String token,String password) async{
+  final body = {
+      "token": token,
+      "password":password
+    };
+    await apiManager.post(ApiConstants.forgetPasswordEdnPoint, body);
   }
 
   @override

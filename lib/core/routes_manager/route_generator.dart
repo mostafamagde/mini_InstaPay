@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/service_locator.dart';
 import 'package:untitled2/features/account_managment/presentation/views/pin_view.dart';
+import 'package:untitled2/features/auth/data/repository/auth_repo_impl.dart';
+import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
+import 'package:untitled2/features/auth/presentation/views/enter_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
@@ -135,7 +138,10 @@ class RouteGenerator {
         );
       case RoutesNames.allTransaction:
         return MaterialPageRoute(
-          builder: (context) => TransactionView(),
+          builder: (context) => BlocProvider(
+            create: (context) => TransactionCubit(TransactionRepository()),
+            child: TransactionView(),
+          ),
           settings: settings,
         );
       case RoutesNames.changePassword:
@@ -164,7 +170,14 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-
+      case RoutesNames.EnterPasswordView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => AuthCubit(AuthRepoImpl()),
+            child: EnterPasswordView(),
+          ),
+          settings: settings,
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const SplashView(),
