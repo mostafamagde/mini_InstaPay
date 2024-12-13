@@ -11,14 +11,16 @@ class ApiConstants {
   static const String ConfirmChangeEmail = 'user/confirmChangeEmail';
   static const String updatePassword = 'user/updatePassword';
   static const String getAllBanks = 'bank/';
-  static const String getUserData="user/";
-  static const String addGetBankAccount="account/";
-  static const String logOut="user/logout";
-  static const String deleteAccount="/account/";
-  static const String getBalance="account/balance/";
-  static const String resendOtpEndPoint= 'auth/resendOTP/';
-  static const String getTransactionEndPoint="/transaction/history";
-  static const String getAllNotifications='/notification';
-  static const String readNotifications='/notification/markAsRead/';  static const String sendMoney="/transaction/send-money";
+  static const String getUserData = "user/";
+  static const String addGetBankAccount = "account/";
+  static const String logOut = "user/logout";
+  static const String deleteAccount = "/account/";
+  static const String getBalance = "account/balance/";
+  static const String resendOtpEndPoint = 'auth/resendOTP/';
+  static const String getTransactionEndPoint = "/transaction/history";
+  static const String getAllNotifications = '/notification';
+  static const String readNotifications = '/notification/markAsRead/';
+  static const String sendMoney = "/transaction/send-money";
+  static const String receiveMoney = "transaction/request-recieve-money";
 
 }
