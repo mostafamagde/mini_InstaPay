@@ -21,7 +21,7 @@ static  GetBalanceCubit get(context) =>BlocProvider.of(context);
        emit(GetBalanceSuccess(balance: balance));
      } catch (e) {
        if (e is DioException) {
-         emit(GetBalanceFailed(error: "GetBalanceFailed"));
+         emit(GetBalanceFailed(error: e.response?.data["message"] ?? e.message));
 
        } else {
          emit(GetBalanceFailed(error: "GetBalanceFailed"));

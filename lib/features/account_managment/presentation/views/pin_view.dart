@@ -32,7 +32,14 @@ class PinCodeScreen extends StatelessWidget {
     var formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Enter PIN Code'),
+        title: const Text('Enter PIN Code',style: TextStyle(
+          color: Colors.white
+        ),),
+         centerTitle: true,
+        leading: IconButton(
+          onPressed: (){
+          Navigator.pop(context);}
+       ,icon: Icon(Icons.arrow_back_ios,color: Colors.white,) )
       ),
       body: BlocConsumer<GetBalanceCubit, GetBalanceState>(
         listener: (context, state) {

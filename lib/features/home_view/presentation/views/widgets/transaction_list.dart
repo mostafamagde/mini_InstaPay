@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/routes_manager/route_generator.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
 
@@ -17,13 +21,15 @@ class TransactionList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
                     children: [
                       const Text("Last Transactions"),
                       const Spacer(),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, RoutesNames.allTransaction,arguments: state.transactions);
+                        },
                         child: Text(
                           "view all",
                           style: theme.textTheme.bodyMedium?.copyWith(
@@ -35,16 +41,15 @@ class TransactionList extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(), 
                   shrinkWrap: true, 
-                  itemCount: state.transactions.length,
+                  itemCount: min(state.transactions.length,5),
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
                         TransactionCard(transaction: state.transactions[index],),
-                        if (index < state.transactions.length - 1)
+                     
                           const SizedBox(height: 16),
                       ],
                     );
