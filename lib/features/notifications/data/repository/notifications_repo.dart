@@ -11,9 +11,26 @@ class NotificationsRepo{
     .map((item) => NotificationModel.fromJson(item))
     .toList();
    }
-     Future<void> readNotifications(NotificationModel notification) async{
+     Future<void> readNotifications(String notificationId) async{
       await _apiManger.patch(
-    ApiConstants.readNotifications+notification.id,
+    ApiConstants.readNotifications+notificationId,
+   headers: {"token":UserModel.getInstance().token});
+     }
+      Future<void> rejectRequest({required String notificationId}) async{
+        
+      await _apiManger.post(
+    ApiConstants.rejectReceive+notificationId,
+    {},
+   headers: {"token":UserModel.getInstance().token});
+     }
+      Future<void> acceptRequest({required String notificationId,String? accountId,required String pin}) async{
+       final body ={
+        "accountId": accountId,
+          "PIN":pin
+        };
+      await _apiManger.post(
+    ApiConstants.confirmReceive+notificationId,
+   body,
    headers: {"token":UserModel.getInstance().token});
      }
 }

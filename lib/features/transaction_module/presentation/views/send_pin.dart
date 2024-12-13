@@ -7,7 +7,6 @@ import 'package:untitled2/features/transaction_module/data/models/send_model.dar
 
 import '../../../../core/utils/validation.dart';
 import '../../../../core/widgets/custom_snackbar.dart';
-import '../../../account_managment/presentation/manager/balance_cubit/get_balance_cubit.dart';
 import '../manager/send_cubit/send_cubit.dart';
 
 class SendPin extends StatelessWidget {

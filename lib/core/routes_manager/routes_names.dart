@@ -18,5 +18,5 @@ class RoutesNames {
   static const String pinSendView = "pinSendView";
   static const String EnterPasswordView = "enterPassword";
   static const String changeDefaultAccount = "ChangeDefaultAccount";
-
+  static const String notificationsPin="notificationsPin";
 }

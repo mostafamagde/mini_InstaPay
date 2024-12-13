@@ -21,7 +21,7 @@ final class ReadNotificationsFailed extends NotificationsState {
   ReadNotificationsFailed({required this.errorMessage});
 }
 final class ReadNotificationsSuccess extends NotificationsState {
-  final NotificationModel notification;
+  final String notificationId;
 
-  ReadNotificationsSuccess({required this.notification});
+  ReadNotificationsSuccess({required this.notificationId});
 }

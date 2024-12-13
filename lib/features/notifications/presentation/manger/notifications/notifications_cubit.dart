@@ -7,28 +7,73 @@ import 'package:untitled2/features/notifications/data/repository/notifications_r
 part 'notifications_state.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
- final NotificationsRepo notificationsRepo;
+  final NotificationsRepo notificationsRepo;
   NotificationsCubit(this.notificationsRepo) : super(NotificationsInitial());
-  getNotification()async{
- try{   emit(NotificationsLoading());
-   List<NotificationModel> notifications= await notificationsRepo.getAllNotifications();
-    emit(NotificationsSuccess(notifications: notifications));}
-    catch(e){
-      if(e is DioException){
-        emit(NotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
+  getNotification() async {
+    try {
+      emit(NotificationsLoading());
+      List<NotificationModel> notifications =
+          await notificationsRepo.getAllNotifications();
+      emit(NotificationsSuccess(notifications: notifications));
+    } catch (e) {
+      if (e is DioException) {
+        emit(NotificationsFailed(
+            errorMessage: e.response?.data["message"] ?? e.message));
+      } else {
+        emit(NotificationsFailed(errorMessage: e.toString()));
       }
-      else{emit(NotificationsFailed(errorMessage: e.toString()));}
     }
   }
-   readNotification(NotificationModel notification)async{
- try{   emit(ReadNotificationsLoading());
-     await notificationsRepo.readNotifications(notification);
-    emit(ReadNotificationsSuccess(notification: notification));}
-    catch(e){
-      if(e is DioException){
-        emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
+
+  readNotification(String notificationId) async {
+    try {
+      emit(ReadNotificationsLoading());
+      await notificationsRepo.readNotifications(notificationId);
+      emit(ReadNotificationsSuccess(notificationId: notificationId));
+    } catch (e) {
+      if (e is DioException) {
+        emit(ReadNotificationsFailed(
+            errorMessage: e.response?.data["message"] ?? e.message));
+      } else {
+        emit(ReadNotificationsFailed(errorMessage: e.toString()));
       }
-      else{emit(ReadNotificationsFailed(errorMessage: e.toString()));}
+    }
+  }
+
+  acceptRequest(
+      {required NotificationModel notification,
+      String? accountId,
+      required String pin}) async {
+    try {
+      emit(ReadNotificationsLoading());
+         
+      await notificationsRepo.acceptRequest(
+          notificationId: notification.transactionId, pin: pin, accountId: accountId);
+       this.readNotification(notification.id);
+    } catch (e) {
+      if (e is DioException) {
+        emit(ReadNotificationsFailed(
+            errorMessage: e.response?.data["message"] ?? e.message));
+      } else {
+        emit(ReadNotificationsFailed(errorMessage: e.toString()));
+      }
+    }
+  }
+
+  rejectRequest(
+      {required NotificationModel  notification,}) async {
+    try {
+      emit(ReadNotificationsLoading());
+      await notificationsRepo.rejectRequest(notificationId: notification.transactionId);
+
+      this.readNotification(notification.id);
+    } catch (e) {
+      if (e is DioException) {
+        emit(ReadNotificationsFailed(
+            errorMessage: e.response?.data["message"] ?? e.message));
+      } else {
+        emit(ReadNotificationsFailed(errorMessage: e.toString()));
+      }
     }
   }
 }
