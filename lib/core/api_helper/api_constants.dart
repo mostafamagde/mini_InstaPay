@@ -4,8 +4,6 @@ class ApiConstants {
   static const String preLogin = "auth/preLogin";
   static const String loginEndPoint = 'auth/login/';
   static const String vetifyEmailEndPoint = 'auth/verifyEmail/';
-  static const String preForgotPasswordEndPoint = 'auth/preForgetPassword';
-  static const String forgotPasswordEndPoint = 'auth/forgetPassword';
   static const String changeCredintialsEndPoint = 'user';
   static const String changeEmail = 'user/changeEmail';
   static const String ConfirmChangeEmail = 'user/confirmChangeEmail';
@@ -19,6 +17,9 @@ class ApiConstants {
   static const String resendOtpEndPoint= 'auth/resendOTP/';
   static const String getTransactionEndPoint="/transaction/history";
   static const String getAllNotifications='/notification';
-  static const String readNotifications='/notification/markAsRead/';  static const String sendMoney="/transaction/send-money";
-
+  static const String readNotifications='/notification/markAsRead/';
+  static const String sendMoney="/transaction/send-money";
+  static const String forgetPasswordEdnPoint='auth/forget-password';
+  static const String ConfirmOtpForgetEdnPoint='auth/confirm-otp-forget';
+  static const String SendforgetPasswordMailEdnPoint='auth/send-forget-password-mail/';
 }

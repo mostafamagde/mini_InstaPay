@@ -15,5 +15,5 @@ class RoutesNames {
   static const String pinView="pinView";
   static const String allTransaction="allTransaction";
   static const String notifications="notifications";  static const String pinSendView="pinSendView";
-
+   static const String EnterPasswordView="enterPassword";
 }

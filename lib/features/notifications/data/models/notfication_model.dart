@@ -23,7 +23,7 @@ class NotificationModel {
       content: json['content'],
       userId: json['userId'],
       type: json['type'],
-      transactionId: json['transactionId'],
+      transactionId: json['transactionId']??'',
       isRead: json['isRead'],
       createdAt: DateTime.parse(json['createdAt']),
     );

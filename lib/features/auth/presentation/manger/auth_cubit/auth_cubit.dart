@@ -18,7 +18,10 @@ class AuthCubit extends Cubit<AuthState> {
       final otpModel = await _authRepository.login(email, password);
       emit(AuthSuccess(otpModel));
     } catch (e) {
-      emit(AuthFail(e.toString()));
+       if (e is DioException) {
+         emit(AuthFail( e.response?.data["message"] ?? e.message));
+      }
+     else emit(AuthFail(e.toString()));
     }
   }
 
@@ -39,8 +42,23 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final otpModel = await _authRepository.forgetPassword(email);
       emit(AuthSuccess(otpModel));
+    }catch (e) {
+       if (e is DioException) {
+         emit(AuthFail( e.response?.data["message"] ?? e.message));
+      }
+     else emit(AuthFail(e.toString()));
+    }
+  }
+   Future<void> SubmitNewPassword(String token,password) async {
+    emit(AuthLoading());
+    try {
+       await _authRepository.enterPassword(token, password);
+      emit(AuthSuccess(OtpModel(token: "")));
     } catch (e) {
-      emit(AuthFail(e.toString()));
+       if (e is DioException) {
+         emit(AuthFail( e.response?.data["message"] ?? e.message));
+      }
+     else emit(AuthFail(e.toString()));
     }
   }
 }

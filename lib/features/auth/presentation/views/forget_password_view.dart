@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
 import 'package:untitled2/features/auth/presentation/views/enter_password_view.dart';
+import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
 
 class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key});
@@ -40,7 +42,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
           listener: (context, state) {
              if (state is AuthSuccess) {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => EnterPasswordView(token: state.otpModel.token)),
+                MaterialPageRoute(builder: (context) => OtpView(userToken:state.otpModel.token,function: Constants.forgetPasswordString,)),
               );
             } else if (state is AuthFail) {
                 snackBar(content: state.message, context: context);
