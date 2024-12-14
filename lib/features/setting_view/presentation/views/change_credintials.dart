@@ -22,10 +22,10 @@ class ChangeCredintials extends StatelessWidget {
       TextEditingController(text: UserModel.getInstance().address);
   final TextEditingController phoneNumberController =
       TextEditingController(text: UserModel.getInstance().mobileNumber);
-
+  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    var formKey = GlobalKey<FormState>();
+
 
     var theme = Theme.of(context);
 

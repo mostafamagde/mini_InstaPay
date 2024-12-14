@@ -27,11 +27,12 @@ class SendPin extends StatelessWidget {
       FocusScope.of(context).requestFocus(focusNodes[index - 1]);
     }
   }
+  var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     var data = ModalRoute.of(context)?.settings.arguments as List<String>;
-    var formKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Enter PIN Code'),

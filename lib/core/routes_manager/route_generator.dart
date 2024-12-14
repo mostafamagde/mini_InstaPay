@@ -35,6 +35,7 @@ import '../../features/account_managment/presentation/views/manage_accounts.dart
 import '../../features/layout_view/presentation/views/layout_view.dart';
 import '../../features/setting_view/data/repos/setting_repo_impl.dart';
 import '../../features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
+import '../../features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
 import '../../features/setting_view/presentation/views/change_default_account.dart';
 import '../../features/splash_view/presentation/views/splash_view.dart';
 import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
@@ -119,7 +120,11 @@ class RouteGenerator {
         );
       case RoutesNames.changeDefaultAccount:
         return MaterialPageRoute(
-          builder: (context) => ChangeDefaultAccount(),
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                ChangeDefaultAccCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+            child: ChangeDefaultAccount(),
+          ),
           settings: settings,
         );
       case RoutesNames.changeCridintials:
@@ -170,7 +175,7 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-         case RoutesNames.notificationsPin:
+      case RoutesNames.notificationsPin:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<NotificationsCubit>(
             create: (context) => NotificationsCubit(NotificationsRepo()),
@@ -195,7 +200,7 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-        case RoutesNames.onBoarding:
+      case RoutesNames.onBoarding:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => OnBoardingCubit(),

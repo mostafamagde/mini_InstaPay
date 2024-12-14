@@ -20,10 +20,10 @@ class ChangeEmailView extends StatelessWidget {
   ChangeEmailView({super.key});
 
   TextEditingController emailController = TextEditingController(text: UserModel.getInstance().email);
-
+  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    var formKey = GlobalKey<FormState>();
+
 
     return BlocConsumer<ChangeEmailCubit, ChangeEmailState>(
       listener: (context, state) {
