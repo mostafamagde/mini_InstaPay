@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/utils/Constants.dart';
+import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_factory.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_repo.dart';
 import 'package:untitled2/features/otp/presentation/manger/cubit/otp_cubit.dart';
+import 'dart:async';
+
+import 'package:untitled2/features/otp/presentation/views/widgets/resend_button.dart';
 
 class OtpView extends StatefulWidget {
   final String userToken;
   final String function;
-
   final String? password;
 
   OtpView({required this.userToken, required this.function, this.password});
@@ -21,18 +25,18 @@ class OtpView extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OtpView> {
-
   final _formKey = GlobalKey<FormState>();
   final List<TextEditingController> _otpControllers = List.generate(
     6,
     (index) => TextEditingController(),
   );
   late OtpRepository repository;
+
   @override
   void initState() {
+    super.initState();
     final factory = OtpFactory();
     repository = factory.createOtpRepo(widget.function, context);
-    super.initState();
   }
 
   void _submitFunction() {
@@ -44,158 +48,9 @@ class _OTPScreenState extends State<OtpView> {
   }
 
   void _resendOtp() {
+    // Resend OTP functionality
     BlocProvider.of<OtpCubit>(context).resendOtp(repository, widget.userToken);
   }
-
-  // void _forgetPasswordFunction() async {
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     final otp = _otpControllers.map((controller) => controller.text).join();
-  //     final apiManager = ApiManager();
-  //     try {
-  //       final response =
-  //           await apiManager.post(ApiConstants.forgotPasswordEndPoint, {
-  //         "token": widget.userToken,
-  //         "password": widget.password,
-  //         "otp": int.parse(otp),
-  //       });
-  //       if (response.statusCode == 201) {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('OTP Verified')),
-  //         );
-  //         Navigator.pushReplacementNamed(context, RoutesNames.loginView);
-  //       } else {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Failed to verify OTP')),
-  //         );
-  //       }
-  //     } catch (e) {
-  //       if (e is DioException) {
-  //         if (e.response != null) print(e.response!.data["message"]);
-  //         print("Sssssssssssssssssss ${e.message}");
-  //       }
-  //     }
-  //   }
-  // }
-
-  // void _signUpFunction() async {
-  //   print('otp');
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     final otp = _otpControllers.map((controller) => controller.text).join();
-  //     final apiManager = ApiManager();
-  //     try {
-  //       final response =
-  //           await apiManager.post(ApiConstants.vetifyEmailEndPoint, {
-  //         "token": widget.userToken,
-  //         "otp": int.parse(otp),
-  //       });
-  //       if (response.statusCode == 201) {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('OTP Verified')),
-  //         );
-  //         Navigator.pushReplacementNamed(context, RoutesNames.loginView);
-  //       } else {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Failed to verify OTP')),
-  //         );
-  //       }
-  //     } catch (e) {
-  //       if (e is DioException) {
-  //         if (e.response != null) {
-  //           print(e.response);
-  //         }
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Error: ${e.message}')),
-  //         );
-  //       }
-  //     }
-  //   }
-  // }
-
-  // void _loginFunction() async {
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     final otp = _otpControllers.map((controller) => controller.text).join();
-  //     final apiManager = ApiManager();
-  //     try {
-  //       final response = await apiManager.post(ApiConstants.loginEndPoint, {
-  //         "token": widget.userToken,
-  //         "otp": int.parse(otp),
-  //       });
-  //       if (response.statusCode == 201) {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Login Successful')),
-  //         );
-  //         UserModel user = UserModel.getInstance();
-  //         user.token = response.data["token"];
-  //         final storage = new FlutterSecureStorage();
-  //         await storage.write(key: "token", value: user.token);
-  //         final userDataResponse = await apiManager.get(ApiConstants.getUserData,headers: {
-  //           "token":user.token
-  //         } ); ;
-  //         if(userDataResponse.statusCode==200){
-  //           user.setFromjson(userDataResponse.data["data"]);
-  //         }
-
-  //         Navigator.pushReplacementNamed(
-  //           context,
-  //           RoutesNames.layoutView,
-  //         );
-  //       } else {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Failed to login')),
-  //         );
-  //       }
-  //     } catch (e) {
-  //       if (e is DioException) {
-  //         if (e.response != null) {
-  //           print(e.response);
-  //         }
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Error: ${e.message}')),
-  //         );
-  //       }
-  //     }
-  //   }
-  // }
-
-  // void _changeEmailFunction() async {
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     final otp = _otpControllers.map((controller) => controller.text).join();
-  //     final apiManager = ApiManager();
-  //     try {
-  //       final response =
-  //           await apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
-  //         "token": UserModel.getInstance().userToken,
-  //         "otp": int.parse(otp),
-  //       }, headers: {
-  //         "token": UserModel.getInstance().token
-  //       });
-  //       if (response.statusCode == 201 || response.statusCode == 200) {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Email Changed Successful')),
-  //         );
-  //         Navigator.pushNamedAndRemoveUntil(
-  //           context,
-  //           RoutesNames.layoutView,
-  //           (route) => false,
-  //         );
-  //       } else {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Failed to change email')),
-  //         );
-  //       }
-  //     } catch (e) {
-
-  //       if (e is DioException) {
-  //         if (e.response != null) {
-  //           print(e.response);
-  //         }
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Error: ${e.message}')),
-  //         );
-  //       }
-  //     }
-  //   }
-  // }
 
   @override
   void dispose() {
@@ -207,22 +62,28 @@ class _OTPScreenState extends State<OtpView> {
 
   @override
   Widget build(BuildContext context) {
-     print(widget.userToken);
-       print(UserModel.getInstance().token);
-    context;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Enter OTP'),
+        title: Text(
+          'Enter OTP',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            )),
         centerTitle: true,
-        backgroundColor: Constants.backgroundColor,
       ),
       body: BlocConsumer<OtpCubit, OtpState>(
         listener: (context, state) {
-          if(state is OtpError){
+          if (state is OtpError) {
             snackBar(content: state.message, context: context);
-          }
-          else if(state is OtpResendSuccess){
-            snackBar(content: "Otp Sent", context: context,color: Colors.green);
+          } else if (state is OtpResendSuccess) {
+            snackBar(content: "Otp Sent", context: context, color: Colors.green);
           }
         },
         builder: (context, state) {
@@ -269,16 +130,16 @@ class _OTPScreenState extends State<OtpView> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _submitFunction,
-                      child: Text('Submit'),
+                    const SizedBox(height: 8),
+                    ResendButton(
+                      onPressed: _resendOtp,
                     ),
                     const SizedBox(height: 10),
-                    TextButton(
-                      onPressed: _resendOtp,
-                      child: Text('Resend OTP'),
+                    CustomButton(
+                      onTap: _submitFunction,
+                      label: "Submit",
                     ),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),
