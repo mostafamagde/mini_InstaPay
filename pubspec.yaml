@@ -48,6 +48,7 @@ dependencies:
   cached_network_image: ^3.4.1
   shared_preferences: ^2.3.3
   device_preview: ^1.2.0
+  auto_size_text: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
