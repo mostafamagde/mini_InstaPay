@@ -11,8 +11,10 @@ import 'package:untitled2/features/notifications/presentation/manger/notificatio
 import '../../../../core/widgets/CustomTitleContainer.dart';
 import '../../../../core/widgets/custom_small_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class HomeView extends StatelessWidget {
   const HomeView({super.key, required this.onTap});
+
   final void Function(int) onTap;
 
   @override
@@ -129,8 +131,10 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                         onTap: () => onTap(2),
                       ),
                       CustomSmallButton(
-                        icon: Icons.balance,
-                        name: "Bill Payment",
+                        icon: Icons.account_balance,
+                        name: "Manage",
+                        onTap: () => Navigator.pushNamed(
+                            context, RoutesNames.ManageAccounts),
                       )
                     ],
                   ),
@@ -145,15 +149,17 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                         name: "Donations",
                       ),
                       CustomSmallButton(
-                        icon: Icons.account_balance,
-                        name: "Manage",
-                      ),
-                      CustomSmallButton(
                         icon: Icons.compare_arrows_outlined,
                         name: "Transactions",
-                        onTap: (){
-                          Navigator.pushNamed(context, RoutesNames.allTransaction);
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, RoutesNames.allTransaction);
                         },
+                      ),
+                      CustomSmallButton(
+                        icon: Icons.settings,
+                        name: "Settings",
+                        onTap: () => onTap(3),
                       )
                     ],
                   ),
@@ -166,12 +172,15 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                 top: 32,
                 right: 24,
                 child: InkWell(
-                  onTap: (){Navigator.pushNamed(context, RoutesNames.notifications);},
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesNames.notifications);
+                  },
                   child: Stack(
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, RoutesNames.notifications);
+                          Navigator.pushNamed(
+                              context, RoutesNames.notifications);
                         },
                         icon: Icon(
                           Icons.notifications,
@@ -181,33 +190,32 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                       ),
                       BlocBuilder<NotificationsCubit, NotificationsState>(
                         builder: (context, state) {
-                          if( state is NotificationsSuccess)
-                           {
-                              final unreadCount = state.notifications
-                  .where((notification) => !notification.isRead)
-                  .length;
-                             return Positioned(
-                                right: 8,
-                                top: 8,
-                                child: Container(
-                                  padding: EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: Constants.primaryMouveColor,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Text(
-                                    '${unreadCount}',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                          if (state is NotificationsSuccess) {
+                            final unreadCount = state.notifications
+                                .where((notification) => !notification.isRead)
+                                .length;
+                            return Positioned(
+                              right: 8,
+                              top: 8,
+                              child: Container(
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: Constants.primaryMouveColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Text(
+                                  '${unreadCount}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              );}
-                             else{
-                              return SizedBox();
-                             }
+                              ),
+                            );
+                          } else {
+                            return SizedBox();
+                          }
                         },
                       ),
                     ],

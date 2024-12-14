@@ -22,7 +22,7 @@ class ManageAccounts extends StatelessWidget {
           snackBar(content: state.message, context: context);
         }
         if (state is ManageBankAccountsSuccess) {
-          snackBar(content: state.message, context: context);
+          snackBar(content: state.message, context: context,color: Colors.green);
         }
       },
       builder: (context, state) {
