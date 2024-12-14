@@ -25,7 +25,7 @@ class ChangePassword extends StatelessWidget {
     return BlocConsumer<ChangePasswordCubit, ChangePasswordState>(
       listener: (context, state) {
         if (state is ChangePasswordSuccess) {
-          snackBar(content: state.message, context: context);
+          snackBar(content: state.message, context: context,color: Colors.green);
           Navigator.pop(context);
         } else if (state is ChangePasswordFailure) {
           snackBar(content: state.errMessage, context: context);

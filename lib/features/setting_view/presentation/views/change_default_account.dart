@@ -40,6 +40,7 @@ class ChangeDefaultAccount extends StatelessWidget {
                 def?.cardInfo?.cardNo = item.cardNo;
                 def?.bankId?.logo = item.bankId?.logo;
                 def?.bankId?.name = item.bankId?.name;
+                def?.id=item.id;
               }
             }
             snackBar(
