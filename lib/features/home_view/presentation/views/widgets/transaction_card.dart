@@ -95,18 +95,22 @@ class TransactionCard extends StatelessWidget {
                 ],
               ),
               SizedBox(width: 10,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(isReceiver?transaction.sender.firstName:transaction.receiver.userName,style: theme.textTheme.bodySmall,),
-                  Text(
-                    isReceiver?transaction.sender.email:transaction.receiver.email,
-                    style: theme.textTheme.bodyMedium,
-                  ), Text(
-                  "${transaction.createdAt}",
-                    style: theme.textTheme.bodySmall,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(isReceiver?transaction.sender.firstName:transaction.receiver.userName,style: theme.textTheme.bodySmall,),
+                    Text(
+                      isReceiver?transaction.sender.email:transaction.receiver.email,
+                      style: theme.textTheme.bodyMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                    ), Text(
+                    "${transaction.createdAt}",
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
               )
 
 

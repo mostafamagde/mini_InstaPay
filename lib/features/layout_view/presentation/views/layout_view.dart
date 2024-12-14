@@ -52,6 +52,7 @@ class LayoutView extends StatelessWidget {
               color: Colors.transparent,
               padding: EdgeInsets.zero,
               child: BottomNavigationBar(
+                elevation: 0,
                 backgroundColor: Constants.backgroundColor,
                 currentIndex: state.index,
                 onTap: (value) {
