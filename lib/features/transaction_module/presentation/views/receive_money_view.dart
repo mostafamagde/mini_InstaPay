@@ -19,19 +19,19 @@ class ReceiveMoneyView extends StatelessWidget {
   TextEditingController recieverData = TextEditingController();
   TextEditingController amount = TextEditingController();
   TextEditingController id = TextEditingController();
-
+  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    var formKey = GlobalKey<FormState>();
+
     Size media = MediaQuery.of(context).size;
     return BlocConsumer<ReceiveCubit, ReceiveState>(listener: (context, state) {
       if (state is ReceiveSuccess) {
         snackBar(
-            content: "Request sent successfully",
+            content: state.message,
             context: context,
             color: Colors.green);
       } else if (state is ReceiveFailed) {
-        snackBar(content: "Failed to send request", context: context);
+        snackBar(content: state.errorMessage, context: context);
       }
     }, builder: (context, state) {
       var cubit = ReceiveCubit.get(context);

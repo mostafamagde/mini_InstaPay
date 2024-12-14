@@ -17,10 +17,10 @@ class ChangePassword extends StatelessWidget {
 
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
-
+  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    var formKey = GlobalKey<FormState>();
+
 
     return BlocConsumer<ChangePasswordCubit, ChangePasswordState>(
       listener: (context, state) {

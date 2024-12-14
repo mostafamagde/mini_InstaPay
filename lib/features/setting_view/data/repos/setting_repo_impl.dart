@@ -16,7 +16,7 @@ class SettingRepoImpl implements SettingRepo {
       {required CredinitialsModel model}) async {
     ApiManager service = ApiManager();
     try {
-     await service.patch(
+      await service.patch(
         ApiConstants.changeCredintialsEndPoint,
         data: {
           "firstName": model.firstName,
@@ -87,7 +87,7 @@ class SettingRepoImpl implements SettingRepo {
   Future<Either<Errors, String>> logOut() async {
     try {
       ApiManager service = ApiManager();
-       await service.post(
+      await service.post(
         ApiConstants.logOut,
         {},
         headers: {
@@ -100,6 +100,24 @@ class SettingRepoImpl implements SettingRepo {
         return left(ServerError.fromDioError(e));
       }
       return left(ServerError(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Errors, String>> changeDefault(String id) async {
+    try {
+      ApiManager service = ApiManager();
+final response=    await  service.patch(ApiConstants.ChangeDefaultAccount, headers: {
+        "token": UserModel.getInstance().token
+      }, data: {
+        "accountId": id,
+      });
+    return Right(response.statusMessage??"success");
+    } catch (e) {
+      if(e is DioException) {
+        return Left(ServerError(e.response?.data["message"]??"error"));
+      }
+      return left(ServerError("Something went wrong"));
     }
   }
 }

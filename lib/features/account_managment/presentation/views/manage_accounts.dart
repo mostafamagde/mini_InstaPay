@@ -34,15 +34,17 @@ class ManageAccounts extends StatelessWidget {
             ),
             appBar: AppBar(
               leading: IconButton(
+
                   onPressed: () {
 
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       RoutesNames.layoutView,
                       (route) => false,
+
                     );
                   },
-                  icon: Icon(Icons.arrow_back)),
+                  icon: Icon(Icons.arrow_back_ios)),
             ),
             body: () {
               if (state is ManageBankAccountsFailed) {

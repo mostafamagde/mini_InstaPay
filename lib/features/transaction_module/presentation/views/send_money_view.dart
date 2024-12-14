@@ -10,10 +10,10 @@ class SendMoneyView extends StatelessWidget {
    SendMoneyView({super.key});
   TextEditingController recieverData =TextEditingController();
   TextEditingController amount =TextEditingController();
-
+   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    var formKey =GlobalKey<FormState>();
+
     Size media = MediaQuery.of(context).size;
     return Form(
       key: formKey,
