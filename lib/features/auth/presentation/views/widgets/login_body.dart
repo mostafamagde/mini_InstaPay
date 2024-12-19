@@ -13,6 +13,8 @@ import 'package:untitled2/features/auth/presentation/views/widgets/auth_header.d
 import 'package:untitled2/features/auth/presentation/views/widgets/custom_text_button.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../../../../admn/presentation/views/admin_layout.dart';
+
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
 
@@ -120,6 +122,9 @@ class _LoginBodyState extends State<LoginBody> {
                         ),
                       ],
                     ),
+                    ElevatedButton(onPressed: () {
+                      Navigator.pushNamed(context, RoutesNames.adminLayout);
+                    }, child: Text("Fuck mario"))
 
                   ],
                 ),

@@ -20,4 +20,5 @@ class RoutesNames {
   static const String changeDefaultAccount = "ChangeDefaultAccount";
   static const String notificationsPin="notificationsPin";
   static const String onBoarding='onBoarding';
+  static const String adminLayout='adminLayout';
 }

@@ -32,6 +32,7 @@ import '../../features/account_managment/presentation/views/add_bank_account.dar
 
 import '../../features/account_managment/presentation/views/choose_bank_account_view.dart';
 import '../../features/account_managment/presentation/views/manage_accounts.dart';
+import '../../features/admn/presentation/views/admin_layout.dart';
 import '../../features/layout_view/presentation/views/layout_view.dart';
 import '../../features/setting_view/data/repos/setting_repo_impl.dart';
 import '../../features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
@@ -68,6 +69,15 @@ class RouteGenerator {
       case RoutesNames.chooseBank:
         return MaterialPageRoute(
           builder: (context) => const ChooseAccountView(),
+          settings: settings,
+        );
+
+      case RoutesNames.adminLayout:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => NavigationCubit(),
+            child: AdminLayout(),
+          ),
           settings: settings,
         );
       case RoutesNames.pinView:
