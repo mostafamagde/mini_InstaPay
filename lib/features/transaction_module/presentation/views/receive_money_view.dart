@@ -1,35 +1,28 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:untitled2/core/utils/Constants.dart';
+import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
+import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/transaction_module/data/models/receive_model.dart';
+import 'package:untitled2/features/transaction_module/presentation/manager/receive_cubit/receive_cubit.dart';
 import 'package:untitled2/features/transaction_module/presentation/views/widgets/transaction_box.dart';
-
-import '../../../../core/models/user_model.dart';
-import '../../../../core/routes_manager/routes_names.dart';
-import '../../../../core/widgets/CustomTitleContainer.dart';
-import '../../../../core/widgets/custom_button.dart';
-import '../manager/receive_cubit/receive_cubit.dart';
 
 class ReceiveMoneyView extends StatelessWidget {
   ReceiveMoneyView({super.key});
 
-  TextEditingController recieverData = TextEditingController();
-  TextEditingController amount = TextEditingController();
-  TextEditingController id = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  final TextEditingController recieverData = TextEditingController();
+  final TextEditingController amount = TextEditingController();
+  final TextEditingController id = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-
     Size media = MediaQuery.of(context).size;
     return BlocConsumer<ReceiveCubit, ReceiveState>(listener: (context, state) {
       if (state is ReceiveSuccess) {
-        snackBar(
-            content: state.message,
-            context: context,
-            color: Colors.green);
+        snackBar(content: state.message, context: context, color: Colors.green);
       } else if (state is ReceiveFailed) {
         snackBar(content: state.errorMessage, context: context);
       }

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_factory.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_repo.dart';
 import 'package:untitled2/features/otp/presentation/manger/cubit/otp_cubit.dart';
-import 'dart:async';
 
 import 'package:untitled2/features/otp/presentation/views/widgets/resend_button.dart';
 
@@ -42,8 +38,7 @@ class _OTPScreenState extends State<OtpView> {
   void _submitFunction() {
     if (_formKey.currentState?.validate() ?? false) {
       final otp = _otpControllers.map((controller) => controller.text).join();
-      BlocProvider.of<OtpCubit>(context)
-          .submit(repository, otp, widget.userToken);
+      BlocProvider.of<OtpCubit>(context).submit(repository, otp, widget.userToken);
     }
   }
 
@@ -119,8 +114,7 @@ class _OTPScreenState extends State<OtpView> {
                               return null;
                             },
                             onChanged: (value) {
-                              if (value.isNotEmpty &&
-                                  index < _otpControllers.length - 1) {
+                              if (value.isNotEmpty && index < _otpControllers.length - 1) {
                                 FocusScope.of(context).nextFocus();
                               } else if (value.isEmpty && index > 0) {
                                 FocusScope.of(context).previousFocus();

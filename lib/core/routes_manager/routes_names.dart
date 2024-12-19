@@ -18,6 +18,6 @@ class RoutesNames {
   static const String pinSendView = "pinSendView";
   static const String EnterPasswordView = "enterPassword";
   static const String changeDefaultAccount = "ChangeDefaultAccount";
-  static const String notificationsPin="notificationsPin";
-  static const String onBoarding='onBoarding';
+  static const String notificationsPin = "notificationsPin";
+  static const String onBoarding = 'onBoarding';
 }

@@ -20,8 +20,7 @@ class ServerError extends Errors {
       case DioExceptionType.badCertificate:
         return ServerError("Bad certificate with server");
       case DioExceptionType.badResponse:
-        ServerError.fromResponse(
-            dioError.response!.statusCode!, dioError.response!.data);
+        ServerError.fromResponse(dioError.response!.statusCode!, dioError.response!.data);
       case DioExceptionType.cancel:
         return ServerError("Request Cancelled");
       case DioExceptionType.connectionError:

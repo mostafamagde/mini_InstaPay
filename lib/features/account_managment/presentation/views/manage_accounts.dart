@@ -4,9 +4,8 @@ import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
+import 'package:untitled2/features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_view.dart';
-
-import '../manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
 
 class ManageAccounts extends StatelessWidget {
   const ManageAccounts({super.key});
@@ -22,7 +21,7 @@ class ManageAccounts extends StatelessWidget {
           snackBar(content: state.message, context: context);
         }
         if (state is ManageBankAccountsSuccess) {
-          snackBar(content: state.message, context: context,color: Colors.green);
+          snackBar(content: state.message, context: context, color: Colors.green);
         }
       },
       builder: (context, state) {
@@ -34,14 +33,11 @@ class ManageAccounts extends StatelessWidget {
             ),
             appBar: AppBar(
               leading: IconButton(
-
                   onPressed: () {
-
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       RoutesNames.layoutView,
                       (route) => false,
-
                     );
                   },
                   icon: Icon(Icons.arrow_back_ios)),

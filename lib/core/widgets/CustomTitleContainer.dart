@@ -6,22 +6,21 @@ class CustomTitleContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Size media = MediaQuery.of(context).size;
     var theme = Theme.of(context);
-    return   Container(
-      height: media.height*.2,
+    return Container(
+      height: media.height * .2,
       width: double.infinity,
       decoration: BoxDecoration(color: theme.secondaryHeaderColor),
       child: Padding(
-
-
-        padding: const EdgeInsets.only(top: 50,left: 15),
+        padding: const EdgeInsets.only(top: 50, left: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            Text(title,style:theme.textTheme.titleLarge,),
+            Text(
+              title,
+              style: theme.textTheme.titleLarge,
+            ),
           ],
         ),
       ),

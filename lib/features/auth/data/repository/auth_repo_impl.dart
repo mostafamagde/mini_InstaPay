@@ -6,36 +6,31 @@ import 'package:untitled2/features/auth/data/models/signup_model.dart';
 import 'package:untitled2/features/auth/data/repository/auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepository {
-     final apiManager = ApiManager();
+  final apiManager = ApiManager();
   @override
   Future<OtpModel> forgetPassword(String email) {
-  final body = {
+    final body = {
       "email": email,
     };
     return apiManager.post(ApiConstants.SendforgetPasswordMailEdnPoint, body).then((response) {
       print("$response sssssssssssssssssssssssssssssssssssssssss ${response.statusCode}");
-      
-        final Map<String, dynamic> responseBody = response.data;
-        final String userToken = responseBody['token'];
-        print(userToken);
-        print("Sent successful");
-        return OtpModel.fromJson(responseBody);
-      }); 
+
+      final Map<String, dynamic> responseBody = response.data;
+      final String userToken = responseBody['token'];
+      print(userToken);
+      print("Sent successful");
+      return OtpModel.fromJson(responseBody);
+    });
   }
-Future<void> enterPassword(String token,String password) async{
-  final body = {
-      "token": token,
-      "password":password
-    };
+
+  Future<void> enterPassword(String token, String password) async {
+    final body = {"token": token, "password": password};
     await apiManager.post(ApiConstants.forgetPasswordEdnPoint, body);
   }
 
   @override
   Future<OtpModel> login(String email, String password) {
-    final body = {
-      "email": email,
-      "password": password
-    };
+    final body = {"email": email, "password": password};
     return apiManager.post(ApiConstants.preLogin, body).then((response) {
       print("$response sssssssssssssssssssssssssssssssssssssssss ${response.statusCode}");
       if (response.statusCode == 201) {
@@ -61,10 +56,8 @@ Future<void> enterPassword(String token,String password) async{
   }
 
   @override
-  Future<OtpModel> signUp(SignUpModel signUpModel) async{
-
-   final response= await apiManager.post(ApiConstants.signupEndPoint, signUpModel.toJson());
-   return OtpModel.fromJson(response.data);
+  Future<OtpModel> signUp(SignUpModel signUpModel) async {
+    final response = await apiManager.post(ApiConstants.signupEndPoint, signUpModel.toJson());
+    return OtpModel.fromJson(response.data);
   }
 }
-

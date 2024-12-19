@@ -7,17 +7,16 @@ import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
-
-import '../manager/change_default_cubit/change_cubit.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
 
 class ChangeDefaultAccount extends StatelessWidget {
   ChangeDefaultAccount({super.key});
 
-  TextEditingController id = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  final TextEditingController id = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-
     Size media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -40,13 +39,10 @@ class ChangeDefaultAccount extends StatelessWidget {
                 def?.cardInfo?.cardNo = item.cardNo;
                 def?.bankId?.logo = item.bankId?.logo;
                 def?.bankId?.name = item.bankId?.name;
-                def?.id=item.id;
+                def?.id = item.id;
               }
             }
-            snackBar(
-                content: "Changed Successfully",
-                context: context,
-                color: Colors.green);
+            snackBar(content: "Changed Successfully", context: context, color: Colors.green);
           }
         },
         builder: (context, state) {

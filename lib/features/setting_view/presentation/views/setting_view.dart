@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
-
-import '../../../../core/widgets/CustomTitleContainer.dart';
-import '../../../../core/widgets/custom_small_button.dart';
-import '../manager/log_out_cubit/log_out_cubit.dart';
+import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
+import 'package:untitled2/core/widgets/custom_small_button.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/log_out_cubit/log_out_cubit.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
@@ -35,8 +33,7 @@ class SettingView extends StatelessWidget {
           ),
           Expanded(
             child: GridView(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               children: [
                 CustomSmallButton(
                   name: "Profile Management",

@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/navigation_cubit/navigation_cubit.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/service_locator.dart';
+import 'package:untitled2/features/account_managment/data/repos/bank_repo_impl.dart';
+import 'package:untitled2/features/account_managment/presentation/manager/balance_cubit/get_balance_cubit.dart';
+import 'package:untitled2/features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
+import 'package:untitled2/features/account_managment/presentation/views/add_bank_account.dart';
+import 'package:untitled2/features/account_managment/presentation/views/choose_bank_account_view.dart';
+import 'package:untitled2/features/account_managment/presentation/views/manage_accounts.dart';
 import 'package:untitled2/features/account_managment/presentation/views/pin_view.dart';
 import 'package:untitled2/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
@@ -12,36 +19,27 @@ import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
 import 'package:untitled2/features/home_view/data/repository/transaction_repo.dart';
 import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/home_view/presentation/views/transaction_view.dart';
+import 'package:untitled2/features/layout_view/presentation/views/layout_view.dart';
 import 'package:untitled2/features/notifications/data/repository/notifications_repo.dart';
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 import 'package:untitled2/features/notifications/presentation/views/notification_pin_view.dart';
 import 'package:untitled2/features/notifications/presentation/views/notifications_view.dart';
 import 'package:untitled2/features/onboarding/presentation/manger/on_boarding/on_boarding_cubit.dart';
 import 'package:untitled2/features/onboarding/presentation/views/on_boarding_view.dart';
+import 'package:untitled2/features/setting_view/data/repos/setting_repo_impl.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_credintials.dart';
+import 'package:untitled2/features/setting_view/presentation/views/change_default_account.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_email_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_password_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
-
-import '../../features/account_managment/data/repos/bank_repo_impl.dart';
-import '../../features/account_managment/presentation/manager/balance_cubit/get_balance_cubit.dart';
-import '../../features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
-import '../../features/account_managment/presentation/views/add_bank_account.dart';
-
-import '../../features/account_managment/presentation/views/choose_bank_account_view.dart';
-import '../../features/account_managment/presentation/views/manage_accounts.dart';
-import '../../features/layout_view/presentation/views/layout_view.dart';
-import '../../features/setting_view/data/repos/setting_repo_impl.dart';
-import '../../features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
-import '../../features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
-import '../../features/setting_view/presentation/views/change_default_account.dart';
-import '../../features/splash_view/presentation/views/splash_view.dart';
-import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
-import '../../features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
-import '../../features/transaction_module/presentation/views/send_pin.dart';
-import '../navigation_cubit/navigation_cubit.dart';
+import 'package:untitled2/features/splash_view/presentation/views/splash_view.dart';
+import 'package:untitled2/features/transaction_module/data/repos/transaction_repo_impl.dart';
+import 'package:untitled2/features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
+import 'package:untitled2/features/transaction_module/presentation/views/send_pin.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -56,9 +54,7 @@ class RouteGenerator {
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => ManageBankAccountsCubit(
-                    ServiceLocator.getIt<BankRepoImpl>())
-                  ..fetchUserBanks(),
+                create: (context) => ManageBankAccountsCubit(ServiceLocator.getIt<BankRepoImpl>())..fetchUserBanks(),
               ),
             ],
             child: ManageAccounts(),
@@ -73,8 +69,7 @@ class RouteGenerator {
       case RoutesNames.pinView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                GetBalanceCubit(ServiceLocator.getIt<BankRepoImpl>()),
+            create: (context) => GetBalanceCubit(ServiceLocator.getIt<BankRepoImpl>()),
             child: PinCodeScreen(),
           ),
           settings: settings,
@@ -121,8 +116,7 @@ class RouteGenerator {
       case RoutesNames.changeDefaultAccount:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                ChangeDefaultAccCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+            create: (context) => ChangeDefaultAccCubit(ServiceLocator.getIt<SettingRepoImpl>()),
             child: ChangeDefaultAccount(),
           ),
           settings: settings,
@@ -130,8 +124,7 @@ class RouteGenerator {
       case RoutesNames.changeCridintials:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => ChangeCredinitialsCubit(
-                ServiceLocator.getIt<SettingRepoImpl>()),
+            create: (context) => ChangeCredinitialsCubit(ServiceLocator.getIt<SettingRepoImpl>()),
             child: ChangeCredintials(),
           ),
           settings: settings,
@@ -144,8 +137,7 @@ class RouteGenerator {
       case RoutesNames.changeEmail:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                ChangeEmailCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+            create: (context) => ChangeEmailCubit(ServiceLocator.getIt<SettingRepoImpl>()),
             child: ChangeEmailView(),
           ),
           settings: settings,
@@ -161,8 +153,7 @@ class RouteGenerator {
       case RoutesNames.changePassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                ChangePasswordCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+            create: (context) => ChangePasswordCubit(ServiceLocator.getIt<SettingRepoImpl>()),
             child: ChangePassword(),
           ),
           settings: settings,
@@ -186,8 +177,7 @@ class RouteGenerator {
       case RoutesNames.pinSendView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                SendCubit(ServiceLocator.getIt.get<TransactionRepoImpl>()),
+            create: (context) => SendCubit(ServiceLocator.getIt.get<TransactionRepoImpl>()),
             child: SendPin(),
           ),
           settings: settings,

@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,12 +17,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   int currentPage = 0;
 
-  List<String> screens = [
-    'firstScreen',
-    'secondScreen',
-    'thirdScreen',
-    'fourthScreen'
-  ];
+  List<String> screens = ['firstScreen', 'secondScreen', 'thirdScreen', 'fourthScreen'];
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +32,17 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 Align(
                   alignment: Alignment.topRight,
                   child: InkWell(
-                              onTap: () {
-                  Navigator.pushNamed(context, RoutesNames.loginView);
-                              },
-                              child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child:  Text(
-                    "Skip",
-                    style: TextStyle(color: Colors.black,
-                    fontSize: 15.sp
+                    onTap: () {
+                      Navigator.pushNamed(context, RoutesNames.loginView);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Skip",
+                        style: TextStyle(color: Colors.black, fontSize: 15.sp),
+                      ),
                     ),
                   ),
-                              ),
-                            ),
                 ),
                 Expanded(
                   child: Directionality(
@@ -63,8 +55,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         cubit.changeOnboardingScreen(screens[index]);
                       },
                       itemBuilder: (context, index) {
-                        final screenData =
-                            cubit.onBoardingScreens.values.elementAt(index);
+                        final screenData = cubit.onBoardingScreens.values.elementAt(index);
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,66 +67,52 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                                 children: [
                                   Text(
                                     "Welcome to",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 13.sp),
+                                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300, fontSize: 13.sp),
                                   ),
                                   Text(
                                     "MINI",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20.sp),
+                                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 20.sp),
                                   ),
                                 ],
                               ),
                             ),
                             SizedBox(
-                              height: MediaQuery.sizeOf(context).height/2,
+                              height: MediaQuery.sizeOf(context).height / 2,
                               width: double.infinity,
                               child: Image.asset(
                                 screenData['img'],
                                 fit: BoxFit.fill,
                               ),
                             ),
-                            SizedBox(height: 16,),
+                            SizedBox(
+                              height: 16,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: List.generate(screens.length, (index) {
                                 return InkWell(
                                   onTap: () {
                                     if (index == screens.length) {
-                                      Navigator.pushNamed(
-                                          context, RoutesNames.loginView);
+                                      Navigator.pushNamed(context, RoutesNames.loginView);
                                     } else {
                                       _pageController.animateToPage(
                                         index,
-                                        duration:
-                                            const Duration(milliseconds: 300),
+                                        duration: const Duration(milliseconds: 300),
                                         curve: Curves.easeInOut,
                                       );
                                     }
                                   },
                                   child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 650),
-                                    margin:
-                                        const EdgeInsets.symmetric(horizontal: 5),
+                                    margin: const EdgeInsets.symmetric(horizontal: 5),
                                     width: currentPage == index ? 16 : 10,
                                     height: currentPage == index ? 10 : 10,
                                     decoration: BoxDecoration(
-                                      color: currentPage == index
-                                          ? Constants.secondaryOrangeColor
-                                          : Colors.transparent,
+                                      color: currentPage == index ? Constants.secondaryOrangeColor : Colors.transparent,
                                       border: Border.all(
-                                        color: currentPage == index
-                                            ? Colors.transparent
-                                            : Colors.grey,
+                                        color: currentPage == index ? Colors.transparent : Colors.grey,
                                       ),
-                                      borderRadius: currentPage == index
-                                          ? BorderRadius.circular(
-                                              8) 
-                                          : BorderRadius.circular(50),
+                                      borderRadius: currentPage == index ? BorderRadius.circular(8) : BorderRadius.circular(50),
                                     ),
                                   ),
                                 );
@@ -153,10 +130,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Text(
                                   screenData['subtitle'],
-                                  style: TextStyle(
-                                      color: Color(0xffB2B5BD),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 13.sp),
+                                  style: TextStyle(color: Color(0xffB2B5BD), fontWeight: FontWeight.w400, fontSize: 13.sp),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -188,8 +162,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           width: 70.0,
                           height: 70.0,
                           child: CustomPaint(
-                            painter: RoundedSquarePainter(
-                                progress: (currentPage + 1) / 4),
+                            painter: RoundedSquarePainter(progress: (currentPage + 1) / 4),
                           ),
                         ),
                         Container(

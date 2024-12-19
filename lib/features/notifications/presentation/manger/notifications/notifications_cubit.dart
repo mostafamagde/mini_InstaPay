@@ -12,13 +12,11 @@ class NotificationsCubit extends Cubit<NotificationsState> {
   getNotification() async {
     try {
       emit(NotificationsLoading());
-      List<NotificationModel> notifications =
-          await notificationsRepo.getAllNotifications();
+      List<NotificationModel> notifications = await notificationsRepo.getAllNotifications();
       emit(NotificationsSuccess(notifications: notifications));
     } catch (e) {
       if (e is DioException) {
-        emit(NotificationsFailed(
-            errorMessage: e.response?.data["message"] ?? e.message));
+        emit(NotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
       } else {
         emit(NotificationsFailed(errorMessage: e.toString()));
       }
@@ -32,36 +30,31 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       emit(ReadNotificationsSuccess(notificationId: notificationId));
     } catch (e) {
       if (e is DioException) {
-        emit(ReadNotificationsFailed(
-            errorMessage: e.response?.data["message"] ?? e.message));
+        emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
       } else {
         emit(ReadNotificationsFailed(errorMessage: e.toString()));
       }
     }
   }
 
-  acceptRequest(
-      {required NotificationModel notification,
-      String? accountId,
-      required String pin}) async {
+  acceptRequest({required NotificationModel notification, String? accountId, required String pin}) async {
     try {
       emit(ReadNotificationsLoading());
-         
-      await notificationsRepo.acceptRequest(
-          notificationId: notification.transactionId, pin: pin, accountId: accountId);
-       this.readNotification(notification.id);
+
+      await notificationsRepo.acceptRequest(notificationId: notification.transactionId, pin: pin, accountId: accountId);
+      this.readNotification(notification.id);
     } catch (e) {
       if (e is DioException) {
-        emit(ReadNotificationsFailed(
-            errorMessage: e.response?.data["message"] ?? e.message));
+        emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
       } else {
         emit(ReadNotificationsFailed(errorMessage: e.toString()));
       }
     }
   }
 
-  rejectRequest(
-      {required NotificationModel  notification,}) async {
+  rejectRequest({
+    required NotificationModel notification,
+  }) async {
     try {
       emit(ReadNotificationsLoading());
       await notificationsRepo.rejectRequest(notificationId: notification.transactionId);
@@ -69,8 +62,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       this.readNotification(notification.id);
     } catch (e) {
       if (e is DioException) {
-        emit(ReadNotificationsFailed(
-            errorMessage: e.response?.data["message"] ?? e.message));
+        emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
       } else {
         emit(ReadNotificationsFailed(errorMessage: e.toString()));
       }

@@ -46,17 +46,21 @@ class _SignupBodyState extends State<SignupBody> {
         listener: (context, state) {
           if (state is AuthSuccess) {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => OtpView(userToken: state.otpModel.token,function: Constants.signupString,)),
+              MaterialPageRoute(
+                  builder: (context) => OtpView(
+                        userToken: state.otpModel.token,
+                        function: Constants.signupString,
+                      )),
             );
           } else if (state is AuthFail) {
-           snackBar(content: state.message, context: context);
+            snackBar(content: state.message, context: context);
           }
         },
         builder: (context, state) {
-          bool isLoading = state is AuthLoading; 
+          bool isLoading = state is AuthLoading;
 
           return ModalProgressHUD(
-            inAsyncCall: isLoading, 
+            inAsyncCall: isLoading,
             child: SingleChildScrollView(
               child: Form(
                 key: formKey,
@@ -116,14 +120,14 @@ class _SignupBodyState extends State<SignupBody> {
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           context.read<AuthCubit>().signUp(
-                            SignUpModel(
-                              firstName: firstNameController.text,
-                              lastName: lastNameController.text,
-                              email: emailController.text,
-                              password: passwordController.text,
-                              mobileNumber: phoneNumberController.text,
-                            ),
-                          );
+                                SignUpModel(
+                                  firstName: firstNameController.text,
+                                  lastName: lastNameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  mobileNumber: phoneNumberController.text,
+                                ),
+                              );
                         }
                       },
                       label: "Sign Up",

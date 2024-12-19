@@ -9,17 +9,17 @@ part 'transaction_state.dart';
 class TransactionCubit extends Cubit<TransactionState> {
   final TransactionRepository transactionRepository;
   TransactionCubit(this.transactionRepository) : super(TransactionInitial());
-  getTransaction()async{
-    try{
-    emit(TransactionLoading());
-    List<TransactionModel>transactions= await transactionRepository.getAllTransactions();
-    emit(TransactionSuccess(transactions: transactions));
-    }
-    catch(e){
-      if(e is DioException){
+  getTransaction() async {
+    try {
+      emit(TransactionLoading());
+      List<TransactionModel> transactions = await transactionRepository.getAllTransactions();
+      emit(TransactionSuccess(transactions: transactions));
+    } catch (e) {
+      if (e is DioException) {
         emit(TransactionError(error: e.response?.data["message"] ?? e.message));
+      } else {
+        emit(TransactionError(error: e.toString()));
       }
-      else{emit(TransactionError(error: e.toString()));}
     }
   }
 }

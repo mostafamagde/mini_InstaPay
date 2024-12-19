@@ -1,38 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/models/user_model.dart';
-
+import 'package:untitled2/core/utils/validation.dart';
+import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
-
-import '../../../../core/utils/validation.dart';
-import '../../../../core/widgets/CustomTitleContainer.dart';
-import '../../../../core/widgets/custom_text_field.dart';
-import '../../data/models/credinitials_model.dart';
-import '../manager/change_credintials_cubit/change_credinitials_cubit.dart';
+import 'package:untitled2/core/widgets/custom_text_field.dart';
+import 'package:untitled2/features/setting_view/data/models/credinitials_model.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
 
 class ChangeCredintials extends StatelessWidget {
   ChangeCredintials({super.key});
 
-  final TextEditingController firstNameController =
-      TextEditingController(text: UserModel.getInstance().firstName);
-  final TextEditingController lastNameController =
-      TextEditingController(text: UserModel.getInstance().lastName);
+  final TextEditingController firstNameController = TextEditingController(text: UserModel.getInstance().firstName);
+  final TextEditingController lastNameController = TextEditingController(text: UserModel.getInstance().lastName);
+  final TextEditingController addressController = TextEditingController(text: UserModel.getInstance().address);
+  final TextEditingController phoneNumberController = TextEditingController(text: UserModel.getInstance().mobileNumber);
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final TextEditingController addressController =
-      TextEditingController(text: UserModel.getInstance().address);
-  final TextEditingController phoneNumberController =
-      TextEditingController(text: UserModel.getInstance().mobileNumber);
-  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-
-
     var theme = Theme.of(context);
 
     return BlocConsumer<ChangeCredinitialsCubit, ChangeCredinitialsState>(
       listener: (context, state) {
         if (state is ChangeCredinitialsSuccess) {
-          snackBar(content: state.message, context: context,color: Colors.green);
+          snackBar(content: state.message, context: context, color: Colors.green);
           Navigator.pop(context);
         } else if (state is ChangeCredinitialsFailure) {
           snackBar(content: state.errorMessage, context: context);
@@ -94,9 +86,7 @@ class ChangeCredintials extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                        style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             cubit.changeCredinitials(CredinitialsModel(

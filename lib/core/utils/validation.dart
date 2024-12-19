@@ -1,5 +1,4 @@
 class Validation {
-
   static String? validateEmailTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
@@ -29,52 +28,58 @@ class Validation {
 
     return null;
   }
+
   static String? validateAmountTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
-    }if (int.parse(value)<1){
+    }
+    if (int.parse(value) < 1) {
       return 'Minimum amount is 1 Pound';
     }
 
     return null;
   }
+
   static String? validateCardNumberTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
-    }else if (value.length!=4){
+    } else if (value.length != 4) {
       return 'please enter 4 digits';
     }
 
     return null;
   }
+
   static String? validatePinTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
-    }else if (value.length!=1){
+    } else if (value.length != 1) {
       return 'please enter 1 digits';
     }
 
     return null;
   }
+
   static String? validateCVVNumberTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
-    }else if (value.length!=3){
+    } else if (value.length != 3) {
       return 'please enter CVV correctly';
     }
 
     return null;
   }
+
   static String? validateExpDateTextField(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
-    }else if (value.length!=5){
+    } else if (value.length != 5) {
       return 'please enter Expiration date correctly';
-    }else if (int.parse(value.split("/")[0])<=0){
+    } else if (int.parse(value.split("/")[0]) <= 0) {
       return 'Cant enter negative or zero month';
-    }else if (int.parse(value.split("/")[0])>12){
+    } else if (int.parse(value.split("/")[0]) > 12) {
       return 'Cant enter month greater than 12';
-    }else if (int.parse(value.split("/")[1])<24){
+    } else if (int.parse(value.split("/")[1]) < 24) {
       return 'That card is not a valid';
     }
 
@@ -88,7 +93,7 @@ class Validation {
     if (value.length < 8) {
       return 'Password must be at least 8 characters long';
     }
-final passwordRegex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d[^\W]{8,}$');
+    final passwordRegex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d[^\W]{8,}$');
     if (!passwordRegex.hasMatch(value)) {
       return 'Password must contain at least one small letter, one capital letter, one number and one special character';
     }

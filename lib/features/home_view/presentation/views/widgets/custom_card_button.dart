@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomAccountCardButton extends StatelessWidget {
-  const CustomAccountCardButton(
-      {super.key, required this.text, required this.icon});
+  const CustomAccountCardButton({super.key, required this.text, required this.icon});
 
   final String text;
   final IconData icon;

@@ -22,11 +22,10 @@ class OtpSignUpRepo extends OtpRepository {
           "otp": int.parse(otp),
         },
       );
-      
+
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
-      }
-      else{
+      } else {
         Navigator.pushReplacementNamed(context, RoutesNames.loginView);
       }
     } catch (e) {
@@ -42,10 +41,7 @@ class OtpSignUpRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {
-          "token": token,
-          "type": Constants.signupString
-        },
+        {"token": token, "type": Constants.signupString},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

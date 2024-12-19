@@ -2,9 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
-
-import '../../../data/repos/bank_list_proxy.dart';
-import '../../../data/repos/bank_repo.dart';
+import 'package:untitled2/features/account_managment/data/repos/bank_list_proxy.dart';
 
 part 'banks_state.dart';
 

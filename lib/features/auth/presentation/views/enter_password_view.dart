@@ -3,13 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
-import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
+import 'package:untitled2/core/utils/validation.dart';
 
 class EnterPasswordView extends StatelessWidget {
   EnterPasswordView({super.key});
@@ -20,10 +18,9 @@ class EnterPasswordView extends StatelessWidget {
     var formKey = GlobalKey<FormState>();
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if(state is AuthSuccess){
+        if (state is AuthSuccess) {
           Navigator.pushNamed(context, RoutesNames.loginView);
-        }
-        else if(state is AuthFail){
+        } else if (state is AuthFail) {
           snackBar(content: state.message, context: context);
         }
       },
@@ -46,8 +43,7 @@ class EnterPasswordView extends StatelessWidget {
                     child: Text(
                       'Enter your new password',
                       textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontSize: 23.sp, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 23.sp, fontWeight: FontWeight.w600),
                     ),
                   ),
                   CustomTextField(
@@ -61,7 +57,7 @@ class EnterPasswordView extends StatelessWidget {
                   CustomButton(
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<AuthCubit>(context).SubmitNewPassword(token,passwordController.text);
+                          BlocProvider.of<AuthCubit>(context).SubmitNewPassword(token, passwordController.text);
                         }
                       },
                       label: "Submit")

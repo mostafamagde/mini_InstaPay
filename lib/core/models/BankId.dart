@@ -1,8 +1,9 @@
 class BankId {
   BankId({
-      this.id, 
-      this.name, 
-      this.logo,});
+    this.id,
+    this.name,
+    this.logo,
+  });
 
   BankId.fromJson(dynamic json) {
     id = json['_id'];
@@ -20,5 +21,4 @@ class BankId {
     map['logo'] = logo;
     return map;
   }
-
 }

@@ -19,8 +19,7 @@ class PrivacySettingView extends StatelessWidget {
           ),
           Expanded(
             child: GridView(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               children: [
                 CustomSmallButton(
                   padding: 25,

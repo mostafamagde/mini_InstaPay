@@ -11,8 +11,7 @@ import 'package:untitled2/features/notifications/presentation/manger/notificatio
 class NotificationPinView extends StatelessWidget {
   NotificationPinView({super.key});
   final int pinLength = 6;
-  final List<TextEditingController> controllers =
-      List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> controllers = List.generate(6, (_) => TextEditingController());
   final List<FocusNode> focusNodes = List.generate(6, (_) => FocusNode());
   final TextEditingController accId = TextEditingController();
   void _onTextChanged(String value, int index, BuildContext context) {
@@ -25,8 +24,7 @@ class NotificationPinView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NotificationModel notification =
-        ModalRoute.of(context)?.settings.arguments as NotificationModel;
+    NotificationModel notification = ModalRoute.of(context)?.settings.arguments as NotificationModel;
     var formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
@@ -37,10 +35,7 @@ class NotificationPinView extends StatelessWidget {
           if (state is ReadNotificationsFailed) {
             snackBar(content: state.errorMessage, context: context);
           } else if (state is ReadNotificationsSuccess) {
-            snackBar(
-                content: 'Money sent successfully',
-                context: context,
-                color: Colors.green);
+            snackBar(content: 'Money sent successfully', context: context, color: Colors.green);
             Navigator.pushNamed(context, RoutesNames.notifications);
           }
         },
@@ -81,18 +76,11 @@ class NotificationPinView extends StatelessWidget {
                               counterText: '',
                               border: OutlineInputBorder(),
                             ),
-                            onChanged: (value) =>
-                                _onTextChanged(value, index, context),
+                            onChanged: (value) => _onTextChanged(value, index, context),
                             onFieldSubmitted: (value) async {
                               if (formKey.currentState!.validate()) {
                                 BlocProvider.of<NotificationsCubit>(context)
-                                    .acceptRequest(
-                                        notification: notification,
-                                        pin: controllers
-                                            .map(
-                                                (controller) => controller.text)
-                                            .join(),
-                                        accountId: accId.text);
+                                    .acceptRequest(notification: notification, pin: controllers.map((controller) => controller.text).join(), accountId: accId.text);
                               }
                             },
                           ),

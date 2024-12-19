@@ -13,15 +13,15 @@ class ResendButton extends StatefulWidget {
 }
 
 class _ResendButtonState extends State<ResendButton> {
-  bool isDisabled = false; 
-  int remainingTime = 60;  // Initial timer value in seconds
+  bool isDisabled = false;
+  int remainingTime = 60; // Initial timer value in seconds
   late Timer _timer;
 
   void _startTimer() {
     setState(() {
       isDisabled = true;
     });
-    
+
     // Start a countdown timer
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (remainingTime > 0) {
@@ -40,7 +40,7 @@ class _ResendButtonState extends State<ResendButton> {
   @override
   void initState() {
     super.initState();
-    _startTimer();  // Start the timer on initialization
+    _startTimer(); // Start the timer on initialization
   }
 
   @override
@@ -52,32 +52,29 @@ class _ResendButtonState extends State<ResendButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
-     crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        isDisabled?
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              'You can resend OTP in $remainingTime seconds',
-              style: TextStyle(color: Colors.grey,
-              fontSize: 14.sp
-              ),
-            ),
-          ):Expanded(child: SizedBox()),
+        isDisabled
+            ? FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  'You can resend OTP in $remainingTime seconds',
+                  style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+                ),
+              )
+            : Expanded(child: SizedBox()),
         Align(
           alignment: Alignment.bottomRight,
           child: TextButton(
             onPressed: isDisabled
-                ? null 
+                ? null
                 : () {
                     widget.onPressed();
-                    _startTimer();  
+                    _startTimer();
                   },
             child: Text('Resend OTP'),
           ),
         ),
-        
-  
       ],
     );
   }

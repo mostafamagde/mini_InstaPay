@@ -1,12 +1,8 @@
-
-
 import 'BankId.dart';
 import 'CardId.dart';
 
 class DefaultAcc {
-  DefaultAcc({
-      this.id, 
-      this.bankId,this.cardInfo});
+  DefaultAcc({this.id, this.bankId, this.cardInfo});
 
   DefaultAcc.fromJson(dynamic json) {
     id = json['_id'];
@@ -25,5 +21,4 @@ class DefaultAcc {
     }
     return map;
   }
-
 }

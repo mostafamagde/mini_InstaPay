@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
-
-import '../../../../core/routes_manager/routes_names.dart';
 
 class AddBankAccount extends StatefulWidget {
   @override
@@ -17,17 +15,12 @@ class AddBankAccount extends StatefulWidget {
 }
 
 class _AddBankAccountState extends State<AddBankAccount> {
-  final List<TextEditingController> _cardNumberControllers =
-      List.generate(4, (_) => TextEditingController());
-  final List<TextEditingController> _pinControllers =
-      List.generate(6, (_) => TextEditingController());
-  final List<TextEditingController> _additionalFieldControllers =
-      List.generate(4, (_) => TextEditingController());
-  final List<FocusNode> _cardNumberFocusNodes =
-      List.generate(4, (_) => FocusNode());
+  final List<TextEditingController> _cardNumberControllers = List.generate(4, (_) => TextEditingController());
+  final List<TextEditingController> _pinControllers = List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> _additionalFieldControllers = List.generate(4, (_) => TextEditingController());
+  final List<FocusNode> _cardNumberFocusNodes = List.generate(4, (_) => FocusNode());
   final List<FocusNode> _pinFocusNodes = List.generate(6, (_) => FocusNode());
-  final List<FocusNode> _additionalFieldFocusNodes =
-      List.generate(4, (_) => FocusNode());
+  final List<FocusNode> _additionalFieldFocusNodes = List.generate(4, (_) => FocusNode());
   final TextEditingController _cardHolderController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
   final TextEditingController _expirationController = TextEditingController();
@@ -104,8 +97,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
   void _onExpirationChanged(String value) {
     if (value.length == 2 && !value.contains('/')) {
       _expirationController.text = "$value/";
-      _expirationController.selection = TextSelection.fromPosition(
-          TextPosition(offset: _expirationController.text.length));
+      _expirationController.selection = TextSelection.fromPosition(TextPosition(offset: _expirationController.text.length));
     }
   }
 
@@ -117,7 +109,6 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
   @override
   Widget build(BuildContext context) {
-
     var bank = ModalRoute.of(context)?.settings.arguments as BankModel;
     var formKey = GlobalKey<FormState>();
     return Scaffold(
@@ -263,12 +254,8 @@ class _AddBankAccountState extends State<AddBankAccount> {
                       onFieldSubmitted: (value) async {
                         if (formKey.currentState!.validate()) {
                           String cardHolderName = _cardHolderController.text;
-                          String cardNumber = _cardNumberControllers
-                              .map((controller) => controller.text)
-                              .join();
-                          String pin = _pinControllers
-                              .map((controller) => controller.text)
-                              .join();
+                          String cardNumber = _cardNumberControllers.map((controller) => controller.text).join();
+                          String pin = _pinControllers.map((controller) => controller.text).join();
                           String cvv = _cvvController.text;
                           String expirationDate = _expirationController.text;
 
@@ -290,9 +277,8 @@ class _AddBankAccountState extends State<AddBankAccount> {
                               "token": UserModel.getInstance().token,
                             },
                           );
-                          if (data.statusCode == 200 ||
-                              data.statusCode == 201) {
-                            UserModel user=  UserModel.getInstance();
+                          if (data.statusCode == 200 || data.statusCode == 201) {
+                            UserModel user = UserModel.getInstance();
 
                             final apiManager = ApiManager();
                             final userDataResponse = await apiManager.get(
@@ -300,15 +286,14 @@ class _AddBankAccountState extends State<AddBankAccount> {
                               headers: {
                                 "token": user.token,
                               },
-                            ) ;
+                            );
                             user.setFromjson(userDataResponse.data["data"]);
-                            snackBar(content: "Added Successfully", context: context,color: Colors.green);
+                            snackBar(content: "Added Successfully", context: context, color: Colors.green);
 
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               RoutesNames.ManageAccounts,
                               (route) => false,
-
                             );
                           }
                         }

@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
+import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
+import 'package:untitled2/core/widgets/custom_small_button.dart';
 import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
-import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_list.dart';
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
-import '../../../../core/widgets/CustomTitleContainer.dart';
-import '../../../../core/widgets/custom_small_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeView extends StatelessWidget {
@@ -32,8 +31,7 @@ class HomeView extends StatelessWidget {
               Column(
                 children: [
                   CustomTitleContainer(
-                    title:
-                        '''${user.firstName![0].toUpperCase() + user.firstName!.substring(1)}
+                    title: '''${user.firstName![0].toUpperCase() + user.firstName!.substring(1)}
 ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                   ),
                   SizedBox(
@@ -48,8 +46,7 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, RoutesNames.ManageAccounts);
+                          Navigator.pushNamed(context, RoutesNames.ManageAccounts);
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8),
@@ -63,14 +60,12 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                       )
                     ],
                   ),
-                  if (UserModel.getInstance().defaultAcc != null)
-                    BankAccountManagment(),
+                  if (UserModel.getInstance().defaultAcc != null) BankAccountManagment(),
                   if (UserModel.getInstance().defaultAcc == null)
                     Container(
                       child: Center(
                         child: TextButton(
-                          onPressed: () => Navigator.pushNamed(
-                              context, RoutesNames.chooseBank),
+                          onPressed: () => Navigator.pushNamed(context, RoutesNames.chooseBank),
                           child: Column(
                             children: [
                               Text(
@@ -104,9 +99,7 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                         onPressed: () {},
                         child: Text(
                           "view all",
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.secondaryHeaderColor,
-                              fontWeight: FontWeight.w400),
+                          style: theme.textTheme.bodyMedium?.copyWith(color: theme.secondaryHeaderColor, fontWeight: FontWeight.w400),
                         ),
                       ),
                       SizedBox(
@@ -133,8 +126,7 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                       CustomSmallButton(
                         icon: Icons.account_balance,
                         name: "Manage",
-                        onTap: () => Navigator.pushNamed(
-                            context, RoutesNames.ManageAccounts),
+                        onTap: () => Navigator.pushNamed(context, RoutesNames.ManageAccounts),
                       )
                     ],
                   ),
@@ -152,8 +144,7 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                         icon: Icons.compare_arrows_outlined,
                         name: "Transactions",
                         onTap: () {
-                          Navigator.pushNamed(
-                              context, RoutesNames.allTransaction);
+                          Navigator.pushNamed(context, RoutesNames.allTransaction);
                         },
                       ),
                       CustomSmallButton(
@@ -179,8 +170,7 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, RoutesNames.notifications);
+                          Navigator.pushNamed(context, RoutesNames.notifications);
                         },
                         icon: Icon(
                           Icons.notifications,
@@ -191,9 +181,7 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                       BlocBuilder<NotificationsCubit, NotificationsState>(
                         builder: (context, state) {
                           if (state is NotificationsSuccess) {
-                            final unreadCount = state.notifications
-                                .where((notification) => !notification.isRead)
-                                .length;
+                            final unreadCount = state.notifications.where((notification) => !notification.isRead).length;
                             return Positioned(
                               right: 8,
                               top: 8,

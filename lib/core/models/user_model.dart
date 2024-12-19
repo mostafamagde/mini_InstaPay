@@ -23,10 +23,8 @@ class UserModel {
   setFromjson(Map<String, dynamic> json) {
     print(json);
     firstName = json['firstName'];
-    id=json['_id'];
-    defaultAcc = json["defaultAcc"] == null
-        ? null
-        : DefaultAcc.fromJson(json["defaultAcc"]);
+    id = json['_id'];
+    defaultAcc = json["defaultAcc"] == null ? null : DefaultAcc.fromJson(json["defaultAcc"]);
 
     lastName = json['lastName'];
     email = json['email'];

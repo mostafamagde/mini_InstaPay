@@ -2,9 +2,10 @@ import 'Data.dart';
 
 class BankAccountModel {
   BankAccountModel({
-      this.message, 
-      this.status, 
-      this.data,});
+    this.message,
+    this.status,
+    this.data,
+  });
 
   BankAccountModel.fromJson(dynamic json) {
     message = json['message'];
@@ -31,5 +32,4 @@ class BankAccountModel {
     }
     return map;
   }
-
 }

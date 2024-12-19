@@ -18,50 +18,38 @@ class BankRepoImpl implements BankRepository {
 
   @override
   Future<BankAccountModel> getAllBankAccounts() async {
-    final response = await ApiManager().get(ApiConstants.addGetBankAccount,
-        headers: {"token": UserModel.getInstance().token});
+    final response = await ApiManager().get(ApiConstants.addGetBankAccount, headers: {"token": UserModel.getInstance().token});
 
     print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      UserModel.getInstance().bankAccounts =
-          BankAccountModel.fromJson(response.data);
-
+      UserModel.getInstance().bankAccounts = BankAccountModel.fromJson(response.data);
     }
     return BankAccountModel.fromJson(response.data);
   }
 
   @override
-  Future<void> deleteBankAccounts(BankAccountModel bank, int index,
-      TextEditingController inputController) async {
-    final date = await ApiManager().delete(
-        '${ApiConstants.deleteAccount + bank.data![index].id!}',
-        body: {"PIN": inputController.text},
-        headers: {"token": UserModel.getInstance().token});
+  Future<void> deleteBankAccounts(BankAccountModel bank, int index, TextEditingController inputController) async {
+    final date = await ApiManager().delete('${ApiConstants.deleteAccount + bank.data![index].id!}', body: {"PIN": inputController.text}, headers: {"token": UserModel.getInstance().token});
     if (date.statusCode == 200 || date.statusCode == 201) {
-
-      if(UserModel.getInstance().bankAccounts!=null){
-      for (var item in UserModel.getInstance().bankAccounts!.data!) {
-        if (item.id == bank.data![index].id!) {
-          UserModel.getInstance().bankAccounts!.data!.remove(item);
+      if (UserModel.getInstance().bankAccounts != null) {
+        for (var item in UserModel.getInstance().bankAccounts!.data!) {
+          if (item.id == bank.data![index].id!) {
+            UserModel.getInstance().bankAccounts!.data!.remove(item);
+          }
         }
-
-      }}
+      }
 
       UserModel.getInstance().defaultAcc = null;
     }
   }
 
   @override
-  Future<int> getBalance(String accId, String pin) async{
-    final data = await ApiManager().post(
-        "${ApiConstants.getBalance}${accId}",
-        {
-          "PIN": pin
-
-        },
-        headers: {
-          "token": UserModel.getInstance().token,
-        });
+  Future<int> getBalance(String accId, String pin) async {
+    final data = await ApiManager().post("${ApiConstants.getBalance}${accId}", {
+      "PIN": pin
+    }, headers: {
+      "token": UserModel.getInstance().token,
+    });
     if (data.statusCode == 200 || data.statusCode == 201) {
       return data.data['data'];
     } else {
