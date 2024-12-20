@@ -1,15 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:untitled2/core/api_helper/api_constants.dart';
-import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
-
-import '../../../../../core/models/CardId.dart';
-import '../../../../../core/widgets/custom_alert_dialoge.dart';
 import 'custom_card_button.dart';
 
 class BankAccountManagment extends StatelessWidget {
@@ -52,7 +47,6 @@ class BankAccountManagment extends StatelessWidget {
                 ),
                 width: 50,
                 height: 50,
-
               ),
               SizedBox(
                 width: 12,
@@ -82,10 +76,7 @@ class BankAccountManagment extends StatelessWidget {
                     Clipboard.setData(
                       ClipboardData(text: UserModel.getInstance().email!),
                     );
-                    snackBar(
-                        content: "Copied to ClipBoard",
-                        context: context,
-                        color: Colors.green);
+                    snackBar(content: "Copied to ClipBoard", context: context, color: Colors.green);
                   },
                   icon: Icon(
                     Icons.copy,
@@ -119,8 +110,7 @@ class BankAccountManagment extends StatelessWidget {
                     text: "Check Balance",
                   ),
                   onTap: () async {
-                    Navigator.pushNamed(context, RoutesNames.pinView,
-                        arguments: UserModel.getInstance().defaultAcc?.id);
+                    Navigator.pushNamed(context, RoutesNames.pinView, arguments: UserModel.getInstance().defaultAcc?.id);
                   },
                 ),
               ],

@@ -14,12 +14,7 @@ class AnimationBuilder extends StatelessWidget {
       builder: (context, _) {
         return const Text(
           "Mini",
-          style: TextStyle(
-            fontSize: 35,
-            color: Colors.white,
-            fontWeight: FontWeight.w800,
-            fontStyle: FontStyle.italic
-          ),
+          style: TextStyle(fontSize: 35, color: Colors.white, fontWeight: FontWeight.w800, fontStyle: FontStyle.italic),
           textAlign: TextAlign.center,
         );
       },

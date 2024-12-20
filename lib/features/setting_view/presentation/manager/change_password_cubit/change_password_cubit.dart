@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
-import '../../../data/repos/setting_repo.dart';
+import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
 
 part 'change_password_state.dart';
 
@@ -12,8 +11,7 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
 
   static ChangePasswordCubit get(context) => BlocProvider.of(context);
 
-  Future<void> changePassword(
-      {required String newPass, required oldPass}) async {
+  Future<void> changePassword({required String newPass, required oldPass}) async {
     emit(ChangePasswordLoading());
     var data = await _settingRepo.changePassword(
       newPass: newPass,

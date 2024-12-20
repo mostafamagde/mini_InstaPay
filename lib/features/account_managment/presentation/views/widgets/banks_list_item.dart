@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../core/utils/Constants.dart';
 
 class BanksListItem extends StatelessWidget {
   final BankModel bank;

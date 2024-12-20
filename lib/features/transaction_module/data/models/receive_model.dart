@@ -3,6 +3,5 @@ class ReceiveModel {
   String? accountId;
   final int amount;
 
-  ReceiveModel(
-      {required this.receiveData, this.accountId, required this.amount});
+  ReceiveModel({required this.receiveData, this.accountId, required this.amount});
 }

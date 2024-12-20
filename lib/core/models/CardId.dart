@@ -1,7 +1,8 @@
 class CardId {
   CardId({
-      this.id, 
-      this.cardNo,});
+    this.id,
+    this.cardNo,
+  });
 
   CardId.fromJson(dynamic json) {
     id = json['_id'];
@@ -16,5 +17,4 @@ class CardId {
     map['cardNo'] = cardNo;
     return map;
   }
-
 }

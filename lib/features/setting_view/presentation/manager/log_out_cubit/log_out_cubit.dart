@@ -11,7 +11,6 @@ class LogOutCubit extends Cubit<LogOutState> {
   static LogOutCubit get(context) => BlocProvider.of(context);
 
   Future<void> logOut() async {
-
     emit(LogOutLoading());
     var data = await _settingRepo.logOut();
     data.fold(

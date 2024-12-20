@@ -12,8 +12,7 @@ import 'otp_repo.dart';
 class OtpLoginRepo extends OtpRepository {
   final ApiManager _apiManager;
 
-  OtpLoginRepo({required super.context})
-      : _apiManager = ServiceLocator.getIt.get<ApiManager>();
+  OtpLoginRepo({required super.context}) : _apiManager = ServiceLocator.getIt.get<ApiManager>();
 
   @override
   Future<void> submitOtp({required String token, required String otp}) async {
@@ -32,8 +31,7 @@ class OtpLoginRepo extends OtpRepository {
         user.token = response.data["token"];
         final storage = new FlutterSecureStorage();
         await storage.write(key: "token", value: user.token);
-        final userDataResponse = await _apiManager
-            .get(ApiConstants.getUserData, headers: {"token": user.token});
+        final userDataResponse = await _apiManager.get(ApiConstants.getUserData, headers: {"token": user.token});
         ;
         if (userDataResponse.statusCode != 200 && userDataResponse.statusCode != 201) {
           throw Exception(response.data["message"]);

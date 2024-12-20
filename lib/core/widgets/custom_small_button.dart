@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 
-import '../utils/Constants.dart';
-
-// ignore: must_be_immutable
 class CustomSmallButton extends StatelessWidget {
-   CustomSmallButton({
+  CustomSmallButton({
     super.key,
     required this.name,
     required this.icon,
-     this.onTap,  this.padding=0,
+    this.onTap,
+    this.padding = 0,
   });
 
   final String name;
   final IconData icon;
-  void Function()? onTap;
-   double padding;
+  final void Function()? onTap;
+  final double padding;
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
     return Padding(
-      padding:  EdgeInsets.all(padding),
+      padding: EdgeInsets.all(padding),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(17),
-
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -43,9 +41,7 @@ class CustomSmallButton extends StatelessWidget {
               Container(
                 height: 65,
                 width: 65,
-                decoration: BoxDecoration(
-                    color: Constants.buttonBackgroundColor,
-                    borderRadius: BorderRadius.circular(22)),
+                decoration: BoxDecoration(color: Constants.buttonBackgroundColor, borderRadius: BorderRadius.circular(22)),
                 child: Icon(
                   icon,
                   color: theme.secondaryHeaderColor,
@@ -54,7 +50,6 @@ class CustomSmallButton extends StatelessWidget {
               SizedBox(
                 height: 25,
               ),
-
               Text(
                 name,
                 maxLines: 1,

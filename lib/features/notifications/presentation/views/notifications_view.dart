@@ -9,42 +9,48 @@ import 'package:untitled2/features/notifications/presentation/views/widget/notif
 
 // ignore: must_be_immutable
 class NotificationsView extends StatelessWidget {
-   NotificationsView({Key? key}) : super(key: key);
-   List<NotificationModel> notifications=[];
+  NotificationsView({Key? key}) : super(key: key);
+  List<NotificationModel> notifications = [];
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<NotificationsCubit>(context).getNotification();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Notifications",style: TextStyle(
-          color: Colors.white
-        ),),
+        title: const Text(
+          "Notifications",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
-        leading: IconButton(onPressed: (){
-          Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView,   (Route<dynamic> route) => false,);
-        }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                RoutesNames.layoutView,
+                (Route<dynamic> route) => false,
+              );
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            )),
       ),
       body: BlocConsumer<NotificationsCubit, NotificationsState>(
         listener: (context, state) {
-          if(state is NotificationsSuccess){
-            notifications=state.notifications;
-          }
-          else if(state is ReadNotificationsFailed){
+          if (state is NotificationsSuccess) {
+            notifications = state.notifications;
+          } else if (state is ReadNotificationsFailed) {
             snackBar(content: state.errorMessage, context: context);
-          }
-          else if(state is ReadNotificationsSuccess){
-         final index = notifications.indexWhere((notification) => notification.id == state.notificationId);
-          notifications[index].isRead=true;
+          } else if (state is ReadNotificationsSuccess) {
+            final index = notifications.indexWhere((notification) => notification.id == state.notificationId);
+            notifications[index].isRead = true;
           }
         },
         builder: (context, state) {
           if (state is NotificationsFailed) {
-            return  Center(child: Text(state.errorMessage));
-          }
-          else if (state is NotificationsLoading){
+            return Center(child: Text(state.errorMessage));
+          } else if (state is NotificationsLoading) {
             return Center(child: CircularProgressIndicator());
-          }
-           else  {
+          } else {
             if (notifications.isEmpty) {
               return const Center(
                 child: Text(
@@ -66,10 +72,9 @@ class NotificationsView extends StatelessWidget {
                 ),
               ),
             );
-          } 
+          }
         },
       ),
     );
   }
 }
-

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/validation.dart';
+import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_item.dart';
-import '../../../../../core/utils/validation.dart';
-import '../../../../../core/widgets/custom_text_field.dart';
 
 class UserAccountsListView extends StatelessWidget {
   const UserAccountsListView({
@@ -13,19 +13,17 @@ class UserAccountsListView extends StatelessWidget {
   });
 
   final BankAccountModel bank;
-  final Future<void> Function(BankAccountModel model, int index,
-      TextEditingController inputController) onLongPressed;
+  final Future<void> Function(BankAccountModel model, int index, TextEditingController inputController) onLongPressed;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
         itemBuilder: (context, index) {
-
           return Padding(
             padding: const EdgeInsets.only(top: 15),
             child: InkWell(
-              onTap: () => Navigator.pushNamed(context,RoutesNames.pinView,arguments: bank.data?[index].id),
+              onTap: () => Navigator.pushNamed(context, RoutesNames.pinView, arguments: bank.data?[index].id),
               onLongPress: () {
                 TextEditingController inputController = TextEditingController();
 
@@ -33,16 +31,10 @@ class UserAccountsListView extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-
                       title: Text(
                         "Are you sure you want to delete this account",
                       ),
-                      content: CustomTextField(
-                          controller: inputController,
-                          label: "IPIN",
-                          icon: Icons.pin,
-                          inputType: TextInputType.visiblePassword,
-                          valid: Validation.validateRegularTextField),
+                      content: CustomTextField(controller: inputController, label: "IPIN", icon: Icons.pin, inputType: TextInputType.visiblePassword, valid: Validation.validateRegularTextField),
                       actions: [
                         TextButton(
                           onPressed: () {

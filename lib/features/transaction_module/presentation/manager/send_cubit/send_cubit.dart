@@ -1,9 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/transaction_module/data/models/send_model.dart';
-
-import '../../../data/repos/transaction_repo.dart';
+import 'package:untitled2/features/transaction_module/data/repos/transaction_repo.dart';
 
 part 'send_state.dart';
 

@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
@@ -16,24 +15,21 @@ class OtpChangeEmailRepo extends OtpRepository {
 
   @override
   Future<void> submitOtp({required String token, required String otp}) async {
-
     try {
-        final response =
-            await _apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
-          "token": token,
-          "otp": int.parse(otp),
-        }, headers: {
-          "token": UserModel.getInstance().token
-        });
+      final response = await _apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
+        "token": token,
+        "otp": int.parse(otp),
+      }, headers: {
+        "token": UserModel.getInstance().token
+      });
       if (response.statusCode != 201 && response.statusCode != 200) {
         throw Exception(response.data["message"]);
-      }
-      else{
-         Navigator.pushNamedAndRemoveUntil(
-            context,
-            RoutesNames.layoutView,
-            (route) => false,
-          );
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          RoutesNames.layoutView,
+          (route) => false,
+        );
       }
     } catch (e) {
       if (e is DioException) {
@@ -46,16 +42,7 @@ class OtpChangeEmailRepo extends OtpRepository {
   @override
   Future<void> resendOtp({required String token}) async {
     try {
-      final response = await _apiManager.post(
-        ApiConstants.resendOtpEndPoint,
-        {
-          "token": token,
-          "type": Constants.ConfirmChangeEmailString
-        },
-        headers: {
-          "token": UserModel.getInstance().token
-        }
-      );
+      final response = await _apiManager.post(ApiConstants.resendOtpEndPoint, {"token": token, "type": Constants.ConfirmChangeEmailString}, headers: {"token": UserModel.getInstance().token});
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
       }

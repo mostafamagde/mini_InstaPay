@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled2/core/utils/validation.dart';
+import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
+import 'package:untitled2/core/widgets/custom_button.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
+import 'package:untitled2/core/widgets/custom_text_field.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
 
-
-import '../../../../core/utils/validation.dart';
-import '../../../../core/widgets/CustomTitleContainer.dart';
-import '../../../../core/widgets/custom_button.dart';
-
-import '../../../../core/widgets/custom_snackbar.dart';
-import '../../../../core/widgets/custom_text_field.dart';
-import '../manager/change_password_cubit/change_password_cubit.dart';
-
-// ignore: must_be_immutable
 class ChangePassword extends StatelessWidget {
   ChangePassword({super.key});
 
-  TextEditingController oldPasswordController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  final TextEditingController oldPasswordController = TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-
-
     return BlocConsumer<ChangePasswordCubit, ChangePasswordState>(
       listener: (context, state) {
         if (state is ChangePasswordSuccess) {
-          snackBar(content: state.message, context: context,color: Colors.green);
+          snackBar(content: state.message, context: context, color: Colors.green);
           Navigator.pop(context);
         } else if (state is ChangePasswordFailure) {
           snackBar(content: state.errMessage, context: context);

@@ -2,10 +2,11 @@ import 'package:untitled2/core/models/BankId.dart';
 
 class Data {
   Data({
-      this.id, 
-      this.bankId, 
-      this.userId, 
-      this.cardNo,});
+    this.id,
+    this.bankId,
+    this.userId,
+    this.cardNo,
+  });
 
   Data.fromJson(dynamic json) {
     id = json['_id'];
@@ -26,5 +27,4 @@ class Data {
     map['cardNo'] = cardNo;
     return map;
   }
-
 }

@@ -1,15 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/utils/Constants.dart';
-
-import '../../../../../core/models/user_model.dart';
-import '../../../../../core/widgets/custom_snackbar.dart';
-import '../../../data/models/BankAccountModel.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
+import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
 
 class UserAccountsListItem extends StatelessWidget {
-  const UserAccountsListItem(
-      {super.key, required this.bank, required this.index});
+  const UserAccountsListItem({super.key, required this.bank, required this.index});
 
   final BankAccountModel bank;
   final int index;
@@ -55,7 +53,6 @@ class UserAccountsListItem extends StatelessWidget {
               SizedBox(
                 width: 12,
               ),
-
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,22 +73,20 @@ class UserAccountsListItem extends StatelessWidget {
                   ],
                 ),
               ),
-
               IconButton(
                   onPressed: () {
                     Clipboard.setData(
                       ClipboardData(text: bank.data![index].id!),
                     );
-                    snackBar(
-                        content: "Copied to ClipBoard",
-                        context: context,
-                        color: Colors.green);
+                    snackBar(content: "Copied to ClipBoard", context: context, color: Colors.green);
                   },
                   icon: Icon(
                     Icons.copy,
                     color: Colors.grey,
                   )),
-              SizedBox(width: 5,)
+              SizedBox(
+                width: 5,
+              )
             ],
           ),
           SizedBox(

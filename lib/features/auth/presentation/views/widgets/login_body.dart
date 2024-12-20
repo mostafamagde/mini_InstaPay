@@ -82,8 +82,7 @@ class _LoginBodyState extends State<LoginBody> {
                     CustomTextButton(
                       label: "Forget Password",
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, RoutesNames.ForgetPasswordView);
+                        Navigator.pushNamed(context, RoutesNames.ForgetPasswordView);
                       },
                     ),
                     SizedBox(
@@ -116,15 +115,16 @@ class _LoginBodyState extends State<LoginBody> {
                         CustomTextButton(
                           label: "Sign Up",
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, RoutesNames.signupView);
+                            Navigator.pushNamed(context, RoutesNames.signupView);
                           },
                         ),
                       ],
                     ),
+
                     ElevatedButton(onPressed: () {
                       Navigator.pushNamed(context, RoutesNames.adminLayout);
                     }, child: Text("Fuck mario"))
+
 
                   ],
                 ),

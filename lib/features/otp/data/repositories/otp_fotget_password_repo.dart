@@ -6,6 +6,7 @@ import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/service_locator.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_repo.dart';
+
 class OtpForgetPasswordRepo extends OtpRepository {
   final ApiManager _apiManager;
 
@@ -23,9 +24,8 @@ class OtpForgetPasswordRepo extends OtpRepository {
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
-      }
-      else{
-         Navigator.pushReplacementNamed(context, RoutesNames.EnterPasswordView,arguments: response.data["token"]);
+      } else {
+        Navigator.pushReplacementNamed(context, RoutesNames.EnterPasswordView, arguments: response.data["token"]);
       }
     } catch (e) {
       if (e is DioException) {
@@ -40,10 +40,7 @@ class OtpForgetPasswordRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {
-          "token": token,
-          "type": Constants.forgetPasswordString
-        },
+        {"token": token, "type": Constants.forgetPasswordString},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

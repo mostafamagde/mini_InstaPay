@@ -1,8 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/routes_manager/route_generator.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';

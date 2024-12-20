@@ -23,8 +23,7 @@ class BankListProxy {
   Future<void> saveList(List<BankModel> bankList) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    List<String> jsonList =
-        bankList.map((bank) => jsonEncode(bank.toJson())).toList();
+    List<String> jsonList = bankList.map((bank) => jsonEncode(bank.toJson())).toList();
 
     await prefs.setStringList('bankList', jsonList);
   }
@@ -35,9 +34,7 @@ class BankListProxy {
     List<String>? jsonList = prefs.getStringList('bankList');
 
     if (jsonList != null) {
-      return jsonList
-          .map((json) => BankModel.fromJson(jsonDecode(json)))
-          .toList();
+      return jsonList.map((json) => BankModel.fromJson(jsonDecode(json))).toList();
     }
 
     return [];

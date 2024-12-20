@@ -4,8 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
-
-import '../../../../../core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'AnimatedBuilder.dart';
 
 class SplashBody extends StatefulWidget {
@@ -15,8 +14,7 @@ class SplashBody extends StatefulWidget {
   State<SplashBody> createState() => _SplashBodyState();
 }
 
-class _SplashBodyState extends State<SplashBody>
-    with SingleTickerProviderStateMixin {
+class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
 
@@ -58,17 +56,17 @@ class _SplashBodyState extends State<SplashBody>
       final storage = new FlutterSecureStorage();
       try {
         final token = await storage.read(key: "token");
-        if (token != null&& token.isNotEmpty) {
-          UserModel user=  UserModel.getInstance();
-         user.token = token;
-            final apiManager = ApiManager();
+        if (token != null && token.isNotEmpty) {
+          UserModel user = UserModel.getInstance();
+          user.token = token;
+          final apiManager = ApiManager();
           final userDataResponse = await apiManager.get(
             ApiConstants.getUserData,
-             headers: {
-            "token": token,
-        }, 
-        ) ;            
-            user.setFromjson(userDataResponse.data["data"]);      
+            headers: {
+              "token": token,
+            },
+          );
+          user.setFromjson(userDataResponse.data["data"]);
           Navigator.pushReplacementNamed(
             context,
             RoutesNames.layoutView,

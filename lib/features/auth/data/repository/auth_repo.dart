@@ -5,6 +5,5 @@ abstract class AuthRepository {
   Future<OtpModel> forgetPassword(String email);
   Future<OtpModel> signUp(SignUpModel signUpModel);
   Future<OtpModel> login(String email, String password);
-  Future<void> enterPassword(String token,String password);
+  Future<void> enterPassword(String token, String password);
 }
- 

@@ -1,8 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
-import '../../../data/repos/setting_repo.dart';
+import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
 
 part 'change_state.dart';
 

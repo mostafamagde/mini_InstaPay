@@ -1,39 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:untitled2/core/models/user_model.dart';
-
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
-
+import 'package:untitled2/core/widgets/custom_button.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
-
-import '../../../../core/utils/Constants.dart';
-import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/custom_snackbar.dart';
-import '../../../otp/presentation/views/otp_view.dart';
-import '../manager/change_email_cubit/change_email_cubit.dart';
-
+import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
 
 class ChangeEmailView extends StatelessWidget {
   ChangeEmailView({super.key});
 
-  TextEditingController emailController = TextEditingController(text: UserModel.getInstance().email);
-  var formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController(text: UserModel.getInstance().email);
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-
-
     return BlocConsumer<ChangeEmailCubit, ChangeEmailState>(
       listener: (context, state) {
         if (state is ChangeEmailSuccess) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => OtpView(
-                  userToken: state.message,
-                  function: Constants.ConfirmChangeEmailString),
+              builder: (context) => OtpView(userToken: state.message, function: Constants.ConfirmChangeEmailString),
             ),
           );
         } else if (state is ChangeEmailFailure) {

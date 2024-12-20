@@ -1,19 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:untitled2/core/api_helper/api_constants.dart';
+import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/errors/errors.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/setting_view/data/models/credinitials_model.dart';
 import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
-
-import '../../../../core/api_helper/api_constants.dart';
-import '../../../../core/api_helper/api_manger.dart';
-import '../../../../core/errors/errors.dart';
 
 class SettingRepoImpl implements SettingRepo {
   SettingRepoImpl(ApiManager apiManager);
 
   @override
-  Future<Either<Errors, String>> changeCredintials(
-      {required CredinitialsModel model}) async {
+  Future<Either<Errors, String>> changeCredintials({required CredinitialsModel model}) async {
     ApiManager service = ApiManager();
     try {
       await service.patch(
@@ -60,8 +58,7 @@ class SettingRepoImpl implements SettingRepo {
   }
 
   @override
-  Future<Either<Errors, String>> changePassword(
-      {required String oldPass, required String newPass}) async {
+  Future<Either<Errors, String>> changePassword({required String oldPass, required String newPass}) async {
     try {
       ApiManager service = ApiManager();
       await service.patch(
@@ -107,15 +104,15 @@ class SettingRepoImpl implements SettingRepo {
   Future<Either<Errors, String>> changeDefault(String id) async {
     try {
       ApiManager service = ApiManager();
-final response=    await  service.patch(ApiConstants.ChangeDefaultAccount, headers: {
+      final response = await service.patch(ApiConstants.ChangeDefaultAccount, headers: {
         "token": UserModel.getInstance().token
       }, data: {
         "accountId": id,
       });
-    return Right(response.statusMessage??"success");
+      return Right(response.statusMessage ?? "success");
     } catch (e) {
-      if(e is DioException) {
-        return Left(ServerError(e.response?.data["message"]??"error"));
+      if (e is DioException) {
+        return Left(ServerError(e.response?.data["message"] ?? "error"));
       }
       return left(ServerError("Something went wrong"));
     }

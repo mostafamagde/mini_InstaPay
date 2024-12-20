@@ -11,17 +11,16 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._authRepository) : super(AuthInitial());
   final AuthRepository _authRepository;
 
-
-  Future<void> login({required String email,required String password}) async {
+  Future<void> login({required String email, required String password}) async {
     emit(AuthLoading());
     try {
       final otpModel = await _authRepository.login(email, password);
       emit(AuthSuccess(otpModel));
     } catch (e) {
-       if (e is DioException) {
-         emit(AuthFail( e.response?.data["message"] ?? e.message));
-      }
-     else emit(AuthFail(e.toString()));
+      if (e is DioException) {
+        emit(AuthFail(e.response?.data["message"] ?? e.message));
+      } else
+        emit(AuthFail(e.toString()));
     }
   }
 
@@ -31,34 +30,36 @@ class AuthCubit extends Cubit<AuthState> {
       final otpModel = await _authRepository.signUp(signUpModel);
       emit(AuthSuccess(otpModel));
     } catch (e) {
-       if (e is DioException) {
-         emit(AuthFail( e.response?.data["message"] ?? e.message));
-      }
-     else emit(AuthFail(e.toString()));
+      if (e is DioException) {
+        emit(AuthFail(e.response?.data["message"] ?? e.message));
+      } else
+        emit(AuthFail(e.toString()));
     }
   }
+
   Future<void> forgetPassword(String email) async {
     emit(AuthLoading());
     try {
       final otpModel = await _authRepository.forgetPassword(email);
       emit(AuthSuccess(otpModel));
-    }catch (e) {
-       if (e is DioException) {
-         emit(AuthFail( e.response?.data["message"] ?? e.message));
-      }
-     else emit(AuthFail(e.toString()));
+    } catch (e) {
+      if (e is DioException) {
+        emit(AuthFail(e.response?.data["message"] ?? e.message));
+      } else
+        emit(AuthFail(e.toString()));
     }
   }
-   Future<void> SubmitNewPassword(String token,password) async {
+
+  Future<void> SubmitNewPassword(String token, password) async {
     emit(AuthLoading());
     try {
-       await _authRepository.enterPassword(token, password);
+      await _authRepository.enterPassword(token, password);
       emit(AuthSuccess(OtpModel(token: "")));
     } catch (e) {
-       if (e is DioException) {
-         emit(AuthFail( e.response?.data["message"] ?? e.message));
-      }
-     else emit(AuthFail(e.toString()));
+      if (e is DioException) {
+        emit(AuthFail(e.response?.data["message"] ?? e.message));
+      } else
+        emit(AuthFail(e.toString()));
     }
   }
 }
