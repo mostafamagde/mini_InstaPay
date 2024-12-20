@@ -36,10 +36,32 @@ import 'package:untitled2/features/setting_view/presentation/views/change_defaul
 import 'package:untitled2/features/setting_view/presentation/views/change_email_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_password_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
+
+
+import '../../features/account_managment/data/repos/bank_repo_impl.dart';
+import '../../features/account_managment/presentation/manager/balance_cubit/get_balance_cubit.dart';
+import '../../features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
+import '../../features/account_managment/presentation/views/add_bank_account.dart';
+
+import '../../features/account_managment/presentation/views/choose_bank_account_view.dart';
+import '../../features/account_managment/presentation/views/manage_accounts.dart';
+import '../../features/admn/presentation/views/admin_layout.dart';
+import '../../features/layout_view/presentation/views/layout_view.dart';
+import '../../features/setting_view/data/repos/setting_repo_impl.dart';
+import '../../features/setting_view/presentation/manager/change_credintials_cubit/change_credinitials_cubit.dart';
+import '../../features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
+import '../../features/setting_view/presentation/views/change_default_account.dart';
+import '../../features/splash_view/presentation/views/splash_view.dart';
+import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
+import '../../features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
+import '../../features/transaction_module/presentation/views/send_pin.dart';
+import '../navigation_cubit/navigation_cubit.dart';
+
 import 'package:untitled2/features/splash_view/presentation/views/splash_view.dart';
 import 'package:untitled2/features/transaction_module/data/repos/transaction_repo_impl.dart';
 import 'package:untitled2/features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
 import 'package:untitled2/features/transaction_module/presentation/views/send_pin.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -64,6 +86,15 @@ class RouteGenerator {
       case RoutesNames.chooseBank:
         return MaterialPageRoute(
           builder: (context) => const ChooseAccountView(),
+          settings: settings,
+        );
+
+      case RoutesNames.adminLayout:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => NavigationCubit(),
+            child: AdminLayout(),
+          ),
           settings: settings,
         );
       case RoutesNames.pinView:
