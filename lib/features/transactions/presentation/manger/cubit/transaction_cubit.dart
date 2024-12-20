@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/features/home_view/data/model/transaction_model.dart';
-import 'package:untitled2/features/home_view/data/repository/transaction_repo.dart';
+import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
+import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 
 part 'transaction_state.dart';
 

@@ -16,9 +16,9 @@ import 'package:untitled2/features/auth/presentation/views/enter_password_view.d
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
-import 'package:untitled2/features/home_view/data/repository/transaction_repo.dart';
-import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
-import 'package:untitled2/features/home_view/presentation/views/transaction_view.dart';
+import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
+import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
+import 'package:untitled2/features/transactions/presentation/views/all_transaction_view.dart';
 import 'package:untitled2/features/layout_view/presentation/views/layout_view.dart';
 import 'package:untitled2/features/notifications/data/repository/notifications_repo.dart';
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
@@ -146,7 +146,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => TransactionCubit(TransactionRepository()),
-            child: TransactionView(),
+            child: AllTransactionView(),
           ),
           settings: settings,
         );

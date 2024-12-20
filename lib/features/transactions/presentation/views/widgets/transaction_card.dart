@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/features/home_view/data/model/transaction_model.dart';
+import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({super.key, required this.transaction});
   final TransactionModel transaction;
+        Color getColor(String status) {
+          Color color ;
+
+        switch (status) {
+            case Constants.kSuccessString:
+                color =Colors.green;
+                break;
+            case Constants.kFailedString:
+                color =Colors.red;
+                break;
+            case Constants.kPendingString:
+                color =Colors.orange;
+                break;
+            default:
+                color =Colors.grey;
+        }
+
+        return color;
+    }
   @override
   Widget build(BuildContext context) {
     final user = UserModel.getInstance();
@@ -35,7 +54,7 @@ class TransactionCard extends StatelessWidget {
               Container(
                 height: 20,
                 width: 75,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Colors.lightBlueAccent),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: getColor(transaction.status)),
                 child: Center(
                   child: Text(
                     transaction.status,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
-import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
+import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
+import 'package:untitled2/features/transactions/presentation/views/widgets/transaction_card.dart';
 
-class TransactionView extends StatelessWidget {
-  const TransactionView({
+class AllTransactionView extends StatelessWidget {
+  const AllTransactionView({
     super.key,
   });
 
