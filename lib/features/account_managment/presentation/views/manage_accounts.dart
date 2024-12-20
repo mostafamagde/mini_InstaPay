@@ -56,7 +56,7 @@ class ManageAccounts extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       UserAccountsListView(
-                        onLongPressed: cubit.deleteBankAccount,
+                        deleteAccount: cubit.deleteBankAccount,
                         bank: UserModel.getInstance().bankAccounts!,
                       )
                     ],

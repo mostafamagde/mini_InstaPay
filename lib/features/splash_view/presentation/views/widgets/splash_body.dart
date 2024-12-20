@@ -69,7 +69,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
           user.setFromjson(userDataResponse.data["data"]);
           Navigator.pushReplacementNamed(
             context,
-            RoutesNames.layoutView,
+          user.role =='Admin'? RoutesNames.adminLayout:RoutesNames.layoutView,
           );
         } else {
           Navigator.pushReplacementNamed(

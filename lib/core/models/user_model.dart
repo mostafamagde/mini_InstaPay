@@ -11,6 +11,7 @@ class UserModel {
   String? address;
   String? id;
   BankAccountModel? bankAccounts;
+  String? role;
 
   DefaultAcc? defaultAcc;
 
@@ -30,6 +31,7 @@ class UserModel {
     email = json['email'];
     mobileNumber = json['mobileNumber'];
     address = json['address'];
+    role = json['role'];
   }
 
   UserModel._internal();
