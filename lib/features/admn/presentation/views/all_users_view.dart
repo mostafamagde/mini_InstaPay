@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:untitled2/features/admn/presentation/views/widgets/user_account_list_view.dart';
 import 'package:untitled2/features/admn/presentation/views/widgets/user_item.dart';
 
 class AllUsersView extends StatelessWidget {
@@ -6,16 +7,17 @@ class AllUsersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+    Size media =MediaQuery.of(context).size;
+    return Padding(
+      padding:  EdgeInsets.symmetric(horizontal: media.width*.05),
+      child: Column(
 
-        Row(
+
         children: [
-         SizedBox(width: 25,), UserItem(),
-        ],
-      )],
+          UserAccountListView()
+
+          ]
+      ),
     );
   }
 }
