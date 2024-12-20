@@ -20,20 +20,19 @@ class TransactionItem extends StatelessWidget {
         startActionPane:
         ActionPane(motion: const DrawerMotion(), extentRatio: .2, children: [
           SlidableAction(
-            backgroundColor: const Color(0xFFFE4A49),
-            foregroundColor: Colors.white,
-            icon: Icons.delete,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              topLeft: Radius.circular(10),
-            ),
+
+            padding: EdgeInsets.only(right: 10),
+            backgroundColor: Constants.backgroundColor,
+            foregroundColor: Colors.red,
+            icon: Icons.sos,
+
             onPressed: (BuildContext context) {},
           ),
 
         ]),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          height: 105,
+          padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+          height: 115,
           width: media.width * .9,
           decoration: BoxDecoration(
             color: Colors.white,

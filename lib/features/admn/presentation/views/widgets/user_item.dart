@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import '../../../../../core/utils/Constants.dart';
+
 class UserItem extends StatelessWidget {
   const UserItem({super.key});
 
@@ -13,14 +15,13 @@ class UserItem extends StatelessWidget {
         startActionPane:
             ActionPane(motion: const DrawerMotion(), extentRatio: .2, children: [
           SlidableAction(
-            backgroundColor: const Color(0xFFFE4A49),
-            foregroundColor: Colors.white,
+
+            padding: EdgeInsets.only(right: 10),
+            backgroundColor: Constants.backgroundColor,
+            foregroundColor: Colors.red,
             icon: Icons.delete,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              topLeft: Radius.circular(10),
-            ),
             onPressed: (BuildContext context) {},
+
           ),
         ]),
         child: Container(

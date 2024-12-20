@@ -18,6 +18,7 @@ class UserAccountsListItem extends StatelessWidget {
     var theme = Theme.of(context);
     return Container(
       width: media.width * .9,
+      height: 70,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
