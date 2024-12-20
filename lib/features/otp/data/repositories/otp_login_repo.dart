@@ -38,9 +38,11 @@ class OtpLoginRepo extends OtpRepository {
         } else {
           user.setFromjson(userDataResponse.data["data"]);
         }
-        Navigator.pushReplacementNamed(
+        Navigator.pushNamedAndRemoveUntil(
           context,
-          RoutesNames.layoutView,
+          user.role=='Admin'? RoutesNames.adminLayout :RoutesNames.layoutView,
+          (Route<dynamic> route) => false,
+          
         );
       }
     } catch (e) {
