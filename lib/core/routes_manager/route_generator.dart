@@ -36,6 +36,7 @@ import 'package:untitled2/features/setting_view/presentation/views/change_defaul
 import 'package:untitled2/features/setting_view/presentation/views/change_email_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_password_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
+import 'package:untitled2/features/transactions/presentation/views/transaction_details.dart';
 import '../../features/admn/presentation/views/admin_layout.dart';
 import '../../features/splash_view/presentation/views/splash_view.dart';
 import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
@@ -206,6 +207,14 @@ class RouteGenerator {
           builder: (context) => BlocProvider(
             create: (context) => OnBoardingCubit(),
             child: OnBoardingView(),
+          ),
+          settings: settings,
+        );
+        case RoutesNames.transactionDetails:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => TransactionCubit(TransactionRepository()),
+            child: TransactionDetailsScreen(),
           ),
           settings: settings,
         );

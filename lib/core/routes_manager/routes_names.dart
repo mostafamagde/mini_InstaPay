@@ -22,4 +22,5 @@ class RoutesNames {
   static const String notificationsPin = "notificationsPin";
   static const String onBoarding = 'onBoarding';
   static const String adminLayout = 'adminLayout';
+  static const String transactionDetails='transactionDetails';
 }

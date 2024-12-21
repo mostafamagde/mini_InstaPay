@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
 import 'package:untitled2/features/transactions/presentation/views/transaction_details.dart';
@@ -45,7 +46,7 @@ class TransactionCard extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => TransactionDetailsScreen(transaction: transaction),));
+        Navigator.pushNamed(context,RoutesNames.transactionDetails,arguments: transaction );
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
