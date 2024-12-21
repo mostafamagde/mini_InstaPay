@@ -13,7 +13,10 @@ class AllTransactionView extends StatelessWidget {
   Widget build(BuildContext context) {
     print(UserModel.getInstance().token);
     final user =UserModel.getInstance();
-   user.role=="Admin"?BlocProvider.of<TransactionCubit>(context).getAllTransaction(): BlocProvider.of<TransactionCubit>(context).getUserTransaction();
+    getTransactions(){
+      user.role=="Admin"?BlocProvider.of<TransactionCubit>(context).getAllTransaction(): BlocProvider.of<TransactionCubit>(context).getUserTransaction();
+    }
+   getTransactions();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -32,7 +35,11 @@ class AllTransactionView extends StatelessWidget {
             )),
       ),
       body: BlocConsumer<TransactionCubit, TransactionState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is ManageTransactSuccess){
+              getTransactions();
+          }
+        },
         builder: (context, state) {
           if (state is TransactionSuccess) {
             return Padding(
