@@ -16,7 +16,7 @@ static BanUsersCubit get(context)=>BlocProvider.of(context);
     data.fold(
       (failure) => emit(BanUsersFailure(error: failure.errMessage)),
       (success) => emit(
-        BanUsersSuccess(mssg: success),
+        BanUsersSuccess(mssg: success,id: id),
       ),
     );
 

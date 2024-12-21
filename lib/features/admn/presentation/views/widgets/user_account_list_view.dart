@@ -6,15 +6,17 @@ import '../../../data/models/AdminUsersModel.dart';
 import '../../manager/ban_users_cubit/ban_users_cubit.dart';
 
 class UserAccountListView extends StatelessWidget {
-  const UserAccountListView({super.key, required this.users});
+  const UserAccountListView({super.key, required this.users, required this.onPressed});
 
   final List<AdminUsersModel> users;
+  final Future<void> Function(String id) onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
         return UserItem(
+          onPressed:  onPressed,
 
           users: users[index],
         );

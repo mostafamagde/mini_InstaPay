@@ -5,10 +5,10 @@ import '../../../../../core/utils/Constants.dart';
 import '../../../data/models/AdminUsersModel.dart';
 
 class UserItem extends StatelessWidget {
-  const UserItem({super.key, required this.users});
+  const UserItem({super.key, required this.users, required this.onPressed});
 
   final AdminUsersModel users;
-  // final Future<void> Function(String id) onPressed;
+   final Future<void> Function(String id) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,7 @@ class UserItem extends StatelessWidget {
                 backgroundColor: Constants.backgroundColor,
                 foregroundColor: Colors.red,
                 icon: Icons.hide_source_sharp,
-                onPressed:(context) {
-
-                },
+                onPressed:(context) => onPressed(users.id!),
               ),
             ]),
         child: Container(

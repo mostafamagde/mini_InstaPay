@@ -7,9 +7,13 @@ import 'package:untitled2/features/transactions/presentation/views/all_transacti
 
 import '../../../../core/navigation_cubit/navigation_cubit.dart';
 import '../../../../core/utils/Constants.dart';
+import '../../../../core/utils/service_locator.dart';
+import '../../../setting_view/data/repos/setting_repo_impl.dart';
+import '../../../setting_view/presentation/manager/log_out_cubit/log_out_cubit.dart';
 import '../../data/repo/admin_repo_impl.dart';
 import '../manager/ban_users_cubit/ban_users_cubit.dart';
 import '../manager/get_users_cubit/admin_get_users_cubit.dart';
+import 'admin_setting.dart';
 
 class AdminLayout extends StatelessWidget {
   const AdminLayout({super.key});
@@ -33,14 +37,23 @@ class AdminLayout extends StatelessWidget {
                 create: (context) => BanUsersCubit(
                   AdminRepoImpl(),
                 ),
-              )
+              ),
+
             ],
             child: AllUsersView(),
           ),
           BlocProvider(
             create: (context) => TransactionCubit(TransactionRepository()),
             child: AllTransactionView(),
+
           ),
+          BlocProvider(
+            create: (context) => LogOutCubit(
+              ServiceLocator.getIt.get<SettingRepoImpl>(),
+            ),
+            child: AdminSetting(),
+          )
+
         ];
         return Scaffold(
           bottomNavigationBar: ClipRRect(
@@ -66,6 +79,10 @@ class AdminLayout extends StatelessWidget {
                   BottomNavigationBarItem(
                     icon: Icon(Icons.compare_arrows_outlined),
                     label: "Transactions",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: "Setting",
                   ),
                 ],
                 selectedItemColor: theme.primaryColor,
