@@ -28,4 +28,6 @@ class ApiConstants {
   static const String confirmReceive = "transaction/confirm-recieve/";
   static const String rejectReceive = "transaction/reject-recieve/";
    static const String markAsSuspicious = "/transaction/admin/suspiciousTransaction";
+   static const String allUsersAdmin = "user/admin";
+   static const String banUsersAdmin = "user/admin/banned";
 }

@@ -2,34 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../../../core/utils/Constants.dart';
+import '../../../data/models/AdminUsersModel.dart';
 
 class UserItem extends StatelessWidget {
-  const UserItem({super.key});
+  const UserItem({super.key, required this.users});
+
+  final AdminUsersModel users;
 
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding:
+          EdgeInsets.symmetric(vertical: 10, horizontal: media.width * .05),
       child: Slidable(
-        startActionPane:
-            ActionPane(motion: const DrawerMotion(), extentRatio: .2, children: [
-          SlidableAction(
-
-            padding: EdgeInsets.only(right: 10),
-            backgroundColor: Constants.backgroundColor,
-            foregroundColor: Colors.red,
-            icon: Icons.delete,
-            onPressed: (BuildContext context) {},
-
-          ),
-        ]),
+        startActionPane: ActionPane(
+            motion: const DrawerMotion(),
+            extentRatio: .2,
+            children: [
+              SlidableAction(
+                padding: EdgeInsets.only(right: 10),
+                backgroundColor: Constants.backgroundColor,
+                foregroundColor: Colors.red,
+                icon: Icons.hide_source_sharp,
+                onPressed: (BuildContext context) {},
+              ),
+            ]),
         child: Container(
           height: 90,
           width: media.width * .9,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              topLeft: Radius.circular(10),
+            ),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey,
@@ -40,6 +47,7 @@ class UserItem extends StatelessWidget {
             ],
           ),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: media.width * .2,
@@ -51,11 +59,71 @@ class UserItem extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  child: Text(
-                "mostafamagde227@gmail.com",
-                overflow: TextOverflow.fade,
-                maxLines: 1,
-              ))
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "${users.email!}",
+                    maxLines: 1,
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                  ),
+                  Text(
+                    overflow: TextOverflow.fade,
+                    "${users.userName!}",
+                    maxLines: 1,
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                  ),
+                  Text(
+                    overflow: TextOverflow.fade,
+                    "${users.mobileNumber}",
+                    maxLines: 1,
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                  ),
+                ],
+              )),
+              Column(
+                children: [
+                  Container(
+                    width: 70,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                        ),
+                        color: Constants.primaryMouveColor),
+                    child: Center(
+                      child: Text(
+                        users.role!,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  Container(
+                    width: 70,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                        ),
+                        color: Colors.grey),
+                    child: Center(
+                      child: Text(
+                        users.createdAt!.substring(2, 10),
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
