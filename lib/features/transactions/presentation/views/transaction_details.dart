@@ -58,7 +58,7 @@ class TransactionDetailsScreen extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              Navigator.pushReplacementNamed(context,RoutesNames.allTransaction);
+              Navigator.pop(context);
             },
           ),
         ),
