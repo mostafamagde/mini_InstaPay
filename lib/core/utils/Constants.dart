@@ -14,4 +14,7 @@ abstract class Constants {
   static const String kSuccessString = 'Success';
   static const String kFailedString = 'Failed';
   static const String kPendingString = 'Pending';
+  static const String kSuspiciousString = 'Suspicious';
+  static const String kRefundingString = 'Refunding';
+  static const String kRefundedString = 'Refunded';
 }

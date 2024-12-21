@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<TransactionCubit>(context).getTransaction();
+    BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     BlocProvider.of<NotificationsCubit>(context).getNotification();
     UserModel user = UserModel.getInstance();
     print(user.token);

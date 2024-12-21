@@ -69,7 +69,7 @@ class User {
       firstName: json['firstName'],
       lastName: json['lastName'],
       email: json['email'],
-      userName: json['userName'], // Added userName field
+      userName: json['userName'], 
     );
   }
 
@@ -79,7 +79,7 @@ class User {
       'firstName': firstName,
       'lastName': lastName,
       'email': email,
-      'userName': userName, // Added userName field
+      'userName': userName, 
     };
   }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:untitled2/features/admn/presentation/views/widgets/user_account_list_view.dart';
-import 'package:untitled2/features/admn/presentation/views/widgets/user_item.dart';
 
 class AllUsersView extends StatelessWidget {
   const AllUsersView({super.key});
