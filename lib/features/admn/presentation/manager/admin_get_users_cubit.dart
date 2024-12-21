@@ -15,30 +15,10 @@ class AdminGetUsersCubit extends Cubit<AdminGetUsersState> {
 
   Future<void> getAllUsers([String? search]) async {
     emit(AdminGetUsersLoading());
-    final usersList = await _adminRepo.getUsers();
+    final usersList = await _adminRepo.getUsers(search);
     usersList.fold(
-      (failure) => emit(AdminGetUsersFailure(errorMessage: failure.errMessage)),
-      (success) {
-        if (search == null||search.trim().isEmpty) {
-          emit(AdminGetUsersSuccess(users: success));
-
-        } else {
-
-
-          List<AdminUsersModel> filterd = [];
-          for (var item in success) {
-            if (item.email!.toLowerCase().contains(search.toLowerCase()) ||
-                item.mobileNumber!
-                    .toLowerCase()
-                    .contains(search.toLowerCase()) ||
-                item.userName!.toLowerCase().contains(search.toLowerCase()) ||
-                item.id!.toLowerCase().contains(search.toLowerCase())) {
-              filterd.add(item);
-            }
-            emit(AdminGetUsersSuccess(users: filterd));
-          }
-        }
-      },
-    );
+        (failure) =>
+            emit(AdminGetUsersFailure(errorMessage: failure.errMessage)),
+        (success) => emit(AdminGetUsersSuccess(users: success)));
   }
 }

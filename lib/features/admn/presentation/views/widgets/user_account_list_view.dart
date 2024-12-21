@@ -5,15 +5,16 @@ import '../../../data/models/AdminUsersModel.dart';
 
 class UserAccountListView extends StatelessWidget {
   const UserAccountListView({super.key, required this.users});
+
   final List<AdminUsersModel> users;
 
   @override
   Widget build(BuildContext context) {
-    print(users.length);
     return ListView.builder(
       itemBuilder: (context, index) {
-
-        return UserItem(users: users[index],);
+        return UserItem(
+          users: users[index],
+        );
       },
       itemCount: users.length,
       shrinkWrap: true,

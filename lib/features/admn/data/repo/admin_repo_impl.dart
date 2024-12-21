@@ -10,13 +10,28 @@ import '../../../../core/models/user_model.dart';
 
 class AdminRepoImpl implements AdminRepo {
   @override
-  Future<Either<ServerError,List<AdminUsersModel>>> getUsers() async{
+  Future<Either<ServerError, List<AdminUsersModel>>> getUsers(
+      [String? search]) async {
     ApiManager service = ApiManager();
     try {
-      final data =await  service.get(ApiConstants.allUsersAdmin,
+      final data = await service.get(ApiConstants.allUsersAdmin,
           headers: {"token": UserModel.getInstance().token});
-     final usersList= (data.data as List ).map((e)=>AdminUsersModel.fromJson(e)).toList();
-     return right(usersList);
+      final usersList =
+          (data.data as List).map((e) => AdminUsersModel.fromJson(e)).toList();
+      if (search == null || search.trim().isEmpty) {
+        return right(usersList);
+      } else {
+        List<AdminUsersModel> filterd = [];
+        for (var item in usersList) {
+          if (item.email!.toLowerCase().contains(search.toLowerCase()) ||
+              item.mobileNumber!.toLowerCase().contains(search.toLowerCase()) ||
+              item.userName!.toLowerCase().contains(search.toLowerCase()) ||
+              item.id!.toLowerCase().contains(search.toLowerCase())) {
+            filterd.add(item);
+          }
+        }
+        return right(filterd);
+      }
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));
