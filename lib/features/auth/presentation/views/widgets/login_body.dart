@@ -119,9 +119,6 @@ class _LoginBodyState extends State<LoginBody> {
                       ],
                     ),
 
-                    ElevatedButton(onPressed: () {
-                      Navigator.pushNamed(context, RoutesNames.adminLayout);
-                    }, child: Text("Fuck mario"))
 
 
                   ],
