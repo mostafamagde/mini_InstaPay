@@ -5,4 +5,5 @@ import '../models/AdminUsersModel.dart';
 
 abstract class AdminRepo {
  Future<Either<ServerError,List<AdminUsersModel>>> getUsers( [String? search ]);
+ Future<Either<ServerError,String >> banUsers(String id);
 }

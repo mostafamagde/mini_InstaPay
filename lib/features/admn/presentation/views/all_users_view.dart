@@ -6,7 +6,7 @@ import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/admn/presentation/views/widgets/user_account_list_view.dart';
 
-import '../manager/admin_get_users_cubit.dart';
+import '../manager/get_users_cubit/admin_get_users_cubit.dart';
 
 class AllUsersView extends StatelessWidget {
   AllUsersView({super.key});

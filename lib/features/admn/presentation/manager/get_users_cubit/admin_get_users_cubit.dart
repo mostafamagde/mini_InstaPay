@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/admn/data/models/AdminUsersModel.dart';
 
-import '../../data/repo/admin_repo.dart';
+import '../../../data/repo/admin_repo.dart';
 
 part 'admin_get_users_state.dart';
 
@@ -17,8 +17,10 @@ class AdminGetUsersCubit extends Cubit<AdminGetUsersState> {
     emit(AdminGetUsersLoading());
     final usersList = await _adminRepo.getUsers(search);
     usersList.fold(
-        (failure) =>
-            emit(AdminGetUsersFailure(errorMessage: failure.errMessage)),
-        (success) => emit(AdminGetUsersSuccess(users: success)));
+      (failure) => emit(AdminGetUsersFailure(errorMessage: failure.errMessage)),
+      (success) => emit(
+        AdminGetUsersSuccess(users: success),
+      ),
+    );
   }
 }

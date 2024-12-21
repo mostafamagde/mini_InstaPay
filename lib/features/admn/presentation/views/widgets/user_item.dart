@@ -8,6 +8,7 @@ class UserItem extends StatelessWidget {
   const UserItem({super.key, required this.users});
 
   final AdminUsersModel users;
+  // final Future<void> Function(String id) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,9 @@ class UserItem extends StatelessWidget {
                 backgroundColor: Constants.backgroundColor,
                 foregroundColor: Colors.red,
                 icon: Icons.hide_source_sharp,
-                onPressed: (BuildContext context) {},
+                onPressed:(context) {
+
+                },
               ),
             ]),
         child: Container(
@@ -54,7 +57,12 @@ class UserItem extends StatelessWidget {
                 height: media.height * .08,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/InstaLogo.png"),
+                    image: AssetImage(
+                      users.status == "Suspended"
+                          ? "assets/images/ban.png"
+                          : "assets/images/InstaLogo.png",
+                    ),
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),

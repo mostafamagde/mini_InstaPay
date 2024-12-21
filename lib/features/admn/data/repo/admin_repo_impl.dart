@@ -9,10 +9,11 @@ import '../../../../core/errors/errors.dart';
 import '../../../../core/models/user_model.dart';
 
 class AdminRepoImpl implements AdminRepo {
+  ApiManager service = ApiManager();
+
   @override
   Future<Either<ServerError, List<AdminUsersModel>>> getUsers(
       [String? search]) async {
-    ApiManager service = ApiManager();
     try {
       final data = await service.get(ApiConstants.allUsersAdmin,
           headers: {"token": UserModel.getInstance().token});
@@ -32,6 +33,21 @@ class AdminRepoImpl implements AdminRepo {
         }
         return right(filterd);
       }
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerError.fromDioError(e));
+      }
+      return left(ServerError(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<ServerError, String>> banUsers(String id) async {
+    try {
+      final data = await service.post(
+          ApiConstants.banUsersAdmin, {"userId": id},
+          headers: {"token": UserModel.getInstance().token});
+      return right(data.data["message"]??"banned Succeeded");
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));

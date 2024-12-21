@@ -8,7 +8,8 @@ import 'package:untitled2/features/transactions/presentation/views/all_transacti
 import '../../../../core/navigation_cubit/navigation_cubit.dart';
 import '../../../../core/utils/Constants.dart';
 import '../../data/repo/admin_repo_impl.dart';
-import '../manager/admin_get_users_cubit.dart';
+import '../manager/ban_users_cubit/ban_users_cubit.dart';
+import '../manager/get_users_cubit/admin_get_users_cubit.dart';
 
 class AdminLayout extends StatelessWidget {
   const AdminLayout({super.key});
@@ -20,12 +21,26 @@ class AdminLayout extends StatelessWidget {
     return BlocBuilder<NavigationCubit, NavigationState>(
       builder: (context, state) {
         var cubit = NavigationCubit.get(context);
-        final List<Widget> screens = [BlocProvider(
-          create: (context) => AdminGetUsersCubit(AdminRepoImpl())..getAllUsers(),
-          child: AllUsersView(),
-        ), BlocProvider(
+        final List<Widget> screens = [
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => AdminGetUsersCubit(
+                  AdminRepoImpl(),
+                )..getAllUsers(),
+              ),
+              BlocProvider(
+                create: (context) => BanUsersCubit(
+                  AdminRepoImpl(),
+                ),
+              )
+            ],
+            child: AllUsersView(),
+          ),
+          BlocProvider(
             create: (context) => TransactionCubit(TransactionRepository()),
-            child: AllTransactionView()),
+            child: AllTransactionView(),
+          ),
         ];
         return Scaffold(
           bottomNavigationBar: ClipRRect(
