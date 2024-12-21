@@ -36,4 +36,17 @@ class TransactionCubit extends Cubit<TransactionState> {
       }
     }
   }
+    markAsSuspicious(String transactionId) async {
+    try {
+      emit(ManageTransactionLoading());
+         await transactionRepository.markAsSuspicious(transactionId);
+      emit(ManageTransactSuccess(massage: "Transaction Marked As Suspicious"));
+    } catch (e) {
+      if (e is DioException) {
+        emit(ManageTransactFailed(error: e.response?.data["message"] ?? e.message));
+      } else {
+        emit(ManageTransactFailed(error: e.toString()));
+      }
+    }
+  }
 }

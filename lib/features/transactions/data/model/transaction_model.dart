@@ -1,6 +1,6 @@
 class TransactionModel {
   final String id;
-  final String status;
+   String status;
   final String type;
   final double amount;
   final User sender;

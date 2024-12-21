@@ -27,4 +27,5 @@ class ApiConstants {
     static const String getAllTransactionEndPoint = "/transaction/admin";
   static const String confirmReceive = "transaction/confirm-recieve/";
   static const String rejectReceive = "transaction/reject-recieve/";
+   static const String markAsSuspicious = "/transaction/admin/suspiciousTransaction";
 }

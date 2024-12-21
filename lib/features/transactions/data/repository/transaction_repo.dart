@@ -14,4 +14,9 @@ class TransactionRepository {
     final List<dynamic> data = response.data;
     return data.map((json) => TransactionModel.fromJson(json)).toList();
   }
+    Future<void> markAsSuspicious(String transactionId) async {
+   await ApiManager().post(ApiConstants.markAsSuspicious,{
+      "transactionId": transactionId
+    }, headers: {"token": UserModel.getInstance().token});
+  }
 }
