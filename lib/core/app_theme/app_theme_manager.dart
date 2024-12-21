@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 
 class AppThemeManager {
@@ -18,18 +19,18 @@ class AppThemeManager {
     ),
     textTheme: TextTheme(
       titleLarge: TextStyle(
-        fontSize: 35,
+        fontSize: 28.sp,
         color: Colors.white,
         fontWeight: FontWeight.w700,
       ),
       bodyMedium: TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.w500,
-        fontSize: 18,
+        fontSize: 18.sp,
       ),
       bodySmall: TextStyle(
         color: Colors.grey,
-        fontSize: 15,
+        fontSize: 15.sp,
         fontWeight: FontWeight.w400,
       ),
     ),

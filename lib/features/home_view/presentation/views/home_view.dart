@@ -5,7 +5,7 @@ import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
-import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
+import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_list.dart';
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<TransactionCubit>(context).getTransaction();
+    BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     BlocProvider.of<NotificationsCubit>(context).getNotification();
     UserModel user = UserModel.getInstance();
     print(user.token);

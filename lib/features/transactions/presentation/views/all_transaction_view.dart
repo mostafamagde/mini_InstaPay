@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/features/home_view/presentation/manger/cubit/transaction_cubit.dart';
-import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_card.dart';
+import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
+import 'package:untitled2/features/transactions/presentation/views/widgets/transaction_card.dart';
 
-class TransactionView extends StatelessWidget {
-  const TransactionView({
+class AllTransactionView extends StatelessWidget {
+  const AllTransactionView({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<TransactionCubit>(context).getTransaction();
+    print(UserModel.getInstance().token);
+    final user =UserModel.getInstance();
+   user.role=="Admin"?BlocProvider.of<TransactionCubit>(context).getAllTransaction(): BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -18,7 +21,8 @@ class TransactionView extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        leading: IconButton(
+        leading: user.role=="Admin"? SizedBox():
+        IconButton(
             onPressed: () {
               Navigator.pop(context);
             },

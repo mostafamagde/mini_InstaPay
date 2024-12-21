@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/features/admn/presentation/views/all_transactions_view.dart';
 import 'package:untitled2/features/admn/presentation/views/all_users_view.dart';
+import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
+import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
+import 'package:untitled2/features/transactions/presentation/views/all_transaction_view.dart';
 
 import '../../../../core/navigation_cubit/navigation_cubit.dart';
 import '../../../../core/utils/Constants.dart';
@@ -16,22 +18,17 @@ class AdminLayout extends StatelessWidget {
     return BlocBuilder<NavigationCubit, NavigationState>(
       builder: (context, state) {
         var cubit = NavigationCubit.get(context);
-        final List<Widget> screens = [AllUsersView(), AllTransactionsView()];
+        final List<Widget> screens = [AllUsersView(),BlocProvider(
+          create: (context) => TransactionCubit(TransactionRepository()),
+          child: AllTransactionView()), 
+        ];
         return Scaffold(
-          appBar: AppBar(
-            title: state.index == 0 ? Text("Users") : Text("Transactions"),
-            centerTitle: true,
-            titleTextStyle: theme.textTheme.titleLarge?.copyWith(
-              fontSize: 28
-            ),
-          ),
           bottomNavigationBar: ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
             child: BottomAppBar(
-              height: 90,
               color: Colors.transparent,
               padding: EdgeInsets.zero,
               child: BottomNavigationBar(
