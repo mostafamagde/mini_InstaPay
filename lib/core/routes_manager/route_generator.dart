@@ -10,12 +10,19 @@ import 'package:untitled2/features/account_managment/presentation/views/add_bank
 import 'package:untitled2/features/account_managment/presentation/views/choose_bank_account_view.dart';
 import 'package:untitled2/features/account_managment/presentation/views/manage_accounts.dart';
 import 'package:untitled2/features/account_managment/presentation/views/pin_view.dart';
+import 'package:untitled2/features/admn/presentation/views/admin_layout.dart';
 import 'package:untitled2/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
 import 'package:untitled2/features/auth/presentation/views/enter_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
+import 'package:untitled2/features/reports/presentation/views/account_usage_analysis_screen.dart';
+import 'package:untitled2/features/reports/presentation/views/transactions_summary_screen.dart';
+import 'package:untitled2/features/splash_view/presentation/views/splash_view.dart';
+import 'package:untitled2/features/transaction_module/data/repos/transaction_repo_impl.dart';
+import 'package:untitled2/features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
+import 'package:untitled2/features/transaction_module/presentation/views/send_pin.dart';
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/transactions/presentation/views/all_transaction_view.dart';
@@ -37,12 +44,6 @@ import 'package:untitled2/features/setting_view/presentation/views/change_email_
 import 'package:untitled2/features/setting_view/presentation/views/change_password_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
 import 'package:untitled2/features/transactions/presentation/views/transaction_details.dart';
-import '../../features/admn/presentation/views/admin_layout.dart';
-import '../../features/splash_view/presentation/views/splash_view.dart';
-import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
-import '../../features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
-import '../../features/transaction_module/presentation/views/send_pin.dart';
-
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -210,12 +211,22 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-        case RoutesNames.transactionDetails:
+      case RoutesNames.transactionDetails:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => TransactionCubit(TransactionRepository()),
             child: TransactionDetailsScreen(),
           ),
+          settings: settings,
+        );
+      case RoutesNames.transactionsSummary:
+        return MaterialPageRoute(
+          builder: (context) => const TransactionsSummaryScreen(),
+          settings: settings,
+        );
+      case RoutesNames.accountUsageAnalysis:
+        return MaterialPageRoute(
+          builder: (context) => AccountUsageAnalysisScreen(),
           settings: settings,
         );
       default:
