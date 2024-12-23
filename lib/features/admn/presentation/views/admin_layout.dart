@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/features/admn/presentation/views/all_users_view.dart';
+import 'package:untitled2/features/notifications/data/repository/notifications_repo.dart';
+import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/transactions/presentation/views/all_transaction_view.dart';
@@ -42,10 +44,14 @@ class AdminLayout extends StatelessWidget {
             ],
             child: AllUsersView(),
           ),
-          BlocProvider(
-            create: (context) => TransactionCubit(TransactionRepository()),
+          MultiBlocProvider(
+            providers: [
+                   BlocProvider(
+          create: (context) => TransactionCubit(TransactionRepository())),
+                  BlocProvider(
+          create: (context) => NotificationsCubit(NotificationsRepo())),
+            ],
             child: AllTransactionView(),
-
           ),
           BlocProvider(
             create: (context) => LogOutCubit(

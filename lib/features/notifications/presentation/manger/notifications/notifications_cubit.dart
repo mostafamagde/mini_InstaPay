@@ -41,7 +41,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     try {
       emit(ReadNotificationsLoading());
 
-      await notificationsRepo.acceptRequest(notificationId: notification.transactionId, pin: pin, accountId: accountId);
+      await notificationsRepo.acceptRequest(transactionId: notification.transactionId, pin: pin, accountId: accountId);
       this.readNotification(notification.id);
     } catch (e) {
       if (e is DioException) {
@@ -57,8 +57,38 @@ class NotificationsCubit extends Cubit<NotificationsState> {
   }) async {
     try {
       emit(ReadNotificationsLoading());
-      await notificationsRepo.rejectRequest(notificationId: notification.transactionId);
+      await notificationsRepo.rejectRequest(transactionId: notification.transactionId);
 
+      this.readNotification(notification.id);
+    } catch (e) {
+      if (e is DioException) {
+        emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
+      } else {
+        emit(ReadNotificationsFailed(errorMessage: e.toString()));
+      }
+    }
+  }
+  rejectRefund({
+    required NotificationModel notification,
+  }) async {
+    try {
+      emit(ReadNotificationsLoading());
+      await notificationsRepo.rejectRefund(transactionId: notification.transactionId);
+
+      this.readNotification(notification.id);
+    } catch (e) {
+      if (e is DioException) {
+        emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
+      } else {
+        emit(ReadNotificationsFailed(errorMessage: e.toString()));
+      }
+    }
+  }
+   acceptRefund({required NotificationModel notification}) async {
+    try {
+      emit(ReadNotificationsLoading());
+
+      await notificationsRepo.acceptRefund(transactionId: notification.transactionId);
       this.readNotification(notification.id);
     } catch (e) {
       if (e is DioException) {

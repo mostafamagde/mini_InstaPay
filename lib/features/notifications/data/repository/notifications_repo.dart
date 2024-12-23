@@ -14,12 +14,22 @@ class NotificationsRepo {
     await _apiManger.patch(ApiConstants.readNotifications + notificationId, headers: {"token": UserModel.getInstance().token});
   }
 
-  Future<void> rejectRequest({required String notificationId}) async {
-    await _apiManger.post(ApiConstants.rejectReceive + notificationId, {}, headers: {"token": UserModel.getInstance().token});
+  Future<void> rejectRequest({required String transactionId}) async {
+    await _apiManger.post(ApiConstants.rejectReceive + transactionId, {}, headers: {"token": UserModel.getInstance().token});
   }
 
-  Future<void> acceptRequest({required String notificationId, String? accountId, required String pin}) async {
+  Future<void> acceptRequest({required String transactionId, String? accountId, required String pin}) async {
     final body = {"accountId": accountId, "PIN": pin};
-    await _apiManger.post(ApiConstants.confirmReceive + notificationId, body, headers: {"token": UserModel.getInstance().token});
+    await _apiManger.post(ApiConstants.confirmReceive + transactionId, body, headers: {"token": UserModel.getInstance().token});
+  }
+  Future<void> rejectRefund({required String transactionId}) async {
+    await _apiManger.post(ApiConstants.rejectRefund , {
+      "transactionId": transactionId
+    }, headers: {"token": UserModel.getInstance().token});
+  }
+
+  Future<void> acceptRefund({required String transactionId}) async {
+  
+    await _apiManger.post(ApiConstants.acceptRefund,{"transactionId": transactionId }, headers: {"token": UserModel.getInstance().token});
   }
 }
