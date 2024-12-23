@@ -16,83 +16,96 @@ class SettingView extends StatelessWidget {
         if (state is LogOutSuccess) {
           print(state.successMessage);
           Navigator.pushNamedAndRemoveUntil(
-            context,
-            RoutesNames.loginView,
-            (route) => false,
-          );
+              context, RoutesNames.loginView, (route) => false);
         }
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomTitleContainer(
-            title: "Setting",
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: CustomTitleContainer(
+              title: "Setting",
+            ),
           ),
-          Expanded(
-            child: GridView(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              children: [
-                CustomSmallButton(
-                  name: "Profile Management",
-                  icon: Icons.settings,
-                  padding: 25,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      RoutesNames.changeCridintials,
-                    );
-                  },
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 2,
+                  crossAxisSpacing: 2,
                 ),
-                CustomSmallButton(
-                  padding: 25,
-                  name: "Privacy Setting",
-                  icon: Icons.privacy_tip,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      RoutesNames.privacySetting,
-                    );
-                  },
-                ),
-                CustomSmallButton(
-                  padding: 25,
-                  name: "Transactions",
-                  icon: Icons.receipt_long,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      RoutesNames.transactionsSummary,
-                    );
-                  },
-                ),
-                CustomSmallButton(
-                  padding: 25,
-                  name: "Usage Analysis",
-                  icon: Icons.bar_chart,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      RoutesNames.accountUsageAnalysis,
-                    );
-                  },
-                ),
-                CustomSmallButton(
-                  padding: 25,
-                  name: "Log Out",
-                  icon: Icons.logout,
-                  onTap: () => cubit.logOut(),
-                ),
-                CustomSmallButton(
-                  padding: 25,
-                  name: "Change Default",
-                  icon: Icons.change_circle,
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    RoutesNames.changeDefaultAccount,
-                  ),
-                ),
-              ],
+                itemCount: 6,
+                itemBuilder: (context, index) {
+                  final buttons = [
+                    {
+                      "name": "Profile Management",
+                      "icon": Icons.settings,
+                      "onTap": () {
+                        Navigator.pushNamed(
+                          context,
+                          RoutesNames.changeCridintials,
+                        );
+                      }
+                    },
+                    {
+                      "name": "Privacy Setting",
+                      "icon": Icons.privacy_tip,
+                      "onTap": () {
+                        Navigator.pushNamed(
+                          context,
+                          RoutesNames.privacySetting,
+                        );
+                      }
+                    },
+                    {
+                      "name": "Transactions",
+                      "icon": Icons.receipt_long,
+                      "onTap": () {
+                        Navigator.pushNamed(
+                          context,
+                          RoutesNames.transactionsSummary,
+                        );
+                      }
+                    },
+                    {
+                      "name": "Usage Analysis",
+                      "icon": Icons.bar_chart,
+                      "onTap": () {
+                        Navigator.pushNamed(
+                          context,
+                          RoutesNames.accountUsageAnalysis,
+                        );
+                      }
+                    },
+                    {
+                      "name": "Log Out",
+                      "icon": Icons.logout,
+                      "onTap": () => cubit.logOut(),
+                    },
+                    {
+                      "name": "Change Default",
+                      "icon": Icons.change_circle,
+                      "onTap": () {
+                        Navigator.pushNamed(
+                          context,
+                          RoutesNames.changeDefaultAccount,
+                        );
+                      }
+                    },
+                  ];
+
+                  final button = buttons[index];
+                  return CustomSmallButton(
+                    name: button["name"] as String,
+                    icon: button["icon"] as IconData,
+                    padding: 18,
+                    onTap: button["onTap"] as VoidCallback,
+                  );
+                },
+              ),
             ),
           ),
         ],

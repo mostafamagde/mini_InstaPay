@@ -93,11 +93,6 @@ class BankRepoImpl implements BankRepository {
       user.setFromjson(userDataResponse.data["data"]);
 
 
-      // Navigator.pushNamedAndRemoveUntil(
-      //   context,
-      //   RoutesNames.ManageAccounts,
-      //       (route) => false,
-      // );
     }
   }
 }
