@@ -90,9 +90,7 @@ class UserAccountsListItem extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
+
         ],
       ),
     );
