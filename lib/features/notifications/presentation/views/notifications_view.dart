@@ -60,16 +60,7 @@ class NotificationsView extends StatelessWidget {
             return Center(child: Text(state.errorMessage));
           } else if (state is NotificationsLoading) {
             return Center(child: CircularProgressIndicator());
-          } else {
-            if (notifications.isEmpty) {
-              return const Center(
-                child: Text(
-                  "No notifications available",
-                  style: TextStyle(fontSize: 16),
-                ),
-              );
-            }
-          }
+          } 
 
           return StreamBuilder<NotificationModel>(
             stream: s,
@@ -80,6 +71,14 @@ class NotificationsView extends StatelessWidget {
                 if (snapshot.data != null && (snapshot.data as NotificationModel).id != notifications[0].id) {
                   notifications.insert(0, snapshot.data);
                 }
+                 if (notifications.isEmpty) {
+              return const Center(
+                child: Text(
+                  "No notifications available",
+                  style: TextStyle(fontSize: 16),
+                ),
+              );
+            }
                 return ModalProgressHUD(
                   inAsyncCall: state is ReadNotificationsLoading,
                   child: Padding(
