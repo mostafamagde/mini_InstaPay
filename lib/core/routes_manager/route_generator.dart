@@ -10,12 +10,22 @@ import 'package:untitled2/features/account_managment/presentation/views/add_bank
 import 'package:untitled2/features/account_managment/presentation/views/choose_bank_account_view.dart';
 import 'package:untitled2/features/account_managment/presentation/views/manage_accounts.dart';
 import 'package:untitled2/features/account_managment/presentation/views/pin_view.dart';
+import 'package:untitled2/features/admn/presentation/views/admin_layout.dart';
 import 'package:untitled2/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:untitled2/features/auth/presentation/manger/auth_cubit/auth_cubit.dart';
 import 'package:untitled2/features/auth/presentation/views/enter_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
+import 'package:untitled2/features/reports/domain/use_cases/get_annual_transactions.dart';
+import 'package:untitled2/features/reports/domain/use_cases/get_monthly_transactions.dart';
+import 'package:untitled2/features/reports/presentation/manager/transaction_summary_view_cubit/transaction_summary_view_cubit.dart';
+import 'package:untitled2/features/reports/presentation/views/account_usage_analysis_screen.dart';
+import 'package:untitled2/features/reports/presentation/views/transactions_summary_screen.dart';
+import 'package:untitled2/features/splash_view/presentation/views/splash_view.dart';
+import 'package:untitled2/features/transaction_module/data/repos/transaction_repo_impl.dart';
+import 'package:untitled2/features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
+import 'package:untitled2/features/transaction_module/presentation/views/send_pin.dart';
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/transactions/presentation/views/all_transaction_view.dart';
@@ -43,6 +53,7 @@ import '../../features/splash_view/presentation/views/splash_view.dart';
 import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
 import '../../features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
 import '../../features/transaction_module/presentation/views/send_pin.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -95,7 +106,7 @@ class RouteGenerator {
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider<TransactionCubit>(
-                create: (context) => TransactionCubit(TransactionRepository()),
+                create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
               ),
               BlocProvider<NotificationsCubit>(
                 create: (context) => NotificationsCubit(NotificationsRepo()),
@@ -167,7 +178,7 @@ class RouteGenerator {
       case RoutesNames.allTransaction:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => TransactionCubit(TransactionRepository()),
+            create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             child: AllTransactionView(),
           ),
           settings: settings,
@@ -225,9 +236,22 @@ class RouteGenerator {
       case RoutesNames.transactionDetails:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => TransactionCubit(TransactionRepository()),
+            create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             child: TransactionDetailsScreen(),
           ),
+          settings: settings,
+        );
+      case RoutesNames.transactionsSummary:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => TransactionSummaryViewCubit(ServiceLocator.getIt<GetMonthlyTransactions>(), ServiceLocator.getIt<GetAnnualTransactions>()),
+            child: const TransactionsSummaryScreen(),
+          ),
+          settings: settings,
+        );
+      case RoutesNames.accountUsageAnalysis:
+        return MaterialPageRoute(
+          builder: (context) => AccountUsageAnalysisScreen(),
           settings: settings,
         );
       default:

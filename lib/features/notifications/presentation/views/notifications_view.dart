@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/socket_service.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/notifications/data/models/notfication_model.dart';
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
@@ -12,9 +13,11 @@ import 'package:untitled2/features/notifications/presentation/views/widget/notif
 class NotificationsView extends StatelessWidget {
   NotificationsView({Key? key}) : super(key: key);
   List<NotificationModel> notifications = [];
+
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<NotificationsCubit>(context).getNotification();
+    final s = SocketService.instance.stream;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -66,20 +69,33 @@ class NotificationsView extends StatelessWidget {
                 ),
               );
             }
-            return ModalProgressHUD(
-              inAsyncCall: state is ReadNotificationsLoading,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: ListView.builder(
-                  itemCount: notifications.length,
-                  itemBuilder: (context, index) {
-                    final notification = notifications[index];
-                    return NotificationItem(notification: notification);
-                  },
-                ),
-              ),
-            );
           }
+
+          return StreamBuilder<NotificationModel>(
+            stream: s,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                if (snapshot.data != null && (snapshot.data as NotificationModel).id != notifications[0].id) {
+                  notifications.insert(0, snapshot.data);
+                }
+                return ModalProgressHUD(
+                  inAsyncCall: state is ReadNotificationsLoading,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: ListView.builder(
+                      itemCount: notifications.length,
+                      itemBuilder: (context, index) {
+                        final notification = notifications[index];
+                        return NotificationItem(notification: notification);
+                      },
+                    ),
+                  ),
+                );
+              }
+            },
+          );
         },
       ),
     );

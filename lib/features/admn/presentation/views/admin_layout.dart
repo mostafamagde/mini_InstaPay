@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/features/admn/presentation/views/all_users_view.dart';
 import 'package:untitled2/features/notifications/data/repository/notifications_repo.dart';
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/transactions/presentation/views/all_transaction_view.dart';
-
 import '../../../../core/navigation_cubit/navigation_cubit.dart';
 import '../../../../core/utils/Constants.dart';
 import '../../../../core/utils/service_locator.dart';
@@ -40,16 +40,13 @@ class AdminLayout extends StatelessWidget {
                   AdminRepoImpl(),
                 ),
               ),
-
             ],
             child: AllUsersView(),
           ),
           MultiBlocProvider(
             providers: [
-                   BlocProvider(
-          create: (context) => TransactionCubit(TransactionRepository())),
-                  BlocProvider(
-          create: (context) => NotificationsCubit(NotificationsRepo())),
+              BlocProvider(create: (context) => TransactionCubit(TransactionRepository(ServiceLocator.getIt<ApiManager>()))),
+              BlocProvider(create: (context) => NotificationsCubit(NotificationsRepo())),
             ],
             child: AllTransactionView(),
           ),
@@ -59,7 +56,6 @@ class AdminLayout extends StatelessWidget {
             ),
             child: AdminSetting(),
           )
-
         ];
         return Scaffold(
           bottomNavigationBar: ClipRRect(

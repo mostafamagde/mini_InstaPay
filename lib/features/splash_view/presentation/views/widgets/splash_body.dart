@@ -5,6 +5,7 @@ import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/socket_service.dart';
 import 'AnimatedBuilder.dart';
 
 class SplashBody extends StatefulWidget {
@@ -67,9 +68,10 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
             },
           );
           user.setFromjson(userDataResponse.data["data"]);
+          SocketService.instance.connect();
           Navigator.pushReplacementNamed(
             context,
-          user.role =='Admin'? RoutesNames.adminLayout:RoutesNames.layoutView,
+            user.role == 'Admin' ? RoutesNames.adminLayout : RoutesNames.layoutView,
           );
         } else {
           Navigator.pushReplacementNamed(

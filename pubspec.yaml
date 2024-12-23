@@ -50,6 +50,8 @@ dependencies:
   device_preview: ^1.2.0
   flutter_slidable: ^3.1.1
   auto_size_text: ^3.0.0
+  socket_io_client_flutter: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
