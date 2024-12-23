@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/utils/Constants.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomSmallButton extends StatelessWidget {
   CustomSmallButton({
     super.key,
@@ -8,19 +8,20 @@ class CustomSmallButton extends StatelessWidget {
     required this.icon,
     this.onTap,
     this.padding = 0,
+    this.verticalPadding=0
   });
 
   final String name;
   final IconData icon;
   final void Function()? onTap;
   final double padding;
-
+  final double verticalPadding;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.all(padding),
+      padding:  EdgeInsets.symmetric(horizontal: padding,vertical: verticalPadding),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(17),
@@ -31,7 +32,7 @@ class CustomSmallButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           padding: EdgeInsets.only(left: 4,right:4,bottom: 16),
-          width: media.width * .27,
+          width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -39,8 +40,8 @@ class CustomSmallButton extends StatelessWidget {
                 height: 10,
               ),
               Container(
-                height: 65,
-                width: 65,
+                height: 65.r,
+                width: 65.r,
                 decoration: BoxDecoration(color: Constants.buttonBackgroundColor, borderRadius: BorderRadius.circular(22)),
                 child: Icon(
                   icon,
@@ -50,13 +51,23 @@ class CustomSmallButton extends StatelessWidget {
               SizedBox(
                 height: 25,
               ),
-              Text(
-                name,
-                maxLines: 1,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: Colors.black,
-                  fontSize: 12,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        name,
+                        maxLines: 1,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: Colors.black,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

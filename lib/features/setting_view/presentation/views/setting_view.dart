@@ -4,7 +4,7 @@ import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/log_out_cubit/log_out_cubit.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
 
@@ -34,8 +34,6 @@ class SettingView extends StatelessWidget {
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 2,
-                  crossAxisSpacing: 2,
                 ),
                 itemCount: 6,
                 itemBuilder: (context, index) {
@@ -101,8 +99,9 @@ class SettingView extends StatelessWidget {
                   return CustomSmallButton(
                     name: button["name"] as String,
                     icon: button["icon"] as IconData,
-                    padding: 18,
                     onTap: button["onTap"] as VoidCallback,
+                    padding: 16,
+                    verticalPadding: 8.h,
                   );
                 },
               ),
