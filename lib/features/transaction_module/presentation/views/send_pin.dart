@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
@@ -37,7 +38,11 @@ class SendPin extends StatelessWidget {
         if (state is SendFailed) {
           snackBar(content: state.error, context: context);
         } else if (state is SendSuccess) {
+          
           snackBar(content: 'Money sent successfully', context: context, color: Colors.green);
+          Navigator.pushNamedAndRemoveUntil(context, 
+          RoutesNames.layoutView
+          ,(Route<dynamic> route) => false);
         }
       }, builder: (context, state) {
         var cubit = SendCubit.get(context);

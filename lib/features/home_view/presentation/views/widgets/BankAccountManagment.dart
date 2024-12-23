@@ -14,6 +14,7 @@ class BankAccountManagment extends StatelessWidget {
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
     var theme = Theme.of(context);
+    print(UserModel.getInstance());
     return Container(
       width: media.width * .9,
       padding: EdgeInsets.only(bottom: 16),
@@ -35,7 +36,7 @@ class BankAccountManagment extends StatelessWidget {
                 width: 15,
               ),
               CachedNetworkImage(
-                imageUrl: UserModel.getInstance().defaultAcc!.bankId!.logo!,
+                imageUrl: UserModel.getInstance().defaultAcc!.bankId?.logo??'',
                 placeholder: (context, _) => Center(
                   child: CircularProgressIndicator(
                     color: Constants.primaryMouveColor,
@@ -88,7 +89,7 @@ class BankAccountManagment extends StatelessWidget {
             height: 10,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -9,7 +9,7 @@ class CustomTitleContainer extends StatelessWidget {
     Size media = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     return Container(
-      height: media.height * .2,
+      padding: EdgeInsets.only(bottom: 32),
       width: double.infinity,
       decoration: BoxDecoration(color: theme.secondaryHeaderColor),
       child: Padding(

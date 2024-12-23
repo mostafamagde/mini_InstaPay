@@ -111,49 +111,72 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomSmallButton(
-                        icon: Icons.call_made_rounded,
-                        name: "Send Money",
-                        onTap: () => onTap(1),
-                      ),
-                      CustomSmallButton(
-                        icon: Icons.call_received_rounded,
-                        name: "Receive Money",
-                        onTap: () => onTap(2),
-                      ),
-                      CustomSmallButton(
-                        icon: Icons.account_balance,
-                        name: "Manage",
-                        onTap: () => Navigator.pushNamed(context, RoutesNames.ManageAccounts),
-                      )
-                    ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                    child: Row(
+                    
+                      children: [
+                        Expanded(
+                          child: CustomSmallButton(
+                            icon: Icons.call_made_rounded,
+                            name: "Send Money",
+                            onTap: () => onTap(1),
+                            padding: 5,
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomSmallButton(
+                            icon: Icons.call_received_rounded,
+                            name: "Receive Money",
+                            onTap: () => onTap(2),
+                            padding: 5,
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomSmallButton(
+                            icon: Icons.account_balance,
+                            name: "Manage",
+                            onTap: () => Navigator.pushNamed(context, RoutesNames.ManageAccounts),
+                            padding: 5,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomSmallButton(
-                        icon: Icons.handshake_rounded,
-                        name: "Donations",
-                      ),
-                      CustomSmallButton(
-                        icon: Icons.compare_arrows_outlined,
-                        name: "Transactions",
-                        onTap: () {
-                          Navigator.pushNamed(context, RoutesNames.allTransaction);
-                        },
-                      ),
-                      CustomSmallButton(
-                        icon: Icons.settings,
-                        name: "Settings",
-                        onTap: () => onTap(3),
-                      )
-                    ],
+             
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                    child: Row(
+                    
+                      children: [
+                        Expanded(
+                          child: CustomSmallButton(
+                            icon: Icons.handshake_rounded,
+                            name: "Donations",
+                            padding: 5,
+                          ),
+
+                        ),
+                        Expanded(
+                          child: CustomSmallButton(
+                            icon: Icons.compare_arrows_outlined,
+                            name: "Transactions",
+                            onTap: () {
+                              Navigator.pushNamed(context, RoutesNames.allTransaction);
+                            },
+                            padding: 5,
+                          ),
+                        ),
+                        Expanded(
+                          child: CustomSmallButton(
+                            icon: Icons.settings,
+                            name: "Settings",
+                            onTap: () => onTap(3),
+                            padding: 5,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 10,
