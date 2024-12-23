@@ -3,6 +3,7 @@ import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
+import 'package:untitled2/features/account_managment/data/models/add_account_model.dart';
 
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 
@@ -57,6 +58,46 @@ class BankRepoImpl implements BankRepository {
       return data.data['data'];
     } else {
       return 10;
+    }
+  }
+
+  @override
+  Future<void> addAccount(AddAccountModel account) async {
+    final response = await ApiManager().post(
+      ApiConstants.addGetBankAccount,
+      {
+        "holderName": account.cardHolderName,
+        "bankId": account.bankId,
+        "cardNo": account.cardNumber,
+        "date": {
+          "year": "20" + account.expirationDate.split("/")[1],
+          "month": account.expirationDate.split("/")[0],
+        },
+        "CVV": account.cvv,
+        "PIN": account.pin
+      },
+      headers: {
+        "token": UserModel.getInstance().token,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      UserModel user = UserModel.getInstance();
+
+      final apiManager = ApiManager();
+      final userDataResponse = await apiManager.get(
+        ApiConstants.getUserData,
+        headers: {
+          "token": user.token,
+        },
+      );
+      user.setFromjson(userDataResponse.data["data"]);
+
+
+      // Navigator.pushNamedAndRemoveUntil(
+      //   context,
+      //   RoutesNames.ManageAccounts,
+      //       (route) => false,
+      // );
     }
   }
 }

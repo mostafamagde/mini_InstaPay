@@ -20,5 +20,6 @@ class ServiceLocator {
     getIt.registerSingleton<TransactionsSummaryRepoImpl>(TransactionsSummaryRepoImpl());
     getIt.registerSingleton<GetMonthlyTransactions>(GetMonthlyTransactions(getIt<TransactionRepository>(), getIt<TransactionsSummaryRepoImpl>()));
     getIt.registerSingleton<GetAnnualTransactions>(GetAnnualTransactions(getIt<TransactionRepository>(), getIt<TransactionsSummaryRepoImpl>()));
+
   }
 }
