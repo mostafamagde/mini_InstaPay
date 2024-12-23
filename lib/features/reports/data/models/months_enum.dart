@@ -16,6 +16,10 @@ enum Month {
 
   const Month(this.value);
 
+  static int getMonthNum(Month month) {
+    return Month.values.indexOf(month);
+  }
+
   static List<String> get allValues {
     return Month.values.map<String>((Month element) {
       return element.value;
