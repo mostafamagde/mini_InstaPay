@@ -11,9 +11,13 @@ class GetMonthlyTransactions {
   final TransactionsSummaryRepoImpl transactionsSummaryRepoImpl;
 
   Future<TransactionSummaryModel> getMonthlyTransactions(String month, int year) async {
-    List<TransactionModel> result = await _transactionRepo.getUserTransactions();
-    return transactionsSummaryRepoImpl.getTransactionSummaryModel(
-      result.where((TransactionModel model) => model.createdAt.month - 1 == Month.getMonthNum(month) && model.createdAt.year == year).toList(),
-    );
+    try {
+      List<TransactionModel> result = await _transactionRepo.getUserTransactions();
+      return transactionsSummaryRepoImpl.getTransactionSummaryModel(
+        result.where((TransactionModel model) => model.createdAt.month - 1 == Month.getMonthNum(month) && model.createdAt.year == year).toList(),
+      );
+    } catch (_) {
+      return TransactionSummaryModel.init();
+    }
   }
 }

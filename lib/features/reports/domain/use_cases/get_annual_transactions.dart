@@ -10,9 +10,13 @@ class GetAnnualTransactions {
   final TransactionsSummaryRepo transactionsSummaryRepo;
 
   Future<TransactionSummaryModel> getAnnualTransactions(int year) async {
-    List<TransactionModel> result = await _transactionRepo.getUserTransactions();
-    return transactionsSummaryRepo.getTransactionSummaryModel(
-      result.where((TransactionModel model) => model.createdAt.year == year).toList(),
-    );
+    try {
+      List<TransactionModel> result = await _transactionRepo.getUserTransactions();
+      return transactionsSummaryRepo.getTransactionSummaryModel(
+        result.where((TransactionModel model) => model.createdAt.year == year).toList(),
+      );
+    } catch (_) {
+      return TransactionSummaryModel.init();
+    }
   }
 }
