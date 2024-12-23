@@ -30,4 +30,7 @@ class ApiConstants {
    static const String markAsSuspicious = "/transaction/admin/suspiciousTransaction";
    static const String allUsersAdmin = "user/admin";
    static const String banUsersAdmin = "user/admin/banned";
+   static const String requestRefund ="/transaction/request-refund";
+   static const String acceptRefund='/transaction/admin/approve-refund';
+   static const String rejectRefund='/transaction/admin/reject-refund';
 }

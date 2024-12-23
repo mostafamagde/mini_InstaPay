@@ -21,8 +21,8 @@ final class TransactionSuccess extends TransactionState {
 final class ManageTransactionLoading extends TransactionState {}
 final class ManageTransactSuccess extends TransactionState {
   final String massage;
-
-  ManageTransactSuccess({required this.massage});
+  final String transactionStatus;
+  ManageTransactSuccess({required this.massage,required this.transactionStatus});
 }
 final class ManageTransactFailed extends TransactionState {
     final String error;

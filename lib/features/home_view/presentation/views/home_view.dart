@@ -5,6 +5,7 @@ import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
+import 'package:untitled2/core/widgets/notification_icon.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
 import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_list.dart';
@@ -162,53 +163,7 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
               Positioned(
                 top: 32,
                 right: 24,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesNames.notifications);
-                  },
-                  child: Stack(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, RoutesNames.notifications);
-                        },
-                        icon: Icon(
-                          Icons.notifications,
-                          color: Colors.white,
-                          size: 30.r,
-                        ),
-                      ),
-                      BlocBuilder<NotificationsCubit, NotificationsState>(
-                        builder: (context, state) {
-                          if (state is NotificationsSuccess) {
-                            final unreadCount = state.notifications.where((notification) => !notification.isRead).length;
-                            return Positioned(
-                              right: 8,
-                              top: 8,
-                              child: Container(
-                                padding: EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: Constants.primaryMouveColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Text(
-                                  '${unreadCount}',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            );
-                          } else {
-                            return SizedBox();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                child: NotificationIcon(),
               )
             ],
           ),
@@ -218,3 +173,4 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
     );
   }
 }
+

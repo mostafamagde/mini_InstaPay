@@ -23,4 +23,10 @@ class TransactionRepository {
   Future<void> markAsSuspicious(String transactionId) async {
     await apiManager.post(ApiConstants.markAsSuspicious, {"transactionId": transactionId}, headers: {"token": UserModel.getInstance().token});
   }
+   Future<void> requestRefund(String transactionId) async {
+   await ApiManager().post(ApiConstants.requestRefund,{
+      "transactionId": transactionId,
+      "reason": "I want to refund the transaction"
+    }, headers: {"token": UserModel.getInstance().token});
+  }
 }
