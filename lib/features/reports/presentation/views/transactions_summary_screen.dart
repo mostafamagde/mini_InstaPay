@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/reports/presentation/views/widgets/transactions_summary_screen_body.dart';
 
 class TransactionsSummaryScreen extends StatelessWidget {
@@ -6,8 +7,13 @@ class TransactionsSummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: TransactionsSummaryScreenBody(),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Constants.secondaryOrangeColor,
+        title: Text('Transactions', style: TextStyle(color: Colors.white, fontSize: 26)),
+        centerTitle: true,
+      ),
+      body: const TransactionsSummaryScreenBody(),
     );
   }
 }
