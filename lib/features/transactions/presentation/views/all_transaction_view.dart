@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/core/widgets/notification_icon.dart';
+import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/transactions/presentation/views/widgets/transaction_card.dart';
 
@@ -11,8 +13,11 @@ class AllTransactionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     print(UserModel.getInstance().token);
     final user =UserModel.getInstance();
+        if(user.role=="Admin")
+       { BlocProvider.of<NotificationsCubit>(context).getNotification();}
     getTransactions(){
       user.role=="Admin"?BlocProvider.of<TransactionCubit>(context).getAllTransaction(): BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     }
@@ -33,6 +38,9 @@ class AllTransactionView extends StatelessWidget {
               Icons.arrow_back_ios,
               color: Colors.white,
             )),
+            actions: [
+              user.role=="Admin"? NotificationIcon():SizedBox()
+            ],
       ),
       body: BlocConsumer<TransactionCubit, TransactionState>(
         listener: (context, state) {

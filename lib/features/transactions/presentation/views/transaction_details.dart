@@ -11,15 +11,42 @@ import 'package:untitled2/features/transactions/data/model/transaction_model.dar
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
+  const TransactionDetailsScreen({
+    Key? key,
+  }) : super(key: key);
 
-
-  const TransactionDetailsScreen({Key? key, })
-      : super(key: key);
+  Widget showButton(TransactionModel transaction, context) {
+    final user = UserModel.getInstance();
+    if (user.role != 'Admin' &&
+        user.id == transaction.sender.id &&
+        transaction.status == Constants.kSuccessString) {
+      return CustomButton(
+        onTap: () {
+          BlocProvider.of<TransactionCubit>(context)
+              .requestRefund(transaction.id);
+        },
+        label: "Request Refund",
+        color: Colors.red.shade700,
+      );
+    } else if (user.role == 'Admin' &&
+        transaction.status == Constants.kSuccessString) {
+      return CustomButton(
+        onTap: () {
+          BlocProvider.of<TransactionCubit>(context)
+              .markAsSuspicious(transaction.id);
+        },
+        label: "Mark as Suspecious",
+        color: Colors.red.shade700,
+      );
+    } else {
+      return SizedBox();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    TransactionModel transaction = ModalRoute.of(context)?.settings.arguments as TransactionModel;
-    final user = UserModel.getInstance();
+    TransactionModel transaction =
+    ModalRoute.of(context)?.settings.arguments as TransactionModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -65,61 +92,50 @@ class TransactionDetailsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: BlocConsumer<TransactionCubit, TransactionState>(
-        listener: (context, state) {
-          if(state is ManageTransactSuccess){
-            transaction.status= Constants.kSuspiciousString;
-            snackBar(content: state.massage, context: context,color: Colors.green);
-          }
-          else if(state is ManageTransactFailed){
-            snackBar(content: state.error, context: context);
-          }
-        },
-        builder: (context,state) {
-          return ModalProgressHUD(
-            inAsyncCall: state is ManageTransactionLoading,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildStatusBadge(transaction.status),
-                  const SizedBox(height: 16.0),
-                  Text(
-                    '\$${transaction.amount.toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontSize: 30.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green[700],
-                    ),
-                  ),
-                  const SizedBox(height: 24.0),
-                  _buildUserDetail('Sender', transaction.sender),
-                  const SizedBox(height: 16.0),
-                  _buildUserDetail('Receiver', transaction.receiver),
-                  const SizedBox(height: 16.0),
-                  _buildDetailRow(
-                    'Created At',
-                    '${transaction.createdAt.toLocal()}'.split(' ')[0],
-                  ),
-                  SizedBox(
-                    height: 32,
-                  ),
-                  user.role == 'Admin' &&
-                          transaction.status == Constants.kSuccessString
-                      ? CustomButton(
-                          onTap: () {
-                            BlocProvider.of<TransactionCubit>(context).markAsSuspicious(transaction.id);
-                          },
-                          label: "Mark as Suspecious",
-                          color: Colors.red.shade700,
-                        )
-                      : SizedBox()
-                ],
-              ),
-            ),
-          );
+          listener: (context, state) {
+        if (state is ManageTransactSuccess) {
+          transaction.status = state.transactionStatus;
+          snackBar(
+              content: state.massage, context: context, color: Colors.green);
+        } else if (state is ManageTransactFailed) {
+          snackBar(content: state.error, context: context);
         }
-      ),
+      }, builder: (context, state) {
+        return ModalProgressHUD(
+          inAsyncCall: state is ManageTransactionLoading,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildStatusBadge(transaction.status),
+                const SizedBox(height: 16.0),
+                Text(
+                  '\$${transaction.amount.toStringAsFixed(2)}',
+                  style: TextStyle(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green[700],
+                  ),
+                ),
+                const SizedBox(height: 24.0),
+                _buildUserDetail('Sender', transaction.sender),
+                const SizedBox(height: 16.0),
+                _buildUserDetail('Receiver', transaction.receiver),
+                const SizedBox(height: 16.0),
+                _buildDetailRow(
+                  'Created At',
+                  '${transaction.createdAt.toLocal()}'.split(' ')[0],
+                ),
+                SizedBox(
+                  height: 32,
+                ),
+                showButton(transaction, context)
+              ],
+            ),
+          ),
+        );
+      }),
     );
   }
 

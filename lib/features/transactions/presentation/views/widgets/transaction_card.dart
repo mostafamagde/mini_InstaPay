@@ -50,7 +50,6 @@ class TransactionCard extends StatelessWidget {
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        height: 105,
         width: media.width,
         decoration: BoxDecoration(
           border: Border(
