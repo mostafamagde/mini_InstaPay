@@ -8,9 +8,9 @@ final class TransactionSummaryViewInitial extends TransactionSummaryViewState {}
 final class TransactionSummaryViewLoading extends TransactionSummaryViewState {}
 
 final class TransactionSummaryViewSuccess extends TransactionSummaryViewState {
-  final List<TransactionModel> transactions;
+  final TransactionSummaryModel transactionSummaryModel;
 
-  TransactionSummaryViewSuccess(this.transactions);
+  TransactionSummaryViewSuccess(this.transactionSummaryModel);
 }
 
 final class TransactionSummaryViewFailed extends TransactionSummaryViewState {}

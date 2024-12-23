@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/features/reports/data/models/months_enum.dart';
-import 'package:untitled2/features/reports/data/models/transactions_range_enum.dart';
+import 'package:untitled2/features/reports/data/enums/months_enum.dart';
+import 'package:untitled2/features/reports/data/enums/transactions_range_enum.dart';
+import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
 import 'package:untitled2/features/reports/presentation/manager/transaction_summary_view_cubit/transaction_summary_view_cubit.dart';
 import 'package:untitled2/features/reports/presentation/views/widgets/drop_down_menu_section.dart';
-import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
-import 'package:untitled2/features/transactions/presentation/views/widgets/transaction_card.dart';
+import 'package:untitled2/features/reports/presentation/views/widgets/transaction_summary_section.dart';
 
 class TransactionsSummaryScreenBody extends StatelessWidget {
   const TransactionsSummaryScreenBody({super.key});
@@ -15,22 +15,23 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TransactionSummaryViewCubit cubit = BlocProvider.of<TransactionSummaryViewCubit>(context);
-    late List<TransactionModel> transactionModels = [];
+    late TransactionSummaryModel transactionSummaryModel = TransactionSummaryModel.init();
     final String initMonth = Month.values[DateTime.now().month - 1].value;
     final int initYear = DateTime.now().year;
-    String monthlyRangeMonth = initMonth;
-    int monthlyRangeYear = initYear;
+    String month = initMonth;
+    int year = initYear;
 
     WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) async => await BlocProvider.of<TransactionSummaryViewCubit>(context).getAnnualTransactions(initYear),
+      (timeStamp) async => await BlocProvider.of<TransactionSummaryViewCubit>(context).getAnnualTransactions(year),
     );
 
     return BlocConsumer<TransactionSummaryViewCubit, TransactionSummaryViewState>(
       listener: (context, state) {
         if (state is TransactionSummaryViewLoading) {
-          transactionModels = [];
-        } else if (state is TransactionSummaryViewSuccess) {
-          transactionModels = state.transactions;
+          transactionSummaryModel = TransactionSummaryModel.init();
+        }
+        if (state is TransactionSummaryViewSuccess) {
+          transactionSummaryModel = state.transactionSummaryModel;
         } else if (state is TransactionSummaryViewFailed) {
           snackBar(content: "Something went wrong", context: context);
         }
@@ -48,12 +49,10 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
                   onSelected: (value) async {
                     if (value == TransactionRange.Monthly.value) {
                       cubit.showMonth = true;
-                      monthlyRangeMonth = initMonth;
-                      monthlyRangeYear = initYear;
-                      await BlocProvider.of<TransactionSummaryViewCubit>(context).getMonthlyTransactions(initMonth, initYear);
+                      await BlocProvider.of<TransactionSummaryViewCubit>(context).getMonthlyTransactions(month, year);
                     } else {
                       cubit.showMonth = false;
-                      await BlocProvider.of<TransactionSummaryViewCubit>(context).getAnnualTransactions(initYear);
+                      await BlocProvider.of<TransactionSummaryViewCubit>(context).getAnnualTransactions(year);
                     }
                   },
                 ),
@@ -64,11 +63,11 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
                   initialSelection: initYear,
                   values: List.generate(DateTime.now().year - 2000 + 1, (int index) => DateTime.now().year - index),
                   onSelected: (value) async {
+                    year = value!;
                     if (cubit.showMonth) {
-                      monthlyRangeYear = value!;
-                      await BlocProvider.of<TransactionSummaryViewCubit>(context).getMonthlyTransactions(monthlyRangeMonth, monthlyRangeYear);
+                      await BlocProvider.of<TransactionSummaryViewCubit>(context).getMonthlyTransactions(month, year);
                     } else {
-                      await BlocProvider.of<TransactionSummaryViewCubit>(context).getAnnualTransactions(value!);
+                      await BlocProvider.of<TransactionSummaryViewCubit>(context).getAnnualTransactions(year);
                     }
                   },
                 ),
@@ -81,22 +80,23 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
                       initialSelection: initMonth,
                       values: Month.allValues,
                       onSelected: (value) async {
-                        monthlyRangeMonth = value!;
-                        await BlocProvider.of<TransactionSummaryViewCubit>(context).getMonthlyTransactions(monthlyRangeMonth, monthlyRangeYear);
+                        month = value!;
+                        await BlocProvider.of<TransactionSummaryViewCubit>(context).getMonthlyTransactions(month, year);
                       },
                     ),
                   ],
                 ),
-              SliverToBoxAdapter(child: SizedBox(height: 20)),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: transactionModels.length,
-                  (context, index) {
-                    return TransactionCard(transaction: transactionModels[index]);
-                  },
+              SliverToBoxAdapter(child: SizedBox(height: 25)),
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: TransactionSummarySection(model: transactionSummaryModel),
+                  ),
                 ),
               ),
-              SliverToBoxAdapter(child: SizedBox(height: 15)),
+              SliverToBoxAdapter(child: SizedBox(height: 20)),
             ],
           ),
         );

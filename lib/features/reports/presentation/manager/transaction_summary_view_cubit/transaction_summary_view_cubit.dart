@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
 import 'package:untitled2/features/reports/domain/use_cases/get_annual_transactions.dart';
 import 'package:untitled2/features/reports/domain/use_cases/get_monthly_transactions.dart';
-import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
 
 part 'transaction_summary_view_state.dart';
 
@@ -16,7 +16,7 @@ class TransactionSummaryViewCubit extends Cubit<TransactionSummaryViewState> {
   Future<void> getMonthlyTransactions(String month, int year) async {
     try {
       emit(TransactionSummaryViewLoading());
-      List<TransactionModel> res = await _getMonthlyTransactionsUseCase.getMonthlyTransactions(month, year);
+      TransactionSummaryModel res = await _getMonthlyTransactionsUseCase.getMonthlyTransactions(month, year);
       emit(TransactionSummaryViewSuccess(res));
     } catch (_) {
       emit(TransactionSummaryViewFailed());
@@ -26,7 +26,7 @@ class TransactionSummaryViewCubit extends Cubit<TransactionSummaryViewState> {
   Future<void> getAnnualTransactions(int year) async {
     try {
       emit(TransactionSummaryViewLoading());
-      List<TransactionModel> res = await _getAnnualTransactionsUseCase.getAnnualTransactions(year);
+      TransactionSummaryModel res = await _getAnnualTransactionsUseCase.getAnnualTransactions(year);
       emit(TransactionSummaryViewSuccess(res));
     } catch (_) {
       emit(TransactionSummaryViewFailed());
