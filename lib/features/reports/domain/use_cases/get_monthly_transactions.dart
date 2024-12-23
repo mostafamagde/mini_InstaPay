@@ -7,8 +7,10 @@ class GetMonthlyTransactions {
 
   final TransactionRepository _transactionRepo;
 
-  Future<List<TransactionModel>> getMonthlyTransactions(String month) async {
-    List<TransactionModel> result = await _transactionRepo.getAllTransactions();
-    return result.where((TransactionModel model) => model.createdAt.month == Month.getMonthNum(month)).toList();
+  Future<List<TransactionModel>> getMonthlyTransactions(String month, int year) async {
+    List<TransactionModel> result = await _transactionRepo.getUserTransactions();
+    return result.where((TransactionModel model) {
+      return model.createdAt.month - 1 == Month.getMonthNum(month) && model.createdAt.year == year;
+    }).toList();
   }
 }

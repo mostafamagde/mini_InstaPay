@@ -7,15 +7,16 @@ import 'package:untitled2/features/transactions/data/model/transaction_model.dar
 part 'transaction_summary_view_state.dart';
 
 class TransactionSummaryViewCubit extends Cubit<TransactionSummaryViewState> {
-  TransactionSummaryViewCubit(this.getMonthlyTransactionsUseCase, this.getAnnualTransactionsUseCase) : super(TransactionSummaryViewInitial());
+  TransactionSummaryViewCubit(this._getMonthlyTransactionsUseCase, this._getAnnualTransactionsUseCase) : super(TransactionSummaryViewInitial());
 
-  final GetMonthlyTransactions getMonthlyTransactionsUseCase;
-  final GetAnnualTransactions getAnnualTransactionsUseCase;
+  final GetMonthlyTransactions _getMonthlyTransactionsUseCase;
+  final GetAnnualTransactions _getAnnualTransactionsUseCase;
+  bool showMonth = false;
 
-  Future<void> getMonthlyTransactions(String month) async {
+  Future<void> getMonthlyTransactions(String month, int year) async {
     try {
       emit(TransactionSummaryViewLoading());
-      List<TransactionModel> res = await getMonthlyTransactionsUseCase.getMonthlyTransactions(month);
+      List<TransactionModel> res = await _getMonthlyTransactionsUseCase.getMonthlyTransactions(month, year);
       emit(TransactionSummaryViewSuccess(res));
     } catch (_) {
       emit(TransactionSummaryViewFailed());
@@ -25,7 +26,7 @@ class TransactionSummaryViewCubit extends Cubit<TransactionSummaryViewState> {
   Future<void> getAnnualTransactions(int year) async {
     try {
       emit(TransactionSummaryViewLoading());
-      List<TransactionModel> res = await getAnnualTransactionsUseCase.getAnnualTransactions(year);
+      List<TransactionModel> res = await _getAnnualTransactionsUseCase.getAnnualTransactions(year);
       emit(TransactionSummaryViewSuccess(res));
     } catch (_) {
       emit(TransactionSummaryViewFailed());

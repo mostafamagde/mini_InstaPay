@@ -17,6 +17,9 @@ import 'package:untitled2/features/auth/presentation/views/enter_password_view.d
 import 'package:untitled2/features/auth/presentation/views/forget_password_view.dart';
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
+import 'package:untitled2/features/reports/domain/use_cases/get_annual_transactions.dart';
+import 'package:untitled2/features/reports/domain/use_cases/get_monthly_transactions.dart';
+import 'package:untitled2/features/reports/presentation/manager/transaction_summary_view_cubit/transaction_summary_view_cubit.dart';
 import 'package:untitled2/features/reports/presentation/views/account_usage_analysis_screen.dart';
 import 'package:untitled2/features/reports/presentation/views/transactions_summary_screen.dart';
 import 'package:untitled2/features/splash_view/presentation/views/splash_view.dart';
@@ -221,7 +224,10 @@ class RouteGenerator {
         );
       case RoutesNames.transactionsSummary:
         return MaterialPageRoute(
-          builder: (context) => const TransactionsSummaryScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => TransactionSummaryViewCubit(ServiceLocator.getIt<GetMonthlyTransactions>(), ServiceLocator.getIt<GetAnnualTransactions>()),
+            child: const TransactionsSummaryScreen(),
+          ),
           settings: settings,
         );
       case RoutesNames.accountUsageAnalysis:

@@ -7,7 +7,7 @@ class GetAnnualTransactions {
   final TransactionRepository _transactionRepo;
 
   Future<List<TransactionModel>> getAnnualTransactions(int year) async {
-    List<TransactionModel> result = await _transactionRepo.getAllTransactions();
+    List<TransactionModel> result = await _transactionRepo.getUserTransactions();
     return result.where((TransactionModel model) => model.createdAt.year == year).toList();
   }
 }
