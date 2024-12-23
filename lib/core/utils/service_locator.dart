@@ -12,5 +12,6 @@ class ServiceLocator {
     getIt.registerSingleton<SettingRepoImpl>(SettingRepoImpl(getIt.get<ApiManager>()));
     getIt.registerSingleton<BankRepoImpl>(BankRepoImpl());
     getIt.registerSingleton<TransactionRepoImpl>(TransactionRepoImpl(getIt.get<ApiManager>()));
+
   }
 }
