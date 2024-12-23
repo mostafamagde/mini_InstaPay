@@ -140,9 +140,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                 (route) => false,
           );
         }
-        if (state is AddAccountLoading) {
 
-        }
         if (state is AddAccountFailed) {
 
           snackBar(content: state.errorMessage, context: context);
