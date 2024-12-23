@@ -24,13 +24,14 @@ class ApiConstants {
   static const String ConfirmOtpForgetEdnPoint = 'auth/confirm-otp-forget';
   static const String SendforgetPasswordMailEdnPoint = 'auth/send-forget-password-mail/';
   static const String ChangeDefaultAccount = 'transaction/change-default';
-    static const String getAllTransactionEndPoint = "/transaction/admin";
+  static const String getAllTransactionEndPoint = "/transaction/admin";
   static const String confirmReceive = "transaction/confirm-recieve/";
   static const String rejectReceive = "transaction/reject-recieve/";
-   static const String markAsSuspicious = "/transaction/admin/suspiciousTransaction";
-   static const String allUsersAdmin = "user/admin";
-   static const String banUsersAdmin = "user/admin/banned";
-   static const String requestRefund ="/transaction/request-refund";
-   static const String acceptRefund='/transaction/admin/approve-refund';
-   static const String rejectRefund='/transaction/admin/reject-refund';
+  static const String markAsSuspicious = "/transaction/admin/suspiciousTransaction";
+  static const String allUsersAdmin = "user/admin";
+  static const String banUsersAdmin = "user/admin/banned";
+  static const String requestRefund ="/transaction/request-refund";
+  static const String acceptRefund='/transaction/admin/approve-refund';
+  static const String rejectRefund='/transaction/admin/reject-refund';
+  static const String updatePin='account/';
 }

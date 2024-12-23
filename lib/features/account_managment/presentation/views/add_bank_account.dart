@@ -18,16 +18,16 @@ class AddBankAccount extends StatefulWidget {
 
 class _AddBankAccountState extends State<AddBankAccount> {
   final List<TextEditingController> _cardNumberControllers =
-  List.generate(4, (_) => TextEditingController());
+      List.generate(4, (_) => TextEditingController());
   final List<TextEditingController> _pinControllers =
-  List.generate(6, (_) => TextEditingController());
+      List.generate(6, (_) => TextEditingController());
   final List<TextEditingController> _additionalFieldControllers =
-  List.generate(4, (_) => TextEditingController());
+      List.generate(4, (_) => TextEditingController());
   final List<FocusNode> _cardNumberFocusNodes =
-  List.generate(4, (_) => FocusNode());
+      List.generate(4, (_) => FocusNode());
   final List<FocusNode> _pinFocusNodes = List.generate(6, (_) => FocusNode());
   final List<FocusNode> _additionalFieldFocusNodes =
-  List.generate(4, (_) => FocusNode());
+      List.generate(4, (_) => FocusNode());
   final TextEditingController _cardHolderController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
   final TextEditingController _expirationController = TextEditingController();
@@ -35,7 +35,6 @@ class _AddBankAccountState extends State<AddBankAccount> {
   final FocusNode _expirationFocusNode = FocusNode();
 
   bool _isPinVisible = false;
-
 
   @override
   void dispose() {
@@ -118,17 +117,12 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
   @override
   Widget build(BuildContext context) {
-
     var cubit = AddAccountCubit.get(context);
-    var bank = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments as BankModel;
+    var bank = ModalRoute.of(context)?.settings.arguments as BankModel;
     var formKey = GlobalKey<FormState>();
     return BlocListener<AddAccountCubit, AddAccountState>(
       listener: (context, state) {
         if (state is AddAccountSuccess) {
-
           snackBar(
               content: "Added Successfully",
               context: context,
@@ -137,12 +131,11 @@ class _AddBankAccountState extends State<AddBankAccount> {
           Navigator.pushNamedAndRemoveUntil(
             context,
             RoutesNames.ManageAccounts,
-                (route) => false,
+            (route) => false,
           );
         }
 
         if (state is AddAccountFailed) {
-
           snackBar(content: state.errorMessage, context: context);
         }
       },
@@ -291,8 +284,8 @@ class _AddBankAccountState extends State<AddBankAccount> {
                           ),
                           onChanged: _onExpirationChanged,
                           onFieldSubmitted: (value) async {
-                            if (formKey.currentState!.validate())  {
-                            await  cubit.addAccount(AddAccountModel(
+                            if (formKey.currentState!.validate()) {
+                              await cubit.addAccount(AddAccountModel(
                                   cardNumber: _cardNumberControllers
                                       .map((controller) => controller.text)
                                       .join(),
