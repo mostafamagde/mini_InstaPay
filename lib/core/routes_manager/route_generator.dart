@@ -93,7 +93,7 @@ class RouteGenerator {
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider<TransactionCubit>(
-                create: (context) => TransactionCubit(TransactionRepository()),
+                create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
               ),
               BlocProvider<NotificationsCubit>(
                 create: (context) => NotificationsCubit(NotificationsRepo()),
@@ -158,7 +158,7 @@ class RouteGenerator {
       case RoutesNames.allTransaction:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => TransactionCubit(TransactionRepository()),
+            create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             child: AllTransactionView(),
           ),
           settings: settings,
@@ -214,7 +214,7 @@ class RouteGenerator {
       case RoutesNames.transactionDetails:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => TransactionCubit(TransactionRepository()),
+            create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             child: TransactionDetailsScreen(),
           ),
           settings: settings,

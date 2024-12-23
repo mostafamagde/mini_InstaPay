@@ -16,8 +16,8 @@ enum Month {
 
   const Month(this.value);
 
-  static int getMonthNum(Month month) {
-    return Month.values.indexOf(month);
+  static int getMonthNum(String month) {
+    return Month.values.indexWhere((element) => element.value == month);
   }
 
   static List<String> get allValues {

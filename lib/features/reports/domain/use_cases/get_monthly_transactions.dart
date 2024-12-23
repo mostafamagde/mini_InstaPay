@@ -3,12 +3,12 @@ import 'package:untitled2/features/transactions/data/model/transaction_model.dar
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 
 class GetMonthlyTransactions {
-  const GetMonthlyTransactions(this.transactionRepo);
+  const GetMonthlyTransactions(this._transactionRepo);
 
-  final TransactionRepository transactionRepo;
+  final TransactionRepository _transactionRepo;
 
-  Future<List<TransactionModel>> getMonthlyTransactions(Month month) async {
-    List<TransactionModel> result = await transactionRepo.getAllTransactions();
+  Future<List<TransactionModel>> getMonthlyTransactions(String month) async {
+    List<TransactionModel> result = await _transactionRepo.getAllTransactions();
     return result.where((TransactionModel model) => model.createdAt.month == Month.getMonthNum(month)).toList();
   }
 }

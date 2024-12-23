@@ -4,7 +4,6 @@ import 'package:untitled2/features/admn/presentation/views/all_users_view.dart';
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 import 'package:untitled2/features/transactions/presentation/views/all_transaction_view.dart';
-
 import '../../../../core/navigation_cubit/navigation_cubit.dart';
 import '../../../../core/utils/Constants.dart';
 import '../../../../core/utils/service_locator.dart';
@@ -38,14 +37,12 @@ class AdminLayout extends StatelessWidget {
                   AdminRepoImpl(),
                 ),
               ),
-
             ],
             child: AllUsersView(),
           ),
           BlocProvider(
-            create: (context) => TransactionCubit(TransactionRepository()),
+            create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             child: AllTransactionView(),
-
           ),
           BlocProvider(
             create: (context) => LogOutCubit(
@@ -53,7 +50,6 @@ class AdminLayout extends StatelessWidget {
             ),
             child: AdminSetting(),
           )
-
         ];
         return Scaffold(
           bottomNavigationBar: ClipRRect(

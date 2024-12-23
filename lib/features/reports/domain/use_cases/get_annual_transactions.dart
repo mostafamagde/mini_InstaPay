@@ -2,12 +2,12 @@ import 'package:untitled2/features/transactions/data/model/transaction_model.dar
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 
 class GetAnnualTransactions {
-  const GetAnnualTransactions(this.transactionRepo);
+  const GetAnnualTransactions(this._transactionRepo);
 
-  final TransactionRepository transactionRepo;
+  final TransactionRepository _transactionRepo;
 
   Future<List<TransactionModel>> getAnnualTransactions(int year) async {
-    List<TransactionModel> result = await transactionRepo.getAllTransactions();
+    List<TransactionModel> result = await _transactionRepo.getAllTransactions();
     return result.where((TransactionModel model) => model.createdAt.year == year).toList();
   }
 }

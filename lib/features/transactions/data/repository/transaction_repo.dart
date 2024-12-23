@@ -4,19 +4,23 @@ import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
 
 class TransactionRepository {
+  const TransactionRepository(this.apiManager);
+
+  final ApiManager apiManager;
+
   Future<List<TransactionModel>> getUserTransactions() async {
-    final response = await ApiManager().get(ApiConstants.getTransactionEndPoint, headers: {"token": UserModel.getInstance().token});
+    final response = await apiManager.get(ApiConstants.getTransactionEndPoint, headers: {"token": UserModel.getInstance().token});
     final List<dynamic> data = response.data["data"];
     return data.map((json) => TransactionModel.fromJson(json)).toList();
   }
+
   Future<List<TransactionModel>> getAllTransactions() async {
-    final response = await ApiManager().get(ApiConstants.getAllTransactionEndPoint, headers: {"token": UserModel.getInstance().token});
+    final response = await apiManager.get(ApiConstants.getAllTransactionEndPoint, headers: {"token": UserModel.getInstance().token});
     final List<dynamic> data = response.data;
     return data.map((json) => TransactionModel.fromJson(json)).toList();
   }
-    Future<void> markAsSuspicious(String transactionId) async {
-   await ApiManager().post(ApiConstants.markAsSuspicious,{
-      "transactionId": transactionId
-    }, headers: {"token": UserModel.getInstance().token});
+
+  Future<void> markAsSuspicious(String transactionId) async {
+    await apiManager.post(ApiConstants.markAsSuspicious, {"transactionId": transactionId}, headers: {"token": UserModel.getInstance().token});
   }
 }
