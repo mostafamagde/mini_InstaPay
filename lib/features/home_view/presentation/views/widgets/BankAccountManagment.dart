@@ -89,7 +89,7 @@ class BankAccountManagment extends StatelessWidget {
             height: 10,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomAccountCardButton extends StatelessWidget {
   const CustomAccountCardButton({super.key, required this.text, required this.icon});
 
@@ -20,7 +20,9 @@ class CustomAccountCardButton extends StatelessWidget {
         ),
         Text(
           text,
-          style: theme.textTheme.bodyMedium,
+          style: TextStyle(
+            fontSize: 16.sp
+          ),
         )
       ],
     );

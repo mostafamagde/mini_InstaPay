@@ -16,7 +16,7 @@ class TransactionBox extends StatelessWidget {
     Size media = MediaQuery.of(context).size;
     return Container(
       width: media.width * .85,
-      height: send ? media.height * .32 : media.height * .38,
+       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

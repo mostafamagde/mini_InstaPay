@@ -30,8 +30,8 @@ class CustomSmallButton extends StatelessWidget {
             boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1)],
             borderRadius: BorderRadius.circular(20),
           ),
+          padding: EdgeInsets.only(left: 4,right:4,bottom: 16),
           width: media.width * .27,
-          height: media.width * .3,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
