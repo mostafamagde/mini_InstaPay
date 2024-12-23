@@ -98,4 +98,8 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       }
     }
   }
+  @override
+  void emitState() {
+    emit(NotificationsSuccess(notifications: []));
+  }
 }

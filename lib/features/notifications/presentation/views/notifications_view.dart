@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
@@ -27,17 +28,17 @@ class NotificationsView extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
-             UserModel.getInstance().role=="Admin"?
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                RoutesNames.adminLayout,
-                (Route<dynamic> route) => false,
-              )
-             : Navigator.pushNamedAndRemoveUntil(
-                context,
-                RoutesNames.layoutView,
-                (Route<dynamic> route) => false,
-              );
+              UserModel.getInstance().role == "Admin"
+                  ? Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      RoutesNames.adminLayout,
+                      (Route<dynamic> route) => false,
+                    )
+                  : Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      RoutesNames.layoutView,
+                      (Route<dynamic> route) => false,
+                    );
             },
             icon: Icon(
               Icons.arrow_back_ios,
@@ -51,7 +52,8 @@ class NotificationsView extends StatelessWidget {
           } else if (state is ReadNotificationsFailed) {
             snackBar(content: state.errorMessage, context: context);
           } else if (state is ReadNotificationsSuccess) {
-            final index = notifications.indexWhere((notification) => notification.id == state.notificationId);
+            final index = notifications.indexWhere(
+                (notification) => notification.id == state.notificationId);
             notifications[index].isRead = true;
           }
         },
@@ -60,7 +62,7 @@ class NotificationsView extends StatelessWidget {
             return Center(child: Text(state.errorMessage));
           } else if (state is NotificationsLoading) {
             return Center(child: CircularProgressIndicator());
-          } 
+          }
 
           return StreamBuilder<NotificationModel>(
             stream: s,
@@ -68,17 +70,27 @@ class NotificationsView extends StatelessWidget {
               if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
-                if (snapshot.data != null && (snapshot.data as NotificationModel).id != notifications[0].id) {
-                  notifications.insert(0, snapshot.data);
+                if (snapshot.data != null) {
+                  print("data");
+                  if (notifications.length != 0) {
+                    print("not empty");
+                    if ((snapshot.data as NotificationModel).id !=
+                        notifications[0].id) {
+                      notifications.insert(0, snapshot.data);
+                    }
+                  } else {
+                    print("empty");
+                    notifications.add(snapshot.data);
+                  }
                 }
-                 if (notifications.isEmpty) {
-              return const Center(
-                child: Text(
-                  "No notifications available",
-                  style: TextStyle(fontSize: 16),
-                ),
-              );
-            }
+                if (notifications.isEmpty) {
+                  return Center(
+                    child: Text(
+                      "No notifications available",
+                      style: TextStyle(fontSize: 20.sp),
+                    ),
+                  );
+                }
                 return ModalProgressHUD(
                   inAsyncCall: state is ReadNotificationsLoading,
                   child: Padding(
