@@ -17,7 +17,7 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
           if (transaction.status == TransactionStatus.SUCCESS.value) {
             model.transactionSummaryModel.addSuccessSend(transaction.amount);
           } else {
-            model.transactionSummaryModel.totalFailedTransactions += 0;
+            model.transactionSummaryModel.totalFailedTransactions++;
           }
         } else {
           late UserTransactionSummaryModel user;
@@ -39,7 +39,7 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
           if (transaction.status == TransactionStatus.SUCCESS.value) {
             model.transactionSummaryModel.addSuccessRecv(transaction.amount);
           } else {
-            model.transactionSummaryModel.totalFailedTransactions += 0;
+            model.transactionSummaryModel.totalFailedTransactions++;
           }
         } else {
           late UserTransactionSummaryModel user;
@@ -76,7 +76,7 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
         if (transaction.status == TransactionStatus.SUCCESS.value) {
           model.transactionSummaryModel.addSuccessRecv(transaction.amount);
         } else {
-          model.transactionSummaryModel.totalFailedTransactions += 0;
+          model.transactionSummaryModel.totalFailedTransactions++;
         }
       } else {
         late UserTransactionSummaryModel user;
@@ -97,7 +97,7 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
         if (transaction.status == TransactionStatus.SUCCESS.value) {
           model.transactionSummaryModel.addSuccessSend(transaction.amount);
         } else {
-          model.transactionSummaryModel.totalFailedTransactions += 0;
+          model.transactionSummaryModel.totalFailedTransactions++;
         }
       } else {
         late UserTransactionSummaryModel user;
