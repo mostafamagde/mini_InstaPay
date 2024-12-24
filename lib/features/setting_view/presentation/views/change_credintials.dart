@@ -26,7 +26,7 @@ class ChangeCredintials extends StatelessWidget {
     return BlocConsumer<ChangeCredinitialsCubit, ChangeCredinitialsState>(
       listener: (context, state) {
         if (state is ChangeCredinitialsSuccess) {
-          snackBar(content: state.message, context: context, color: Colors.green);
+          snackBar(content: "Changed Successfully", context: context, color: Colors.green);
           Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (route) => false,);
 
         } else if (state is ChangeCredinitialsFailure) {
