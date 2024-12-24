@@ -1,8 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
 import 'package:untitled2/features/account_managment/data/repos/bank_repo_impl.dart';
+import 'package:untitled2/features/reports/data/repo_impl/admin_transactions_summary_repo_impl.dart';
 import 'package:untitled2/features/reports/data/repo_impl/one_user_transactions_repo_impl.dart';
-import 'package:untitled2/features/reports/data/repo_impl/transactions_summary_repo_impl.dart';
+import 'package:untitled2/features/reports/data/repo_impl/user_transactions_summary_repo_impl.dart';
 import 'package:untitled2/features/reports/domain/use_cases/get_annual_transactions.dart';
 import 'package:untitled2/features/reports/domain/use_cases/get_each_user_transactions.dart';
 import 'package:untitled2/features/reports/domain/use_cases/get_monthly_transactions.dart';
@@ -19,9 +20,10 @@ class ServiceLocator {
     getIt.registerSingleton<BankRepoImpl>(BankRepoImpl());
     getIt.registerSingleton<TransactionRepoImpl>(TransactionRepoImpl(getIt.get<ApiManager>()));
     getIt.registerSingleton<TransactionRepository>(TransactionRepository(getIt.get<ApiManager>()));
-    getIt.registerSingleton<TransactionsSummaryRepoImpl>(TransactionsSummaryRepoImpl());
-    getIt.registerSingleton<GetMonthlyTransactions>(GetMonthlyTransactions(getIt<TransactionRepository>(), getIt<TransactionsSummaryRepoImpl>()));
-    getIt.registerSingleton<GetAnnualTransactions>(GetAnnualTransactions(getIt<TransactionRepository>(), getIt<TransactionsSummaryRepoImpl>()));
+    getIt.registerSingleton<UserTransactionsSummaryRepoImpl>(UserTransactionsSummaryRepoImpl());
+    getIt.registerSingleton<AdminTransactionsSummaryRepoImpl>(AdminTransactionsSummaryRepoImpl());
+    getIt.registerSingleton<GetMonthlyTransactions>(GetMonthlyTransactions(getIt<TransactionRepository>(), getIt<UserTransactionsSummaryRepoImpl>(), getIt<AdminTransactionsSummaryRepoImpl>()));
+    getIt.registerSingleton<GetAnnualTransactions>(GetAnnualTransactions(getIt<TransactionRepository>(), getIt<UserTransactionsSummaryRepoImpl>(), getIt<AdminTransactionsSummaryRepoImpl>()));
     getIt.registerSingleton<OneUserTransactionsRepoImpl>(OneUserTransactionsRepoImpl());
     getIt.registerSingleton<GetEachUserTransactions>(GetEachUserTransactions(getIt<TransactionRepository>(), getIt<OneUserTransactionsRepoImpl>()));
   }
