@@ -12,9 +12,9 @@ class ChangePin extends StatelessWidget {
   final int pinLength = 6;
 
   final List<TextEditingController> oldPinControllers =
-  List.generate(6, (_) => TextEditingController());
+      List.generate(6, (_) => TextEditingController());
   final List<TextEditingController> newPinControllers =
-  List.generate(6, (_) => TextEditingController());
+      List.generate(6, (_) => TextEditingController());
   final List<FocusNode> oldPinFocusNodes = List.generate(6, (_) => FocusNode());
   final List<FocusNode> newPinFocusNodes = List.generate(6, (_) => FocusNode());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -32,12 +32,9 @@ class ChangePin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var id = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments as String;
+    var id = ModalRoute.of(context)?.settings.arguments as String;
     final cubit = ChangePinCubit.get(context);
-    return BlocListener<ChangePinCubit, ChangePinState>(
+    return BlocConsumer<ChangePinCubit, ChangePinState>(
       listener: (context, state) {
         if (state is ChangePinSuccess) {
           snackBar(
@@ -49,70 +46,78 @@ class ChangePin extends StatelessWidget {
           snackBar(content: state.message, context: context, color: Colors.red);
         }
       },
-      child: ModalProgressHUD(
-        inAsyncCall: cubit.state is ChangePinLoading,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Update PIN Code',
-              style: TextStyle(color: Colors.white),
+      builder: (BuildContext context, ChangePinState state) {
+        return ModalProgressHUD(
+          inAsyncCall: cubit.state is ChangePinLoading,
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text(
+                'Update PIN Code',
+                style: TextStyle(color: Colors.white),
+              ),
+              centerTitle: true,
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                ),
+              ),
             ),
-            centerTitle: true,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
+            body: Form(
+              key: formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Enter Old PIN',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildPinInputRow(
+                        oldPinControllers, oldPinFocusNodes, context),
+                    const SizedBox(height: 40),
+                    const Text(
+                      'Enter New PIN',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildPinInputRow(
+                        newPinControllers, newPinFocusNodes, context),
+                    const SizedBox(height: 40),
+                    CustomButton(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            cubit.changePin(
+                                oldPinControllers
+                                    .map((controller) => controller.text)
+                                    .join(),
+                                newPinControllers
+                                    .map((controller) => controller.text)
+                                    .join(),
+                                id);
+                          }
+                        },
+                        label: "Submit")
+                  ],
+                ),
               ),
             ),
           ),
-          body: Form(
-            key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Enter Old PIN',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  _buildPinInputRow(
-                      oldPinControllers, oldPinFocusNodes, context),
-                  const SizedBox(height: 40),
-                  const Text(
-                    'Enter New PIN',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  _buildPinInputRow(
-                      newPinControllers, newPinFocusNodes, context),
-                  const SizedBox(height: 40),
-                  CustomButton(onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      cubit.changePin(oldPinControllers.map((
-                          controller) => controller.text).join(),
-                          newPinControllers.map((controller) => controller.text)
-                              .join(), id);
-                    }
-                  }, label: "Submit")
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 
