@@ -1,7 +1,7 @@
 import 'package:untitled2/core/enums/transaction_status_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
-import 'package:untitled2/features/reports/domain/repo_interface/transactions_summary_repo_interface.dart';
+import 'package:untitled2/features/reports/domain/repo_interface/transactions_summary_repo.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
 
 class TransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
@@ -22,7 +22,7 @@ class TransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
           summaryModel.totalReceive += model.amount;
         }
         summaryModel.totalSuccessTransactions++;
-      } else if (model.status == TransactionStatus.FAILED.value) {
+      } else if (model.status != TransactionStatus.SUCCESS.value) {
         summaryModel.totalFailedTransactions++;
       }
     }

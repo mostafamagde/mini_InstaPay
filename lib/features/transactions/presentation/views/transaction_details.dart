@@ -7,6 +7,7 @@ import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
+import 'package:untitled2/features/transactions/data/model/user_model.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {

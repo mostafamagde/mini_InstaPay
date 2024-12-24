@@ -10,7 +10,7 @@ class TransactionsSummaryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Constants.secondaryOrangeColor,
-        title: Text('Transactions', style: TextStyle(color: Colors.white, fontSize: 26)),
+        title: Text('Transactions Summary', style: TextStyle(color: Colors.white, fontSize: 26)),
         centerTitle: true,
       ),
       body: const TransactionsSummaryScreenBody(),

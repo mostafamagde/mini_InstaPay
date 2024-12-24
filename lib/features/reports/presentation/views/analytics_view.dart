@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
 
 class AnalyticsView extends StatelessWidget {
@@ -9,9 +8,12 @@ class AnalyticsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Analytics', style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
-          CustomTitleContainer(title: 'Analytics'),
           const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.all(15),
