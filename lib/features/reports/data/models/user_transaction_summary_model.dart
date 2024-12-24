@@ -59,13 +59,13 @@ class UserTransactionSummaryModel extends TransactionSummaryModel {
     totalSend += amount;
     totalNet -= amount;
     totalSendTransactions++;
-    totalSuccessTransactions += 1;
+    totalSuccessTransactions++;
   }
 
   void addSuccessRecv(double amount) {
     totalReceive += amount;
     totalNet += amount;
     totalReceiveTransactions++;
-    totalSuccessTransactions += 1;
+    totalSuccessTransactions++;
   }
 }
