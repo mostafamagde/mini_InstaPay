@@ -15,7 +15,7 @@ import 'package:untitled2/features/setting_view/presentation/manager/change_emai
 class ChangeEmailView extends StatelessWidget {
   ChangeEmailView({super.key});
 
-  final TextEditingController emailController = TextEditingController(text: UserModel.getInstance().email);
+  final TextEditingController emailController = TextEditingController(text: UserModel.instance.email);
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override

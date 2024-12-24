@@ -17,5 +17,5 @@ abstract class Constants {
   static const String kSuspiciousString = 'Suspicious';
   static const String kRefundingString = 'Refunding';
   static const String kRefundedString = 'Refunded';
-  static const String kRequestRefund='Request_Refund';
+  static const String kRequestRefund = 'Request_Refund';
 }

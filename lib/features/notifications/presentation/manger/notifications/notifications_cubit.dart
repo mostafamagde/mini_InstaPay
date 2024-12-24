@@ -68,6 +68,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       }
     }
   }
+
   rejectRefund({
     required NotificationModel notification,
   }) async {
@@ -84,7 +85,8 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       }
     }
   }
-   acceptRefund({required NotificationModel notification}) async {
+
+  acceptRefund({required NotificationModel notification}) async {
     try {
       emit(ReadNotificationsLoading());
 
@@ -98,7 +100,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       }
     }
   }
-  
+
   void emitState() {
     emit(NotificationsSuccess(notifications: []));
   }

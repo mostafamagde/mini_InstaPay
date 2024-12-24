@@ -28,13 +28,11 @@ class AllUsersView extends StatelessWidget {
         BlocConsumer<BanUsersCubit, BanUsersState>(
           listener: (context, state) {
             if (state is BanUsersSuccess) {
-              snackBar(
-                  content: state.mssg, context: context, color: Colors.green);
+              snackBar(content: state.mssg, context: context, color: Colors.green);
               id = state.id;
             }
             if (state is BanUsersFailure) {
-              snackBar(
-                  content: state.error, context: context, color: Colors.red);
+              snackBar(content: state.error, context: context, color: Colors.red);
             }
           },
           builder: (context, state) {
@@ -46,10 +44,9 @@ class AllUsersView extends StatelessWidget {
                   builder: (context, state) {
                     if (state is AdminGetUsersSuccess) {
                       if (id != null) {
-                        final index = state.users.indexWhere(
-                            (v) => v.id == id);
+                        final index = state.users.indexWhere((v) => v.id == id);
                         state.users[index].status = "Suspended";
-                        id =null;
+                        id = null;
                       }
                     }
                     var cubit = AdminGetUsersCubit.get(context);
@@ -75,16 +72,14 @@ class AllUsersView extends StatelessWidget {
 
                         SliverToBoxAdapter(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                             child: CustomTextField(
                               label: "Search Users",
                               icon: CupertinoIcons.search,
                               inputType: TextInputType.text,
                               controller: search,
                               valid: Validation.validateRegularTextField,
-                              function: (value) async =>
-                                  await cubit.getAllUsers(value),
+                              function: (value) async => await cubit.getAllUsers(value),
                             ),
                           ),
                         ),
@@ -101,8 +96,7 @@ class AllUsersView extends StatelessWidget {
                         // Loading State
                         if (state is AdminGetUsersLoading)
                           SliverToBoxAdapter(
-                            child: const Center(
-                                child: CircularProgressIndicator()),
+                            child: const Center(child: CircularProgressIndicator()),
                           ),
                         // Success State
                         if (state is AdminGetUsersSuccess)

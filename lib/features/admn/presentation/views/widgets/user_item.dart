@@ -8,27 +8,23 @@ class UserItem extends StatelessWidget {
   const UserItem({super.key, required this.users, required this.onPressed});
 
   final AdminUsersModel users;
-   final Future<void> Function(String id) onPressed;
+  final Future<void> Function(String id) onPressed;
 
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
     return Padding(
-      padding:
-          EdgeInsets.symmetric(vertical: 10, horizontal: media.width * .05),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: media.width * .05),
       child: Slidable(
-        startActionPane: ActionPane(
-            motion: const DrawerMotion(),
-            extentRatio: .2,
-            children: [
-              SlidableAction(
-                padding: EdgeInsets.only(right: 10),
-                backgroundColor: Constants.backgroundColor,
-                foregroundColor: Colors.red,
-                icon: Icons.hide_source_sharp,
-                onPressed:(context) => onPressed(users.id!),
-              ),
-            ]),
+        startActionPane: ActionPane(motion: const DrawerMotion(), extentRatio: .2, children: [
+          SlidableAction(
+            padding: EdgeInsets.only(right: 10),
+            backgroundColor: Constants.backgroundColor,
+            foregroundColor: Colors.red,
+            icon: Icons.hide_source_sharp,
+            onPressed: (context) => onPressed(users.id!),
+          ),
+        ]),
         child: Container(
           height: 90,
           width: media.width * .9,
@@ -56,9 +52,7 @@ class UserItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
-                      users.status == "Suspended"
-                          ? "assets/images/ban.png"
-                          : "assets/images/InstaLogo.png",
+                      users.status == "Suspended" ? "assets/images/ban.png" : "assets/images/InstaLogo.png",
                     ),
                     fit: BoxFit.contain,
                   ),

@@ -17,7 +17,7 @@ class GetAnnualTransactions {
   Future<TransactionSummaryModel> getAnnualTransactions(int year) async {
     try {
       late List<TransactionModel> result;
-      if (UserModel.getInstance().role == 'Admin') {
+      if (UserModel.instance.role == 'Admin') {
         result = await _transactionRepo.getAllTransactions();
         return _adminTransactionsSummaryRepoImpl.getTransactionSummaryModel(
           result.where((TransactionModel model) => model.createdAt.year == year).toList(),
@@ -29,7 +29,7 @@ class GetAnnualTransactions {
         );
       }
     } catch (_) {
-      if (UserModel.getInstance().role == 'Admin') {
+      if (UserModel.instance.role == 'Admin') {
         return AdminTransactionSummaryModel.init();
       } else {
         return UserTransactionSummaryModel.init();

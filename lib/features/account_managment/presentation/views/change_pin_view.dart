@@ -11,18 +11,15 @@ import '../manager/change_pin_cubit/change_pin_cubit.dart';
 class ChangePin extends StatelessWidget {
   final int pinLength = 6;
 
-  final List<TextEditingController> oldPinControllers =
-      List.generate(6, (_) => TextEditingController());
-  final List<TextEditingController> newPinControllers =
-      List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> oldPinControllers = List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> newPinControllers = List.generate(6, (_) => TextEditingController());
   final List<FocusNode> oldPinFocusNodes = List.generate(6, (_) => FocusNode());
   final List<FocusNode> newPinFocusNodes = List.generate(6, (_) => FocusNode());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   ChangePin({Key? key}) : super(key: key);
 
-  void _onTextChanged(String value, int index, List<FocusNode> focusNodes,
-      BuildContext context) {
+  void _onTextChanged(String value, int index, List<FocusNode> focusNodes, BuildContext context) {
     if (value.isNotEmpty && index < pinLength - 1) {
       FocusScope.of(context).requestFocus(focusNodes[index + 1]);
     } else if (value.isEmpty && index > 0) {
@@ -37,10 +34,8 @@ class ChangePin extends StatelessWidget {
     return BlocConsumer<ChangePinCubit, ChangePinState>(
       listener: (context, state) {
         if (state is ChangePinSuccess) {
-          snackBar(
-              content: state.message, context: context, color: Colors.green);
-          Navigator.pushNamedAndRemoveUntil(
-              context, RoutesNames.layoutView, (route) => false);
+          snackBar(content: state.message, context: context, color: Colors.green);
+          Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (route) => false);
         }
         if (state is ChangePinFailed) {
           snackBar(content: state.message, context: context, color: Colors.red);
@@ -82,8 +77,7 @@ class ChangePin extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    _buildPinInputRow(
-                        oldPinControllers, oldPinFocusNodes, context),
+                    _buildPinInputRow(oldPinControllers, oldPinFocusNodes, context),
                     const SizedBox(height: 40),
                     const Text(
                       'Enter New PIN',
@@ -94,20 +88,12 @@ class ChangePin extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    _buildPinInputRow(
-                        newPinControllers, newPinFocusNodes, context),
+                    _buildPinInputRow(newPinControllers, newPinFocusNodes, context),
                     const SizedBox(height: 40),
                     CustomButton(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
-                            cubit.changePin(
-                                oldPinControllers
-                                    .map((controller) => controller.text)
-                                    .join(),
-                                newPinControllers
-                                    .map((controller) => controller.text)
-                                    .join(),
-                                id);
+                            cubit.changePin(oldPinControllers.map((controller) => controller.text).join(), newPinControllers.map((controller) => controller.text).join(), id);
                           }
                         },
                         label: "Submit")
@@ -121,8 +107,7 @@ class ChangePin extends StatelessWidget {
     );
   }
 
-  Widget _buildPinInputRow(List<TextEditingController> controllers,
-      List<FocusNode> focusNodes, BuildContext context) {
+  Widget _buildPinInputRow(List<TextEditingController> controllers, List<FocusNode> focusNodes, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(pinLength, (index) {
@@ -142,8 +127,7 @@ class ChangePin extends StatelessWidget {
                 counterText: '',
                 border: OutlineInputBorder(),
               ),
-              onChanged: (value) =>
-                  _onTextChanged(value, index, focusNodes, context),
+              onChanged: (value) => _onTextChanged(value, index, focusNodes, context),
             ),
           ),
         );

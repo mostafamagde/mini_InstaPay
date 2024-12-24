@@ -1,23 +1,24 @@
-import 'package:untitled2/core/models/BankId.dart';
+import 'package:untitled2/core/models/bank_data.dart';
 
-class Data {
-  Data({
+class BankAccountData {
+  String? id;
+  BankData? bankId;
+  String? userId;
+  String? cardNo;
+
+  BankAccountData({
     this.id,
     this.bankId,
     this.userId,
     this.cardNo,
   });
 
-  Data.fromJson(dynamic json) {
+  BankAccountData.fromJson(dynamic json) {
     id = json['_id'];
-    bankId = BankId.fromJson(json['bankId']);
+    bankId = BankData.fromJson(json['bankId']);
     userId = json['userId'];
     cardNo = json['cardNo'];
   }
-  String? id;
-  BankId? bankId;
-  String? userId;
-  String? cardNo;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

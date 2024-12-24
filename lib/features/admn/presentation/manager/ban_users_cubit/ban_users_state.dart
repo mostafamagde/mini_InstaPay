@@ -11,7 +11,7 @@ final class BanUsersSuccess extends BanUsersState {
   final String mssg;
   final String id;
 
-  BanUsersSuccess({required this.mssg,required this.id});
+  BanUsersSuccess({required this.mssg, required this.id});
 }
 
 final class BanUsersFailure extends BanUsersState {

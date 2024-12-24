@@ -25,5 +25,5 @@ class RoutesNames {
   static const String accountUsageAnalysis = 'accountUsageAnalysis';
   static const String changePin = 'ChangePin';
   static const String analyticsView = 'analyticsView';
-  static const String changeLimit='changeLimit';
+  static const String changeLimit = 'changeLimit';
 }

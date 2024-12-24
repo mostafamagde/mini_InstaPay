@@ -1,8 +1,8 @@
 import 'package:untitled2/features/reports/data/models/user_transaction_summary_model.dart';
-import 'package:untitled2/features/transactions/data/model/user_model.dart';
+import 'package:untitled2/features/transactions/data/model/transaction_user_model.dart';
 
 class OneUserTransactionsModel {
-  final User user;
+  final TransactionUserModel user;
   bool iamReciever;
   final UserTransactionSummaryModel transactionSummaryModel;
 
@@ -11,7 +11,7 @@ class OneUserTransactionsModel {
   factory OneUserTransactionsModel.init() {
     return OneUserTransactionsModel(
       iamReciever: true,
-      user: User.init(),
+      user: TransactionUserModel.init(),
       transactionSummaryModel: UserTransactionSummaryModel.init(),
     );
   }

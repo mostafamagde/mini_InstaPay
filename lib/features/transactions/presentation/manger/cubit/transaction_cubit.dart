@@ -37,11 +37,12 @@ class TransactionCubit extends Cubit<TransactionState> {
       }
     }
   }
-    markAsSuspicious(String transactionId) async {
+
+  markAsSuspicious(String transactionId) async {
     try {
       emit(ManageTransactionLoading());
-         await transactionRepository.markAsSuspicious(transactionId);
-      emit(ManageTransactSuccess(massage: "Transaction Marked As Suspicious",transactionStatus: Constants.kSuspiciousString));
+      await transactionRepository.markAsSuspicious(transactionId);
+      emit(ManageTransactSuccess(massage: "Transaction Marked As Suspicious", transactionStatus: Constants.kSuspiciousString));
     } catch (e) {
       if (e is DioException) {
         emit(ManageTransactFailed(error: e.response?.data["message"] ?? e.message));
@@ -50,11 +51,12 @@ class TransactionCubit extends Cubit<TransactionState> {
       }
     }
   }
+
   requestRefund(String transactionId) async {
     try {
       emit(ManageTransactionLoading());
-         await transactionRepository.requestRefund(transactionId);
-      emit(ManageTransactSuccess(massage: "Refund Requested",transactionStatus: Constants.kRefundingString));
+      await transactionRepository.requestRefund(transactionId);
+      emit(ManageTransactSuccess(massage: "Refund Requested", transactionStatus: Constants.kRefundingString));
     } catch (e) {
       if (e is DioException) {
         print(e.response);

@@ -21,7 +21,7 @@ class SocketService {
       {
         'transports': ['websocket'],
         'autoConnect': true,
-        'auth': {"userId": UserModel.getInstance().id},
+        'auth': {"userId": UserModel.instance.id},
       },
     );
 

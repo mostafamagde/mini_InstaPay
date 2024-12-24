@@ -7,7 +7,7 @@ class CustomButton extends StatelessWidget {
   final String label;
   final double? padding;
   final Color color;
-  CustomButton({super.key, required this.onTap, required this.label, this.padding, this.color=Constants.primaryMouveColor});
+  CustomButton({super.key, required this.onTap, required this.label, this.padding, this.color = Constants.primaryMouveColor});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,6 @@ class CustomButton extends StatelessWidget {
                     ),
                     backgroundColor: color,
                     padding: EdgeInsets.symmetric(vertical: 12)),
-                    
                 child: Text(
                   label,
                   style: TextStyle(color: Colors.white, fontSize: 20.sp),

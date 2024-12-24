@@ -13,7 +13,7 @@ class GetEachUserTransactions {
   Future<List<OneUserTransactionsModel>> getEachUserTransactions() async {
     try {
       late List<TransactionModel> result;
-      if (UserModel.getInstance().role == 'Admin') {
+      if (UserModel.instance.role == 'Admin') {
         result = await _transactionRepo.getAllTransactions();
         return _oneUserTransactionsRepo.getOneUserTransactionsForAdmin(result);
       } else {

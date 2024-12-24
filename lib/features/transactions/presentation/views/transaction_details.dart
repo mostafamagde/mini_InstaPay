@@ -7,7 +7,7 @@ import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
-import 'package:untitled2/features/transactions/data/model/user_model.dart';
+import 'package:untitled2/features/transactions/data/model/transaction_user_model.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
@@ -16,24 +16,18 @@ class TransactionDetailsScreen extends StatelessWidget {
   }) : super(key: key);
 
   Widget showButton(TransactionModel transaction, context) {
-    final user = UserModel.getInstance();
-    if (user.role != 'Admin' &&
-        user.id == transaction.sender.id &&
-        transaction.status == Constants.kSuccessString) {
+    if (UserModel.instance.role != 'Admin' && UserModel.instance.id == transaction.sender.id && transaction.status == Constants.kSuccessString) {
       return CustomButton(
         onTap: () {
-          BlocProvider.of<TransactionCubit>(context)
-              .requestRefund(transaction.id);
+          BlocProvider.of<TransactionCubit>(context).requestRefund(transaction.id);
         },
         label: "Request Refund",
         color: Colors.red.shade700,
       );
-    } else if (user.role == 'Admin' &&
-        transaction.status == Constants.kSuccessString) {
+    } else if (UserModel.instance.role == 'Admin' && transaction.status == Constants.kSuccessString) {
       return CustomButton(
         onTap: () {
-          BlocProvider.of<TransactionCubit>(context)
-              .markAsSuspicious(transaction.id);
+          BlocProvider.of<TransactionCubit>(context).markAsSuspicious(transaction.id);
         },
         label: "Mark as Suspecious",
         color: Colors.red.shade700,
@@ -45,17 +39,13 @@ class TransactionDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TransactionModel transaction =
-    ModalRoute.of(context)?.settings.arguments as TransactionModel;
+    TransactionModel transaction = ModalRoute.of(context)?.settings.arguments as TransactionModel;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
           'Transaction Details',
-          style: TextStyle(
-              fontSize: 20.sp,
-              color: Colors.black,
-              fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 20.sp, color: Colors.black, fontWeight: FontWeight.w500),
         ),
         leading: Transform.translate(
           offset: const Offset(12, 0.0),
@@ -91,12 +81,10 @@ class TransactionDetailsScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: BlocConsumer<TransactionCubit, TransactionState>(
-          listener: (context, state) {
+      body: BlocConsumer<TransactionCubit, TransactionState>(listener: (context, state) {
         if (state is ManageTransactSuccess) {
           transaction.status = state.transactionStatus;
-          snackBar(
-              content: state.massage, context: context, color: Colors.green);
+          snackBar(content: state.massage, context: context, color: Colors.green);
         } else if (state is ManageTransactFailed) {
           snackBar(content: state.error, context: context);
         }
@@ -174,7 +162,7 @@ class TransactionDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildUserDetail(String label, User user) {
+  Widget _buildUserDetail(String label, TransactionUserModel user) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

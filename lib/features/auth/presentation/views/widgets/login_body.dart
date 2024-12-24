@@ -78,8 +78,6 @@ class _LoginBodyState extends State<LoginBody> {
                       valid: Validation.validatePasswordTextField,
                       obsecure: true,
                       pass: true,
-
-
                     ),
                     CustomTextButton(
                       label: "Forget Password",
@@ -122,9 +120,6 @@ class _LoginBodyState extends State<LoginBody> {
                         ),
                       ],
                     ),
-
-
-
                   ],
                 ),
               ),

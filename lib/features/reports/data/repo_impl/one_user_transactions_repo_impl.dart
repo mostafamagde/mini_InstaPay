@@ -11,7 +11,7 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
     Map<String, OneUserTransactionsModel> data = {};
 
     for (TransactionModel transaction in transactionModels) {
-      if (transaction.sender.id == UserModel.getInstance().id) {
+      if (transaction.sender.id == UserModel.instance.id) {
         if (data.containsKey(transaction.receiver.id)) {
           OneUserTransactionsModel model = data[transaction.receiver.id]!;
           if (transaction.status == TransactionStatus.SUCCESS.value) {
@@ -33,7 +33,7 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
             transactionSummaryModel: user,
           );
         }
-      } else if (transaction.receiver.id == UserModel.getInstance().id) {
+      } else if (transaction.receiver.id == UserModel.instance.id) {
         if (data.containsKey(transaction.sender.id)) {
           OneUserTransactionsModel model = data[transaction.sender.id]!;
           if (transaction.status == TransactionStatus.SUCCESS.value) {

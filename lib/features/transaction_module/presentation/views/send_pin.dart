@@ -38,11 +38,8 @@ class SendPin extends StatelessWidget {
         if (state is SendFailed) {
           snackBar(content: state.error, context: context);
         } else if (state is SendSuccess) {
-          
           snackBar(content: 'Money sent successfully', context: context, color: Colors.green);
-          Navigator.pushNamedAndRemoveUntil(context, 
-          RoutesNames.layoutView
-          ,(Route<dynamic> route) => false);
+          Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (Route<dynamic> route) => false);
         }
       }, builder: (context, state) {
         var cubit = SendCubit.get(context);

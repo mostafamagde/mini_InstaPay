@@ -15,24 +15,27 @@ class ManageAccounts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChangeDefaultAccCubit, ChangeState>(
-     listener: (context, state) {
-          if (state is ChangeFailed) {
-            snackBar(content: state.message, context: context);
-          } else if (state is ChangeSuccess) {
-            for (var item in UserModel.getInstance().bankAccounts!.data!) {
-              if (item.id == state.Id) {
-                var def = UserModel.getInstance().defaultAcc;
-                def?.cardInfo?.cardNo = item.cardNo;
-                def?.bankId?.logo = item.bankId?.logo;
-                def?.bankId?.name = item.bankId?.name;
-                def?.id = item.id;
-                break;
-              }
+      listener: (context, state) {
+        if (state is ChangeFailed) {
+          snackBar(content: state.message, context: context);
+        } else if (state is ChangeSuccess) {
+          for (var item in UserModel.instance.bankAccounts!) {
+            if (item.id == state.Id) {
+              UserModel.instance.defaultAcc?.cardInfo?.cardNo = item.cardNo;
+              UserModel.instance.defaultAcc?.bankId?.logo = item.bankId?.logo;
+              UserModel.instance.defaultAcc?.bankId?.name = item.bankId?.name;
+              UserModel.instance.defaultAcc?.id = item.id;
+              break;
             }
-            snackBar(content: "Changed Successfully", context: context, color: Colors.green);
-            Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (route) => false,);
           }
-        },
+          snackBar(content: "Changed Successfully", context: context, color: Colors.green);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesNames.layoutView,
+            (route) => false,
+          );
+        }
+      },
       builder: (context, state) {
         return ModalProgressHUD(
           inAsyncCall: state is ChangeLoading,
@@ -45,58 +48,56 @@ class ManageAccounts extends StatelessWidget {
                 snackBar(content: state.message, context: context);
               }
               if (state is ManageBankAccountsSuccess) {
-                snackBar(
-                    content: state.message,
-                    context: context,
-                    color: Colors.green);
+                snackBar(content: state.message, context: context, color: Colors.green);
               }
             },
             builder: (context, state) {
               var cubit = ManageBankAccountsCubit.get(context);
               return Scaffold(
-                  bottomNavigationBar: CustomButton(
-                    onTap: () =>
-                        Navigator.pushNamed(context, RoutesNames.chooseBank),
-                    label: "Add Account",
-                  ),
-                  appBar: AppBar(
-                    leading: IconButton(
-                        onPressed: () {
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            RoutesNames.layoutView,
-                            (route) => false,
-                          );
-                        },
-                        icon: Icon(Icons.arrow_back_ios)),
-                  ),
-                  body: () {
-                    if (state is ManageBankAccountsFailed) {
-                      return Center(
-                        child: Text(state.message),
+                bottomNavigationBar: CustomButton(
+                  onTap: () => Navigator.pushNamed(context, RoutesNames.chooseBank),
+                  label: "Add Account",
+                ),
+                appBar: AppBar(
+                  leading: IconButton(
+                    onPressed: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RoutesNames.layoutView,
+                        (route) => false,
                       );
-                    } else if (state is ManageBankAccountsLoading) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
-                      return ModalProgressHUD(
-                        inAsyncCall: state is DeleteBancAccountLoading,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              UserAccountsListView(
-                                deleteAccount: cubit.deleteBankAccount,
-                                bank: UserModel.getInstance().bankAccounts!,
-                              )
-                            ],
-                          ),
+                    },
+                    icon: Icon(Icons.arrow_back_ios),
+                  ),
+                ),
+                body: () {
+                  if (state is ManageBankAccountsFailed) {
+                    return Center(
+                      child: Text(state.message),
+                    );
+                  } else if (state is ManageBankAccountsLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return ModalProgressHUD(
+                      inAsyncCall: state is DeleteBancAccountLoading,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            UserAccountsListView(
+                              deleteAccount: cubit.deleteBankAccount,
+                              banks: UserModel.instance.bankAccounts!,
+                            )
+                          ],
                         ),
-                      );
-                    }
-                  }.call());
+                      ),
+                    );
+                  }
+                }.call(),
+              );
             },
           ),
         );
