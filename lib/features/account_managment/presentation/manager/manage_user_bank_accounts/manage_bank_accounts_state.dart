@@ -24,3 +24,4 @@ final class ManageBankAccountsDeleteFailed extends ManageBankAccountsState {
 
   ManageBankAccountsDeleteFailed(this.message);
 }
+final class DeleteBancAccountLoading extends ManageBankAccountsState{}

@@ -17,7 +17,6 @@ class RoutesNames {
   static const String notifications = "notifications";
   static const String pinSendView = "pinSendView";
   static const String EnterPasswordView = "enterPassword";
-  static const String changeDefaultAccount = "ChangeDefaultAccount";
   static const String notificationsPin = "notificationsPin";
   static const String onBoarding = 'onBoarding';
   static const String adminLayout = 'adminLayout';
@@ -26,4 +25,5 @@ class RoutesNames {
   static const String accountUsageAnalysis = 'accountUsageAnalysis';
   static const String changePin = 'ChangePin';
   static const String analyticsView = 'analyticsView';
+  static const String changeLimit='changeLimit';
 }

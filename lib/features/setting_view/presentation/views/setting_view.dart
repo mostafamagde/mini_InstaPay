@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
@@ -25,13 +26,22 @@ class SettingView extends StatelessWidget {
           onTap: () =>
               Navigator.pushNamed(context, RoutesNames.privacySetting)),
       ButtonModel(
-          name: "Log Out", icon: Icons.logout, onTap: () {
-            showDialog(context: context, builder:
-            (context) => AlertDialog(
+          name: "Change limit",
+          icon: Icons.money,
+          onTap: () {
+            Navigator.pushNamed(context, RoutesNames.changeLimit,
+                arguments: UserModel.getInstance().defaultAcc?.id);
+          }),
+      ButtonModel(
+        name: "Log Out",
+        icon: Icons.logout,
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
               title: Text(
                 "Are you sure you want to delete this account",
               ),
-
               actions: [
                 TextButton(
                   onPressed: () {
@@ -49,13 +59,16 @@ class SettingView extends StatelessWidget {
                   ),
                 ),
               ],
-            ),);
-          },),
+            ),
+          );
+        },
+      ),
       ButtonModel(
-          name: "Change Default",
-          icon: Icons.change_circle,
-          onTap: () =>
-              Navigator.pushNamed(context, RoutesNames.changeDefaultAccount)),
+          name: "Analytics",
+          icon: Icons.analytics_sharp,
+          onTap: () {
+            Navigator.pushNamed(context, RoutesNames.analyticsView);
+          }),
     ];
 
     return BlocListener<LogOutCubit, LogOutState>(

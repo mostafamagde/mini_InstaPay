@@ -16,7 +16,7 @@ class ChangeDefaultAccCubit extends Cubit<ChangeState> {
     response.fold(
       (failure) => emit(ChangeFailed(message: failure.errMessage)),
       (message) => emit(
-        ChangeSuccess(message: message),
+        ChangeSuccess(Id: id),
       ),
     );
   }

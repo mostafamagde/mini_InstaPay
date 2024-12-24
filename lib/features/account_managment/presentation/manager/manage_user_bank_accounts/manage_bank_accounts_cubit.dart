@@ -29,6 +29,7 @@ class ManageBankAccountsCubit extends Cubit<ManageBankAccountsState> {
   }
 
   Future<void> deleteBankAccount(BankAccountModel model, int index, TextEditingController inputController) async {
+    emit(DeleteBancAccountLoading());
     try {
       await bankRepository.deleteBankAccounts(model, index, inputController);
 
