@@ -16,8 +16,11 @@ class SettingView extends StatelessWidget {
     final List<ButtonModel> buttonModels = [
       ButtonModel(name: "Profile Management", icon: Icons.settings, onTap: () => Navigator.pushNamed(context, RoutesNames.changeCridintials)),
       ButtonModel(name: "Privacy Setting", icon: Icons.privacy_tip, onTap: () => Navigator.pushNamed(context, RoutesNames.privacySetting)),
-      ButtonModel(name: "Log Out", icon: Icons.logout, onTap: () => cubit.logOut()),
       ButtonModel(name: "Change Default", icon: Icons.change_circle, onTap: () => Navigator.pushNamed(context, RoutesNames.changeDefaultAccount)),
+      ButtonModel(name:"Change limit",icon: Icons.money,onTap: (){
+        Navigator.pushNamed(context, RoutesNames.changeLimit);
+      }),
+      ButtonModel(name: "Log Out", icon: Icons.logout, onTap: () => cubit.logOut()),
     ];
 
     return BlocListener<LogOutCubit, LogOutState>(
