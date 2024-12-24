@@ -26,15 +26,11 @@ class SettingView extends StatelessWidget {
           onTap: () =>
               Navigator.pushNamed(context, RoutesNames.privacySetting)),
       ButtonModel(
-          name: "Change Default",
-          icon: Icons.change_circle,
-          onTap: () =>
-              Navigator.pushNamed(context, RoutesNames.changeDefaultAccount)),
-      ButtonModel(
           name: "Change limit",
           icon: Icons.money,
           onTap: () {
-            Navigator.pushNamed(context, RoutesNames.changeLimit, arguments: UserModel.getInstance().defaultAcc?.id );
+            Navigator.pushNamed(context, RoutesNames.changeLimit,
+                arguments: UserModel.getInstance().defaultAcc?.id);
           }),
       ButtonModel(
         name: "Log Out",
@@ -67,13 +63,12 @@ class SettingView extends StatelessWidget {
           );
         },
       ),
-       ButtonModel(
+      ButtonModel(
           name: "Analytics",
           icon: Icons.analytics_sharp,
           onTap: () {
-             Navigator.pushNamed(context, RoutesNames.analyticsView);
+            Navigator.pushNamed(context, RoutesNames.analyticsView);
           }),
-
     ];
 
     return BlocListener<LogOutCubit, LogOutState>(

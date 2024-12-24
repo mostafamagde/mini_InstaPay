@@ -50,7 +50,6 @@ import 'package:untitled2/features/setting_view/presentation/manager/change_defa
 import 'package:untitled2/features/setting_view/presentation/manager/change_email_cubit/change_email_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_password_cubit/change_password_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_credintials.dart';
-import 'package:untitled2/features/setting_view/presentation/views/change_default_account.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_email_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/change_password_view.dart';
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
@@ -147,15 +146,7 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-      case RoutesNames.changeDefaultAccount:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider<ChangeDefaultAccCubit>(
-            create: (context) =>
-                ChangeDefaultAccCubit(ServiceLocator.getIt<SettingRepoImpl>()),
-            child: ChangeDefaultAccount(),
-          ),
-          settings: settings,
-        );
+      
       case RoutesNames.changeCridintials:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ChangeCredinitialsCubit>(

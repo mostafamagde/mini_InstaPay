@@ -137,6 +137,7 @@ final Future<void> Function(BankAccountModel model, int index,
                                     label: "IPIN",
                                     icon: Icons.pin,
                                     pass: true,
+                                    obsecure: true,
                                     inputType: TextInputType.visiblePassword,
                                     valid: Validation.validateRegularTextField),
                                 actions: [
