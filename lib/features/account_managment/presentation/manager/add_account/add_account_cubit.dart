@@ -1,11 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/account_managment/data/models/add_account_model.dart';
-
 import '../../../data/repos/bank_repo.dart';
-import '../get_all_banks/banks_cubit.dart';
 
 part 'add_account_state.dart';
 

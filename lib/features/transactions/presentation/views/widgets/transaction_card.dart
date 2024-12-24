@@ -4,7 +4,6 @@ import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
-import 'package:untitled2/features/transactions/presentation/views/transaction_details.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({super.key, required this.transaction});

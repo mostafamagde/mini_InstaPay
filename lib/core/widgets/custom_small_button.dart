@@ -19,7 +19,7 @@ class CustomSmallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var media = MediaQuery.of(context).size;
+    // var media = MediaQuery.of(context).size;
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: padding,vertical: verticalPadding),
       child: InkWell(
@@ -34,6 +34,7 @@ class CustomSmallButton extends StatelessWidget {
           padding: EdgeInsets.only(left: 4,right:4,bottom: 16),
           width: double.infinity,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
