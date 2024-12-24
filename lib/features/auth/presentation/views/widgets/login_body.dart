@@ -76,6 +76,10 @@ class _LoginBodyState extends State<LoginBody> {
                       inputType: TextInputType.visiblePassword,
                       controller: _passwordController,
                       valid: Validation.validatePasswordTextField,
+                      obsecure: true,
+                      pass: true,
+
+
                     ),
                     CustomTextButton(
                       label: "Forget Password",
