@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/routes_manager/routes_names.dart';
 import '../../../../core/widgets/CustomTitleContainer.dart';
 import '../../../../core/widgets/custom_small_button.dart';

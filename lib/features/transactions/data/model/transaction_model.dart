@@ -1,6 +1,8 @@
+import 'package:untitled2/features/transactions/data/model/user_model.dart';
+
 class TransactionModel {
   final String id;
-   String status;
+  String status;
   final String type;
   final double amount;
   final User sender;
@@ -45,46 +47,5 @@ class TransactionModel {
   String toString() {
     return 'TransactionModel(id: $id, status: $status, type: $type, amount: $amount, '
         'sender: $sender, receiver: $receiver, createdAt: $createdAt)';
-  }
-}
-
-class User {
-  final String id;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String userName;
-
-  User({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.userName,
-  });
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['_id'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      email: json['email'],
-      userName: json['userName'], 
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'firstName': firstName,
-      'lastName': lastName,
-      'email': email,
-      'userName': userName, 
-    };
-  }
-
-  @override
-  String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, email: $email, userName: $userName)';
   }
 }

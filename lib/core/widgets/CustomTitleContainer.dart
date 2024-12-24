@@ -6,7 +6,7 @@ class CustomTitleContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size media = MediaQuery.of(context).size;
+    // Size media = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     return Container(
       padding: EdgeInsets.only(bottom: 32),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/reports/presentation/views/widgets/account_usage_analysis_screen_body.dart';
 
 class AccountUsageAnalysisScreen extends StatelessWidget {
@@ -6,8 +7,12 @@ class AccountUsageAnalysisScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Constants.secondaryOrangeColor,
+        title: Text('Usage Analysis', style: TextStyle(color: Colors.white, fontSize: 26)),
+        centerTitle: true,
+      ),
       body: AccountUsageAnalysisScreenBody(),
     );
   }

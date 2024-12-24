@@ -1,5 +1,5 @@
 import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
-import 'package:untitled2/features/reports/domain/repo_interface/transactions_summary_repo_interface.dart';
+import 'package:untitled2/features/reports/domain/repo_interface/transactions_summary_repo.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 
