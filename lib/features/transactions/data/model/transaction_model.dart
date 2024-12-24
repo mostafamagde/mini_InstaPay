@@ -1,12 +1,12 @@
-import 'package:untitled2/features/transactions/data/model/user_model.dart';
+import 'package:untitled2/features/transactions/data/model/transaction_user_model.dart';
 
 class TransactionModel {
   final String id;
   String status;
   final String type;
   final double amount;
-  final User sender;
-  final User receiver;
+  final TransactionUserModel sender;
+  final TransactionUserModel receiver;
   final DateTime createdAt;
 
   TransactionModel({
@@ -25,8 +25,8 @@ class TransactionModel {
       status: json['status'],
       type: json['type'],
       amount: (json['amount'] as num).toDouble(),
-      sender: User.fromJson(json['sender']),
-      receiver: User.fromJson(json['reciever']), // Corrected to match JSON key
+      sender: TransactionUserModel.fromJson(json['sender']),
+      receiver: TransactionUserModel.fromJson(json['reciever']), // Corrected to match JSON key
       createdAt: DateTime.parse(json['createdAt']),
     );
   }

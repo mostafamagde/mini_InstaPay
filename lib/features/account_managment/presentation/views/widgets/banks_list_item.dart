@@ -6,14 +6,13 @@ import 'package:untitled2/features/account_managment/data/models/bank_model.dart
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BanksListItem extends StatelessWidget {
-  final BankModel bank;
-
   const BanksListItem({super.key, required this.bank});
+
+  final BankModel bank;
 
   @override
   Widget build(BuildContext context) {
-    Size media = MediaQuery.of(context).size;
-    var theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -24,8 +23,6 @@ class BanksListItem extends StatelessWidget {
           arguments: bank,
         ),
         child: Container(
-          width: media.width * .85,
-          height: media.height * .085,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Colors.white,
@@ -35,9 +32,7 @@ class BanksListItem extends StatelessWidget {
           ),
           child: Column(
             children: [
-              SizedBox(
-                height: 15,
-              ),
+              SizedBox(height: 15),
               Row(
                 children: [
                   SizedBox(
@@ -56,9 +51,7 @@ class BanksListItem extends StatelessWidget {
                       color: Constants.secondaryOrangeColor,
                     )),
                   ),
-                  SizedBox(
-                    width: 32,
-                  ),
+                  SizedBox(width: 32),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -68,11 +61,10 @@ class BanksListItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: 8,
-                  ),
+                  SizedBox(width: 8),
                 ],
               ),
+              SizedBox(height: 15),
             ],
           ),
         ),

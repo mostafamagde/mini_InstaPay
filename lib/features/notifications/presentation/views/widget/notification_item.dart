@@ -13,7 +13,6 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = UserModel.instance;
     return ListTile(
       leading: Icon(
         notification.isRead ? Icons.notifications_none : Icons.notifications_active,
@@ -29,7 +28,7 @@ class NotificationItem extends StatelessWidget {
         notification.createdAt.toLocal().toString(),
         style: const TextStyle(fontSize: 12),
       ),
-      trailing: (notification.type == Constants.RequestSendString && user.role != "Admin") || (notification.type == Constants.kRequestRefund && user.role == "Admin")
+      trailing: (notification.type == Constants.RequestSendString && UserModel.instance.role != "Admin") || (notification.type == Constants.kRequestRefund && UserModel.instance.role == "Admin")
           ? notification.isRead
               ? Text("Closed")
               : Row(

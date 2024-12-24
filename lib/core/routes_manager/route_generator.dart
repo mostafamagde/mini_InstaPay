@@ -136,7 +136,7 @@ class RouteGenerator {
       case RoutesNames.AddBankAccount:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<AddAccountCubit>(
-            create: (context) => AddAccountCubit(),
+            create: (context) => AddAccountCubit(ServiceLocator.getIt<BankRepoImpl>()),
             child: AddBankAccount(),
           ),
           settings: settings,

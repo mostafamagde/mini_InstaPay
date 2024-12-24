@@ -33,16 +33,15 @@ class SettingRepoImpl implements SettingRepo {
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        UserModel user = UserModel.instance;
         try {
           final apiManager = ApiManager();
           final userDataResponse = await apiManager.get(
             ApiConstants.getUserData,
             headers: {
-              "token": user.token,
+              "token": UserModel.instance.token,
             },
           );
-          user.setFromjson(userDataResponse.data["data"]);
+          UserModel.instance.setFromjson(userDataResponse.data["data"]);
         } catch (e) {}
       }
       return right("Chang");

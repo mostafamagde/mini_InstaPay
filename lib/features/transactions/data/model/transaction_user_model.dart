@@ -1,11 +1,11 @@
-class User {
+class TransactionUserModel {
   String id;
   String firstName;
   String lastName;
   String email;
   String userName;
 
-  User({
+  TransactionUserModel({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -13,8 +13,8 @@ class User {
     required this.userName,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory TransactionUserModel.fromJson(Map<String, dynamic> json) {
+    return TransactionUserModel(
       id: json['_id'],
       firstName: json['firstName'],
       lastName: json['lastName'],
@@ -33,8 +33,8 @@ class User {
     };
   }
 
-  factory User.init() {
-    return User(
+  factory TransactionUserModel.init() {
+    return TransactionUserModel(
       id: '',
       firstName: '',
       lastName: '',

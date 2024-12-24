@@ -20,8 +20,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     BlocProvider.of<NotificationsCubit>(context).getNotification();
-    UserModel user = UserModel.instance;
-    print(user.token);
+    print(UserModel.instance.token);
     var theme = Theme.of(context);
     return Scaffold(
       body: CustomScrollView(slivers: [
@@ -31,8 +30,8 @@ class HomeView extends StatelessWidget {
               Column(
                 children: [
                   CustomTitleContainer(
-                    title: '''${user.firstName![0].toUpperCase() + user.firstName!.substring(1)}
-${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
+                    title: '''${UserModel.instance.firstName![0].toUpperCase() + UserModel.instance.firstName!.substring(1)}
+${UserModel.instance.lastName![0].toUpperCase() + UserModel.instance.lastName!.substring(1)}''',
                   ),
                   SizedBox(
                     height: 50,

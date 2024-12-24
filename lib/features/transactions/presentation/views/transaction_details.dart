@@ -7,7 +7,7 @@ import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
-import 'package:untitled2/features/transactions/data/model/user_model.dart';
+import 'package:untitled2/features/transactions/data/model/transaction_user_model.dart';
 import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
@@ -16,8 +16,7 @@ class TransactionDetailsScreen extends StatelessWidget {
   }) : super(key: key);
 
   Widget showButton(TransactionModel transaction, context) {
-    final user = UserModel.instance;
-    if (user.role != 'Admin' && user.id == transaction.sender.id && transaction.status == Constants.kSuccessString) {
+    if (UserModel.instance.role != 'Admin' && UserModel.instance.id == transaction.sender.id && transaction.status == Constants.kSuccessString) {
       return CustomButton(
         onTap: () {
           BlocProvider.of<TransactionCubit>(context).requestRefund(transaction.id);
@@ -25,7 +24,7 @@ class TransactionDetailsScreen extends StatelessWidget {
         label: "Request Refund",
         color: Colors.red.shade700,
       );
-    } else if (user.role == 'Admin' && transaction.status == Constants.kSuccessString) {
+    } else if (UserModel.instance.role == 'Admin' && transaction.status == Constants.kSuccessString) {
       return CustomButton(
         onTap: () {
           BlocProvider.of<TransactionCubit>(context).markAsSuspicious(transaction.id);
@@ -163,7 +162,7 @@ class TransactionDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildUserDetail(String label, User user) {
+  Widget _buildUserDetail(String label, TransactionUserModel user) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -8,17 +8,17 @@ import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
-import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
+import 'package:untitled2/features/account_managment/data/models/account_data.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
 
-// ignore: must_be_immutable
 class UserAccountsListItem extends StatelessWidget {
-  UserAccountsListItem({super.key, required this.bank, required this.index, required this.deleteAccount});
+  UserAccountsListItem({super.key, required this.banks, required this.index, required this.deleteAccount});
 
-  final BankAccountModel bank;
+  final List<BankAccountData> banks;
   final int index;
-  final Future<void> Function(BankAccountModel model, int index, TextEditingController inputController) deleteAccount;
-  TextEditingController inputController = TextEditingController();
+  final Future<void> Function(List<BankAccountData> model, int index, TextEditingController inputController) deleteAccount;
+  final TextEditingController inputController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
@@ -42,7 +42,7 @@ class UserAccountsListItem extends StatelessWidget {
                 width: 15,
               ),
               CachedNetworkImage(
-                imageUrl: bank.data![index].bankId!.logo!,
+                imageUrl: banks[index].bankId!.logo!,
                 width: 50,
                 height: 50,
                 placeholder: (context, _) => Center(
@@ -72,23 +72,24 @@ class UserAccountsListItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "PREPAID****${bank.data?[index].cardNo}",
+                      "PREPAID****${banks[index].cardNo}",
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
                 ),
               ),
               IconButton(
-                  onPressed: () {
-                    Clipboard.setData(
-                      ClipboardData(text: bank.data![index].id!),
-                    );
-                    snackBar(content: "Copied to ClipBoard", context: context, color: Colors.green);
-                  },
-                  icon: Icon(
-                    Icons.copy,
-                    color: Colors.grey,
-                  )),
+                onPressed: () {
+                  Clipboard.setData(
+                    ClipboardData(text: banks[index].id!),
+                  );
+                  snackBar(content: "Copied to ClipBoard", context: context, color: Colors.green);
+                },
+                icon: Icon(
+                  Icons.copy,
+                  color: Colors.grey,
+                ),
+              ),
               PopupMenuButton<String>(
                 color: Colors.white,
                 elevation: 20,
@@ -100,14 +101,14 @@ class UserAccountsListItem extends StatelessWidget {
                       value: '1',
                       child: const Text('See Balance'),
                       onTap: () {
-                        Navigator.pushNamed(context, RoutesNames.pinView, arguments: bank.data?[index].id);
+                        Navigator.pushNamed(context, RoutesNames.pinView, arguments: banks[index].id);
                       },
                     ),
                     PopupMenuItem(
                       value: '2',
                       child: const Text('Change pin'),
                       onTap: () {
-                        Navigator.pushNamed(context, RoutesNames.changePin, arguments: bank.data![index].id!);
+                        Navigator.pushNamed(context, RoutesNames.changePin, arguments: banks[index].id!);
                       },
                     ),
                     PopupMenuItem(
@@ -138,7 +139,7 @@ class UserAccountsListItem extends StatelessWidget {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      deleteAccount(bank, index, inputController);
+                                      deleteAccount(banks, index, inputController);
                                       Navigator.pop(context);
                                     },
                                     child: Text(
@@ -155,14 +156,14 @@ class UserAccountsListItem extends StatelessWidget {
                       value: '4',
                       child: Text('Change Limit'),
                       onTap: () {
-                        Navigator.pushNamed(context, RoutesNames.changeLimit, arguments: bank.data![index].id);
+                        Navigator.pushNamed(context, RoutesNames.changeLimit, arguments: banks[index].id);
                       },
                     ),
                     PopupMenuItem(
                       value: '5',
                       child: Text('Make Default'),
                       onTap: () {
-                        BlocProvider.of<ChangeDefaultAccCubit>(context).changeDefault(bank.data![index].id!);
+                        BlocProvider.of<ChangeDefaultAccCubit>(context).changeDefault(banks[index].id!);
                       },
                     )
                   ];

@@ -3,13 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/errors/errors.dart';
 import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
+import 'package:untitled2/features/account_managment/data/models/account_data.dart';
 import 'package:untitled2/features/account_managment/data/models/add_account_model.dart';
-
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
-
-import '../../../../core/errors/errors.dart';
 import 'bank_repo.dart';
 
 class BankRepoImpl implements BankRepository {
@@ -21,22 +19,23 @@ class BankRepoImpl implements BankRepository {
   }
 
   @override
-  Future<BankAccountModel> getAllBankAccounts() async {
+  Future<List<BankAccountData>> getAllBankAccounts() async {
     final response = await ApiManager().get(ApiConstants.addGetBankAccount, headers: {"token": UserModel.instance.token});
 
     print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      UserModel.instance.bankAccounts = BankAccountModel.fromJson(response.data);
+      UserModel.instance.bankAccounts = List.generate(response.data['data'].length, (int index) => BankAccountData.fromJson(response.data['data'][index]));
+      return UserModel.instance.bankAccounts ?? [];
     }
-    return BankAccountModel.fromJson(response.data);
+    return [];
   }
 
   @override
-  Future<void> deleteBankAccounts(BankAccountModel bank, int index, TextEditingController inputController) async {
-    final date = await ApiManager().delete('${ApiConstants.deleteAccount + bank.data![index].id!}', body: {"PIN": inputController.text}, headers: {"token": UserModel.instance.token});
+  Future<void> deleteBankAccounts(List<BankAccountData> banks, int index, TextEditingController inputController) async {
+    final date = await ApiManager().delete('${ApiConstants.deleteAccount + banks[index].id!}', body: {"PIN": inputController.text}, headers: {"token": UserModel.instance.token});
     if (date.statusCode == 200 || date.statusCode == 201) {
       if (UserModel.instance.bankAccounts != null) {
-        UserModel.instance.bankAccounts!.data!.removeWhere((element) => element.id == bank.data![index].id!);
+        UserModel.instance.bankAccounts!.removeWhere((element) => element.id == banks[index].id!);
       }
     }
   }
@@ -75,16 +74,15 @@ class BankRepoImpl implements BankRepository {
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
-      UserModel user = UserModel.instance;
       try {
         final apiManager = ApiManager();
         final userDataResponse = await apiManager.get(
           ApiConstants.getUserData,
           headers: {
-            "token": user.token,
+            "token": UserModel.instance.token,
           },
         );
-        user.setFromjson(userDataResponse.data["data"]);
+        UserModel.instance.setFromjson(userDataResponse.data["data"]);
       } catch (e) {}
     }
   }

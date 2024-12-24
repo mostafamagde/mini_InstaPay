@@ -2,17 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/account_managment/data/models/add_account_model.dart';
+import 'package:untitled2/features/account_managment/data/repos/bank_repo.dart';
 
 part 'add_account_state.dart';
 
 class AddAccountCubit extends Cubit<AddAccountState> {
-  AddAccountCubit() : super(AddAccountInitial());
+  AddAccountCubit(this._bankRepository) : super(AddAccountInitial());
 
+  final BankRepository _bankRepository;
   static AddAccountCubit get(context) => BlocProvider.of(context);
 
   Future<void> addAccount(AddAccountModel account) async {
     emit(AddAccountLoading());
     try {
+      await _bankRepository.addAccount(account);
       emit(AddAccountSuccess(msg: "added successfully"));
     } catch (e) {
       if (e is DioException) {
