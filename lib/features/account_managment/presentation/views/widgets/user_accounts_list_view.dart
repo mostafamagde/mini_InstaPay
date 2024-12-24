@@ -10,8 +10,7 @@ class UserAccountsListView extends StatelessWidget {
   });
 
   final BankAccountModel bank;
-  final Future<void> Function(BankAccountModel model, int index,
-      TextEditingController inputController) deleteAccount;
+  final Future<void> Function(BankAccountModel model, int index, TextEditingController inputController) deleteAccount;
 
   @override
   Widget build(BuildContext context) {

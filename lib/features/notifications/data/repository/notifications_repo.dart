@@ -6,30 +6,28 @@ import 'package:untitled2/features/notifications/data/models/notfication_model.d
 class NotificationsRepo {
   final _apiManger = ApiManager();
   Future<List<NotificationModel>> getAllNotifications() async {
-    final response = await _apiManger.get(ApiConstants.getAllNotifications, headers: {"token": UserModel.getInstance().token});
+    final response = await _apiManger.get(ApiConstants.getAllNotifications, headers: {"token": UserModel.instance.token});
     return (response.data['data'] as List).map((item) => NotificationModel.fromJson(item)).toList();
   }
 
   Future<void> readNotifications(String notificationId) async {
-    await _apiManger.patch(ApiConstants.readNotifications + notificationId, headers: {"token": UserModel.getInstance().token});
+    await _apiManger.patch(ApiConstants.readNotifications + notificationId, headers: {"token": UserModel.instance.token});
   }
 
   Future<void> rejectRequest({required String transactionId}) async {
-    await _apiManger.post(ApiConstants.rejectReceive + transactionId, {}, headers: {"token": UserModel.getInstance().token});
+    await _apiManger.post(ApiConstants.rejectReceive + transactionId, {}, headers: {"token": UserModel.instance.token});
   }
 
   Future<void> acceptRequest({required String transactionId, String? accountId, required String pin}) async {
     final body = {"accountId": accountId, "PIN": pin};
-    await _apiManger.post(ApiConstants.confirmReceive + transactionId, body, headers: {"token": UserModel.getInstance().token});
+    await _apiManger.post(ApiConstants.confirmReceive + transactionId, body, headers: {"token": UserModel.instance.token});
   }
+
   Future<void> rejectRefund({required String transactionId}) async {
-    await _apiManger.post(ApiConstants.rejectRefund , {
-      "transactionId": transactionId
-    }, headers: {"token": UserModel.getInstance().token});
+    await _apiManger.post(ApiConstants.rejectRefund, {"transactionId": transactionId}, headers: {"token": UserModel.instance.token});
   }
 
   Future<void> acceptRefund({required String transactionId}) async {
-  
-    await _apiManger.post(ApiConstants.acceptRefund,{"transactionId": transactionId }, headers: {"token": UserModel.getInstance().token});
+    await _apiManger.post(ApiConstants.acceptRefund, {"transactionId": transactionId}, headers: {"token": UserModel.instance.token});
   }
 }

@@ -17,17 +17,12 @@ class AddBankAccount extends StatefulWidget {
 }
 
 class _AddBankAccountState extends State<AddBankAccount> {
-  final List<TextEditingController> _cardNumberControllers =
-      List.generate(4, (_) => TextEditingController());
-  final List<TextEditingController> _pinControllers =
-      List.generate(6, (_) => TextEditingController());
-  final List<TextEditingController> _additionalFieldControllers =
-      List.generate(4, (_) => TextEditingController());
-  final List<FocusNode> _cardNumberFocusNodes =
-      List.generate(4, (_) => FocusNode());
+  final List<TextEditingController> _cardNumberControllers = List.generate(4, (_) => TextEditingController());
+  final List<TextEditingController> _pinControllers = List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> _additionalFieldControllers = List.generate(4, (_) => TextEditingController());
+  final List<FocusNode> _cardNumberFocusNodes = List.generate(4, (_) => FocusNode());
   final List<FocusNode> _pinFocusNodes = List.generate(6, (_) => FocusNode());
-  final List<FocusNode> _additionalFieldFocusNodes =
-      List.generate(4, (_) => FocusNode());
+  final List<FocusNode> _additionalFieldFocusNodes = List.generate(4, (_) => FocusNode());
   final TextEditingController _cardHolderController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
   final TextEditingController _expirationController = TextEditingController();
@@ -104,8 +99,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
   void _onExpirationChanged(String value) {
     if (value.length == 2 && !value.contains('/')) {
       _expirationController.text = "$value/";
-      _expirationController.selection = TextSelection.fromPosition(
-          TextPosition(offset: _expirationController.text.length));
+      _expirationController.selection = TextSelection.fromPosition(TextPosition(offset: _expirationController.text.length));
     }
   }
 
@@ -123,10 +117,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
     return BlocConsumer<AddAccountCubit, AddAccountState>(
       listener: (context, state) {
         if (state is AddAccountSuccess) {
-          snackBar(
-              content: "Added Successfully",
-              context: context,
-              color: Colors.green);
+          snackBar(content: "Added Successfully", context: context, color: Colors.green);
 
           Navigator.pushNamedAndRemoveUntil(
             context,
@@ -138,7 +129,8 @@ class _AddBankAccountState extends State<AddBankAccount> {
         if (state is AddAccountFailed) {
           snackBar(content: state.errorMessage, context: context);
         }
-      }, builder: (BuildContext context, AddAccountState state) {
+      },
+      builder: (BuildContext context, AddAccountState state) {
         return ModalProgressHUD(
           inAsyncCall: cubit.state is AddAccountLoading,
           child: Scaffold(
@@ -189,9 +181,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                       children: [
                         IconButton(
                           icon: Icon(
-                            _isPinVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                            _isPinVisible ? Icons.visibility : Icons.visibility_off,
                             color: Colors.grey,
                           ),
                           onPressed: _togglePinVisibility,
@@ -286,15 +276,11 @@ class _AddBankAccountState extends State<AddBankAccount> {
                             onFieldSubmitted: (value) async {
                               if (formKey.currentState!.validate()) {
                                 await cubit.addAccount(AddAccountModel(
-                                    cardNumber: _cardNumberControllers
-                                        .map((controller) => controller.text)
-                                        .join(),
+                                    cardNumber: _cardNumberControllers.map((controller) => controller.text).join(),
                                     cardHolderName: _cardHolderController.text,
                                     expirationDate: _expirationController.text,
                                     cvv: _cvvController.text,
-                                    pin: _pinControllers
-                                        .map((controller) => controller.text)
-                                        .join(),
+                                    pin: _pinControllers.map((controller) => controller.text).join(),
                                     bankId: bank.id));
                               }
                             },
@@ -308,8 +294,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
             ),
           ),
         );
-    },
-
+      },
     );
   }
 }

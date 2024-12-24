@@ -9,6 +9,7 @@ import 'package:untitled2/features/transaction_module/data/models/receive_model.
 import 'package:untitled2/features/transaction_module/presentation/manager/receive_cubit/receive_cubit.dart';
 import 'package:untitled2/features/transaction_module/presentation/views/widgets/transaction_box.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class ReceiveMoneyView extends StatelessWidget {
   ReceiveMoneyView({super.key});
 

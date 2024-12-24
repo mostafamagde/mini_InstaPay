@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     BlocProvider.of<NotificationsCubit>(context).getNotification();
-    UserModel user = UserModel.getInstance();
+    UserModel user = UserModel.instance;
     print(user.token);
     var theme = Theme.of(context);
     return Scaffold(
@@ -60,8 +60,8 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                       )
                     ],
                   ),
-                  if (UserModel.getInstance().defaultAcc != null) BankAccountManagment(),
-                  if (UserModel.getInstance().defaultAcc == null)
+                  if (UserModel.instance.defaultAcc != null) BankAccountManagment(),
+                  if (UserModel.instance.defaultAcc == null)
                     Container(
                       child: Center(
                         child: TextButton(

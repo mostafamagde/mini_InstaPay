@@ -13,7 +13,7 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = UserModel.getInstance();
+    final user = UserModel.instance;
     return ListTile(
       leading: Icon(
         notification.isRead ? Icons.notifications_none : Icons.notifications_active,

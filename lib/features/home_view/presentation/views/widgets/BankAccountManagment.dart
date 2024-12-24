@@ -14,7 +14,7 @@ class BankAccountManagment extends StatelessWidget {
   Widget build(BuildContext context) {
     Size media = MediaQuery.of(context).size;
     var theme = Theme.of(context);
-    print(UserModel.getInstance());
+    print(UserModel.instance);
     return Container(
       width: media.width * .9,
       padding: EdgeInsets.only(bottom: 16),
@@ -36,8 +36,7 @@ class BankAccountManagment extends StatelessWidget {
                 width: 15,
               ),
               CachedNetworkImage(
-                imageUrl:
-                    UserModel.getInstance().defaultAcc!.bankId?.logo ?? '',
+                imageUrl: UserModel.instance.defaultAcc!.bankId?.logo ?? '',
                 placeholder: (context, _) => Center(
                   child: CircularProgressIndicator(
                     color: Constants.primaryMouveColor,
@@ -58,13 +57,13 @@ class BankAccountManagment extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      UserModel.getInstance().email!,
+                      UserModel.instance.email!,
                       style: theme.textTheme.bodyMedium,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
                     Text(
-                      "************${UserModel.getInstance().defaultAcc?.cardInfo?.cardNo!}",
+                      "************${UserModel.instance.defaultAcc?.cardInfo?.cardNo!}",
                       style: theme.textTheme.bodySmall,
                     ),
                   ],
@@ -76,12 +75,9 @@ class BankAccountManagment extends StatelessWidget {
               IconButton(
                   onPressed: () {
                     Clipboard.setData(
-                      ClipboardData(text: UserModel.getInstance().email!),
+                      ClipboardData(text: UserModel.instance.email!),
                     );
-                    snackBar(
-                        content: "Copied to ClipBoard",
-                        context: context,
-                        color: Colors.green);
+                    snackBar(content: "Copied to ClipBoard", context: context, color: Colors.green);
                   },
                   icon: Icon(
                     Icons.copy,
@@ -103,8 +99,7 @@ class BankAccountManagment extends StatelessWidget {
                     text: "Update PIN",
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, RoutesNames.changePin,
-                        arguments: UserModel.getInstance().defaultAcc?.id);
+                    Navigator.pushNamed(context, RoutesNames.changePin, arguments: UserModel.instance.defaultAcc?.id);
                   },
                 ),
                 Container(
@@ -118,8 +113,7 @@ class BankAccountManagment extends StatelessWidget {
                     text: "Check Balance",
                   ),
                   onTap: () async {
-                    Navigator.pushNamed(context, RoutesNames.pinView,
-                        arguments: UserModel.getInstance().defaultAcc?.id);
+                    Navigator.pushNamed(context, RoutesNames.pinView, arguments: UserModel.instance.defaultAcc?.id);
                   },
                 ),
               ],
@@ -131,12 +125,12 @@ class BankAccountManagment extends StatelessWidget {
   }
 }
 /*final data = await ApiManager().post(
-                          "${ApiConstants.getBalance}${UserModel.getInstance().bankAccounts!.data?[0].id}",
+                          "${ApiConstants.getBalance}${UserModel.instance.bankAccounts!.data?[0].id}",
                           {
                             "PIN": "111111"
                           },
                           headers: {
-                            "token": UserModel.getInstance().token,
+                            "token": UserModel.instance.token,
                           });
                       if (data.statusCode == 201) {
                         print(data.data["data"]);

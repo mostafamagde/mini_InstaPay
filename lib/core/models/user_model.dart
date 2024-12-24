@@ -1,5 +1,4 @@
 import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
-
 import 'DefaultAcc.dart';
 
 class UserModel {
@@ -12,14 +11,15 @@ class UserModel {
   String? id;
   BankAccountModel? bankAccounts;
   String? role;
-
   DefaultAcc? defaultAcc;
 
-  static final UserModel _singleton = UserModel._internal();
+  // static final UserModel _singleton = UserModel._internal();
 
-  factory UserModel.getInstance() {
-    return _singleton;
-  }
+  // factory UserModel.instance {
+  //   return _singleton;
+  // }
+
+  static UserModel get instance => UserModel._();
 
   setFromjson(Map<String, dynamic> json) {
     print(json);
@@ -33,5 +33,5 @@ class UserModel {
     role = json['role'];
   }
 
-  UserModel._internal();
+  UserModel._();
 }

@@ -12,5 +12,5 @@ abstract class BankRepository {
   Future<void> deleteBankAccounts(BankAccountModel model, int index, TextEditingController inputController);
   Future<int> getBalance(String accId, String pin);
   Future<void> addAccount(AddAccountModel account);
-    Future<Either<ServerError,String>> changePin(String oldPin, String newPin,String accId);
+  Future<Either<ServerError, String>> changePin(String oldPin, String newPin, String accId);
 }

@@ -15,24 +15,28 @@ class ManageAccounts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ChangeDefaultAccCubit, ChangeState>(
-     listener: (context, state) {
-          if (state is ChangeFailed) {
-            snackBar(content: state.message, context: context);
-          } else if (state is ChangeSuccess) {
-            for (var item in UserModel.getInstance().bankAccounts!.data!) {
-              if (item.id == state.Id) {
-                var def = UserModel.getInstance().defaultAcc;
-                def?.cardInfo?.cardNo = item.cardNo;
-                def?.bankId?.logo = item.bankId?.logo;
-                def?.bankId?.name = item.bankId?.name;
-                def?.id = item.id;
-                break;
-              }
+      listener: (context, state) {
+        if (state is ChangeFailed) {
+          snackBar(content: state.message, context: context);
+        } else if (state is ChangeSuccess) {
+          for (var item in UserModel.instance.bankAccounts!.data!) {
+            if (item.id == state.Id) {
+              var def = UserModel.instance.defaultAcc;
+              def?.cardInfo?.cardNo = item.cardNo;
+              def?.bankId?.logo = item.bankId?.logo;
+              def?.bankId?.name = item.bankId?.name;
+              def?.id = item.id;
+              break;
             }
-            snackBar(content: "Changed Successfully", context: context, color: Colors.green);
-            Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (route) => false,);
           }
-        },
+          snackBar(content: "Changed Successfully", context: context, color: Colors.green);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesNames.layoutView,
+            (route) => false,
+          );
+        }
+      },
       builder: (context, state) {
         return ModalProgressHUD(
           inAsyncCall: state is ChangeLoading,
@@ -45,18 +49,14 @@ class ManageAccounts extends StatelessWidget {
                 snackBar(content: state.message, context: context);
               }
               if (state is ManageBankAccountsSuccess) {
-                snackBar(
-                    content: state.message,
-                    context: context,
-                    color: Colors.green);
+                snackBar(content: state.message, context: context, color: Colors.green);
               }
             },
             builder: (context, state) {
               var cubit = ManageBankAccountsCubit.get(context);
               return Scaffold(
                   bottomNavigationBar: CustomButton(
-                    onTap: () =>
-                        Navigator.pushNamed(context, RoutesNames.chooseBank),
+                    onTap: () => Navigator.pushNamed(context, RoutesNames.chooseBank),
                     label: "Add Account",
                   ),
                   appBar: AppBar(
@@ -89,7 +89,7 @@ class ManageAccounts extends StatelessWidget {
                             children: [
                               UserAccountsListView(
                                 deleteAccount: cubit.deleteBankAccount,
-                                bank: UserModel.getInstance().bankAccounts!,
+                                bank: UserModel.instance.bankAccounts!,
                               )
                             ],
                           ),

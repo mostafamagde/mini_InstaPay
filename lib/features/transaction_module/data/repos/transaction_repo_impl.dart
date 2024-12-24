@@ -22,7 +22,7 @@ class TransactionRepoImpl implements TransactionRepo {
         "amount": send.amount,
         "accountId": send.account ?? null,
       }, headers: {
-        "token": UserModel.getInstance().token,
+        "token": UserModel.instance.token,
       });
       return right(response.statusMessage ?? "success");
     } catch (e) {
@@ -42,7 +42,7 @@ class TransactionRepoImpl implements TransactionRepo {
         "amount": receive.amount,
         "accountId": receive.accountId ?? null,
       }, headers: {
-        "token": UserModel.getInstance().token,
+        "token": UserModel.instance.token,
       });
       return right(response.statusMessage ?? "success");
     } catch (e) {

@@ -20,7 +20,7 @@ class OtpChangeEmailRepo extends OtpRepository {
         "token": token,
         "otp": int.parse(otp),
       }, headers: {
-        "token": UserModel.getInstance().token
+        "token": UserModel.instance.token
       });
       if (response.statusCode != 201 && response.statusCode != 200) {
         throw Exception(response.data["message"]);
@@ -42,7 +42,7 @@ class OtpChangeEmailRepo extends OtpRepository {
   @override
   Future<void> resendOtp({required String token}) async {
     try {
-      final response = await _apiManager.post(ApiConstants.resendOtpEndPoint, {"token": token, "type": Constants.ConfirmChangeEmailString}, headers: {"token": UserModel.getInstance().token});
+      final response = await _apiManager.post(ApiConstants.resendOtpEndPoint, {"token": token, "type": Constants.ConfirmChangeEmailString}, headers: {"token": UserModel.instance.token});
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
       }

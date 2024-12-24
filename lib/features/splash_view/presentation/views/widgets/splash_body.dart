@@ -58,7 +58,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
       try {
         final token = await storage.read(key: "token");
         if (token != null && token.isNotEmpty) {
-          UserModel user = UserModel.getInstance();
+          UserModel user = UserModel.instance;
           user.token = token;
           final apiManager = ApiManager();
           final userDataResponse = await apiManager.get(

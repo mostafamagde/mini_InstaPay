@@ -27,7 +27,7 @@ class OtpLoginRepo extends OtpRepository {
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
       } else {
-        UserModel user = UserModel.getInstance();
+        UserModel user = UserModel.instance;
         user.token = response.data["token"];
         final storage = new FlutterSecureStorage();
         await storage.write(key: "token", value: user.token);
@@ -40,9 +40,8 @@ class OtpLoginRepo extends OtpRepository {
         }
         Navigator.pushNamedAndRemoveUntil(
           context,
-          user.role=='Admin'? RoutesNames.adminLayout :RoutesNames.layoutView,
+          user.role == 'Admin' ? RoutesNames.adminLayout : RoutesNames.layoutView,
           (Route<dynamic> route) => false,
-          
         );
       }
     } catch (e) {

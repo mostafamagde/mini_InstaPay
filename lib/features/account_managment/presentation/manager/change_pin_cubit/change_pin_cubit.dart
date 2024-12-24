@@ -6,7 +6,7 @@ part 'change_pin_state.dart';
 
 class ChangePinCubit extends Cubit<ChangePinState> {
   final BankRepository _bankRepository;
-  static ChangePinCubit get(context)=>BlocProvider.of(context);
+  static ChangePinCubit get(context) => BlocProvider.of(context);
 
   ChangePinCubit(this._bankRepository) : super(ChangePinInitial());
 
