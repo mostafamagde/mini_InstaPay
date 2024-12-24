@@ -33,5 +33,5 @@ class ApiConstants {
   static const String requestRefund ="/transaction/request-refund";
   static const String acceptRefund='/transaction/admin/approve-refund';
   static const String rejectRefund='/transaction/admin/reject-refund';
-  static const String updatePin='account/';
+  static const String updatePin='account/PIN/';
 }
