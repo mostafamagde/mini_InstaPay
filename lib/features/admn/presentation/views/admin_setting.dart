@@ -10,7 +10,6 @@ class AdminSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var cubit = LogOutCubit.get(context);
     return BlocListener<LogOutCubit, LogOutState>(
       listener: (context, state) {
@@ -19,7 +18,7 @@ class AdminSetting extends StatelessWidget {
           Navigator.pushNamedAndRemoveUntil(
             context,
             RoutesNames.loginView,
-                (route) => false,
+            (route) => false,
           );
         }
       },
@@ -34,15 +33,27 @@ class AdminSetting extends StatelessWidget {
             child: GridView(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               children: [
-
-
                 CustomSmallButton(
-                  padding: 25,
+                  icon: Icons.receipt_long,
+                  name: "Transactions Summary",
+                  padding: 15,
+                  verticalPadding: 15,
+                  onTap: () => Navigator.pushNamed(context, RoutesNames.transactionsSummary),
+                ),
+                CustomSmallButton(
+                  icon: Icons.bar_chart,
+                  name: "Usage Analysis",
+                  padding: 15,
+                  verticalPadding: 15,
+                  onTap: () => Navigator.pushNamed(context, RoutesNames.accountUsageAnalysis),
+                ),
+                CustomSmallButton(
+                  padding: 15,
                   name: "Log Out",
                   icon: Icons.logout,
+                  verticalPadding: 15,
                   onTap: () => cubit.logOut(),
                 ),
-
               ],
             ),
           ),

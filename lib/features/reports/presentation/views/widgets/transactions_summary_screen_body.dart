@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/reports/data/enums/months_enum.dart';
 import 'package:untitled2/features/reports/data/enums/transactions_range_enum.dart';
+import 'package:untitled2/features/reports/data/models/admin_transaction_summary_model.dart';
 import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
+import 'package:untitled2/features/reports/data/models/user_transaction_summary_model.dart';
 import 'package:untitled2/features/reports/presentation/manager/transaction_summary_view_cubit/transaction_summary_view_cubit.dart';
 import 'package:untitled2/features/reports/presentation/views/widgets/drop_down_menu_section.dart';
 import 'package:untitled2/features/reports/presentation/views/widgets/transaction_summary_section.dart';
@@ -15,7 +18,7 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TransactionSummaryViewCubit cubit = BlocProvider.of<TransactionSummaryViewCubit>(context);
-    late TransactionSummaryModel transactionSummaryModel = TransactionSummaryModel.init();
+    late TransactionSummaryModel transactionSummaryModel = UserModel.getInstance().role == 'Admin' ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
     final String initMonth = Month.values[DateTime.now().month - 1].value;
     final int initYear = DateTime.now().year;
     String month = initMonth;
@@ -28,7 +31,7 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
     return BlocConsumer<TransactionSummaryViewCubit, TransactionSummaryViewState>(
       listener: (context, state) {
         if (state is TransactionSummaryViewLoading) {
-          transactionSummaryModel = TransactionSummaryModel.init();
+          transactionSummaryModel = UserModel.getInstance().role == 'Admin' ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
         }
         if (state is TransactionSummaryViewSuccess) {
           transactionSummaryModel = state.transactionSummaryModel;
@@ -92,7 +95,7 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: TransactionSummarySection(model: transactionSummaryModel),
+                    child: TransactionSummarySection(transactionSummaryModel: transactionSummaryModel),
                   ),
                 ),
               ),

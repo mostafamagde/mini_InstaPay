@@ -60,7 +60,7 @@ class AccountUsageAnalysisScreenBody extends StatelessWidget {
                   padding: const EdgeInsets.all(15),
                   child: Column(
                     children: [
-                      TransactionSummarySection(model: showedModel.transactionSummaryModel),
+                      TransactionSummarySection(transactionSummaryModel: showedModel.transactionSummaryModel),
                       const SizedBox(height: 10),
                     ],
                   ),
