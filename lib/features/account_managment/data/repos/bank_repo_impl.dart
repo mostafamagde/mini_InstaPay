@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
@@ -7,6 +9,7 @@ import 'package:untitled2/features/account_managment/data/models/add_account_mod
 
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 
+import '../../../../core/errors/errors.dart';
 import 'bank_repo.dart';
 
 class BankRepoImpl implements BankRepository {
@@ -91,8 +94,27 @@ class BankRepoImpl implements BankRepository {
         },
       );
       user.setFromjson(userDataResponse.data["data"]);
-
-
     }
+  }
+
+  @override
+  Future<Either<ServerError,String>> changePin(String oldPin, String newPin, String accId) async {
+    try{
+      final response=  await ApiManager().patch(ApiConstants.updatePin + accId, headers: {
+        "token": UserModel.getInstance().token
+      }, data: {
+        "oldPIN": oldPin,
+        "newPIN": newPin,
+      });
+      return right(response.statusMessage??"PIN updated");
+    }catch(e){
+      if (e is DioException) {
+        return Left(ServerError(e.response?.data["message"] ?? "error"));
+      } else {
+        return left(ServerError("Something went wrong"));
+      }
+    }
+
+
   }
 }

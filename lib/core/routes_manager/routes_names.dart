@@ -24,4 +24,5 @@ class RoutesNames {
   static const String transactionDetails = 'transactionDetails';
   static const String transactionsSummary = 'transactionsSummary';
   static const String accountUsageAnalysis = 'accountUsageAnalysis';
+  static const String changePin = 'ChangePin';
 }

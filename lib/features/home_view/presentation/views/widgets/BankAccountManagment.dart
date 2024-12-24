@@ -36,7 +36,8 @@ class BankAccountManagment extends StatelessWidget {
                 width: 15,
               ),
               CachedNetworkImage(
-                imageUrl: UserModel.getInstance().defaultAcc!.bankId?.logo??'',
+                imageUrl:
+                    UserModel.getInstance().defaultAcc!.bankId?.logo ?? '',
                 placeholder: (context, _) => Center(
                   child: CircularProgressIndicator(
                     color: Constants.primaryMouveColor,
@@ -77,7 +78,10 @@ class BankAccountManagment extends StatelessWidget {
                     Clipboard.setData(
                       ClipboardData(text: UserModel.getInstance().email!),
                     );
-                    snackBar(content: "Copied to ClipBoard", context: context, color: Colors.green);
+                    snackBar(
+                        content: "Copied to ClipBoard",
+                        context: context,
+                        color: Colors.green);
                   },
                   icon: Icon(
                     Icons.copy,
@@ -95,10 +99,13 @@ class BankAccountManagment extends StatelessWidget {
               children: [
                 InkWell(
                   child: CustomAccountCardButton(
-                    icon: Icons.qr_code,
-                    text: "QR Code",
+                    icon: Icons.pin,
+                    text: "Update PIN",
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesNames.changePin,
+                        arguments: UserModel.getInstance().defaultAcc?.id);
+                  },
                 ),
                 Container(
                   width: 2,
@@ -111,7 +118,8 @@ class BankAccountManagment extends StatelessWidget {
                     text: "Check Balance",
                   ),
                   onTap: () async {
-                    Navigator.pushNamed(context, RoutesNames.pinView, arguments: UserModel.getInstance().defaultAcc?.id);
+                    Navigator.pushNamed(context, RoutesNames.pinView,
+                        arguments: UserModel.getInstance().defaultAcc?.id);
                   },
                 ),
               ],
