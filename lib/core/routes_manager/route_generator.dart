@@ -21,8 +21,10 @@ import 'package:untitled2/features/auth/presentation/views/forget_password_view.
 import 'package:untitled2/features/auth/presentation/views/login_view.dart';
 import 'package:untitled2/features/auth/presentation/views/signup_view.dart';
 import 'package:untitled2/features/reports/domain/use_cases/get_annual_transactions.dart';
+import 'package:untitled2/features/reports/domain/use_cases/get_each_user_transactions.dart';
 import 'package:untitled2/features/reports/domain/use_cases/get_monthly_transactions.dart';
 import 'package:untitled2/features/reports/presentation/manager/transaction_summary_view_cubit/transaction_summary_view_cubit.dart';
+import 'package:untitled2/features/reports/presentation/manager/usage_analysis_cubit/usage_analysis_cubit.dart';
 import 'package:untitled2/features/reports/presentation/views/account_usage_analysis_screen.dart';
 import 'package:untitled2/features/reports/presentation/views/analytics_view.dart';
 import 'package:untitled2/features/reports/presentation/views/transactions_summary_screen.dart';
@@ -234,7 +236,10 @@ class RouteGenerator {
         );
       case RoutesNames.accountUsageAnalysis:
         return MaterialPageRoute(
-          builder: (context) => const AccountUsageAnalysisScreen(),
+          builder: (context) => BlocProvider<UsageAnalysisCubit>(
+            create: (context) => UsageAnalysisCubit(ServiceLocator.getIt<GetEachUserTransactions>()),
+            child: const AccountUsageAnalysisScreen(),
+          ),
           settings: settings,
         );
       case RoutesNames.changePin:

@@ -4,15 +4,15 @@ import 'package:untitled2/features/transactions/data/model/transaction_model.dar
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 
 class GetEachUserTransactions {
-  const GetEachUserTransactions(this._transactionRepo, this.oneUserTransactionsRepo);
+  const GetEachUserTransactions(this._transactionRepo, this._oneUserTransactionsRepo);
 
   final TransactionRepository _transactionRepo;
-  final OneUserTransactionsRepo oneUserTransactionsRepo;
+  final OneUserTransactionsRepo _oneUserTransactionsRepo;
 
-  Future<List<OneUserTransactionsModel>> getAnnualTransactions(int year) async {
+  Future<List<OneUserTransactionsModel>> getEachUserTransactions() async {
     try {
       List<TransactionModel> result = await _transactionRepo.getUserTransactions();
-      return oneUserTransactionsRepo.getOneUserTransactions(result);
+      return _oneUserTransactionsRepo.getOneUserTransactions(result);
     } catch (_) {
       return [];
     }

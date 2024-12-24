@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DropDownMenuSection<T> extends StatelessWidget {
-  const DropDownMenuSection({super.key, required this.values, this.onSelected, this.horizontalPadding = 15, required this.initialSelection});
+  const DropDownMenuSection({super.key, required this.values, this.onSelected, this.horizontalPadding = 15, required this.initialSelection, this.labels});
 
   final List<T> values;
+  final List<String>? labels;
+
   final void Function(T? value)? onSelected;
   final double horizontalPadding;
   final T initialSelection;
@@ -21,7 +23,7 @@ class DropDownMenuSection<T> extends StatelessWidget {
         (int index) {
           return DropdownMenuEntry<T>(
             value: values[index],
-            label: values[index].toString(),
+            label: labels == null ? values[index].toString() : labels![index],
           );
         },
       ),
