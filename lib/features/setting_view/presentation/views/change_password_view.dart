@@ -44,6 +44,8 @@ class ChangePassword extends StatelessWidget {
                   icon: Icons.password,
                   inputType: TextInputType.visiblePassword,
                   valid: Validation.validatePasswordTextField,
+                  obsecure: true,
+                  pass: true,
                 ),
                 SizedBox(
                   height: 10.h,
@@ -54,6 +56,8 @@ class ChangePassword extends StatelessWidget {
                   icon: Icons.password,
                   inputType: TextInputType.visiblePassword,
                   valid: Validation.validatePasswordTextField,
+                  obsecure: true,
+                  pass: true,
                 ),
                 SizedBox(
                   height: 10,

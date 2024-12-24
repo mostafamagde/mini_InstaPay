@@ -15,10 +15,12 @@ class ChangeLimit extends StatefulWidget {
 }
 
 class _ChangeLimitState extends State<ChangeLimit> {
+  
   String _selectedOption = "Daily"; // Initial value
   TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final accountId= ModalRoute.of(context)?.settings.arguments as String ?;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Change Limit"),
@@ -74,14 +76,14 @@ class _ChangeLimitState extends State<ChangeLimit> {
                   height: 32,
                 ),
                 CustomButton(onTap: () {
-                  if(UserModel.getInstance().defaultAcc?.id ==null){
+                  if(accountId==null){
                     snackBar(content: "You don't have bank account", context: context);
                     return;
                   }
                   if(_controller.text.isEmpty){
                   snackBar(content: "Please enter limit", context: context);
                   }
-                  BlocProvider.of<ChangeLimitCubit>(context).changeLimit(limit: double.parse(_controller.text), duration: _selectedOption.toLowerCase(), accountId: UserModel.getInstance().defaultAcc!.id!);
+                  BlocProvider.of<ChangeLimitCubit>(context).changeLimit(limit: double.parse(_controller.text), duration: _selectedOption.toLowerCase(), accountId: accountId);
                 }, label: "Set Limit")
               ],
             ),

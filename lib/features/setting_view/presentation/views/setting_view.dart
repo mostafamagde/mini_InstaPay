@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
@@ -14,20 +15,73 @@ class SettingView extends StatelessWidget {
   Widget build(BuildContext context) {
     final LogOutCubit cubit = LogOutCubit.get(context);
     final List<ButtonModel> buttonModels = [
-      ButtonModel(name: "Profile Management", icon: Icons.settings, onTap: () => Navigator.pushNamed(context, RoutesNames.changeCridintials)),
-      ButtonModel(name: "Privacy Setting", icon: Icons.privacy_tip, onTap: () => Navigator.pushNamed(context, RoutesNames.privacySetting)),
-      ButtonModel(name: "Change Default", icon: Icons.change_circle, onTap: () => Navigator.pushNamed(context, RoutesNames.changeDefaultAccount)),
-      ButtonModel(name:"Change limit",icon: Icons.money,onTap: (){
-        Navigator.pushNamed(context, RoutesNames.changeLimit);
-      }),
-      ButtonModel(name: "Log Out", icon: Icons.logout, onTap: () => cubit.logOut()),
+      ButtonModel(
+          name: "Profile Management",
+          icon: Icons.settings,
+          onTap: () =>
+              Navigator.pushNamed(context, RoutesNames.changeCridintials)),
+      ButtonModel(
+          name: "Privacy Setting",
+          icon: Icons.privacy_tip,
+          onTap: () =>
+              Navigator.pushNamed(context, RoutesNames.privacySetting)),
+      ButtonModel(
+          name: "Change Default",
+          icon: Icons.change_circle,
+          onTap: () =>
+              Navigator.pushNamed(context, RoutesNames.changeDefaultAccount)),
+      ButtonModel(
+          name: "Change limit",
+          icon: Icons.money,
+          onTap: () {
+            Navigator.pushNamed(context, RoutesNames.changeLimit, arguments: UserModel.getInstance().defaultAcc?.id );
+          }),
+      ButtonModel(
+        name: "Log Out",
+        icon: Icons.logout,
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text(
+                "Are you sure you want to delete this account",
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Cancel"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    cubit.logOut();
+                  },
+                  child: Text(
+                    "Confirm",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+       ButtonModel(
+          name: "Analytics",
+          icon: Icons.analytics_sharp,
+          onTap: () {
+             Navigator.pushNamed(context, RoutesNames.analyticsView);
+          }),
+
     ];
 
     return BlocListener<LogOutCubit, LogOutState>(
       listener: (context, state) {
         if (state is LogOutSuccess) {
           print(state.successMessage);
-          Navigator.pushNamedAndRemoveUntil(context, RoutesNames.loginView, (route) => false);
+          Navigator.pushNamedAndRemoveUntil(
+              context, RoutesNames.loginView, (route) => false);
         }
       },
       child: CustomScrollView(

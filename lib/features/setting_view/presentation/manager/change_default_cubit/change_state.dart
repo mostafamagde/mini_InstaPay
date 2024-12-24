@@ -12,9 +12,9 @@ final class ChangeFailed extends ChangeState {
 }
 
 final class ChangeSuccess extends ChangeState {
-  final String message;
+  final String Id;
 
-  ChangeSuccess({required this.message});
+  ChangeSuccess({required this.Id});
 }
 
 final class ChangeLoading extends ChangeState {}

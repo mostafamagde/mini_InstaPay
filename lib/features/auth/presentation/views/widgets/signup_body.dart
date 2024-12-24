@@ -112,6 +112,9 @@ class _SignupBodyState extends State<SignupBody> {
                       inputType: TextInputType.emailAddress,
                       valid: Validation.validatePasswordTextField,
                       controller: passwordController,
+                      pass: true,
+                      obsecure: true,
+
                     ),
                     SizedBox(
                       height: 8,

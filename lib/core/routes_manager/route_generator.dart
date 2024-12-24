@@ -66,10 +66,17 @@ class RouteGenerator {
         );
       case RoutesNames.ManageAccounts:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<ManageBankAccountsCubit>(
-            create: (context) =>
-                ManageBankAccountsCubit(ServiceLocator.getIt<BankRepoImpl>())
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<ManageBankAccountsCubit>(
+                create: (context) => ManageBankAccountsCubit(
+                    ServiceLocator.getIt<BankRepoImpl>())
                   ..fetchUserBanks(),
+              ),
+              BlocProvider(
+                create: (context) => ChangeDefaultAccCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+              ),
+            ],
             child: const ManageAccounts(),
           ),
           settings: settings,
@@ -276,7 +283,8 @@ class RouteGenerator {
       case RoutesNames.changeLimit:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => ChangeLimitCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+            create: (context) =>
+                ChangeLimitCubit(ServiceLocator.getIt<SettingRepoImpl>()),
             child: const ChangeLimit(),
           ),
           settings: settings,
