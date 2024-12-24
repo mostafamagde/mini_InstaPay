@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
@@ -7,6 +9,7 @@ import 'package:untitled2/features/account_managment/data/models/add_account_mod
 
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
 
+import '../../../../core/errors/errors.dart';
 import 'bank_repo.dart';
 
 class BankRepoImpl implements BankRepository {
@@ -20,11 +23,15 @@ class BankRepoImpl implements BankRepository {
   @override
   Future<BankAccountModel> getAllBankAccounts() async {
     final response = await ApiManager().get(ApiConstants.addGetBankAccount,
-        headers: {"token": UserModel.getInstance().token});
+        headers: {"token": UserModel
+            .getInstance()
+            .token});
 
     print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      UserModel.getInstance().bankAccounts =
+      UserModel
+          .getInstance()
+          .bankAccounts =
           BankAccountModel.fromJson(response.data);
     }
     return BankAccountModel.fromJson(response.data);
@@ -36,10 +43,15 @@ class BankRepoImpl implements BankRepository {
     final date = await ApiManager().delete(
         '${ApiConstants.deleteAccount + bank.data![index].id!}',
         body: {"PIN": inputController.text},
-        headers: {"token": UserModel.getInstance().token});
+        headers: {"token": UserModel
+            .getInstance()
+            .token});
     if (date.statusCode == 200 || date.statusCode == 201) {
-      if (UserModel.getInstance().bankAccounts != null) {
-        UserModel.getInstance()
+      if (UserModel
+          .getInstance()
+          .bankAccounts != null) {
+        UserModel
+            .getInstance()
             .bankAccounts!
             .data!
             .removeWhere((element) => element.id == bank.data![index].id!);
@@ -52,7 +64,9 @@ class BankRepoImpl implements BankRepository {
     final data = await ApiManager().post("${ApiConstants.getBalance}${accId}", {
       "PIN": pin
     }, headers: {
-      "token": UserModel.getInstance().token,
+      "token": UserModel
+          .getInstance()
+          .token,
     });
     if (data.statusCode == 200 || data.statusCode == 201) {
       return data.data['data'];
@@ -77,22 +91,45 @@ class BankRepoImpl implements BankRepository {
         "PIN": account.pin
       },
       headers: {
-        "token": UserModel.getInstance().token,
+        "token": UserModel
+            .getInstance()
+            .token,
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
       UserModel user = UserModel.getInstance();
+      try {
+        final apiManager = ApiManager();
+        final userDataResponse = await apiManager.get(
+          ApiConstants.getUserData,
+          headers: {
+            "token": user.token,
+          },
+        );
+        user.setFromjson(userDataResponse.data["data"]);
+      } catch (e) {}
+    }}
 
-      final apiManager = ApiManager();
-      final userDataResponse = await apiManager.get(
-        ApiConstants.getUserData,
-        headers: {
-          "token": user.token,
-        },
-      );
-      user.setFromjson(userDataResponse.data["data"]);
-
-
+    @override
+    Future<Either<ServerError, String>> changePin(String oldPin, String newPin,
+        String accId) async {
+      try {
+        final response = await ApiManager().patch(
+            ApiConstants.updatePin + accId, headers: {
+          "token": UserModel
+              .getInstance()
+              .token
+        }, data: {
+          "oldPIN": oldPin,
+          "newPIN": newPin,
+        });
+        return right(response.statusMessage ?? "PIN updated");
+      } catch (e) {
+        if (e is DioException) {
+          return Left(ServerError(e.response?.data["message"] ?? "error"));
+        } else {
+          return left(ServerError("Something went wrong"));
+        }
+      }
     }
   }
-}

@@ -120,7 +120,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
     var cubit = AddAccountCubit.get(context);
     var bank = ModalRoute.of(context)?.settings.arguments as BankModel;
     var formKey = GlobalKey<FormState>();
-    return BlocListener<AddAccountCubit, AddAccountState>(
+    return BlocConsumer<AddAccountCubit, AddAccountState>(
       listener: (context, state) {
         if (state is AddAccountSuccess) {
           snackBar(
@@ -138,176 +138,178 @@ class _AddBankAccountState extends State<AddBankAccount> {
         if (state is AddAccountFailed) {
           snackBar(content: state.errorMessage, context: context);
         }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Add Bank Account'),
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: ModalProgressHUD(
-              inAsyncCall: cubit.state is AddAccountLoading,
-              child: Column(
-                children: [
-                  CustomTitleContainer(title: "Enter card Info"),
-                  CustomTextField(
-                    label: 'Card Holder Name',
-                    icon: Icons.person,
-                    inputType: TextInputType.name,
-                    valid: Validation.validateRegularTextField,
-                    controller: _cardHolderController,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(4, (index) {
-                      return Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      }, builder: (BuildContext context, AddAccountState state) {
+        return ModalProgressHUD(
+          inAsyncCall: cubit.state is AddAccountLoading,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text('Add Bank Account'),
+              centerTitle: true,
+            ),
+            body: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    CustomTitleContainer(title: "Enter card Info"),
+                    CustomTextField(
+                      label: 'Card Holder Name',
+                      icon: Icons.person,
+                      inputType: TextInputType.name,
+                      valid: Validation.validateRegularTextField,
+                      controller: _cardHolderController,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(4, (index) {
+                        return Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: TextFormField(
+                              maxLines: 1,
+                              validator: Validation.validateCardNumberTextField,
+                              controller: _cardNumberControllers[index],
+                              focusNode: _cardNumberFocusNodes[index],
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
+                              maxLength: 4,
+                              decoration: InputDecoration(
+                                counterText: "",
+                                labelText: 'Card',
+                                border: OutlineInputBorder(),
+                              ),
+                              onChanged: (_) => _onCardNumberChanged(index),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            _isPinVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey,
+                          ),
+                          onPressed: _togglePinVisibility,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(4, (index) {
+                        return Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: TextFormField(
+                              obscureText: !_isPinVisible,
+                              maxLines: 1,
+                              validator: Validation.validateRegularTextField,
+                              controller: _additionalFieldControllers[index],
+                              focusNode: _additionalFieldFocusNodes[index],
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
+                              maxLength: 1,
+                              decoration: InputDecoration(
+                                labelText: 'CPIN',
+                                border: OutlineInputBorder(),
+                              ),
+                              onChanged: (_) => _onAdditionalFieldChanged(index),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(6, (index) {
+                        return Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: TextFormField(
+                              maxLines: 1,
+                              validator: Validation.validateRegularTextField,
+                              controller: _pinControllers[index],
+                              focusNode: _pinFocusNodes[index],
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
+                              maxLength: 1,
+                              obscureText: !_isPinVisible,
+                              decoration: InputDecoration(
+                                labelText: 'IPin',
+                                border: OutlineInputBorder(),
+                              ),
+                              onChanged: (_) => _onPinChanged(index),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
                           child: TextFormField(
                             maxLines: 1,
-                            validator: Validation.validateCardNumberTextField,
-                            controller: _cardNumberControllers[index],
-                            focusNode: _cardNumberFocusNodes[index],
+                            validator: Validation.validateCVVNumberTextField,
+                            controller: _cvvController,
+                            focusNode: _cvvFocusNode,
                             keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            maxLength: 4,
+                            maxLength: 3,
                             decoration: InputDecoration(
+                              labelText: 'CVV',
+                              border: OutlineInputBorder(),
                               counterText: "",
-                              labelText: 'Card',
-                              border: OutlineInputBorder(),
                             ),
-                            onChanged: (_) => _onCardNumberChanged(index),
+                            onChanged: _onCvvChanged,
                           ),
                         ),
-                      );
-                    }),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          _isPinVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Colors.grey,
-                        ),
-                        onPressed: _togglePinVisibility,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(4, (index) {
-                      return Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: TextFormField(
-                            obscureText: !_isPinVisible,
-                            maxLines: 1,
-                            validator: Validation.validateRegularTextField,
-                            controller: _additionalFieldControllers[index],
-                            focusNode: _additionalFieldFocusNodes[index],
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            maxLength: 1,
-                            decoration: InputDecoration(
-                              labelText: 'CPIN',
-                              border: OutlineInputBorder(),
-                            ),
-                            onChanged: (_) => _onAdditionalFieldChanged(index),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(6, (index) {
-                      return Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        SizedBox(width: 10),
+                        Expanded(
+                          flex: 3,
                           child: TextFormField(
                             maxLines: 1,
-                            validator: Validation.validateRegularTextField,
-                            controller: _pinControllers[index],
-                            focusNode: _pinFocusNodes[index],
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            maxLength: 1,
-                            obscureText: !_isPinVisible,
+                            validator: Validation.validateExpDateTextField,
+                            controller: _expirationController,
+                            focusNode: _expirationFocusNode,
+                            keyboardType: TextInputType.datetime,
                             decoration: InputDecoration(
-                              labelText: 'IPin',
+                              labelText: 'Expiration Date (MM/YY)',
                               border: OutlineInputBorder(),
                             ),
-                            onChanged: (_) => _onPinChanged(index),
+                            onChanged: _onExpirationChanged,
+                            onFieldSubmitted: (value) async {
+                              if (formKey.currentState!.validate()) {
+                                await cubit.addAccount(AddAccountModel(
+                                    cardNumber: _cardNumberControllers
+                                        .map((controller) => controller.text)
+                                        .join(),
+                                    cardHolderName: _cardHolderController.text,
+                                    expirationDate: _expirationController.text,
+                                    cvv: _cvvController.text,
+                                    pin: _pinControllers
+                                        .map((controller) => controller.text)
+                                        .join(),
+                                    bankId: bank.id));
+                              }
+                            },
                           ),
                         ),
-                      );
-                    }),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: TextFormField(
-                          maxLines: 1,
-                          validator: Validation.validateCVVNumberTextField,
-                          controller: _cvvController,
-                          focusNode: _cvvFocusNode,
-                          keyboardType: TextInputType.number,
-                          maxLength: 3,
-                          decoration: InputDecoration(
-                            labelText: 'CVV',
-                            border: OutlineInputBorder(),
-                            counterText: "",
-                          ),
-                          onChanged: _onCvvChanged,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        flex: 3,
-                        child: TextFormField(
-                          maxLines: 1,
-                          validator: Validation.validateExpDateTextField,
-                          controller: _expirationController,
-                          focusNode: _expirationFocusNode,
-                          keyboardType: TextInputType.datetime,
-                          decoration: InputDecoration(
-                            labelText: 'Expiration Date (MM/YY)',
-                            border: OutlineInputBorder(),
-                          ),
-                          onChanged: _onExpirationChanged,
-                          onFieldSubmitted: (value) async {
-                            if (formKey.currentState!.validate()) {
-                              await cubit.addAccount(AddAccountModel(
-                                  cardNumber: _cardNumberControllers
-                                      .map((controller) => controller.text)
-                                      .join(),
-                                  cardHolderName: _cardHolderController.text,
-                                  expirationDate: _expirationController.text,
-                                  cvv: _cvvController.text,
-                                  pin: _pinControllers
-                                      .map((controller) => controller.text)
-                                      .join(),
-                                  bankId: bank.id));
-                            }
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+    },
+
     );
   }
 }

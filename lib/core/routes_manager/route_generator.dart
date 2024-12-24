@@ -48,12 +48,13 @@ import 'package:untitled2/features/setting_view/presentation/views/change_passwo
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
 import 'package:untitled2/features/transactions/presentation/views/transaction_details.dart';
 import '../../features/account_managment/presentation/manager/add_account/add_account_cubit.dart';
+import '../../features/account_managment/presentation/manager/change_pin_cubit/change_pin_cubit.dart';
+import '../../features/account_managment/presentation/views/change_pin_view.dart';
 import '../../features/admn/presentation/views/admin_layout.dart';
 import '../../features/splash_view/presentation/views/splash_view.dart';
 import '../../features/transaction_module/data/repos/transaction_repo_impl.dart';
 import '../../features/transaction_module/presentation/manager/send_cubit/send_cubit.dart';
 import '../../features/transaction_module/presentation/views/send_pin.dart';
-
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -106,7 +107,8 @@ class RouteGenerator {
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider<TransactionCubit>(
-                create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
+                create: (context) => TransactionCubit(
+                    ServiceLocator.getIt<TransactionRepository>()),
               ),
               BlocProvider<NotificationsCubit>(
                 create: (context) => NotificationsCubit(NotificationsRepo()),
@@ -178,7 +180,8 @@ class RouteGenerator {
       case RoutesNames.allTransaction:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
+            create: (context) =>
+                TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             child: AllTransactionView(),
           ),
           settings: settings,
@@ -236,7 +239,8 @@ class RouteGenerator {
       case RoutesNames.transactionDetails:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
+            create: (context) =>
+                TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             child: TransactionDetailsScreen(),
           ),
           settings: settings,
@@ -244,7 +248,9 @@ class RouteGenerator {
       case RoutesNames.transactionsSummary:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => TransactionSummaryViewCubit(ServiceLocator.getIt<GetMonthlyTransactions>(), ServiceLocator.getIt<GetAnnualTransactions>()),
+            create: (context) => TransactionSummaryViewCubit(
+                ServiceLocator.getIt<GetMonthlyTransactions>(),
+                ServiceLocator.getIt<GetAnnualTransactions>()),
             child: const TransactionsSummaryScreen(),
           ),
           settings: settings,
@@ -252,6 +258,14 @@ class RouteGenerator {
       case RoutesNames.accountUsageAnalysis:
         return MaterialPageRoute(
           builder: (context) => AccountUsageAnalysisScreen(),
+          settings: settings,
+        );
+      case RoutesNames.changePin:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => ChangePinCubit(ServiceLocator.getIt<BankRepoImpl>()),
+            child: ChangePin(),
+          ),
           settings: settings,
         );
       default:

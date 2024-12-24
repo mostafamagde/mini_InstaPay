@@ -44,7 +44,9 @@ class ManageAccounts extends StatelessWidget {
             ),
             body: () {
               if (state is ManageBankAccountsFailed) {
-                return Container();
+                return Center(
+                  child: Text(state.message),
+                );
               } else if (state is ManageBankAccountsLoading) {
                 return Center(
                   child: CircularProgressIndicator(),

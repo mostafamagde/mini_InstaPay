@@ -24,11 +24,11 @@ class UserAccountsListView extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(top: 15),
+            padding: const EdgeInsets.only(top: 15, left: 10),
             child: Slidable(
               startActionPane: ActionPane(
                   motion: const DrawerMotion(),
-                  extentRatio: .28,
+                  extentRatio: .35,
                   children: [
                     SlidableAction(
                       padding: EdgeInsets.only(right: 10),
@@ -56,8 +56,7 @@ class UserAccountsListView extends StatelessWidget {
                                 actions: [
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .pop();
+                                      Navigator.of(context).pop();
                                     },
                                     child: Text("Cancel"),
                                   ),
@@ -85,8 +84,18 @@ class UserAccountsListView extends StatelessWidget {
                       foregroundColor: Colors.grey,
                       icon: Icons.balance,
                       onPressed: (BuildContext context) {
-                        Navigator.pushNamed(context, RoutesNames.pinView, arguments: bank.data?[index].id);
-
+                        Navigator.pushNamed(context, RoutesNames.pinView,
+                            arguments: bank.data?[index].id);
+                      },
+                    ),
+                    SlidableAction(
+                      padding: EdgeInsets.only(right: 15),
+                      backgroundColor: Constants.backgroundColor,
+                      foregroundColor: Colors.grey,
+                      icon: Icons.pin,
+                      onPressed: (BuildContext context) {
+                        Navigator.pushNamed(context, RoutesNames.changePin,
+                            arguments: bank.data![index].id!);
                       },
                     ),
                   ]),
