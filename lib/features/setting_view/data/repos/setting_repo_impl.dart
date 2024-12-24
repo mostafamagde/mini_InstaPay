@@ -14,39 +14,50 @@ class SettingRepoImpl implements SettingRepo {
   Future<Either<Errors, String>> changeCredintials(
       {required CredinitialsModel model}) async {
     ApiManager service = ApiManager();
-    try {
-      final response = await service.patch(
-        ApiConstants.changeCredintialsEndPoint,
-        data: {
-          "firstName": model.firstName,
-          "lastName": model.lastName,
-          "mobileNumber": model.phoneNumber,
-          "address": model.address,
-        },
-        headers: {
-          "token": UserModel.getInstance().token,
-        },
-      );
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        UserModel user = UserModel.getInstance();
-        try {
-          final apiManager = ApiManager();
-          final userDataResponse = await apiManager.get(
-            ApiConstants.getUserData,
-            headers: {
-              "token": user.token,
-            },
-          );
-          user.setFromjson(userDataResponse.data["data"]);
-        } catch (e) {}
-      }
-      return right("Chang");
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerError.fromDioError(e));
-      }
-      return left(ServerError(e.toString()));
+    if (model.address == UserModel
+        .getInstance()
+        .address && model.lastName == UserModel
+        .getInstance()
+        .lastName && model.phoneNumber == UserModel
+        .getInstance()
+        .mobileNumber&&model.firstName==UserModel.getInstance().firstName){
+      return left(ServerError("You cant submit the same info"));
     }
+      try {
+        final response = await service.patch(
+          ApiConstants.changeCredintialsEndPoint,
+          data: {
+            "firstName": model.firstName,
+            "lastName": model.lastName,
+            "mobileNumber": model.phoneNumber,
+            "address": model.address,
+          },
+          headers: {
+            "token": UserModel
+                .getInstance()
+                .token,
+          },
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          UserModel user = UserModel.getInstance();
+          try {
+            final apiManager = ApiManager();
+            final userDataResponse = await apiManager.get(
+              ApiConstants.getUserData,
+              headers: {
+                "token": user.token,
+              },
+            );
+            user.setFromjson(userDataResponse.data["data"]);
+          } catch (e) {}
+        }
+        return right("Chang");
+      } catch (e) {
+        if (e is DioException) {
+          return left(ServerError.fromDioError(e));
+        }
+        return left(ServerError(e.toString()));
+      }
   }
 
   @override
@@ -56,15 +67,18 @@ class SettingRepoImpl implements SettingRepo {
       final response = await service.post(
         ApiConstants.changeEmail,
         headers: {
-          "token": UserModel.getInstance().token,
+          "token": UserModel
+              .getInstance()
+              .token,
         },
         {
           "email": email,
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-         UserModel.getInstance().email=email;
-
+        UserModel
+            .getInstance()
+            .email = email;
       }
       return right(response.data["token"]);
     } catch (e) {
@@ -83,7 +97,9 @@ class SettingRepoImpl implements SettingRepo {
       await service.patch(
         ApiConstants.updatePassword,
         headers: {
-          "token": UserModel.getInstance().token,
+          "token": UserModel
+              .getInstance()
+              .token,
         },
         data: {
           "newPassword": newPass,
@@ -107,7 +123,9 @@ class SettingRepoImpl implements SettingRepo {
         ApiConstants.logOut,
         {},
         headers: {
-          "token": UserModel.getInstance().token,
+          "token": UserModel
+              .getInstance()
+              .token,
         },
       );
       return Right("LogOut successfully");
@@ -124,8 +142,10 @@ class SettingRepoImpl implements SettingRepo {
     try {
       ApiManager service = ApiManager();
       final response =
-          await service.patch(ApiConstants.ChangeDefaultAccount, headers: {
-        "token": UserModel.getInstance().token
+      await service.patch(ApiConstants.ChangeDefaultAccount, headers: {
+        "token": UserModel
+            .getInstance()
+            .token
       }, data: {
         "accountId": id,
       });
