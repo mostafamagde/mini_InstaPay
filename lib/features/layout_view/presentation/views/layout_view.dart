@@ -48,6 +48,12 @@ class LayoutView extends StatelessWidget {
                   LogOutCubit(
                     ServiceLocator.getIt.get<SettingRepoImpl>(),
                   ),
+            ),
+             BlocProvider(
+              create: (context) =>
+                  ForgetPinCubit(
+                    ServiceLocator.getIt.get<SettingRepoImpl>(),
+                  ),
             )
           ], child: SettingView()),
         ];
