@@ -9,7 +9,6 @@ import 'package:mini_instapay/features/account_managment/presentation/manager/ch
 
 class ChangePin extends StatelessWidget {
   final int pinLength = 6;
-
   final List<TextEditingController> oldPinControllers = List.generate(6, (_) => TextEditingController());
   final List<TextEditingController> newPinControllers = List.generate(6, (_) => TextEditingController());
   final List<FocusNode> oldPinFocusNodes = List.generate(6, (_) => FocusNode());
@@ -61,44 +60,47 @@ class ChangePin extends StatelessWidget {
                 ),
               ),
             ),
-            body: Form(
-              key: formKey,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Enter Old PIN',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
+            body: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 30),
+                      const Text(
+                        'Enter Old PIN',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    _buildPinInputRow(oldPinControllers, oldPinFocusNodes, context),
-                    const SizedBox(height: 40),
-                    const Text(
-                      'Enter New PIN',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                      const SizedBox(height: 20),
+                      _buildPinInputRow(oldPinControllers, oldPinFocusNodes, context),
+                      const SizedBox(height: 40),
+                      const Text(
+                        'Enter New PIN',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    _buildPinInputRow(newPinControllers, newPinFocusNodes, context),
-                    const SizedBox(height: 40),
-                    CustomButton(
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          cubit.changePin(oldPinControllers.map((controller) => controller.text).join(), newPinControllers.map((controller) => controller.text).join(), id);
-                        }
-                      },
-                      label: "Submit",
-                    )
-                  ],
+                      const SizedBox(height: 20),
+                      _buildPinInputRow(newPinControllers, newPinFocusNodes, context),
+                      const SizedBox(height: 40),
+                      CustomButton(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            cubit.changePin(oldPinControllers.map((controller) => controller.text).join(), newPinControllers.map((controller) => controller.text).join(), id);
+                          }
+                        },
+                        label: "Submit",
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -117,6 +119,7 @@ class ChangePin extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
               obscureText: true,
               validator: Validation.validatePinTextField,
               controller: controllers[index],

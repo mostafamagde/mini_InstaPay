@@ -127,7 +127,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
           Navigator.pushNamedAndRemoveUntil(
             context,
-            RoutesNames.ManageAccounts,
+            RoutesNames.manageAccounts,
             (route) => false,
           );
         }
@@ -137,15 +137,15 @@ class _AddBankAccountState extends State<AddBankAccount> {
         }
       },
       builder: (BuildContext context, AddAccountState state) {
-        return ModalProgressHUD(
-          inAsyncCall: cubit.state is AddAccountLoading,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text('Add Bank Account'),
-              centerTitle: true,
-            ),
-            body: SingleChildScrollView(
-              child: Form(
+        return SingleChildScrollView(
+          child: ModalProgressHUD(
+            inAsyncCall: cubit.state is AddAccountLoading,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text('Add Bank Account'),
+                centerTitle: true,
+              ),
+              body: Form(
                 key: formKey,
                 child: Column(
                   children: [
@@ -164,6 +164,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15.0),
                             child: TextFormField(
+                              onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                               maxLines: 1,
                               validator: Validation.validateCardNumberTextField,
                               controller: _cardNumberControllers[index],
@@ -201,6 +202,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15.0),
                             child: TextFormField(
+                              onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                               obscureText: !_isPinVisible,
                               maxLines: 1,
                               validator: Validation.validateRegularTextField,
@@ -227,6 +229,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: TextFormField(
+                              onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                               maxLines: 1,
                               validator: Validation.validateRegularTextField,
                               controller: _pinControllers[index],
@@ -251,6 +254,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                         Expanded(
                           flex: 2,
                           child: TextFormField(
+                            onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                             maxLines: 1,
                             validator: Validation.validateCVVNumberTextField,
                             controller: _cvvController,
@@ -269,6 +273,7 @@ class _AddBankAccountState extends State<AddBankAccount> {
                         Expanded(
                           flex: 3,
                           child: TextFormField(
+                            onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                             maxLines: 1,
                             validator: Validation.validateExpDateTextField,
                             controller: _expirationController,

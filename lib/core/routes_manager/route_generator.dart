@@ -86,7 +86,7 @@ class RouteGenerator {
     switch (route) {
       case RoutesNames.splashView:
         return const SplashView();
-      case RoutesNames.ManageAccounts:
+      case RoutesNames.manageAccounts:
         return MultiBlocProvider(
           providers: [
             BlocProvider<ManageBankAccountsCubit>(
@@ -152,7 +152,7 @@ class RouteGenerator {
           create: (context) => AuthCubit(ServiceLocator.getIt<AuthRepoImpl>()),
           child: ForgetPasswordView(),
         );
-      case RoutesNames.AddBankAccount:
+      case RoutesNames.addBankAccount:
         return BlocProvider<AddAccountCubit>(
           create: (context) => AddAccountCubit(ServiceLocator.getIt<BankRepoImpl>()),
           child: AddBankAccount(),
@@ -201,7 +201,7 @@ class RouteGenerator {
           create: (context) => SendCubit(ServiceLocator.getIt<TransactionRepoImpl>()),
           child: SendPin(),
         );
-      case RoutesNames.EnterPasswordView:
+      case RoutesNames.enterPasswordView:
         return BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(ServiceLocator.getIt<AuthRepoImpl>()),
           child: EnterPasswordView(),

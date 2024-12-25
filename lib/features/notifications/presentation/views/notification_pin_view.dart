@@ -66,6 +66,7 @@ class NotificationPinView extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
+                            onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                             validator: Validation.validatePinTextField,
                             controller: controllers[index],
                             focusNode: focusNodes[index],

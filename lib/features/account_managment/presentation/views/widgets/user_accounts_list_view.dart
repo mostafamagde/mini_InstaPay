@@ -25,7 +25,6 @@ class UserAccountsListView extends StatelessWidget {
             ),
           );
         }
-        if (state is ForgetPinFailure) {}
       },
       builder: (context, state) {
         return Expanded(
@@ -34,7 +33,7 @@ class UserAccountsListView extends StatelessWidget {
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(top: 15, left: 10),
+                  padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
                   child: UserAccountsListItem(
                     index: index,
                     banks: banks,

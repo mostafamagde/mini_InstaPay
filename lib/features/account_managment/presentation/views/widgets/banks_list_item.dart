@@ -19,7 +19,7 @@ class BanksListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         onTap: () => Navigator.pushNamed(
           context,
-          RoutesNames.AddBankAccount,
+          RoutesNames.addBankAccount,
           arguments: bank,
         ),
         child: Container(

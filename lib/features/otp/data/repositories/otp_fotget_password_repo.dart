@@ -24,7 +24,7 @@ class OtpForgetPasswordRepo extends OtpRepository {
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
       } else {
-        Navigator.pushReplacementNamed(context, RoutesNames.EnterPasswordView, arguments: response.data["token"]);
+        Navigator.pushReplacementNamed(context, RoutesNames.enterPasswordView, arguments: response.data["token"]);
       }
     } catch (e) {
       if (e is DioException) {

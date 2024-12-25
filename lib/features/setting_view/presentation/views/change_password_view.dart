@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mini_instapay/core/utils/validation.dart';
-import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
 import 'package:mini_instapay/core/widgets/custom_button.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
 import 'package:mini_instapay/core/widgets/custom_text_field.dart';
@@ -29,15 +27,15 @@ class ChangePassword extends StatelessWidget {
       builder: (context, state) {
         final ChangePasswordCubit cubit = ChangePasswordCubit.get(context);
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text("Change Password", style: TextStyle(color: Colors.white)),
+          ),
           body: Form(
             key: formKey,
             child: Column(
               children: [
-                CustomTitleContainer(
-                  title: "Change Password",
-                ),
-                SizedBox(height: 10.h),
+                Expanded(child: SizedBox(height: 5)),
                 CustomTextField(
                   controller: oldPasswordController,
                   label: "Enter old Password",
@@ -46,9 +44,6 @@ class ChangePassword extends StatelessWidget {
                   valid: Validation.validatePasswordTextField,
                   obsecure: true,
                   pass: true,
-                ),
-                SizedBox(
-                  height: 10.h,
                 ),
                 CustomTextField(
                   controller: newPasswordController,
@@ -59,9 +54,7 @@ class ChangePassword extends StatelessWidget {
                   obsecure: true,
                   pass: true,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                Expanded(child: SizedBox(height: 5)),
                 CustomButton(
                   label: "Submit",
                   onTap: () async {
@@ -72,7 +65,8 @@ class ChangePassword extends StatelessWidget {
                       );
                     }
                   },
-                )
+                ),
+                SizedBox(height: 15),
               ],
             ),
           ),

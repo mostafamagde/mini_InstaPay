@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/utils/Constants.dart';
 import 'package:mini_instapay/core/utils/validation.dart';
-import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
 import 'package:mini_instapay/core/widgets/custom_button.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
 import 'package:mini_instapay/core/widgets/custom_text_field.dart';
@@ -35,16 +33,19 @@ class ChangeEmailView extends StatelessWidget {
       },
       builder: (context, state) {
         final ChangeEmailCubit cubit = ChangeEmailCubit.get(context);
+
         return ModalProgressHUD(
           inAsyncCall: cubit.state is ChangeEmailLoading,
           child: Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: Text("Enter New Email", style: TextStyle(color: Colors.white)),
+              centerTitle: true,
+            ),
             body: Form(
               key: formKey,
               child: Column(
                 children: [
-                  CustomTitleContainer(title: "Enter New Email"),
-                  SizedBox(height: 10.h),
+                  Expanded(child: SizedBox(height: 20)),
                   CustomTextField(
                     controller: emailController,
                     label: "Enter new Email",
@@ -52,9 +53,7 @@ class ChangeEmailView extends StatelessWidget {
                     inputType: TextInputType.emailAddress,
                     valid: Validation.validateEmailTextField,
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
+                  Expanded(child: SizedBox(height: 20)),
                   CustomButton(
                     label: "Submit",
                     onTap: () {
@@ -62,7 +61,8 @@ class ChangeEmailView extends StatelessWidget {
                         cubit.changeEmail(email: emailController.text);
                       }
                     },
-                  )
+                  ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

@@ -98,6 +98,7 @@ class _OTPScreenState extends State<OtpView> {
                         (index) => SizedBox(
                           width: 50,
                           child: TextFormField(
+                            onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                             controller: _otpControllers[index],
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,

@@ -74,27 +74,20 @@ class ManageAccounts extends StatelessWidget {
                 ),
                 body: () {
                   if (state is ManageBankAccountsFailed) {
-                    return Center(
-                      child: Text(state.message),
-                    );
+                    return Center(child: Text(state.message));
                   } else if (state is ManageBankAccountsLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return Center(child: CircularProgressIndicator());
                   } else {
                     return ModalProgressHUD(
                       inAsyncCall: state is DeleteBancAccountLoading,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            UserAccountsListView(
-                              deleteAccount: cubit.deleteBankAccount,
-                              banks: UserModel.instance.bankAccounts!,
-                            )
-                          ],
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          UserAccountsListView(
+                            deleteAccount: cubit.deleteBankAccount,
+                            banks: UserModel.instance.bankAccounts!,
+                          )
+                        ],
                       ),
                     );
                   }

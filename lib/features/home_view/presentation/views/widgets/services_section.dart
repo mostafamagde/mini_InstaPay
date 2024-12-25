@@ -37,7 +37,7 @@ class ServicesSection extends StatelessWidget {
                   icon: Icons.account_balance,
                   name: "Manage",
                   padding: 5,
-                  onTap: () => Navigator.pushNamed(context, RoutesNames.ManageAccounts),
+                  onTap: () => Navigator.pushNamed(context, RoutesNames.manageAccounts),
                 ),
               )
             ],

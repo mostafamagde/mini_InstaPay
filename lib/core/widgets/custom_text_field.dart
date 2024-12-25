@@ -37,6 +37,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: TextFormField(
+        onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
         textAlign: widget.centerText ? TextAlign.center : TextAlign.start,
         focusNode: widget.node,
         controller: widget.controller,

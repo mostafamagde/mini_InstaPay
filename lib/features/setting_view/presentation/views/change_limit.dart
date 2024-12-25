@@ -33,58 +33,61 @@ class _ChangeLimitState extends State<ChangeLimit> {
           }
         },
         builder: (context, state) {
-          return ModalProgressHUD(
-            inAsyncCall: state is ChangeLimitLoading,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomTextField(
-                  label: "Limit",
-                  icon: Icons.money,
-                  inputType: TextInputType.number,
-                  controller: _controller,
-                ),
-                ListTile(
-                  title: const Text("Daily"),
-                  leading: Radio<String>(
-                    value: "Daily",
-                    groupValue: _selectedOption,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _selectedOption = value!;
-                      });
-                    },
+          return SingleChildScrollView(
+            child: ModalProgressHUD(
+              inAsyncCall: state is ChangeLimitLoading,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: MediaQuery.sizeOf(context).height * .15),
+                  CustomTextField(
+                    label: "Limit",
+                    icon: Icons.money,
+                    inputType: TextInputType.number,
+                    controller: _controller,
                   ),
-                ),
-                ListTile(
-                  title: const Text("Weekly"),
-                  leading: Radio<String>(
-                    value: "Weekly",
-                    groupValue: _selectedOption,
-                    onChanged: (String? value) {
-                      setState(() {
-                        _selectedOption = value!;
-                      });
-                    },
+                  ListTile(
+                    title: const Text("Daily"),
+                    leading: Radio<String>(
+                      value: "Daily",
+                      groupValue: _selectedOption,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 32,
-                ),
-                CustomButton(
-                    onTap: () {
-                      if (accountId == null) {
-                        snackBar(content: "You don't have bank account", context: context);
-                        return;
-                      }
-                      if (_controller.text.isEmpty) {
-                        snackBar(content: "Please enter limit", context: context);
-                      }
-                      BlocProvider.of<ChangeLimitCubit>(context).changeLimit(limit: double.parse(_controller.text), duration: _selectedOption.toLowerCase(), accountId: accountId);
-                    },
-                    label: "Set Limit")
-              ],
+                  ListTile(
+                    title: const Text("Weekly"),
+                    leading: Radio<String>(
+                      value: "Weekly",
+                      groupValue: _selectedOption,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  CustomButton(
+                      onTap: () {
+                        if (accountId == null) {
+                          snackBar(content: "You don't have bank account", context: context);
+                          return;
+                        }
+                        if (_controller.text.isEmpty) {
+                          snackBar(content: "Please enter limit", context: context);
+                        }
+                        BlocProvider.of<ChangeLimitCubit>(context).changeLimit(limit: double.parse(_controller.text), duration: _selectedOption.toLowerCase(), accountId: accountId);
+                      },
+                      label: "Set Limit")
+                ],
+              ),
             ),
           );
         },

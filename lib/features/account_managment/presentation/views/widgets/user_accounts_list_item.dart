@@ -40,9 +40,7 @@ class UserAccountsListItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              SizedBox(
-                width: 15,
-              ),
+              SizedBox(width: 15),
               CachedNetworkImage(
                 imageUrl: banks[index].bankId!.logo!,
                 width: 50,
@@ -57,9 +55,7 @@ class UserAccountsListItem extends StatelessWidget {
                   color: Colors.red,
                 ),
               ),
-              SizedBox(
-                width: 12,
-              ),
+              SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,10 +83,7 @@ class UserAccountsListItem extends StatelessWidget {
                   );
                   snackBar(content: "Copied to ClipBoard", context: context, color: Colors.green);
                 },
-                icon: Icon(
-                  Icons.copy,
-                  color: Colors.grey,
-                ),
+                icon: Icon(Icons.copy, color: Colors.grey),
               ),
               PopupMenuButton<String>(
                 color: Colors.white,

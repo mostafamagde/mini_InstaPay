@@ -44,7 +44,7 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, RoutesNames.ManageAccounts);
+                          Navigator.pushNamed(context, RoutesNames.manageAccounts);
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8),

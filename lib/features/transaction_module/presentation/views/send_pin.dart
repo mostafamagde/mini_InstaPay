@@ -53,18 +53,14 @@ class SendPin extends StatelessWidget {
             key: formKey,
             child: Column(
               children: [
-                SizedBox(
-                  height: 100,
-                ),
+                const Expanded(child: SizedBox(height: 10)),
                 CustomTextField(
                   label: "Source account if blank Source Will be default",
                   icon: Icons.call_made_rounded,
                   inputType: TextInputType.text,
                   controller: accId,
                 ),
-                SizedBox(
-                  height: 50,
-                ),
+                const Expanded(child: SizedBox(height: 10)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(pinLength, (index) {
@@ -73,6 +69,7 @@ class SendPin extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
+                          onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                           obscureText: true,
                           validator: Validation.validatePinTextField,
                           controller: controllers[index],
@@ -104,6 +101,7 @@ class SendPin extends StatelessWidget {
                     );
                   }),
                 ),
+                const Expanded(flex: 3, child: SizedBox(height: 10)),
               ],
             ),
           ),

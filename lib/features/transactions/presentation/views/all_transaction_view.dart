@@ -51,15 +51,12 @@ class AllTransactionView extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is TransactionSuccess) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ListView.separated(
-                itemBuilder: (context, index) => TransactionCard(transaction: state.transactions[index]),
-                separatorBuilder: (context, index) => SizedBox(
-                  height: 16,
-                ),
-                itemCount: state.transactions.length,
+            return ListView.builder(
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: TransactionCard(transaction: state.transactions[index]),
               ),
+              itemCount: state.transactions.length,
             );
           } else if (state is TransactionError) {
             return Center(
