@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled2/core/models/user_model.dart';
+import 'package:untitled2/core/utils/service_locator.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
+import 'package:untitled2/features/account_managment/data/repos/all_banks_repo_impl.dart';
 import 'package:untitled2/features/account_managment/data/repos/bank_list_proxy.dart';
 import 'package:untitled2/features/account_managment/presentation/manager/get_all_banks/banks_cubit.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/bank_list_view.dart';
@@ -21,7 +24,7 @@ class _ChooseAccountViewState extends State<ChooseAccountView> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return BlocProvider<BanksCubit>(
-      create: (context) => BanksCubit(bankProxy: BankListProxy())..fetchBanks(),
+      create: (context) => BanksCubit(bankProxy: BankListProxy(ServiceLocator.getIt<SharedPreferences>(), AllBanksRepoImpl()))..fetchBanks(),
       child: Scaffold(
         body: SafeArea(
           child: Column(
