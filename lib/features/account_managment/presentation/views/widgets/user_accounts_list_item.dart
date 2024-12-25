@@ -9,7 +9,12 @@ import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/account_managment/data/models/account_data.dart';
+import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
+
+import '../../../../setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
+
+import '../../../../setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
 
 class UserAccountsListItem extends StatelessWidget {
   UserAccountsListItem({super.key, required this.banks, required this.index, required this.deleteAccount});
@@ -165,7 +170,16 @@ class UserAccountsListItem extends StatelessWidget {
                       onTap: () {
                         BlocProvider.of<ChangeDefaultAccCubit>(context).changeDefault(banks[index].id!);
                       },
-                    )
+                    ),
+                    PopupMenuItem(
+                      value: '6',
+                      child: Text('forget pin'),
+                      onTap: () {
+                        BlocProvider.of<ForgetPinCubit>(context)
+                           .forgetPin(banks[index].id!);
+
+                      },
+                    ),
                   ];
                 },
               ),

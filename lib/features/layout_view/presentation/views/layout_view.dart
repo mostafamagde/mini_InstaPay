@@ -12,6 +12,8 @@ import 'package:untitled2/features/transaction_module/presentation/manager/recei
 import 'package:untitled2/features/transaction_module/presentation/views/receive_money_view.dart';
 import 'package:untitled2/features/transaction_module/presentation/views/send_money_view.dart';
 
+import '../../../setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
+
 class LayoutView extends StatelessWidget {
   const LayoutView({super.key});
 
@@ -23,20 +25,31 @@ class LayoutView extends StatelessWidget {
       builder: (context, state) {
         var cubit = NavigationCubit.get(context);
         final List<Widget> screens = [
-          HomeView(
-            onTap: cubit.selectTab,
+          BlocProvider(
+            create: (context) => ForgetPinCubit(
+              ServiceLocator.getIt.get<SettingRepoImpl>(),
+            ),
+            child: HomeView(
+              onTap: cubit.selectTab,
+            ),
           ),
           SendMoneyView(),
           BlocProvider(
-            create: (context) => ReceiveCubit(
-              ServiceLocator.getIt.get<TransactionRepoImpl>(),
-            ),
+            create: (context) =>
+                ReceiveCubit(
+                  ServiceLocator.getIt.get<TransactionRepoImpl>(),
+                ),
             child: ReceiveMoneyView(),
           ),
-          BlocProvider(
-            create: (context) => LogOutCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
-            child: SettingView(),
-          ),
+          MultiBlocProvider(providers: [
+
+            BlocProvider(
+              create: (context) =>
+                  LogOutCubit(
+                    ServiceLocator.getIt.get<SettingRepoImpl>(),
+                  ),
+            )
+          ], child: SettingView()),
         ];
         return Scaffold(
           bottomNavigationBar: ClipRRect(
