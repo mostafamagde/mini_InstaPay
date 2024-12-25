@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/enums/role_enum.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/widgets/notification_icon.dart';
-import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
-import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
-import 'package:untitled2/features/transactions/presentation/views/widgets/transaction_card.dart';
+import 'package:mini_instapay/core/enums/role_enum.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/core/widgets/notification_icon.dart';
+import 'package:mini_instapay/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
+import 'package:mini_instapay/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
+import 'package:mini_instapay/features/transactions/presentation/views/widgets/transaction_card.dart';
 
 class AllTransactionView extends StatelessWidget {
   const AllTransactionView({

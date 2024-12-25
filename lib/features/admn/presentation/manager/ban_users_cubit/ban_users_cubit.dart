@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/features/admn/data/repo/admin_repo.dart';
+import 'package:mini_instapay/features/admn/data/repo/admin_repo.dart';
 
 part 'ban_users_state.dart';
 

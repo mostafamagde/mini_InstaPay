@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:untitled2/core/api_helper/api_constants.dart';
-import 'package:untitled2/core/api_helper/api_manger.dart';
-import 'package:untitled2/core/errors/errors.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/features/setting_view/data/models/credinitials_model.dart';
-import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
+import 'package:mini_instapay/core/api_helper/api_constants.dart';
+import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/errors/errors.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/features/setting_view/data/models/credinitials_model.dart';
+import 'package:mini_instapay/features/setting_view/data/repos/setting_repo.dart';
 
 class SettingRepoImpl implements SettingRepo {
   SettingRepoImpl(ApiManager apiManager);

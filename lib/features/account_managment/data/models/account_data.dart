@@ -1,4 +1,4 @@
-import 'package:untitled2/core/models/bank_data.dart';
+import 'package:mini_instapay/core/models/bank_data.dart';
 
 class BankAccountData {
   String? id;

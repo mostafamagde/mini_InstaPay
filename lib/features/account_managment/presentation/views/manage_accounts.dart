@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/widgets/custom_button.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/features/account_managment/data/models/account_data.dart';
-import 'package:untitled2/features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
-import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_view.dart';
-import 'package:untitled2/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/widgets/custom_button.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/features/account_managment/data/models/account_data.dart';
+import 'package:mini_instapay/features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
+import 'package:mini_instapay/features/account_managment/presentation/views/widgets/user_accounts_list_view.dart';
+import 'package:mini_instapay/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
 
 class ManageAccounts extends StatelessWidget {
   const ManageAccounts({super.key});

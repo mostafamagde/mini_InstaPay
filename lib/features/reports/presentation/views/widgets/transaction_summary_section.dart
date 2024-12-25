@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/features/reports/data/models/admin_transaction_summary_model.dart';
-import 'package:untitled2/features/reports/data/models/statistics_element_model.dart';
-import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
-import 'package:untitled2/features/reports/data/models/user_transaction_summary_model.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/features/reports/data/models/admin_transaction_summary_model.dart';
+import 'package:mini_instapay/features/reports/data/models/statistics_element_model.dart';
+import 'package:mini_instapay/features/reports/data/models/transaction_summary_model.dart';
+import 'package:mini_instapay/features/reports/data/models/user_transaction_summary_model.dart';
 
 // ignore: must_be_immutable
 class TransactionSummarySection extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
-import 'package:untitled2/features/account_managment/presentation/manager/get_all_banks/banks_cubit.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/features/account_managment/data/models/bank_model.dart';
+import 'package:mini_instapay/features/account_managment/presentation/manager/get_all_banks/banks_cubit.dart';
 import 'banks_list_item.dart';
 
 class BankListView extends StatelessWidget {

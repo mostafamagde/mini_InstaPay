@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/features/reports/presentation/views/widgets/transactions_summary_screen_body.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/features/reports/presentation/views/widgets/transactions_summary_screen_body.dart';
 
 class TransactionsSummaryScreen extends StatelessWidget {
   const TransactionsSummaryScreen({super.key});

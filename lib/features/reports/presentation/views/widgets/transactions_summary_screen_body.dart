@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:untitled2/core/enums/role_enum.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/features/reports/data/enums/months_enum.dart';
-import 'package:untitled2/features/reports/data/enums/transactions_range_enum.dart';
-import 'package:untitled2/features/reports/data/models/admin_transaction_summary_model.dart';
-import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
-import 'package:untitled2/features/reports/data/models/user_transaction_summary_model.dart';
-import 'package:untitled2/features/reports/presentation/manager/transaction_summary_view_cubit/transaction_summary_view_cubit.dart';
-import 'package:untitled2/features/reports/presentation/views/widgets/drop_down_menu_section.dart';
-import 'package:untitled2/features/reports/presentation/views/widgets/transaction_summary_section.dart';
+import 'package:mini_instapay/core/enums/role_enum.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/features/reports/data/enums/months_enum.dart';
+import 'package:mini_instapay/features/reports/data/enums/transactions_range_enum.dart';
+import 'package:mini_instapay/features/reports/data/models/admin_transaction_summary_model.dart';
+import 'package:mini_instapay/features/reports/data/models/transaction_summary_model.dart';
+import 'package:mini_instapay/features/reports/data/models/user_transaction_summary_model.dart';
+import 'package:mini_instapay/features/reports/presentation/manager/transaction_summary_view_cubit/transaction_summary_view_cubit.dart';
+import 'package:mini_instapay/features/reports/presentation/views/widgets/drop_down_menu_section.dart';
+import 'package:mini_instapay/features/reports/presentation/views/widgets/transaction_summary_section.dart';
 
 class TransactionsSummaryScreenBody extends StatelessWidget {
   const TransactionsSummaryScreenBody({super.key});

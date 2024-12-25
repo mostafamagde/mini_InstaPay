@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:untitled2/core/widgets/custom_button.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/features/otp/data/repositories/otp_factory.dart';
-import 'package:untitled2/features/otp/data/repositories/otp_repo.dart';
-import 'package:untitled2/features/otp/presentation/manger/cubit/otp_cubit.dart';
+import 'package:mini_instapay/core/widgets/custom_button.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/features/otp/data/repositories/otp_factory.dart';
+import 'package:mini_instapay/features/otp/data/repositories/otp_repo.dart';
+import 'package:mini_instapay/features/otp/presentation/manger/cubit/otp_cubit.dart';
 
-import 'package:untitled2/features/otp/presentation/views/widgets/resend_button.dart';
+import 'package:mini_instapay/features/otp/presentation/views/widgets/resend_button.dart';
 
 class OtpView extends StatefulWidget {
   final String userToken;

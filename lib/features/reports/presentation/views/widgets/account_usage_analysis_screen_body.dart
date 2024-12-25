@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/features/reports/data/models/one_user_transactions_model.dart';
-import 'package:untitled2/features/reports/presentation/manager/usage_analysis_cubit/usage_analysis_cubit.dart';
-import 'package:untitled2/features/reports/presentation/views/widgets/drop_down_menu_section.dart';
-import 'package:untitled2/features/reports/presentation/views/widgets/transaction_summary_section.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/features/reports/data/models/one_user_transactions_model.dart';
+import 'package:mini_instapay/features/reports/presentation/manager/usage_analysis_cubit/usage_analysis_cubit.dart';
+import 'package:mini_instapay/features/reports/presentation/views/widgets/drop_down_menu_section.dart';
+import 'package:mini_instapay/features/reports/presentation/views/widgets/transaction_summary_section.dart';
 
 class AccountUsageAnalysisScreenBody extends StatelessWidget {
   const AccountUsageAnalysisScreenBody({super.key});

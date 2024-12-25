@@ -2,8 +2,8 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:untitled2/core/utils/service_locator.dart';
-import 'package:untitled2/features/otp/presentation/manger/cubit/otp_cubit.dart';
+import 'package:mini_instapay/core/utils/service_locator.dart';
+import 'package:mini_instapay/features/otp/presentation/manger/cubit/otp_cubit.dart';
 import 'core/app_theme/app_theme_manager.dart';
 import 'core/routes_manager/route_generator.dart';
 

@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/core/utils/validation.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/core/widgets/custom_text_field.dart';
-import 'package:untitled2/features/account_managment/data/models/account_data.dart';
-import 'package:untitled2/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
-import 'package:untitled2/features/setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/validation.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/core/widgets/custom_text_field.dart';
+import 'package:mini_instapay/features/account_managment/data/models/account_data.dart';
+import 'package:mini_instapay/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
+import 'package:mini_instapay/features/setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
 
 class UserAccountsListItem extends StatelessWidget {
   UserAccountsListItem({super.key, required this.banks, required this.index, required this.deleteAccount});

@@ -1,5 +1,5 @@
-import 'package:untitled2/features/auth/data/models/otp_model.dart';
-import 'package:untitled2/features/auth/data/models/signup_model.dart';
+import 'package:mini_instapay/features/auth/data/models/otp_model.dart';
+import 'package:mini_instapay/features/auth/data/models/signup_model.dart';
 
 abstract class AuthRepository {
   Future<OtpModel> forgetPassword(String email);

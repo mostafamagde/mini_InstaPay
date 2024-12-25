@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/core/utils/validation.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/core/widgets/custom_text_field.dart';
-import 'package:untitled2/features/admn/presentation/manager/ban_users_cubit/ban_users_cubit.dart';
-import 'package:untitled2/features/admn/presentation/manager/get_users_cubit/admin_get_users_cubit.dart';
-import 'package:untitled2/features/admn/presentation/views/widgets/user_account_list_view.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/validation.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/core/widgets/custom_text_field.dart';
+import 'package:mini_instapay/features/admn/presentation/manager/ban_users_cubit/ban_users_cubit.dart';
+import 'package:mini_instapay/features/admn/presentation/manager/get_users_cubit/admin_get_users_cubit.dart';
+import 'package:mini_instapay/features/admn/presentation/views/widgets/user_account_list_view.dart';
 
 class AllUsersView extends StatelessWidget {
   AllUsersView({super.key});

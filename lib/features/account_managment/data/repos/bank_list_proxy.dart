@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
-import 'package:untitled2/features/account_managment/data/repos/all_banks_repo.dart';
-import 'package:untitled2/features/account_managment/data/repos/all_banks_repo_impl.dart';
-import 'package:untitled2/features/account_managment/data/repos/save_time.dart';
+import 'package:mini_instapay/features/account_managment/data/models/bank_model.dart';
+import 'package:mini_instapay/features/account_managment/data/repos/all_banks_repo.dart';
+import 'package:mini_instapay/features/account_managment/data/repos/all_banks_repo_impl.dart';
+import 'package:mini_instapay/features/account_managment/data/repos/save_time.dart';
 
 class BankListProxy implements AllBanksRepo {
   BankListProxy(this.prefs, this.bank);

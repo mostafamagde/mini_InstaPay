@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
-import 'package:untitled2/features/transactions/presentation/views/widgets/transaction_card.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
+import 'package:mini_instapay/features/transactions/presentation/views/widgets/transaction_card.dart';
 
 class TransactionList extends StatelessWidget {
   const TransactionList({super.key});

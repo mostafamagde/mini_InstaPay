@@ -1,4 +1,4 @@
-# untitled2
+# mini_instapay
 
 A new Flutter project.
 

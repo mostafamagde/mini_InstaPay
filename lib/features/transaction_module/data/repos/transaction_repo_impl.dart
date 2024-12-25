@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:untitled2/core/api_helper/api_constants.dart';
-import 'package:untitled2/core/api_helper/api_manger.dart';
-import 'package:untitled2/core/errors/errors.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/features/transaction_module/data/models/receive_model.dart';
-import 'package:untitled2/features/transaction_module/data/models/send_model.dart';
-import 'package:untitled2/features/transaction_module/data/repos/transaction_repo.dart';
+import 'package:mini_instapay/core/api_helper/api_constants.dart';
+import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/errors/errors.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/features/transaction_module/data/models/receive_model.dart';
+import 'package:mini_instapay/features/transaction_module/data/models/send_model.dart';
+import 'package:mini_instapay/features/transaction_module/data/repos/transaction_repo.dart';
 
 class TransactionRepoImpl implements TransactionRepo {
   TransactionRepoImpl(this.service);

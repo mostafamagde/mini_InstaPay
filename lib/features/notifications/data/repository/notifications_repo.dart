@@ -1,7 +1,7 @@
-import 'package:untitled2/core/api_helper/api_constants.dart';
-import 'package:untitled2/core/api_helper/api_manger.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/features/notifications/data/models/notfication_model.dart';
+import 'package:mini_instapay/core/api_helper/api_constants.dart';
+import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/features/notifications/data/models/notfication_model.dart';
 
 class NotificationsRepo {
   final _apiManger = ApiManager();

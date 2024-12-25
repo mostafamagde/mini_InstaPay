@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
-import 'package:untitled2/core/widgets/notification_icon.dart';
-import 'package:untitled2/features/home_view/presentation/views/widgets/services_section.dart';
-import 'package:untitled2/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
-import 'package:untitled2/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
-import 'package:untitled2/features/home_view/presentation/views/widgets/transaction_list.dart';
-import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
+import 'package:mini_instapay/core/widgets/notification_icon.dart';
+import 'package:mini_instapay/features/home_view/presentation/views/widgets/services_section.dart';
+import 'package:mini_instapay/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
+import 'package:mini_instapay/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
+import 'package:mini_instapay/features/home_view/presentation/views/widgets/transaction_list.dart';
+import 'package:mini_instapay/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

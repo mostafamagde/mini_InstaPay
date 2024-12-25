@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/features/account_managment/data/models/account_data.dart';
-import 'package:untitled2/features/account_managment/data/repos/bank_repo.dart';
+import 'package:mini_instapay/features/account_managment/data/models/account_data.dart';
+import 'package:mini_instapay/features/account_managment/data/repos/bank_repo.dart';
 
 part 'manage_bank_accounts_state.dart';
 

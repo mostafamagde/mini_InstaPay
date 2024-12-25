@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:untitled2/core/api_helper/api_constants.dart';
-import 'package:untitled2/core/api_helper/api_manger.dart';
-import 'package:untitled2/core/enums/role_enum.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/utils/socket_service.dart';
+import 'package:mini_instapay/core/api_helper/api_constants.dart';
+import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/enums/role_enum.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/utils/socket_service.dart';
 import 'AnimatedBuilder.dart';
 
 class SplashBody extends StatefulWidget {

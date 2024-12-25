@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:untitled2/core/api_helper/api_constants.dart';
+import 'package:mini_instapay/core/api_helper/api_constants.dart';
 
 class ApiManager {
   final Dio _dio = Dio();

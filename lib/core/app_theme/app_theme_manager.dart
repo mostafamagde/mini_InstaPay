@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:untitled2/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
 
 class AppThemeManager {
   static ThemeData mainTheme = ThemeData(

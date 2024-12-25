@@ -1,5 +1,5 @@
-import 'package:untitled2/core/enums/role_enum.dart';
-import 'package:untitled2/features/account_managment/data/models/account_data.dart';
+import 'package:mini_instapay/core/enums/role_enum.dart';
+import 'package:mini_instapay/features/account_managment/data/models/account_data.dart';
 import 'DefaultAcc.dart';
 
 class UserModel {

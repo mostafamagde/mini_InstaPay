@@ -1,6 +1,6 @@
 {
-    "name": "untitled2",
-    "short_name": "untitled2",
+    "name": "mini_instapay",
+    "short_name": "mini_instapay",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
+import 'package:mini_instapay/features/setting_view/data/repos/setting_repo.dart';
 
 part 'change_limit_state.dart';
 

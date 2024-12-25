@@ -1,5 +1,5 @@
-import 'package:untitled2/features/reports/data/models/user_transaction_summary_model.dart';
-import 'package:untitled2/features/transactions/data/model/transaction_user_model.dart';
+import 'package:mini_instapay/features/reports/data/models/user_transaction_summary_model.dart';
+import 'package:mini_instapay/features/transactions/data/model/transaction_user_model.dart';
 
 class OneUserTransactionsModel {
   final TransactionUserModel user;

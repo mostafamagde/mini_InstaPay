@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
 
 class LogoContainer extends StatelessWidget {
   const LogoContainer({super.key});

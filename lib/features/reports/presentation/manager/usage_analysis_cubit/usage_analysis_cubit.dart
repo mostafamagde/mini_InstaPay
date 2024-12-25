@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/features/reports/data/models/one_user_transactions_model.dart';
-import 'package:untitled2/features/reports/domain/use_cases/get_each_user_transactions.dart';
+import 'package:mini_instapay/features/reports/data/models/one_user_transactions_model.dart';
+import 'package:mini_instapay/features/reports/domain/use_cases/get_each_user_transactions.dart';
 
 part 'usage_analysis_state.dart';
 

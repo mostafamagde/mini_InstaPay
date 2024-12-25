@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/features/admn/data/models/AdminUsersModel.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/features/admn/data/models/AdminUsersModel.dart';
 
 class UserItem extends StatelessWidget {
   const UserItem({super.key, required this.users, required this.onPressed});

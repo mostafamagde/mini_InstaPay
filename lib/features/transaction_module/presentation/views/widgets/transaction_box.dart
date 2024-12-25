@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/core/utils/validation.dart';
-import 'package:untitled2/core/widgets/custom_text_field.dart';
+import 'package:mini_instapay/core/utils/validation.dart';
+import 'package:mini_instapay/core/widgets/custom_text_field.dart';
 
 class TransactionBox extends StatelessWidget {
   TransactionBox({super.key, required this.recieverData, required this.amount, required this.title, this.send = true, this.id});

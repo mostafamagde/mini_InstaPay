@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:untitled2/core/api_helper/api_constants.dart';
-import 'package:untitled2/core/api_helper/api_manger.dart';
-import 'package:untitled2/core/errors/errors.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/features/account_managment/data/models/account_data.dart';
-import 'package:untitled2/features/account_managment/data/models/add_account_model.dart';
+import 'package:mini_instapay/core/api_helper/api_constants.dart';
+import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/errors/errors.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/features/account_managment/data/models/account_data.dart';
+import 'package:mini_instapay/features/account_managment/data/models/add_account_model.dart';
 import 'bank_repo.dart';
 
 class BankRepoImpl implements BankRepository {

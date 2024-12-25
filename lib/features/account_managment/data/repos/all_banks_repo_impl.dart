@@ -1,7 +1,7 @@
-import 'package:untitled2/core/api_helper/api_constants.dart';
-import 'package:untitled2/core/api_helper/api_manger.dart';
-import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
-import 'package:untitled2/features/account_managment/data/repos/all_banks_repo.dart';
+import 'package:mini_instapay/core/api_helper/api_constants.dart';
+import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/features/account_managment/data/models/bank_model.dart';
+import 'package:mini_instapay/features/account_managment/data/repos/all_banks_repo.dart';
 
 class AllBanksRepoImpl extends AllBanksRepo {
   @override

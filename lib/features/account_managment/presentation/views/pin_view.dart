@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/utils/validation.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/features/account_managment/presentation/manager/balance_cubit/get_balance_cubit.dart';
+import 'package:mini_instapay/core/utils/validation.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/features/account_managment/presentation/manager/balance_cubit/get_balance_cubit.dart';
 
 class PinCodeScreen extends StatelessWidget {
   final int pinLength = 6;

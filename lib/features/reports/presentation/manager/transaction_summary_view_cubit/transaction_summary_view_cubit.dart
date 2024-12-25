@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
-import 'package:untitled2/features/reports/domain/use_cases/get_annual_transactions.dart';
-import 'package:untitled2/features/reports/domain/use_cases/get_monthly_transactions.dart';
+import 'package:mini_instapay/features/reports/data/models/transaction_summary_model.dart';
+import 'package:mini_instapay/features/reports/domain/use_cases/get_annual_transactions.dart';
+import 'package:mini_instapay/features/reports/domain/use_cases/get_monthly_transactions.dart';
 
 part 'transaction_summary_view_state.dart';
 

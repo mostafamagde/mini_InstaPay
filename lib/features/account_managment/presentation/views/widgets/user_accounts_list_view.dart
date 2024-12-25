@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/features/account_managment/data/models/account_data.dart';
-import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_item.dart';
-import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
-import 'package:untitled2/features/setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/features/account_managment/data/models/account_data.dart';
+import 'package:mini_instapay/features/account_managment/presentation/views/widgets/user_accounts_list_item.dart';
+import 'package:mini_instapay/features/otp/presentation/views/otp_view.dart';
+import 'package:mini_instapay/features/setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
 
 class UserAccountsListView extends StatelessWidget {
   const UserAccountsListView({super.key, required this.banks, required this.deleteAccount});

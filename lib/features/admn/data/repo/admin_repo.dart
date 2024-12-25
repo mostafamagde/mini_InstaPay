@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:untitled2/core/errors/errors.dart';
-import 'package:untitled2/features/admn/data/models/AdminUsersModel.dart';
+import 'package:mini_instapay/core/errors/errors.dart';
+import 'package:mini_instapay/features/admn/data/models/AdminUsersModel.dart';
 
 
 abstract class AdminRepo {

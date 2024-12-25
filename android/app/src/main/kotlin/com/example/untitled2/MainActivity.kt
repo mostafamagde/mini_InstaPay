@@ -1,4 +1,4 @@
-package com.example.untitled2
+package com.example.mini_instapay
 
 import io.flutter.embedding.android.FlutterActivity
 

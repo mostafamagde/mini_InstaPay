@@ -1,9 +1,9 @@
-import 'package:untitled2/core/enums/role_enum.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/features/reports/data/models/one_user_transactions_model.dart';
-import 'package:untitled2/features/reports/domain/repo_interface/one_user_transactions_repo.dart';
-import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
-import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
+import 'package:mini_instapay/core/enums/role_enum.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/features/reports/data/models/one_user_transactions_model.dart';
+import 'package:mini_instapay/features/reports/domain/repo_interface/one_user_transactions_repo.dart';
+import 'package:mini_instapay/features/transactions/data/model/transaction_model.dart';
+import 'package:mini_instapay/features/transactions/data/repository/transaction_repo.dart';
 
 class GetEachUserTransactions {
   const GetEachUserTransactions(this._transactionRepo, this._oneUserTransactionsRepo);

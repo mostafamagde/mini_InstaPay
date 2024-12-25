@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:untitled2/core/api_helper/api_constants.dart';
-import 'package:untitled2/core/api_helper/api_manger.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/core/utils/service_locator.dart';
-import 'package:untitled2/features/otp/data/repositories/otp_repo.dart';
+import 'package:mini_instapay/core/api_helper/api_constants.dart';
+import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/service_locator.dart';
+import 'package:mini_instapay/features/otp/data/repositories/otp_repo.dart';
 
 class OtpForgetPasswordRepo extends OtpRepository {
   final ApiManager _apiManager;

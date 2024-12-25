@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled2/core/enums/role_enum.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/utils/Constants.dart';
-import 'package:untitled2/features/notifications/data/models/notfication_model.dart';
-import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
+import 'package:mini_instapay/core/enums/role_enum.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/features/notifications/data/models/notfication_model.dart';
+import 'package:mini_instapay/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({super.key, required this.notification});

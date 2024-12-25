@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/features/otp/data/repositories/otp_repo.dart';
+import 'package:mini_instapay/features/otp/data/repositories/otp_repo.dart';
 
 part 'otp_state.dart';
 

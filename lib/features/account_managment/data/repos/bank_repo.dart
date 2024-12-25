@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:untitled2/core/errors/errors.dart';
-import 'package:untitled2/features/account_managment/data/models/account_data.dart';
-import 'package:untitled2/features/account_managment/data/models/add_account_model.dart';
+import 'package:mini_instapay/core/errors/errors.dart';
+import 'package:mini_instapay/features/account_managment/data/models/account_data.dart';
+import 'package:mini_instapay/features/account_managment/data/models/add_account_model.dart';
 
 abstract class BankRepository {
   Future<List<BankAccountData>> getAllBankAccounts();

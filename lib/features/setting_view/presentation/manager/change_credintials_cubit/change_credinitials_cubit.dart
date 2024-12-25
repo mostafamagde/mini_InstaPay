@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/features/setting_view/data/models/credinitials_model.dart';
-import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
+import 'package:mini_instapay/features/setting_view/data/models/credinitials_model.dart';
+import 'package:mini_instapay/features/setting_view/data/repos/setting_repo.dart';
 
 part 'change_credinitials_state.dart';
 

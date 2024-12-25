@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/utils/validation.dart';
-import 'package:untitled2/core/widgets/custom_text_field.dart';
-import 'package:untitled2/features/account_managment/presentation/views/widgets/bank_list_view.dart';
-import 'package:untitled2/features/account_managment/presentation/views/widgets/logo_container.dart';
+import 'package:mini_instapay/core/models/user_model.dart';
+import 'package:mini_instapay/core/utils/validation.dart';
+import 'package:mini_instapay/core/widgets/custom_text_field.dart';
+import 'package:mini_instapay/features/account_managment/presentation/views/widgets/bank_list_view.dart';
+import 'package:mini_instapay/features/account_managment/presentation/views/widgets/logo_container.dart';
 
 class ChooseAccountView extends StatefulWidget {
   const ChooseAccountView({super.key});

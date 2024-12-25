@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:untitled2/core/errors/errors.dart';
-import 'package:untitled2/features/setting_view/data/models/credinitials_model.dart';
+import 'package:mini_instapay/core/errors/errors.dart';
+import 'package:mini_instapay/features/setting_view/data/models/credinitials_model.dart';
 
 abstract class SettingRepo {
   Future<Either<Errors, String>> changeCredintials({required CredinitialsModel model});

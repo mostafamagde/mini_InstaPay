@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/core/navigation_cubit/navigation_cubit.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/widgets/custom_small_button.dart';
+import 'package:mini_instapay/core/navigation_cubit/navigation_cubit.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/widgets/custom_small_button.dart';
 
 class ServicesSection extends StatelessWidget {
   const ServicesSection({super.key});

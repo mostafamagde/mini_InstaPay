@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/core/enums/transaction_status_enum.dart';
-import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
-import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
+import 'package:mini_instapay/core/enums/transaction_status_enum.dart';
+import 'package:mini_instapay/features/transactions/data/model/transaction_model.dart';
+import 'package:mini_instapay/features/transactions/data/repository/transaction_repo.dart';
 
 part 'transaction_state.dart';
 

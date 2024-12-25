@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/features/auth/data/models/otp_model.dart';
-import 'package:untitled2/features/auth/data/models/signup_model.dart';
-import 'package:untitled2/features/auth/data/repository/auth_repo.dart';
+import 'package:mini_instapay/features/auth/data/models/otp_model.dart';
+import 'package:mini_instapay/features/auth/data/models/signup_model.dart';
+import 'package:mini_instapay/features/auth/data/repository/auth_repo.dart';
 
 part 'auth_state.dart';
 

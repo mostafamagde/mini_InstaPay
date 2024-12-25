@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:untitled2/core/routes_manager/routes_names.dart';
-import 'package:untitled2/core/utils/validation.dart';
-import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
-import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/core/widgets/custom_text_field.dart';
-import 'package:untitled2/features/account_managment/data/models/add_account_model.dart';
-import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
-import 'package:untitled2/features/account_managment/presentation/manager/add_account/add_account_cubit.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/utils/validation.dart';
+import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
+import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
+import 'package:mini_instapay/core/widgets/custom_text_field.dart';
+import 'package:mini_instapay/features/account_managment/data/models/add_account_model.dart';
+import 'package:mini_instapay/features/account_managment/data/models/bank_model.dart';
+import 'package:mini_instapay/features/account_managment/presentation/manager/add_account/add_account_cubit.dart';
 
 class AddBankAccount extends StatefulWidget {
   @override
