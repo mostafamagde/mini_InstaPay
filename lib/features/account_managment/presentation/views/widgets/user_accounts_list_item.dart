@@ -185,7 +185,11 @@ class UserAccountsListItem extends StatelessWidget {
                     PopupMenuItem(
                       value: '6',
                       child: Text('forget pin'),
-                      onTap: () {},
+                      onTap: () {
+                        BlocProvider.of<ForgetPinCubit>(context)
+                           .forgetPin(bank.data![index].id!);
+
+                      },
                     ),
                   ];
                 },
