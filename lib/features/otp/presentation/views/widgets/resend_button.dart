@@ -14,10 +14,11 @@ class ResendButton extends StatefulWidget {
 
 class _ResendButtonState extends State<ResendButton> {
   bool isDisabled = false;
-  int remainingTime = 60; // Initial timer value in seconds
+  int remainingTime = 30; 
   late Timer _timer;
 
   void _startTimer() {
+    remainingTime =30;
     setState(() {
       isDisabled = true;
     });

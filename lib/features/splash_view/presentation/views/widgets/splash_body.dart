@@ -75,7 +75,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
         } else {
           Navigator.pushReplacementNamed(
             context,
-            RoutesNames.loginView,
+            RoutesNames.onBoarding,
           );
         }
       } catch (e) {

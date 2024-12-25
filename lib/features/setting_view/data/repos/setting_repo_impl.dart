@@ -162,8 +162,9 @@ class SettingRepoImpl implements SettingRepo {
   }
 
   @override
-  Future<Either<Errors, String>> forgetPin(String id) async {
+   Future<Either<Errors, String>> forgetPin(String id) async {
     try {
+      print(UserModel.instance.token);
       final apiManger = ApiManager();
       final response = await apiManger.post(
           ApiConstants.forgetPin + id,
@@ -173,6 +174,7 @@ class SettingRepoImpl implements SettingRepo {
       return right(response.data["token"]);
     } catch (e) {
       if (e is DioException) {
+        print (e.response!.statusCode);
         return left(ServerError(e.response?.data["message"] ?? "error"));
       }
       return left(ServerError("Something went wrong"));
