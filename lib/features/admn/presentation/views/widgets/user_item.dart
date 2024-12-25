@@ -11,28 +11,31 @@ class UserItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size media = MediaQuery.of(context).size;
+    final Size media = MediaQuery.of(context).size;
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: media.width * .05),
       child: Slidable(
-        startActionPane: ActionPane(motion: const DrawerMotion(), extentRatio: .2, children: [
-          SlidableAction(
-            padding: EdgeInsets.only(right: 10),
-            backgroundColor: Constants.backgroundColor,
-            foregroundColor: Colors.red,
-            icon: Icons.hide_source_sharp,
-            onPressed: (context) => onPressed(users.id!),
-          ),
-        ]),
+        startActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          extentRatio: .2,
+          children: [
+            SlidableAction(
+              padding: EdgeInsets.only(right: 10),
+              backgroundColor: Constants.backgroundColor,
+              foregroundColor: Colors.red,
+              icon: Icons.hide_source_sharp,
+              onPressed: (context) => onPressed(users.id!),
+            ),
+          ],
+        ),
         child: Container(
+          clipBehavior: Clip.hardEdge,
           height: 90,
           width: media.width * .9,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              topLeft: Radius.circular(10),
-            ),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey,
@@ -58,30 +61,31 @@ class UserItem extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "${users.email!}",
-                    maxLines: 1,
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ),
-                  Text(
-                    overflow: TextOverflow.fade,
-                    "${users.userName!}",
-                    maxLines: 1,
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ),
-                  Text(
-                    overflow: TextOverflow.fade,
-                    "${users.mobileNumber}",
-                    maxLines: 1,
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ),
-                ],
-              )),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "${users.email!}",
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                    Text(
+                      overflow: TextOverflow.fade,
+                      "${users.userName!}",
+                      maxLines: 1,
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                    Text(
+                      overflow: TextOverflow.fade,
+                      "${users.mobileNumber}",
+                      maxLines: 1,
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
               Column(
                 children: [
                   Container(

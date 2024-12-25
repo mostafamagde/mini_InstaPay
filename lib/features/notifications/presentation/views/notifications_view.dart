@@ -28,23 +28,24 @@ class NotificationsView extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-            onPressed: () {
-              UserModel.instance.role == Role.Admin
-                  ? Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RoutesNames.adminLayout,
-                      (Route<dynamic> route) => false,
-                    )
-                  : Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RoutesNames.layoutView,
-                      (Route<dynamic> route) => false,
-                    );
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-            )),
+          onPressed: () {
+            UserModel.instance.role == Role.Admin
+                ? Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    RoutesNames.adminLayout,
+                    (Route<dynamic> route) => false,
+                  )
+                : Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    RoutesNames.layoutView,
+                    (Route<dynamic> route) => false,
+                  );
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: BlocConsumer<NotificationsCubit, NotificationsState>(
         listener: (context, state) {
@@ -89,15 +90,17 @@ class NotificationsView extends StatelessWidget {
                 }
                 return ModalProgressHUD(
                   inAsyncCall: state is ReadNotificationsLoading,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    child: ListView.builder(
-                      itemCount: notifications.length,
-                      itemBuilder: (context, index) {
-                        final notification = notifications[index];
-                        return NotificationItem(notification: notification);
-                      },
-                    ),
+                  child: ListView.builder(
+                    itemCount: notifications.length,
+                    itemBuilder: (context, index) {
+                      final notification = notifications[index];
+                      return Column(
+                        children: [
+                          NotificationItem(notification: notification),
+                          Divider(),
+                        ],
+                      );
+                    },
                   ),
                 );
               }
