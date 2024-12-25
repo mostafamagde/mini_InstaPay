@@ -11,13 +11,12 @@ class SettingRepoImpl implements SettingRepo {
   SettingRepoImpl(ApiManager apiManager);
 
   @override
-  Future<Either<Errors, String>> changeCredintials(
-      {required CredinitialsModel model}) async {
+  Future<Either<Errors, String>> changeCredintials({required CredinitialsModel model}) async {
     ApiManager service = ApiManager();
-    if (model.address == UserModel.getInstance().address &&
-        model.lastName == UserModel.getInstance().lastName &&
-        model.phoneNumber == UserModel.getInstance().mobileNumber &&
-        model.firstName == UserModel.getInstance().firstName) {
+    if (model.address == UserModel.instance.address &&
+        model.lastName == UserModel.instance.lastName &&
+        model.phoneNumber == UserModel.instance.mobileNumber &&
+        model.firstName == UserModel.instance.firstName) {
       return left(ServerError("You cant submit the same info"));
     }
     try {
@@ -30,20 +29,19 @@ class SettingRepoImpl implements SettingRepo {
           "address": model.address,
         },
         headers: {
-          "token": UserModel.getInstance().token,
+          "token": UserModel.instance.token,
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        UserModel user = UserModel.getInstance();
         try {
           final apiManager = ApiManager();
           final userDataResponse = await apiManager.get(
             ApiConstants.getUserData,
             headers: {
-              "token": user.token,
+              "token": UserModel.instance.token,
             },
           );
-          user.setFromjson(userDataResponse.data["data"]);
+          UserModel.instance.setFromjson(userDataResponse.data["data"]);
         } catch (e) {}
       }
       return right("Chang");
@@ -62,14 +60,14 @@ class SettingRepoImpl implements SettingRepo {
       final response = await service.post(
         ApiConstants.changeEmail,
         headers: {
-          "token": UserModel.getInstance().token,
+          "token": UserModel.instance.token,
         },
         {
           "email": email,
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        UserModel.getInstance().email = email;
+        UserModel.instance.email = email;
       }
       return right(response.data["token"]);
     } catch (e) {
@@ -81,14 +79,13 @@ class SettingRepoImpl implements SettingRepo {
   }
 
   @override
-  Future<Either<Errors, String>> changePassword(
-      {required String oldPass, required String newPass}) async {
+  Future<Either<Errors, String>> changePassword({required String oldPass, required String newPass}) async {
     try {
       ApiManager service = ApiManager();
       await service.patch(
         ApiConstants.updatePassword,
         headers: {
-          "token": UserModel.getInstance().token,
+          "token": UserModel.instance.token,
         },
         data: {
           "newPassword": newPass,
@@ -112,7 +109,7 @@ class SettingRepoImpl implements SettingRepo {
         ApiConstants.logOut,
         {},
         headers: {
-          "token": UserModel.getInstance().token,
+          "token": UserModel.instance.token,
         },
       );
       return right("LogOut successfully");
@@ -128,9 +125,8 @@ class SettingRepoImpl implements SettingRepo {
   Future<Either<Errors, String>> changeDefault(String id) async {
     try {
       ApiManager service = ApiManager();
-      final response =
-          await service.patch(ApiConstants.ChangeDefaultAccount, headers: {
-        "token": UserModel.getInstance().token
+      final response = await service.patch(ApiConstants.ChangeDefaultAccount, headers: {
+        "token": UserModel.instance.token
       }, data: {
         "accountId": id,
       });
@@ -154,7 +150,7 @@ class SettingRepoImpl implements SettingRepo {
         "amount": limit,
         "type": duration,
       }, headers: {
-        "token": UserModel.getInstance().token
+        "token": UserModel.instance.token
       });
       return right("Limit updated successfully");
     } catch (e) {
@@ -171,7 +167,7 @@ class SettingRepoImpl implements SettingRepo {
       final apiManger = ApiManager();
       final response = await apiManger.post(
           ApiConstants.forgetPin + id,
-          headers: {"token": UserModel.getInstance().token},
+          headers: {"token": UserModel.instance.token},
           {});
 
       return right(response.data["token"]);
@@ -189,7 +185,7 @@ class SettingRepoImpl implements SettingRepo {
       ApiManager service = ApiManager();
       final response =
           await service.patch(ApiConstants.updateForgetPinOtp, headers: {
-        "token": UserModel.getInstance().token
+        "token": UserModel.instance.token
       }, data: {
         "token": userToken,
         "PIN": pin,

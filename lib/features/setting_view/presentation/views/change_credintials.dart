@@ -13,10 +13,10 @@ import 'package:untitled2/features/setting_view/presentation/manager/change_cred
 class ChangeCredintials extends StatelessWidget {
   ChangeCredintials({super.key});
 
-  final TextEditingController firstNameController = TextEditingController(text: UserModel.getInstance().firstName);
-  final TextEditingController lastNameController = TextEditingController(text: UserModel.getInstance().lastName);
-  final TextEditingController addressController = TextEditingController(text: UserModel.getInstance().address);
-  final TextEditingController phoneNumberController = TextEditingController(text: UserModel.getInstance().mobileNumber);
+  final TextEditingController firstNameController = TextEditingController(text: UserModel.instance.firstName);
+  final TextEditingController lastNameController = TextEditingController(text: UserModel.instance.lastName);
+  final TextEditingController addressController = TextEditingController(text: UserModel.instance.address);
+  final TextEditingController phoneNumberController = TextEditingController(text: UserModel.instance.mobileNumber);
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -27,8 +27,11 @@ class ChangeCredintials extends StatelessWidget {
       listener: (context, state) {
         if (state is ChangeCredinitialsSuccess) {
           snackBar(content: "Changed Successfully", context: context, color: Colors.green);
-          Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (route) => false,);
-
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesNames.layoutView,
+            (route) => false,
+          );
         } else if (state is ChangeCredinitialsFailure) {
           snackBar(content: state.errorMessage, context: context);
         }

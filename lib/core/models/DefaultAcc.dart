@@ -1,4 +1,4 @@
-import 'BankId.dart';
+import 'bank_data.dart';
 import 'CardId.dart';
 
 class DefaultAcc {
@@ -6,11 +6,11 @@ class DefaultAcc {
 
   DefaultAcc.fromJson(dynamic json) {
     id = json['_id'];
-    bankId = json['bankId'] != null ? BankId.fromJson(json['bankId']) : null;
+    bankId = json['bankId'] != null ? BankData.fromJson(json['bankId']) : null;
     cardInfo = json['cardId'] != null ? CardId.fromJson(json['cardId']) : null;
   }
   String? id;
-  BankId? bankId;
+  BankData? bankId;
   CardId? cardInfo;
 
   Map<String, dynamic> toJson() {

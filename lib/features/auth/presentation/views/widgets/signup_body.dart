@@ -114,7 +114,6 @@ class _SignupBodyState extends State<SignupBody> {
                       controller: passwordController,
                       pass: true,
                       obsecure: true,
-
                     ),
                     SizedBox(
                       height: 8,

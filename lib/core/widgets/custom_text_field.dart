@@ -58,17 +58,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: Colors.grey),
             ),
-            suffixIcon: widget.pass? IconButton(
-              onPressed: () {
-                widget.obsecure = !widget.obsecure;
-                setState(() {});
-              },
-              icon: Icon(
-                widget.obsecure ? Icons.visibility_off : Icons.visibility,
-                size: widget.pass ? 25 : 0,
-                color:widget.obsecure? Colors.grey:Colors.black,
-              ),
-            ):SizedBox()),
+            suffixIcon: widget.pass
+                ? IconButton(
+                    onPressed: () {
+                      widget.obsecure = !widget.obsecure;
+                      setState(() {});
+                    },
+                    icon: Icon(
+                      widget.obsecure ? Icons.visibility_off : Icons.visibility,
+                      size: widget.pass ? 25 : 0,
+                      color: widget.obsecure ? Colors.grey : Colors.black,
+                    ),
+                  )
+                : SizedBox()),
       ),
     );
   }

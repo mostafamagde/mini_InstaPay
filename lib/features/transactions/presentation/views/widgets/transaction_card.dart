@@ -39,8 +39,7 @@ class TransactionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = UserModel.getInstance();
-    final bool isReceiver = transaction.receiver.id == user.id;
+    final bool isReceiver = transaction.receiver.id == UserModel.instance.id;
     var theme = Theme.of(context);
     var media = MediaQuery.of(context).size;
     return InkWell(

@@ -35,7 +35,7 @@ class _ChooseAccountViewState extends State<ChooseAccountView> {
                 height: 15,
               ),
               Text(
-                "Your Mobile Number ${UserModel.getInstance().mobileNumber} must be",
+                "Your Mobile Number ${UserModel.instance.mobileNumber} must be",
                 style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
               ),
               Text(

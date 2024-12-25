@@ -20,22 +20,13 @@ class SettingView extends StatelessWidget {
     final LogOutCubit cubit = LogOutCubit.get(context);
 
     final List<ButtonModel> buttonModels = [
-      ButtonModel(
-          name: "Profile Management",
-          icon: Icons.settings,
-          onTap: () =>
-              Navigator.pushNamed(context, RoutesNames.changeCridintials)),
-      ButtonModel(
-          name: "Privacy Setting",
-          icon: Icons.privacy_tip,
-          onTap: () =>
-              Navigator.pushNamed(context, RoutesNames.privacySetting)),
+      ButtonModel(name: "Profile Management", icon: Icons.settings, onTap: () => Navigator.pushNamed(context, RoutesNames.changeCridintials)),
+      ButtonModel(name: "Privacy Setting", icon: Icons.privacy_tip, onTap: () => Navigator.pushNamed(context, RoutesNames.privacySetting)),
       ButtonModel(
           name: "Change limit",
           icon: Icons.money,
           onTap: () {
-            Navigator.pushNamed(context, RoutesNames.changeLimit,
-                arguments: UserModel.getInstance().defaultAcc?.id);
+            Navigator.pushNamed(context, RoutesNames.changeLimit, arguments: UserModel.instance.defaultAcc?.id);
           }),
       ButtonModel(
         name: "Log Out",
@@ -81,8 +72,7 @@ class SettingView extends StatelessWidget {
       listener: (context, state) {
         if (state is LogOutSuccess) {
           print(state.successMessage);
-          Navigator.pushNamedAndRemoveUntil(
-              context, RoutesNames.loginView, (route) => false);
+          Navigator.pushNamedAndRemoveUntil(context, RoutesNames.loginView, (route) => false);
         }
       },
       child: CustomScrollView(

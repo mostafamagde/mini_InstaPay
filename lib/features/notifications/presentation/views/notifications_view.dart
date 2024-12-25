@@ -28,7 +28,7 @@ class NotificationsView extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
-              UserModel.getInstance().role == "Admin"
+              UserModel.instance.role == "Admin"
                   ? Navigator.pushNamedAndRemoveUntil(
                       context,
                       RoutesNames.adminLayout,
@@ -52,8 +52,7 @@ class NotificationsView extends StatelessWidget {
           } else if (state is ReadNotificationsFailed) {
             snackBar(content: state.errorMessage, context: context);
           } else if (state is ReadNotificationsSuccess) {
-            final index = notifications.indexWhere(
-                (notification) => notification.id == state.notificationId);
+            final index = notifications.indexWhere((notification) => notification.id == state.notificationId);
             notifications[index].isRead = true;
           }
         },
@@ -74,8 +73,7 @@ class NotificationsView extends StatelessWidget {
                   print("data");
                   if (notifications.length != 0) {
                     print("not empty");
-                    if ((snapshot.data as NotificationModel).id !=
-                        notifications[0].id) {
+                    if ((snapshot.data as NotificationModel).id != notifications[0].id) {
                       notifications.insert(0, snapshot.data);
                     }
                   } else {

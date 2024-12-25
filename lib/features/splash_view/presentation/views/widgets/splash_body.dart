@@ -58,8 +58,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
       try {
         final token = await storage.read(key: "token");
         if (token != null && token.isNotEmpty) {
-          UserModel user = UserModel.getInstance();
-          user.token = token;
+          UserModel.instance.token = token;
           final apiManager = ApiManager();
           final userDataResponse = await apiManager.get(
             ApiConstants.getUserData,
@@ -67,11 +66,11 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
               "token": token,
             },
           );
-          user.setFromjson(userDataResponse.data["data"]);
+          UserModel.instance.setFromjson(userDataResponse.data["data"]);
           SocketService.instance.connect();
           Navigator.pushReplacementNamed(
             context,
-            user.role == 'Admin' ? RoutesNames.adminLayout : RoutesNames.layoutView,
+            UserModel.instance.role == 'Admin' ? RoutesNames.adminLayout : RoutesNames.layoutView,
           );
         } else {
           Navigator.pushReplacementNamed(

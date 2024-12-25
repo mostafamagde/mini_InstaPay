@@ -12,13 +12,10 @@ class AdminRepoImpl implements AdminRepo {
   ApiManager service = ApiManager();
 
   @override
-  Future<Either<ServerError, List<AdminUsersModel>>> getUsers(
-      [String? search]) async {
+  Future<Either<ServerError, List<AdminUsersModel>>> getUsers([String? search]) async {
     try {
-      final data = await service.get(ApiConstants.allUsersAdmin,
-          headers: {"token": UserModel.getInstance().token});
-      final usersList =
-          (data.data as List).map((e) => AdminUsersModel.fromJson(e)).toList();
+      final data = await service.get(ApiConstants.allUsersAdmin, headers: {"token": UserModel.instance.token});
+      final usersList = (data.data as List).map((e) => AdminUsersModel.fromJson(e)).toList();
       if (search == null || search.trim().isEmpty) {
         return right(usersList);
       } else {
@@ -44,10 +41,8 @@ class AdminRepoImpl implements AdminRepo {
   @override
   Future<Either<ServerError, String>> banUsers(String id) async {
     try {
-      final data = await service.post(
-          ApiConstants.banUsersAdmin, {"userId": id},
-          headers: {"token": UserModel.getInstance().token});
-      return right(data.data["message"]??"banned Succeeded");
+      final data = await service.post(ApiConstants.banUsersAdmin, {"userId": id}, headers: {"token": UserModel.instance.token});
+      return right(data.data["message"] ?? "banned Succeeded");
     } catch (e) {
       if (e is DioException) {
         return left(ServerError.fromDioError(e));

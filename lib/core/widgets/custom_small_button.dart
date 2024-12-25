@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class CustomSmallButton extends StatelessWidget {
-  CustomSmallButton({
-    super.key,
-    required this.name,
-    required this.icon,
-    this.onTap,
-    this.padding = 0,
-    this.verticalPadding=0
-  });
+  CustomSmallButton({super.key, required this.name, required this.icon, this.onTap, this.padding = 0, this.verticalPadding = 0});
 
   final String name;
   final IconData icon;
@@ -21,7 +15,7 @@ class CustomSmallButton extends StatelessWidget {
     var theme = Theme.of(context);
     // var media = MediaQuery.of(context).size;
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: padding,vertical: verticalPadding),
+      padding: EdgeInsets.symmetric(horizontal: padding, vertical: verticalPadding),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(17),
@@ -31,7 +25,7 @@ class CustomSmallButton extends StatelessWidget {
             boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1)],
             borderRadius: BorderRadius.circular(20),
           ),
-          padding: EdgeInsets.only(left: 4,right:4,bottom: 16),
+          padding: EdgeInsets.only(left: 4, right: 4, bottom: 16),
           width: double.infinity,
           child: Column(
             mainAxisSize: MainAxisSize.min,

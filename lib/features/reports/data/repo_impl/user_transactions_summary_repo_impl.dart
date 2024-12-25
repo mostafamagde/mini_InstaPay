@@ -10,15 +10,15 @@ class UserTransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
 
     for (TransactionModel model in transactionModels) {
       if (model.status == TransactionStatus.SUCCESS.value) {
-        if (model.sender.id == UserModel.getInstance().id) {
+        if (model.sender.id == UserModel.instance.id) {
           summaryModel.totalSendTransactions++;
-        } else if (model.receiver.id == UserModel.getInstance().id) {
+        } else if (model.receiver.id == UserModel.instance.id) {
           summaryModel.totalReceiveTransactions++;
         }
 
-        if (model.sender.id == UserModel.getInstance().id) {
+        if (model.sender.id == UserModel.instance.id) {
           summaryModel.totalSend += model.amount;
-        } else if (model.receiver.id == UserModel.getInstance().id) {
+        } else if (model.receiver.id == UserModel.instance.id) {
           summaryModel.totalReceive += model.amount;
         }
         summaryModel.totalSuccessTransactions++;

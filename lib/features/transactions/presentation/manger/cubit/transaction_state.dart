@@ -18,14 +18,17 @@ final class TransactionSuccess extends TransactionState {
 
   TransactionSuccess({required this.transactions});
 }
+
 final class ManageTransactionLoading extends TransactionState {}
+
 final class ManageTransactSuccess extends TransactionState {
   final String massage;
   final String transactionStatus;
-  ManageTransactSuccess({required this.massage,required this.transactionStatus});
+  ManageTransactSuccess({required this.massage, required this.transactionStatus});
 }
+
 final class ManageTransactFailed extends TransactionState {
-    final String error;
+  final String error;
 
   ManageTransactFailed({required this.error});
 }

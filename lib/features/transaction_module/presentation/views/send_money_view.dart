@@ -4,6 +4,7 @@ import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/features/transaction_module/presentation/views/widgets/transaction_box.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class SendMoneyView extends StatelessWidget {
   SendMoneyView({super.key});
 
@@ -41,7 +42,9 @@ class SendMoneyView extends StatelessWidget {
               label: "Send",
               padding: 22,
             ),
-            SizedBox(height: 32,)
+            SizedBox(
+              height: 32,
+            )
           ],
         ),
       ),

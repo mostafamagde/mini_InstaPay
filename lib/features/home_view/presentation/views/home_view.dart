@@ -26,8 +26,8 @@ class HomeView extends StatelessWidget {
     BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     BlocProvider.of<NotificationsCubit>(context).getNotification();
     var cubit = ForgetPinCubit.get(context);
-    UserModel user = UserModel.getInstance();
-    print(user.token);
+    final user = UserModel.instance;
+    print(UserModel.instance.token);
     var theme = Theme.of(context);
     return BlocConsumer<ForgetPinCubit, ForgetPinState>(
       listener: (context, state) {
@@ -86,9 +86,9 @@ class HomeView extends StatelessWidget {
                             )
                           ],
                         ),
-                        if (UserModel.getInstance().defaultAcc != null)
+                        if (user.defaultAcc != null)
                           BankAccountManagment(),
-                        if (UserModel.getInstance().defaultAcc == null)
+                        if (user.defaultAcc == null)
                           Container(
                             child: Center(
                               child: TextButton(
@@ -135,7 +135,7 @@ class HomeView extends StatelessWidget {
                         TextButton(
                             onPressed: () {
                               cubit.forgetPin(
-                                  UserModel.getInstance().defaultAcc!.id!);
+                                  user.defaultAcc!.id!);
                             },
                             child: Text("data")),
                         ServicesSection(onTap: onTap),

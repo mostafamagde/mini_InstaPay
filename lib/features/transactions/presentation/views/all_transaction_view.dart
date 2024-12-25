@@ -13,15 +13,15 @@ class AllTransactionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    print(UserModel.getInstance().token);
-    final user =UserModel.getInstance();
-        if(user.role=="Admin")
-       { BlocProvider.of<NotificationsCubit>(context).getNotification();}
-    getTransactions(){
-      user.role=="Admin"?BlocProvider.of<TransactionCubit>(context).getAllTransaction(): BlocProvider.of<TransactionCubit>(context).getUserTransaction();
+    print(UserModel.instance.token);
+    if (UserModel.instance.role == "Admin") {
+      BlocProvider.of<NotificationsCubit>(context).getNotification();
     }
-   getTransactions();
+    getTransactions() {
+      UserModel.instance.role == "Admin" ? BlocProvider.of<TransactionCubit>(context).getAllTransaction() : BlocProvider.of<TransactionCubit>(context).getUserTransaction();
+    }
+
+    getTransactions();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -29,23 +29,22 @@ class AllTransactionView extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        leading: user.role=="Admin"? SizedBox():
-        IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-            )),
-            actions: [
-              user.role=="Admin"? NotificationIcon():SizedBox()
-            ],
+        leading: UserModel.instance.role == "Admin"
+            ? SizedBox()
+            : IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                )),
+        actions: [UserModel.instance.role == "Admin" ? NotificationIcon() : SizedBox()],
       ),
       body: BlocConsumer<TransactionCubit, TransactionState>(
         listener: (context, state) {
-          if(state is ManageTransactSuccess){
-              getTransactions();
+          if (state is ManageTransactSuccess) {
+            getTransactions();
           }
         },
         builder: (context, state) {

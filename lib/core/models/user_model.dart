@@ -1,5 +1,4 @@
-import 'package:untitled2/features/account_managment/data/models/BankAccountModel.dart';
-
+import 'package:untitled2/features/account_managment/data/models/account_data.dart';
 import 'DefaultAcc.dart';
 
 class UserModel {
@@ -10,28 +9,22 @@ class UserModel {
   String? mobileNumber;
   String? address;
   String? id;
-  BankAccountModel? bankAccounts;
+  List<BankAccountData>? bankAccounts;
   String? role;
-
   DefaultAcc? defaultAcc;
 
-  static final UserModel _singleton = UserModel._internal();
-
-  factory UserModel.getInstance() {
-    return _singleton;
-  }
+  UserModel._();
+  static final UserModel _singletonInstance = UserModel._();
+  static UserModel get instance => _singletonInstance;
 
   setFromjson(Map<String, dynamic> json) {
-    print(json);
-    firstName = json['firstName'];
-    id = json['_id'];
-    defaultAcc = json["defaultAcc"] == null ? null : DefaultAcc.fromJson(json["defaultAcc"]);
-    lastName = json['lastName'];
-    email = json['email'];
-    mobileNumber = json['mobileNumber'];
-    address = json['address'];
-    role = json['role'];
+    this.firstName = json['firstName'];
+    this.id = json['_id'];
+    this.defaultAcc = json["defaultAcc"] == null ? null : DefaultAcc.fromJson(json["defaultAcc"]);
+    this.lastName = json['lastName'];
+    this.email = json['email'];
+    this.mobileNumber = json['mobileNumber'];
+    this.address = json['address'];
+    this.role = json['role'];
   }
-
-  UserModel._internal();
 }

@@ -19,7 +19,7 @@ class OtpForgetPinRepo extends OtpRepository {
     try {
      final response=  await _apiManager.post(
         ApiConstants.confirmForgetPinOtp,
-        headers: {"token": UserModel.getInstance().token},
+        headers: {"token": UserModel.instance.token},
         {
           "token": token,
           "OTP": otp,
