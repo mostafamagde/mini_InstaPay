@@ -91,12 +91,13 @@ class ChangePin extends StatelessWidget {
                     _buildPinInputRow(newPinControllers, newPinFocusNodes, context),
                     const SizedBox(height: 40),
                     CustomButton(
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            cubit.changePin(oldPinControllers.map((controller) => controller.text).join(), newPinControllers.map((controller) => controller.text).join(), id);
-                          }
-                        },
-                        label: "Submit")
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          cubit.changePin(oldPinControllers.map((controller) => controller.text).join(), newPinControllers.map((controller) => controller.text).join(), id);
+                        }
+                      },
+                      label: "Submit",
+                    )
                   ],
                 ),
               ),

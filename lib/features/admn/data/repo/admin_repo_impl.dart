@@ -8,12 +8,14 @@ import 'package:mini_instapay/features/admn/data/models/AdminUsersModel.dart';
 import 'package:mini_instapay/features/admn/data/repo/admin_repo.dart';
 
 class AdminRepoImpl implements AdminRepo {
-  ApiManager service = ApiManager();
+  const AdminRepoImpl(this._apiManager);
+
+  final ApiManager _apiManager;
 
   @override
   Future<Either<ServerError, List<AdminUsersModel>>> getUsers([String? search]) async {
     try {
-      final data = await service.get(ApiConstants.allUsersAdmin, headers: {"token": UserModel.instance.token});
+      final data = await _apiManager.get(ApiConstants.allUsersAdmin, headers: {"token": UserModel.instance.token});
       final usersList = (data.data as List).map((e) => AdminUsersModel.fromJson(e)).toList();
       if (search == null || search.trim().isEmpty) {
         return right(usersList);
@@ -40,7 +42,7 @@ class AdminRepoImpl implements AdminRepo {
   @override
   Future<Either<ServerError, String>> banUsers(String id) async {
     try {
-      final data = await service.post(ApiConstants.banUsersAdmin, {"userId": id}, headers: {"token": UserModel.instance.token});
+      final data = await _apiManager.post(ApiConstants.banUsersAdmin, {"userId": id}, headers: {"token": UserModel.instance.token});
       return right(data.data["message"] ?? "banned Succeeded");
     } catch (e) {
       if (e is DioException) {

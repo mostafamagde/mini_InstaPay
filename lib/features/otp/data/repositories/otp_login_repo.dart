@@ -7,13 +7,13 @@ import 'package:mini_instapay/core/enums/role_enum.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
 import 'package:mini_instapay/core/utils/Constants.dart';
-import 'package:mini_instapay/core/utils/service_locator.dart';
 import 'otp_repo.dart';
 
 class OtpLoginRepo extends OtpRepository {
   final ApiManager _apiManager;
+  final FlutterSecureStorage flutterSecureStorage;
 
-  OtpLoginRepo({required super.context}) : _apiManager = ServiceLocator.getIt.get<ApiManager>();
+  const OtpLoginRepo(super.context, this._apiManager, this.flutterSecureStorage);
 
   @override
   Future<void> submitOtp({required String token, required String otp}) async {
@@ -29,15 +29,15 @@ class OtpLoginRepo extends OtpRepository {
         throw Exception(response.data["message"]);
       } else {
         UserModel.instance.token = response.data["token"];
-        final storage = new FlutterSecureStorage();
-        await storage.write(key: "token", value: UserModel.instance.token);
+        await flutterSecureStorage.write(key: "token", value: UserModel.instance.token);
         final userDataResponse = await _apiManager.get(ApiConstants.getUserData, headers: {"token": UserModel.instance.token});
-        ;
+
         if (userDataResponse.statusCode != 200 && userDataResponse.statusCode != 201) {
           throw Exception(response.data["message"]);
         } else {
           UserModel.instance.setFromjson(userDataResponse.data["data"]);
         }
+
         Navigator.pushNamedAndRemoveUntil(
           context,
           UserModel.instance.role == Role.Admin ? RoutesNames.adminLayout : RoutesNames.layoutView,

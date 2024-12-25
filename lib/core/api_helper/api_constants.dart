@@ -22,7 +22,7 @@ class ApiConstants {
   static const String receiveMoney = "transaction/request-recieve-money";
   static const String forgetPasswordEdnPoint = 'auth/forget-password';
   static const String ConfirmOtpForgetEdnPoint = 'auth/confirm-otp-forget';
-  static const String SendforgetPasswordMailEdnPoint = 'auth/send-forget-password-mail/';
+  static const String sendforgetPasswordMailEndPoint = 'auth/send-forget-password-mail/';
   static const String ChangeDefaultAccount = 'transaction/change-default';
   static const String getAllTransactionEndPoint = "/transaction/admin";
   static const String confirmReceive = "transaction/confirm-recieve/";
@@ -35,7 +35,7 @@ class ApiConstants {
   static const String rejectRefund = '/transaction/admin/reject-refund';
   static const String updatePin = 'account/PIN/';
   static const String changeLimit = '/account/limit/';
-  static const String forgetPin='/account/sendForgetPINOTP/';
-  static const String confirmForgetPinOtp='account/confirmOTPforgetPIN';
-  static const String updateForgetPinOtp='account/forgetPIN';
+  static const String forgetPin = '/account/sendForgetPINOTP/';
+  static const String confirmForgetPinOtp = 'account/confirmOTPforgetPIN';
+  static const String updateForgetPinOtp = 'account/forgetPIN';
 }

@@ -4,13 +4,12 @@ import 'package:mini_instapay/core/api_helper/api_constants.dart';
 import 'package:mini_instapay/core/api_helper/api_manger.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
 import 'package:mini_instapay/core/utils/Constants.dart';
-import 'package:mini_instapay/core/utils/service_locator.dart';
 import 'package:mini_instapay/features/otp/data/repositories/otp_repo.dart';
 
 class OtpSignUpRepo extends OtpRepository {
   final ApiManager _apiManager;
 
-  OtpSignUpRepo({required super.context}) : _apiManager = ServiceLocator.getIt.get<ApiManager>();
+  const OtpSignUpRepo(super.context, this._apiManager);
 
   @override
   Future<void> submitOtp({required String token, required String otp}) async {

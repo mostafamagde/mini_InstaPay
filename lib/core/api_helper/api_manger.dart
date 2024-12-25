@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:mini_instapay/core/api_helper/api_constants.dart';
 
 class ApiManager {
-  final Dio _dio = Dio();
+  final Dio _dio;
 
-  ApiManager() {
+  ApiManager(this._dio) {
     _dio.options.baseUrl = ApiConstants.baseUrl;
   }
 

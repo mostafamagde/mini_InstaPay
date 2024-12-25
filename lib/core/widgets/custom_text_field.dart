@@ -20,14 +20,12 @@ class CustomTextField extends StatefulWidget {
   final IconData icon;
   final TextInputType inputType;
   final FormFieldValidator<String>? valid;
-
   final void Function(String)? function;
   final TextEditingController? controller;
-  FocusNode? node;
-  bool centerText;
+  final FocusNode? node;
+  final bool centerText;
   bool obsecure;
-
-  bool pass;
+  final bool pass;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();

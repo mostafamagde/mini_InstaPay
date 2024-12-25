@@ -14,7 +14,7 @@ class BankAccountManagment extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size media = MediaQuery.of(context).size;
     final ThemeData theme = Theme.of(context);
-    
+
     return Container(
       width: media.width * .9,
       padding: EdgeInsets.only(bottom: 16),

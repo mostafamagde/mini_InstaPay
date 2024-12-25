@@ -1,17 +1,17 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SaveTime {
-  static Future<void> saveCurrentTime() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+class TimeSaving {
+  const TimeSaving(this._sharedPreferences);
 
+  final SharedPreferences _sharedPreferences;
+
+  Future<void> saveCurrentTime() async {
     int timestamp = DateTime.now().millisecondsSinceEpoch;
-    await prefs.setInt('currentTime', timestamp);
+    await _sharedPreferences.setInt('currentTime', timestamp);
   }
 
-  static Future<DateTime?> getSavedTime() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    int? savedTimestamp = prefs.getInt('currentTime');
+  Future<DateTime?> getSavedTime() async {
+    int? savedTimestamp = _sharedPreferences.getInt('currentTime');
     if (savedTimestamp != null) {
       return DateTime.fromMillisecondsSinceEpoch(savedTimestamp);
     }

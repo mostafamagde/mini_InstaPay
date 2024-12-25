@@ -4,7 +4,10 @@ import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/features/notifications/data/models/notfication_model.dart';
 
 class NotificationsRepo {
-  final _apiManger = ApiManager();
+  final ApiManager _apiManger;
+
+  const NotificationsRepo(this._apiManger);
+
   Future<List<NotificationModel>> getAllNotifications() async {
     final response = await _apiManger.get(ApiConstants.getAllNotifications, headers: {"token": UserModel.instance.token});
     return (response.data['data'] as List).map((item) => NotificationModel.fromJson(item)).toList();

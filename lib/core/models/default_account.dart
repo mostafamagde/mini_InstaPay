@@ -1,5 +1,5 @@
 import 'bank_data.dart';
-import 'CardId.dart';
+import 'card_id.dart';
 
 class DefaultAcc {
   DefaultAcc({this.id, this.bankId, this.cardInfo});

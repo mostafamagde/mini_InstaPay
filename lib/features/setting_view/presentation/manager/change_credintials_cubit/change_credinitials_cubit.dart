@@ -16,7 +16,7 @@ class ChangeCredinitialsCubit extends Cubit<ChangeCredinitialsState> {
   Future<void> changeCredinitials(CredinitialsModel model) async {
     emit(ChangeCredinitialsLoading());
     final Either data = await _settingRepo.changeCredintials(model: model);
-    
+
     data.fold(
       (failure) => emit(ChangeCredinitialsFailure(failure.errMessage)),
       (message) => emit(

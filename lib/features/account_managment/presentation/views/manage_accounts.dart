@@ -54,7 +54,7 @@ class ManageAccounts extends StatelessWidget {
             },
             builder: (context, state) {
               final ManageBankAccountsCubit cubit = ManageBankAccountsCubit.get(context);
-              
+
               return Scaffold(
                 bottomNavigationBar: CustomButton(
                   onTap: () => Navigator.pushNamed(context, RoutesNames.chooseBank),

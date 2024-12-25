@@ -8,7 +8,7 @@ abstract class SettingRepo {
   Future<Either<Errors, String>> changeEmail({required String email});
   Future<Either<Errors, String>> logOut();
   Future<Either<Errors, String>> changeDefault(String id);
-  Future<Either<Errors,String>> changeLimit({required double limit,required String duration,required accountId});
-  Future<Either<Errors,String>> forgetPin(String id);
-  Future<Either<Errors,String>> updatePin(String pin,String userToken);
+  Future<Either<Errors, String>> changeLimit({required double limit, required String duration, required accountId});
+  Future<Either<Errors, String>> forgetPin(String id);
+  Future<Either<Errors, String>> updatePin(String pin, String userToken);
 }

@@ -1,10 +1,11 @@
 import 'package:mini_instapay/core/enums/transaction_status_enum.dart';
+import 'package:mini_instapay/core/enums/transaction_type_enum.dart';
 import 'package:mini_instapay/features/transactions/data/model/transaction_user_model.dart';
 
 class TransactionModel {
   final String id;
   TransactionStatus status;
-  final String type;
+  final TransactionType type;
   final double amount;
   final TransactionUserModel sender;
   final TransactionUserModel receiver;
@@ -24,7 +25,7 @@ class TransactionModel {
     return TransactionModel(
       id: json['_id'],
       status: TransactionStatus.fromJson(json['status']),
-      type: json['type'],
+      type: TransactionType.fromJson(json['type']),
       amount: (json['amount'] as num).toDouble(),
       sender: TransactionUserModel.fromJson(json['sender']),
       receiver: TransactionUserModel.fromJson(json['reciever']), // Corrected to match JSON key
@@ -36,7 +37,7 @@ class TransactionModel {
     return {
       '_id': id,
       'status': status.value,
-      'type': type,
+      'type': type.value,
       'amount': amount,
       'sender': sender.toJson(),
       'reciever': receiver.toJson(), // Corrected to match JSON key
@@ -46,7 +47,7 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(id: $id, status: $status.value, type: $type, amount: $amount, '
+    return 'TransactionModel(id: $id, status: ${status.value}, type: ${type.value}, amount: $amount, '
         'sender: $sender, receiver: $receiver, createdAt: $createdAt)';
   }
 }

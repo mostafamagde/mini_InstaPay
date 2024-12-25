@@ -9,7 +9,7 @@ class UserTransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
     UserTransactionSummaryModel summaryModel = UserTransactionSummaryModel.init();
 
     for (TransactionModel model in transactionModels) {
-      if (model.status == TransactionStatus.Success.value) {
+      if (model.status == TransactionStatus.Success) {
         if (model.sender.id == UserModel.instance.id) {
           summaryModel.totalSendTransactions++;
         } else if (model.receiver.id == UserModel.instance.id) {
@@ -22,7 +22,7 @@ class UserTransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
           summaryModel.totalReceive += model.amount;
         }
         summaryModel.totalSuccessTransactions++;
-      } else if (model.status != TransactionStatus.Success.value) {
+      } else if (model.status != TransactionStatus.Success) {
         summaryModel.totalFailedTransactions++;
       }
     }

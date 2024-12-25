@@ -7,12 +7,9 @@ import 'package:mini_instapay/core/utils/validation.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
 import 'package:mini_instapay/features/setting_view/presentation/manager/confirm_forget_pin/cinfirm_forget_pin_cubit.dart';
 
-
-
 class ForgetPin extends StatelessWidget {
   final int pinLength = 6;
-  final List<TextEditingController> controllers =
-      List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> controllers = List.generate(6, (_) => TextEditingController());
   final List<FocusNode> focusNodes = List.generate(6, (_) => FocusNode());
   final TextEditingController accId = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -34,17 +31,12 @@ class ForgetPin extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Enter PIN Code'),
       ),
-      body: BlocConsumer<ConfirmForgetPinCubit, ConfirmForgetPinState>(
-          listener: (context, state) {
+      body: BlocConsumer<ConfirmForgetPinCubit, ConfirmForgetPinState>(listener: (context, state) {
         if (state is CinfirmForgetPinFailed) {
           snackBar(content: state.errorMessage, context: context);
         } else if (state is CinfirmForgetPinSuccess) {
-          snackBar(
-              content: state.errorMessage,
-              context: context,
-              color: Colors.green);
-          Navigator.pushNamedAndRemoveUntil(
-              context, RoutesNames.layoutView, (Route<dynamic> route) => false);
+          snackBar(content: state.errorMessage, context: context, color: Colors.green);
+          Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (Route<dynamic> route) => false);
         }
       }, builder: (context, state) {
         final ConfirmForgetPinCubit cubit = ConfirmForgetPinCubit.get(context);
@@ -83,15 +75,10 @@ class ForgetPin extends StatelessWidget {
                             counterText: '',
                             border: OutlineInputBorder(),
                           ),
-                          onChanged: (value) =>
-                              _onTextChanged(value, index, context),
+                          onChanged: (value) => _onTextChanged(value, index, context),
                           onFieldSubmitted: (value) async {
                             if (formKey.currentState!.validate()) {
-                              cubit.updatePin(
-                                  controllers
-                                      .map((controller) => controller.text)
-                                      .join(),
-                                  userToken);
+                              cubit.updatePin(controllers.map((controller) => controller.text).join(), userToken);
                             }
                           },
                         ),

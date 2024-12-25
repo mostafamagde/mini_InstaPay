@@ -12,5 +12,5 @@ abstract class Constants {
   static const String ConfirmChangeEmailString = 'CHANGE_EMAIL';
   static const String RequestSendString = 'Request_Send';
   static const String kRequestRefund = 'Request_Refund';
-  static const String forgetPin='forgetPin';
+  static const String forgetPin = 'forgetPin';
 }

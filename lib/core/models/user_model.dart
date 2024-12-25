@@ -1,6 +1,6 @@
 import 'package:mini_instapay/core/enums/role_enum.dart';
 import 'package:mini_instapay/features/account_managment/data/models/account_data.dart';
-import 'DefaultAcc.dart';
+import 'default_account.dart';
 
 class UserModel {
   String? firstName;

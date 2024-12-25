@@ -7,7 +7,8 @@ class CustomButton extends StatelessWidget {
   final String label;
   final double? padding;
   final Color color;
-  CustomButton({super.key, required this.onTap, required this.label, this.padding, this.color = Constants.primaryMouveColor});
+
+  const CustomButton({super.key, required this.onTap, required this.label, this.padding, this.color = Constants.primaryMouveColor});
 
   @override
   Widget build(BuildContext context) {

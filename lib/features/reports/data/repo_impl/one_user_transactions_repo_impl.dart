@@ -14,14 +14,14 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
       if (transaction.sender.id == UserModel.instance.id) {
         if (data.containsKey(transaction.receiver.id)) {
           OneUserTransactionsModel model = data[transaction.receiver.id]!;
-          if (transaction.status == TransactionStatus.Success.value) {
+          if (transaction.status == TransactionStatus.Success) {
             model.transactionSummaryModel.addSuccessSend(transaction.amount);
           } else {
             model.transactionSummaryModel.totalFailedTransactions++;
           }
         } else {
           late UserTransactionSummaryModel user;
-          if (transaction.status == TransactionStatus.Success.value) {
+          if (transaction.status == TransactionStatus.Success) {
             user = UserTransactionSummaryModel.initSuccessSend(transaction.amount);
           } else {
             user = UserTransactionSummaryModel.initFailed();
@@ -36,14 +36,14 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
       } else if (transaction.receiver.id == UserModel.instance.id) {
         if (data.containsKey(transaction.sender.id)) {
           OneUserTransactionsModel model = data[transaction.sender.id]!;
-          if (transaction.status == TransactionStatus.Success.value) {
+          if (transaction.status == TransactionStatus.Success) {
             model.transactionSummaryModel.addSuccessRecv(transaction.amount);
           } else {
             model.transactionSummaryModel.totalFailedTransactions++;
           }
         } else {
           late UserTransactionSummaryModel user;
-          if (transaction.status == TransactionStatus.Success.value) {
+          if (transaction.status == TransactionStatus.Success) {
             user = UserTransactionSummaryModel.initSuccessRecv(transaction.amount);
           } else {
             user = UserTransactionSummaryModel.initFailed();
@@ -73,14 +73,14 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
     for (TransactionModel transaction in transactionModels) {
       if (data.containsKey(transaction.receiver.id)) {
         OneUserTransactionsModel model = data[transaction.receiver.id]!;
-        if (transaction.status == TransactionStatus.Success.value) {
+        if (transaction.status == TransactionStatus.Success) {
           model.transactionSummaryModel.addSuccessRecv(transaction.amount);
         } else {
           model.transactionSummaryModel.totalFailedTransactions++;
         }
       } else {
         late UserTransactionSummaryModel user;
-        if (transaction.status == TransactionStatus.Success.value) {
+        if (transaction.status == TransactionStatus.Success) {
           user = UserTransactionSummaryModel.initSuccessRecv(transaction.amount);
         } else {
           user = UserTransactionSummaryModel.initFailed();
@@ -94,7 +94,7 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
       }
       if (data.containsKey(transaction.sender.id)) {
         OneUserTransactionsModel model = data[transaction.sender.id]!;
-        if (transaction.status == TransactionStatus.Success.value) {
+        if (transaction.status == TransactionStatus.Success) {
           model.transactionSummaryModel.addSuccessSend(transaction.amount);
         } else {
           model.transactionSummaryModel.totalFailedTransactions++;
@@ -102,7 +102,7 @@ class OneUserTransactionsRepoImpl extends OneUserTransactionsRepo {
       } else {
         late UserTransactionSummaryModel user;
 
-        if (transaction.status == TransactionStatus.Success.value) {
+        if (transaction.status == TransactionStatus.Success) {
           user = UserTransactionSummaryModel.initSuccessSend(transaction.amount);
         } else {
           user = UserTransactionSummaryModel.initFailed();

@@ -5,23 +5,24 @@ import 'package:mini_instapay/core/api_helper/api_manger.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
 import 'package:mini_instapay/core/utils/Constants.dart';
-import 'package:mini_instapay/core/utils/service_locator.dart';
 import 'package:mini_instapay/features/otp/data/repositories/otp_repo.dart';
 
 class OtpChangeEmailRepo extends OtpRepository {
-  final ApiManager _apiManager;
+  const OtpChangeEmailRepo(super.context, this._apiManager);
 
-  OtpChangeEmailRepo({required super.context}) : _apiManager = ServiceLocator.getIt.get<ApiManager>();
+  final ApiManager _apiManager;
 
   @override
   Future<void> submitOtp({required String token, required String otp}) async {
     try {
-      final response = await _apiManager.patch(ApiConstants.ConfirmChangeEmail, data: {
-        "token": token,
-        "otp": int.parse(otp),
-      }, headers: {
-        "token": UserModel.instance.token
-      });
+      final response = await _apiManager.patch(
+        ApiConstants.ConfirmChangeEmail,
+        data: {
+          "token": token,
+          "otp": int.parse(otp),
+        },
+        headers: {"token": UserModel.instance.token},
+      );
       if (response.statusCode != 201 && response.statusCode != 200) {
         throw Exception(response.data["message"]);
       } else {
@@ -42,7 +43,11 @@ class OtpChangeEmailRepo extends OtpRepository {
   @override
   Future<void> resendOtp({required String token}) async {
     try {
-      final response = await _apiManager.post(ApiConstants.resendOtpEndPoint, {"token": token, "type": Constants.ConfirmChangeEmailString}, headers: {"token": UserModel.instance.token});
+      final response = await _apiManager.post(
+        ApiConstants.resendOtpEndPoint,
+        {"token": token, "type": Constants.ConfirmChangeEmailString},
+        headers: {"token": UserModel.instance.token},
+      );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
       }

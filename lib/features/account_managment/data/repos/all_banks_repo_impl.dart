@@ -4,9 +4,13 @@ import 'package:mini_instapay/features/account_managment/data/models/bank_model.
 import 'package:mini_instapay/features/account_managment/data/repos/all_banks_repo.dart';
 
 class AllBanksRepoImpl extends AllBanksRepo {
+  AllBanksRepoImpl(this._apiManager);
+
+  final ApiManager _apiManager;
+
   @override
   Future<List<BankModel>> getAllBanks() async {
-    final response = await ApiManager().get(ApiConstants.getAllBanks);
+    final response = await _apiManager.get(ApiConstants.getAllBanks);
     final List<dynamic> data = response.data;
     return data.map((json) => BankModel.fromJson(json)).toList();
   }

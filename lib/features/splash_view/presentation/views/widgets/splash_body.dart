@@ -5,6 +5,7 @@ import 'package:mini_instapay/core/api_helper/api_manger.dart';
 import 'package:mini_instapay/core/enums/role_enum.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/utils/service_locator.dart';
 import 'package:mini_instapay/core/utils/socket_service.dart';
 import 'AnimatedBuilder.dart';
 
@@ -59,7 +60,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
         final token = await storage.read(key: "token");
         if (token != null && token.isNotEmpty) {
           UserModel.instance.token = token;
-          final apiManager = ApiManager();
+          final apiManager = ServiceLocator.getIt<ApiManager>();
           final userDataResponse = await apiManager.get(
             ApiConstants.getUserData,
             headers: {

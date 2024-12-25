@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_instapay/features/account_managment/data/repos/save_time.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mini_instapay/core/navigation_cubit/navigation_cubit.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
@@ -102,7 +103,13 @@ class RouteGenerator {
         );
       case RoutesNames.chooseBank:
         return BlocProvider<BanksCubit>(
-          create: (context) => BanksCubit(bankProxy: BankListProxy(ServiceLocator.getIt<SharedPreferences>(), ServiceLocator.getIt<AllBanksRepoImpl>()))..fetchBanks(),
+          create: (context) => BanksCubit(
+            bankProxy: BankListProxy(
+              ServiceLocator.getIt<SharedPreferences>(),
+              ServiceLocator.getIt<AllBanksRepoImpl>(),
+              ServiceLocator.getIt<TimeSaving>(),
+            ),
+          )..fetchBanks(),
           child: ChooseAccountView(),
         );
       case RoutesNames.adminLayout:
@@ -122,7 +129,7 @@ class RouteGenerator {
               create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             ),
             BlocProvider<NotificationsCubit>(
-              create: (context) => NotificationsCubit(NotificationsRepo()),
+              create: (context) => NotificationsCubit(ServiceLocator.getIt<NotificationsRepo>()),
             ),
             BlocProvider<NavigationCubit>(
               create: (context) => NavigationCubit(),
@@ -168,7 +175,7 @@ class RouteGenerator {
             BlocProvider<TransactionCubit>(
               create: (context) => TransactionCubit(ServiceLocator.getIt<TransactionRepository>()),
             ),
-            BlocProvider(
+            BlocProvider<NotificationsCubit>(
               create: (context) => NotificationsCubit(ServiceLocator.getIt<NotificationsRepo>()),
             ),
           ],
@@ -181,22 +188,22 @@ class RouteGenerator {
         );
       case RoutesNames.notifications:
         return BlocProvider<NotificationsCubit>(
-          create: (context) => NotificationsCubit(NotificationsRepo()),
+          create: (context) => NotificationsCubit(ServiceLocator.getIt<NotificationsRepo>()),
           child: NotificationsView(),
         );
       case RoutesNames.notificationsPin:
         return BlocProvider<NotificationsCubit>(
-          create: (context) => NotificationsCubit(NotificationsRepo()),
+          create: (context) => NotificationsCubit(ServiceLocator.getIt<NotificationsRepo>()),
           child: NotificationPinView(),
         );
       case RoutesNames.pinSendView:
         return BlocProvider<SendCubit>(
-          create: (context) => SendCubit(ServiceLocator.getIt.get<TransactionRepoImpl>()),
+          create: (context) => SendCubit(ServiceLocator.getIt<TransactionRepoImpl>()),
           child: SendPin(),
         );
       case RoutesNames.EnterPasswordView:
         return BlocProvider<AuthCubit>(
-          create: (context) => AuthCubit(AuthRepoImpl()),
+          create: (context) => AuthCubit(ServiceLocator.getIt<AuthRepoImpl>()),
           child: EnterPasswordView(),
         );
       case RoutesNames.onBoarding:
@@ -238,7 +245,7 @@ class RouteGenerator {
         );
       case RoutesNames.adminSetting:
         return BlocProvider<LogOutCubit>(
-          create: (context) => LogOutCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
+          create: (context) => LogOutCubit(ServiceLocator.getIt<SettingRepoImpl>()),
           child: const AdminSetting(),
         );
       case RoutesNames.allUsersView:
@@ -255,24 +262,24 @@ class RouteGenerator {
         );
       case RoutesNames.homeView:
         return BlocProvider<ForgetPinCubit>(
-          create: (context) => ForgetPinCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
+          create: (context) => ForgetPinCubit(ServiceLocator.getIt<SettingRepoImpl>()),
           child: HomeView(),
         );
       case RoutesNames.sendMoneyView:
         return SendMoneyView();
       case RoutesNames.receiveMoneyView:
         return BlocProvider<ReceiveCubit>(
-          create: (context) => ReceiveCubit(ServiceLocator.getIt.get<TransactionRepoImpl>()),
+          create: (context) => ReceiveCubit(ServiceLocator.getIt<TransactionRepoImpl>()),
           child: ReceiveMoneyView(),
         );
       case RoutesNames.settingView:
         return MultiBlocProvider(
           providers: [
-            BlocProvider(
-              create: (context) => LogOutCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
+            BlocProvider<LogOutCubit>(
+              create: (context) => LogOutCubit(ServiceLocator.getIt<SettingRepoImpl>()),
             ),
-            BlocProvider(
-              create: (context) => ForgetPinCubit(ServiceLocator.getIt.get<SettingRepoImpl>()),
+            BlocProvider<ForgetPinCubit>(
+              create: (context) => ForgetPinCubit(ServiceLocator.getIt<SettingRepoImpl>()),
             )
           ],
           child: SettingView(),

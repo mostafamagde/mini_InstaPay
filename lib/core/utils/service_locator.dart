@@ -1,4 +1,7 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mini_instapay/features/otp/data/repositories/otp_factory.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mini_instapay/core/api_helper/api_manger.dart';
 import 'package:mini_instapay/features/account_managment/data/repos/all_banks_repo_impl.dart';
@@ -20,13 +23,16 @@ class ServiceLocator {
   static final GetIt getIt = GetIt.instance;
 
   static Future<void> setup() async {
-    getIt.registerSingleton<ApiManager>(ApiManager());
+    getIt.registerSingleton<Dio>(Dio());
+    getIt.registerSingleton<FlutterSecureStorage>(FlutterSecureStorage());
+    getIt.registerSingleton<ApiManager>(ApiManager(getIt.get<Dio>()));
+    getIt.registerSingleton<OtpFactory>(OtpFactory());
     getIt.registerSingleton<SettingRepoImpl>(SettingRepoImpl(getIt.get<ApiManager>()));
-    getIt.registerSingleton<BankRepoImpl>(BankRepoImpl());
-    getIt.registerSingleton<AllBanksRepoImpl>(AllBanksRepoImpl());
-    getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl());
-    getIt.registerSingleton<AdminRepoImpl>(AdminRepoImpl());
-    getIt.registerSingleton<NotificationsRepo>(NotificationsRepo());
+    getIt.registerSingleton<NotificationsRepo>(NotificationsRepo(getIt.get<ApiManager>()));
+    getIt.registerSingleton<BankRepoImpl>(BankRepoImpl(getIt.get<ApiManager>()));
+    getIt.registerSingleton<AllBanksRepoImpl>(AllBanksRepoImpl(getIt.get<ApiManager>()));
+    getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl(getIt.get<ApiManager>()));
+    getIt.registerSingleton<AdminRepoImpl>(AdminRepoImpl(getIt.get<ApiManager>()));
     getIt.registerSingleton<TransactionRepoImpl>(TransactionRepoImpl(getIt.get<ApiManager>()));
     getIt.registerSingleton<TransactionRepository>(TransactionRepository(getIt.get<ApiManager>()));
     getIt.registerSingleton<UserTransactionsSummaryRepoImpl>(UserTransactionsSummaryRepoImpl());

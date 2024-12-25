@@ -41,7 +41,7 @@ class _SignupBodyState extends State<SignupBody> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    
+
     return SafeArea(
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {

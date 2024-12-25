@@ -10,9 +10,13 @@ import 'package:mini_instapay/features/account_managment/data/models/add_account
 import 'bank_repo.dart';
 
 class BankRepoImpl implements BankRepository {
+  const BankRepoImpl(this._apiManager);
+
+  final ApiManager _apiManager;
+
   @override
   Future<List<BankAccountData>> getAllBankAccounts() async {
-    final response = await ApiManager().get(ApiConstants.addGetBankAccount, headers: {"token": UserModel.instance.token});
+    final response = await _apiManager.get(ApiConstants.addGetBankAccount, headers: {"token": UserModel.instance.token});
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       UserModel.instance.bankAccounts = List.generate(response.data['data'].length, (int index) => BankAccountData.fromJson(response.data['data'][index]));
@@ -23,7 +27,7 @@ class BankRepoImpl implements BankRepository {
 
   @override
   Future<void> deleteBankAccounts(List<BankAccountData> banks, int index, TextEditingController inputController) async {
-    final date = await ApiManager().delete('${ApiConstants.deleteAccount + banks[index].id!}', body: {"PIN": inputController.text}, headers: {"token": UserModel.instance.token});
+    final date = await _apiManager.delete('${ApiConstants.deleteAccount + banks[index].id!}', body: {"PIN": inputController.text}, headers: {"token": UserModel.instance.token});
     if (date.statusCode == 200 || date.statusCode == 201) {
       if (UserModel.instance.bankAccounts != null) {
         UserModel.instance.bankAccounts!.removeWhere((element) => element.id == banks[index].id!);
@@ -33,7 +37,7 @@ class BankRepoImpl implements BankRepository {
 
   @override
   Future<int> getBalance(String accId, String pin) async {
-    final data = await ApiManager().post("${ApiConstants.getBalance}${accId}", {
+    final data = await _apiManager.post("${ApiConstants.getBalance}${accId}", {
       "PIN": pin
     }, headers: {
       "token": UserModel.instance.token,
@@ -47,7 +51,7 @@ class BankRepoImpl implements BankRepository {
 
   @override
   Future<void> addAccount(AddAccountModel account) async {
-    final response = await ApiManager().post(
+    final response = await _apiManager.post(
       ApiConstants.addGetBankAccount,
       {
         "holderName": account.cardHolderName,
@@ -66,8 +70,7 @@ class BankRepoImpl implements BankRepository {
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
       try {
-        final apiManager = ApiManager();
-        final userDataResponse = await apiManager.get(
+        final userDataResponse = await _apiManager.get(
           ApiConstants.getUserData,
           headers: {
             "token": UserModel.instance.token,
@@ -81,7 +84,7 @@ class BankRepoImpl implements BankRepository {
   @override
   Future<Either<ServerError, String>> changePin(String oldPin, String newPin, String accId) async {
     try {
-      final response = await ApiManager().patch(ApiConstants.updatePin + accId, headers: {
+      final response = await _apiManager.patch(ApiConstants.updatePin + accId, headers: {
         "token": UserModel.instance.token
       }, data: {
         "oldPIN": oldPin,
@@ -90,7 +93,7 @@ class BankRepoImpl implements BankRepository {
       return right(response.statusMessage ?? "PIN updated");
     } catch (e) {
       if (e is DioException) {
-        return Left(ServerError(e.response?.data["message"] ?? "error"));
+        return left(ServerError(e.response?.data["message"] ?? "error"));
       } else {
         return left(ServerError("Something went wrong"));
       }

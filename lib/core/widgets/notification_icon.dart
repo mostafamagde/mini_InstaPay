@@ -8,22 +8,16 @@ import 'package:mini_instapay/features/notifications/data/models/notfication_mod
 import 'package:mini_instapay/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 
 class NotificationIcon extends StatelessWidget {
-  const NotificationIcon({
-    super.key,
-  });
+  const NotificationIcon({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, RoutesNames.notifications);
-      },
+      onTap: () => Navigator.pushNamed(context, RoutesNames.notifications),
       child: Stack(
         children: [
           IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, RoutesNames.notifications);
-            },
+            onPressed: () => Navigator.pushNamed(context, RoutesNames.notifications),
             icon: Icon(
               Icons.notifications,
               color: Colors.white,
