@@ -14,7 +14,7 @@ class BanksCubit extends Cubit<BanksState> {
   Future<void> fetchBanks() async {
     emit(BanksLoading());
     try {
-      final banks = await bankProxy.getBankList();
+      final banks = await bankProxy.getAllBanks();
       print(banks);
       emit(BanksLoaded(banks));
     } catch (e) {

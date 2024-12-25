@@ -7,8 +7,10 @@ import 'package:untitled2/features/otp/presentation/manger/cubit/otp_cubit.dart'
 import 'core/app_theme/app_theme_manager.dart';
 import 'core/routes_manager/route_generator.dart';
 
-void main() {
-  ServiceLocator.setup();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await ServiceLocator.setup();
 
   runApp(
     DevicePreview(
