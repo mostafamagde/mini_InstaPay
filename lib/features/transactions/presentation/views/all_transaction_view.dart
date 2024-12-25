@@ -14,15 +14,16 @@ class AllTransactionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(UserModel.instance.token);
     if (UserModel.instance.role == Role.Admin) {
       BlocProvider.of<NotificationsCubit>(context).getNotification();
     }
-    getTransactions() {
+
+    void getTransactions() {
       UserModel.instance.role == Role.Admin ? BlocProvider.of<TransactionCubit>(context).getAllTransaction() : BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     }
 
     getTransactions();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

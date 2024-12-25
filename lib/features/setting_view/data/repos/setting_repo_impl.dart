@@ -140,10 +140,7 @@ class SettingRepoImpl implements SettingRepo {
   }
 
   @override
-  Future<Either<Errors, String>> changeLimit(
-      {required double limit,
-      required String duration,
-      required accountId}) async {
+  Future<Either<Errors, String>> changeLimit({required double limit, required String duration, required accountId}) async {
     try {
       final apiManger = ApiManager();
       await apiManger.patch(ApiConstants.changeLimit + accountId, data: {
@@ -162,19 +159,14 @@ class SettingRepoImpl implements SettingRepo {
   }
 
   @override
-   Future<Either<Errors, String>> forgetPin(String id) async {
+  Future<Either<Errors, String>> forgetPin(String id) async {
     try {
-      print(UserModel.instance.token);
       final apiManger = ApiManager();
-      final response = await apiManger.post(
-          ApiConstants.forgetPin + id,
-          headers: {"token": UserModel.instance.token},
-          {});
+      final response = await apiManger.post(ApiConstants.forgetPin + id, headers: {"token": UserModel.instance.token}, {});
 
       return right(response.data["token"]);
     } catch (e) {
       if (e is DioException) {
-        print (e.response!.statusCode);
         return left(ServerError(e.response?.data["message"] ?? "error"));
       }
       return left(ServerError("Something went wrong"));
@@ -185,8 +177,7 @@ class SettingRepoImpl implements SettingRepo {
   Future<Either<Errors, String>> updatePin(String pin, String userToken) async {
     try {
       ApiManager service = ApiManager();
-      final response =
-          await service.patch(ApiConstants.updateForgetPinOtp, headers: {
+      final response = await service.patch(ApiConstants.updateForgetPinOtp, headers: {
         "token": UserModel.instance.token
       }, data: {
         "token": userToken,

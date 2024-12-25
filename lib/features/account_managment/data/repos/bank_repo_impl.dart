@@ -14,7 +14,6 @@ class BankRepoImpl implements BankRepository {
   Future<List<BankAccountData>> getAllBankAccounts() async {
     final response = await ApiManager().get(ApiConstants.addGetBankAccount, headers: {"token": UserModel.instance.token});
 
-    print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
       UserModel.instance.bankAccounts = List.generate(response.data['data'].length, (int index) => BankAccountData.fromJson(response.data['data'][index]));
       return UserModel.instance.bankAccounts ?? [];

@@ -71,14 +71,11 @@ class NotificationsView extends StatelessWidget {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
                 if (snapshot.data != null) {
-                  print("data");
                   if (notifications.length != 0) {
-                    print("not empty");
                     if ((snapshot.data as NotificationModel).id != notifications[0].id) {
                       notifications.insert(0, snapshot.data);
                     }
                   } else {
-                    print("empty");
                     notifications.add(snapshot.data);
                   }
                 }

@@ -14,7 +14,6 @@ class BankAccountManagment extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size media = MediaQuery.of(context).size;
     final ThemeData theme = Theme.of(context);
-    print(UserModel.instance);
     
     return Container(
       width: media.width * .9,
@@ -125,14 +124,3 @@ class BankAccountManagment extends StatelessWidget {
     );
   }
 }
-/*final data = await ApiManager().post(
-                          "${ApiConstants.getBalance}${UserModel.instance.bankAccounts!.data?[0].id}",
-                          {
-                            "PIN": "111111"
-                          },
-                          headers: {
-                            "token": UserModel.instance.token,
-                          });
-                      if (data.statusCode == 201) {
-                        print(data.data["data"]);
-                      }*/

@@ -19,7 +19,6 @@ class HomeView extends StatelessWidget {
     BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     BlocProvider.of<NotificationsCubit>(context).getNotification();
     final user = UserModel.instance;
-    print(UserModel.instance.token);
     final ThemeData theme = Theme.of(context);
 
     return Scaffold(

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mini_instapay/core/api_helper/api_constants.dart';
@@ -80,11 +79,6 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
           );
         }
       } catch (e) {
-        if (e is DioException) {
-          print(e.response?.data['message']);
-        } else {
-          print(e);
-        }
         Navigator.pushReplacementNamed(
           context,
           RoutesNames.onBoarding,

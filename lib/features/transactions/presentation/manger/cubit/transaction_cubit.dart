@@ -59,7 +59,6 @@ class TransactionCubit extends Cubit<TransactionState> {
       emit(ManageTransactSuccess(massage: "Refund Requested", transactionStatus: TransactionStatus.Refunding));
     } catch (e) {
       if (e is DioException) {
-        print(e.response);
         emit(ManageTransactFailed(error: e.response?.data["message"] ?? e.message));
       } else {
         emit(ManageTransactFailed(error: e.toString()));

@@ -15,12 +15,10 @@ class BanksCubit extends Cubit<BanksState> {
     emit(BanksLoading());
     try {
       final banks = await bankProxy.getAllBanks();
-      print(banks);
       emit(BanksLoaded(banks));
     } catch (e) {
       if (e is DioException) {
         emit(BanksError(e.response?.data['message'] ?? e.message));
-        print(e.response?.data['message']);
       } else {
         emit(BanksError(e.toString()));
       }

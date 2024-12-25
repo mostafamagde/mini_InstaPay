@@ -37,7 +37,6 @@ class SettingView extends StatelessWidget {
         icon: Icons.security,
         onTap: () {
           if (UserModel.instance.defaultAcc != null) {
-            print(UserModel.instance.defaultAcc!.id!);
             BlocProvider.of<ForgetPinCubit>(context).forgetPin(UserModel.instance.defaultAcc!.id!);
           } else {
             snackBar(content: "You don't have account yet", context: context);
@@ -96,7 +95,6 @@ class SettingView extends StatelessWidget {
         }
         if (state is ForgetPinFailure) {
           snackBar(content: state.errMessage, context: context);
-          print(state.errMessage);
         }
       },
       builder: (context, state) {
@@ -105,7 +103,6 @@ class SettingView extends StatelessWidget {
           child: BlocListener<LogOutCubit, LogOutState>(
             listener: (context, state) {
               if (state is LogOutSuccess) {
-                print(state.successMessage);
                 Navigator.pushNamedAndRemoveUntil(context, RoutesNames.loginView, (route) => false);
               }
             },

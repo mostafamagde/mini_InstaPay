@@ -21,7 +21,6 @@ class ManageBankAccountsCubit extends Cubit<ManageBankAccountsState> {
     } catch (e) {
       if (e is DioException) {
         emit(ManageBankAccountsFailed(e.response?.data['message'] ?? e.message));
-        print(e.response?.data['message']);
       } else {
         emit(ManageBankAccountsFailed(e.toString()));
       }

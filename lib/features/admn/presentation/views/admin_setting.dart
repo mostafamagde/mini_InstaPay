@@ -15,12 +15,7 @@ class AdminSetting extends StatelessWidget {
     return BlocListener<LogOutCubit, LogOutState>(
       listener: (context, state) {
         if (state is LogOutSuccess) {
-          print(state.successMessage);
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            RoutesNames.loginView,
-            (route) => false,
-          );
+          Navigator.pushNamedAndRemoveUntil(context, RoutesNames.loginView, (route) => false);
         }
       },
       child: Column(

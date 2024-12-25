@@ -7,19 +7,14 @@ import 'package:mini_instapay/features/auth/data/repository/auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepository {
   final apiManager = ApiManager();
-  
+
   @override
   Future<OtpModel> forgetPassword(String email) {
     final body = {
       "email": email,
     };
     return apiManager.post(ApiConstants.SendforgetPasswordMailEdnPoint, body).then((response) {
-      print("$response sssssssssssssssssssssssssssssssssssssssss ${response.statusCode}");
-
       final Map<String, dynamic> responseBody = response.data;
-      final String userToken = responseBody['token'];
-      print(userToken);
-      print("Sent successful");
       return OtpModel.fromJson(responseBody);
     });
   }
@@ -33,12 +28,8 @@ class AuthRepoImpl implements AuthRepository {
   Future<OtpModel> login(String email, String password) {
     final body = {"email": email, "password": password};
     return apiManager.post(ApiConstants.preLogin, body).then((response) {
-      print("$response sssssssssssssssssssssssssssssssssssssssss ${response.statusCode}");
       if (response.statusCode == 201) {
         final Map<String, dynamic> responseBody = response.data;
-        final String userToken = responseBody['token'];
-        print(userToken);
-        print("Login successful");
         return OtpModel.fromJson(responseBody);
       } else {
         throw Exception("Login failed with status: ${response.statusCode}");
