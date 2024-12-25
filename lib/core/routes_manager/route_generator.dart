@@ -55,6 +55,10 @@ import 'package:untitled2/features/setting_view/presentation/views/change_passwo
 import 'package:untitled2/features/setting_view/presentation/views/privacy_setting_view.dart';
 import 'package:untitled2/features/transactions/presentation/views/transaction_details.dart';
 
+import '../../features/setting_view/presentation/manager/confirm_forget_pin/cinfirm_forget_pin_cubit.dart';
+import '../../features/setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
+import '../../features/setting_view/presentation/views/forget_pin.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
@@ -73,7 +77,12 @@ class RouteGenerator {
                   ..fetchUserBanks(),
               ),
               BlocProvider(
-                create: (context) => ChangeDefaultAccCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+                create: (context) =>
+                    ForgetPinCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+              ),
+              BlocProvider(
+                create: (context) => ChangeDefaultAccCubit(
+                    ServiceLocator.getIt<SettingRepoImpl>()),
               ),
             ],
             child: const ManageAccounts(),
@@ -146,7 +155,7 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-      
+
       case RoutesNames.changeCridintials:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<ChangeCredinitialsCubit>(
@@ -269,6 +278,15 @@ class RouteGenerator {
       case RoutesNames.analyticsView:
         return MaterialPageRoute(
           builder: (context) => const AnalyticsView(),
+          settings: settings,
+        );
+      case RoutesNames.forgotPin:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                CinfirmForgetPinCubit(ServiceLocator.getIt<SettingRepoImpl>()),
+            child: ForgetPin(),
+          ),
           settings: settings,
         );
       case RoutesNames.changeLimit:

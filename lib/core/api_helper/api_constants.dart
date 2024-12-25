@@ -35,4 +35,7 @@ class ApiConstants {
   static const String rejectRefund='/transaction/admin/reject-refund';
   static const String updatePin='account/PIN/';
   static const String changeLimit='/account/limit/';
+  static const String forgetPin='/account/sendForgetPINOTP/';
+  static const String confirmForgetPinOtp='account/confirmOTPforgetPIN';
+  static const String updateForgetPinOtp='account/forgetPIN';
 }

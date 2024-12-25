@@ -144,17 +144,57 @@ class SettingRepoImpl implements SettingRepo {
   }
 
   @override
-  Future<Either<Errors, String>> changeLimit (
-      {required double limit, required String duration, required accountId}) async{
+  Future<Either<Errors, String>> changeLimit(
+      {required double limit,
+      required String duration,
+      required accountId}) async {
     try {
       final apiManger = ApiManager();
-     await apiManger.patch(ApiConstants.changeLimit + accountId, data: {
+      await apiManger.patch(ApiConstants.changeLimit + accountId, data: {
         "amount": limit,
         "type": duration,
       }, headers: {
         "token": UserModel.getInstance().token
       });
       return right("Limit updated successfully");
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerError(e.response?.data["message"] ?? "error"));
+      }
+      return left(ServerError("Something went wrong"));
+    }
+  }
+
+  @override
+  Future<Either<Errors, String>> forgetPin(String id) async {
+    try {
+      final apiManger = ApiManager();
+      final response = await apiManger.post(
+          ApiConstants.forgetPin + id,
+          headers: {"token": UserModel.getInstance().token},
+          {});
+
+      return right(response.data["token"]);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerError(e.response?.data["message"] ?? "error"));
+      }
+      return left(ServerError("Something went wrong"));
+    }
+  }
+
+  @override
+  Future<Either<Errors, String>> updatePin(String pin, String userToken) async {
+    try {
+      ApiManager service = ApiManager();
+      final response =
+          await service.patch(ApiConstants.updateForgetPinOtp, headers: {
+        "token": UserModel.getInstance().token
+      }, data: {
+        "token": userToken,
+        "PIN": pin,
+      });
+      return right(response.statusMessage ?? "success");
     } catch (e) {
       if (e is DioException) {
         return left(ServerError(e.response?.data["message"] ?? "error"));

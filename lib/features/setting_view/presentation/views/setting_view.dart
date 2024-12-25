@@ -4,16 +4,21 @@ import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
+import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/setting_view/data/models/button_model.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/log_out_cubit/log_out_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../manager/forget_pin_cubit/forget_pin_cubit.dart';
+
 class SettingView extends StatelessWidget {
-  const SettingView({super.key});
+   SettingView({super.key});
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final LogOutCubit cubit = LogOutCubit.get(context);
+
     final List<ButtonModel> buttonModels = [
       ButtonModel(
           name: "Profile Management",
@@ -69,6 +74,7 @@ class SettingView extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, RoutesNames.analyticsView);
           }),
+
     ];
 
     return BlocListener<LogOutCubit, LogOutState>(

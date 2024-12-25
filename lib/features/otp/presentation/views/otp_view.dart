@@ -12,9 +12,9 @@ import 'package:untitled2/features/otp/presentation/views/widgets/resend_button.
 class OtpView extends StatefulWidget {
   final String userToken;
   final String function;
-  final String? password;
 
-  OtpView({required this.userToken, required this.function, this.password});
+
+  OtpView({required this.userToken, required this.function});
 
   @override
   _OTPScreenState createState() => _OTPScreenState();

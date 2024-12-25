@@ -1,5 +1,6 @@
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_change_email_repo.dart';
+import 'package:untitled2/features/otp/data/repositories/otp_forget_pin.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_fotget_password_repo.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_login_repo.dart';
 import 'package:untitled2/features/otp/data/repositories/otp_repo.dart';
@@ -15,7 +16,10 @@ class OtpFactory {
       return OtpSignUpRepo(context: context);
     } else if (type == Constants.forgetPasswordString) {
       return OtpForgetPasswordRepo(context: context);
-    } else {
+    } else if (type == Constants.forgetPin) {
+      return OtpForgetPinRepo(context: context);
+    }
+    else {
       throw Exception("Invalid OTP type");
     }
   }
