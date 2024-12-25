@@ -43,7 +43,7 @@ class _OTPScreenState extends State<OtpView> {
   }
 
   void _resendOtp() {
-    // Resend OTP functionality
+   
     BlocProvider.of<OtpCubit>(context).resendOtp(repository, widget.userToken);
   }
 

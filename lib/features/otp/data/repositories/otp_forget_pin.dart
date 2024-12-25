@@ -22,7 +22,7 @@ class OtpForgetPinRepo extends OtpRepository {
         headers: {"token": UserModel.getInstance().token},
         {
           "token": token,
-          "otp": otp,
+          "OTP": otp,
         },
       );
 
