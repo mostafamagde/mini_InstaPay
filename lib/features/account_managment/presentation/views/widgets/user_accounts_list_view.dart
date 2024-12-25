@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/features/account_managment/data/models/account_data.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_item.dart';
-
-import '../../../../../core/utils/Constants.dart';
-import '../../../../otp/presentation/views/otp_view.dart';
-import '../../../../setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
+import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
 
 class UserAccountsListView extends StatelessWidget {
   const UserAccountsListView({super.key, required this.banks, required this.deleteAccount});
@@ -20,13 +19,13 @@ class UserAccountsListView extends StatelessWidget {
       listener: (context, state) {
         if (state is ForgetPinSuccess) {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OtpView(
-                    userToken: state.userToken,
-                    function: Constants.forgetPin),
-              ));
-        } if(state is ForgetPinFailure){}
+            context,
+            MaterialPageRoute(
+              builder: (context) => OtpView(userToken: state.userToken, function: Constants.forgetPin),
+            ),
+          );
+        }
+        if (state is ForgetPinFailure) {}
       },
       builder: (context, state) {
         return Expanded(

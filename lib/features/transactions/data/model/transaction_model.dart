@@ -1,8 +1,9 @@
+import 'package:untitled2/core/enums/transaction_status_enum.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_user_model.dart';
 
 class TransactionModel {
   final String id;
-  String status;
+  TransactionStatus status;
   final String type;
   final double amount;
   final TransactionUserModel sender;
@@ -22,7 +23,7 @@ class TransactionModel {
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
     return TransactionModel(
       id: json['_id'],
-      status: json['status'],
+      status: TransactionStatus.fromJson(json['status']),
       type: json['type'],
       amount: (json['amount'] as num).toDouble(),
       sender: TransactionUserModel.fromJson(json['sender']),
@@ -34,7 +35,7 @@ class TransactionModel {
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
-      'status': status,
+      'status': status.value,
       'type': type,
       'amount': amount,
       'sender': sender.toJson(),
@@ -45,7 +46,7 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(id: $id, status: $status, type: $type, amount: $amount, '
+    return 'TransactionModel(id: $id, status: $status.value, type: $type, amount: $amount, '
         'sender: $sender, receiver: $receiver, createdAt: $createdAt)';
   }
 }

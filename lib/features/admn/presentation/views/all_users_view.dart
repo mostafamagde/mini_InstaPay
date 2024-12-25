@@ -4,12 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/utils/validation.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
+import 'package:untitled2/features/admn/presentation/manager/ban_users_cubit/ban_users_cubit.dart';
+import 'package:untitled2/features/admn/presentation/manager/get_users_cubit/admin_get_users_cubit.dart';
 import 'package:untitled2/features/admn/presentation/views/widgets/user_account_list_view.dart';
-
-import '../../../../core/widgets/custom_snackbar.dart';
-import '../manager/ban_users_cubit/ban_users_cubit.dart';
-import '../manager/get_users_cubit/admin_get_users_cubit.dart';
 
 class AllUsersView extends StatelessWidget {
   AllUsersView({super.key});
@@ -18,9 +17,9 @@ class AllUsersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var id;
-    Size media = MediaQuery.of(context).size;
-    var theme = Theme.of(context);
+    String? id;
+    final Size media = MediaQuery.of(context).size;
+    final ThemeData theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,7 +35,7 @@ class AllUsersView extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            var banCubit = BanUsersCubit.get(context);
+            final BanUsersCubit banCubit = BanUsersCubit.get(context);
             return Expanded(
               child: ModalProgressHUD(
                 inAsyncCall: state is BanUsersLoading,
@@ -49,7 +48,7 @@ class AllUsersView extends StatelessWidget {
                         id = null;
                       }
                     }
-                    var cubit = AdminGetUsersCubit.get(context);
+                    final AdminGetUsersCubit cubit = AdminGetUsersCubit.get(context);
 
                     return CustomScrollView(
                       slivers: [

@@ -7,52 +7,43 @@ import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/CustomTitleContainer.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
-import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
 import 'package:untitled2/features/setting_view/data/models/button_model.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/log_out_cubit/log_out_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../manager/forget_pin_cubit/forget_pin_cubit.dart';
-
+// ignore: must_be_immutable
 class SettingView extends StatelessWidget {
   SettingView({super.key});
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final LogOutCubit cubit = LogOutCubit.get(context);
 
     final List<ButtonModel> buttonModels = [
+      ButtonModel(name: "Profile Management", icon: Icons.settings, onTap: () => Navigator.pushNamed(context, RoutesNames.changeCridintials)),
+      ButtonModel(name: "Privacy Setting", icon: Icons.privacy_tip, onTap: () => Navigator.pushNamed(context, RoutesNames.privacySetting)),
       ButtonModel(
-          name: "Profile Management",
-          icon: Icons.settings,
-          onTap: () =>
-              Navigator.pushNamed(context, RoutesNames.changeCridintials)),
+        name: "Change limit",
+        icon: Icons.money,
+        onTap: () {
+          Navigator.pushNamed(context, RoutesNames.changeLimit, arguments: UserModel.instance.defaultAcc?.id);
+        },
+      ),
       ButtonModel(
-          name: "Privacy Setting",
-          icon: Icons.privacy_tip,
-          onTap: () =>
-              Navigator.pushNamed(context, RoutesNames.privacySetting)),
-      ButtonModel(
-          name: "Change limit",
-          icon: Icons.money,
-          onTap: () {
-            Navigator.pushNamed(context, RoutesNames.changeLimit,
-                arguments: UserModel.instance.defaultAcc?.id);
-          }),
-      ButtonModel(
-          name: "Forget PIN",
-          icon: Icons.security,
-          onTap: () {
-            if (UserModel.instance.defaultAcc != null) {
-              print(UserModel.instance.defaultAcc!.id!);
-              BlocProvider.of<ForgetPinCubit>(context)
-                  .forgetPin(UserModel.instance.defaultAcc!.id!);
-            } else {
-              snackBar(content: "You don't have account yet", context: context);
-            }
-          }),
+        name: "Forget PIN",
+        icon: Icons.security,
+        onTap: () {
+          if (UserModel.instance.defaultAcc != null) {
+            print(UserModel.instance.defaultAcc!.id!);
+            BlocProvider.of<ForgetPinCubit>(context).forgetPin(UserModel.instance.defaultAcc!.id!);
+          } else {
+            snackBar(content: "You don't have account yet", context: context);
+          }
+        },
+      ),
       ButtonModel(
         name: "Log Out",
         icon: Icons.logout,
@@ -85,22 +76,23 @@ class SettingView extends StatelessWidget {
         },
       ),
       ButtonModel(
-          name: "Analytics",
-          icon: Icons.analytics_sharp,
-          onTap: () {
-            Navigator.pushNamed(context, RoutesNames.analyticsView);
-          }),
+        name: "Analytics",
+        icon: Icons.analytics_sharp,
+        onTap: () {
+          Navigator.pushNamed(context, RoutesNames.analyticsView);
+        },
+      ),
     ];
 
     return BlocConsumer<ForgetPinCubit, ForgetPinState>(
       listener: (context, state) {
-           if (state is ForgetPinSuccess) {
+        if (state is ForgetPinSuccess) {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OtpView(
-                    userToken: state.userToken, function: Constants.forgetPin),
-              ));
+            context,
+            MaterialPageRoute(
+              builder: (context) => OtpView(userToken: state.userToken, function: Constants.forgetPin),
+            ),
+          );
         }
         if (state is ForgetPinFailure) {
           snackBar(content: state.errMessage, context: context);
@@ -114,8 +106,7 @@ class SettingView extends StatelessWidget {
             listener: (context, state) {
               if (state is LogOutSuccess) {
                 print(state.successMessage);
-                Navigator.pushNamedAndRemoveUntil(
-                    context, RoutesNames.loginView, (route) => false);
+                Navigator.pushNamedAndRemoveUntil(context, RoutesNames.loginView, (route) => false);
               }
             },
             child: CustomScrollView(
@@ -131,8 +122,7 @@ class SettingView extends StatelessWidget {
                     child: GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                       ),
                       itemCount: buttonModels.length,

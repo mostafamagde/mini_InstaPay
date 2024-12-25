@@ -3,17 +3,18 @@ import 'package:untitled2/core/utils/Constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSmallButton extends StatelessWidget {
-  CustomSmallButton({super.key, required this.name, required this.icon, this.onTap, this.padding = 0, this.verticalPadding = 0});
+  const CustomSmallButton({super.key, required this.name, required this.icon, this.onTap, this.padding = 0, this.verticalPadding = 0});
 
   final String name;
   final IconData icon;
   final void Function()? onTap;
   final double padding;
   final double verticalPadding;
+
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    // var media = MediaQuery.of(context).size;
+    final ThemeData theme = Theme.of(context);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding, vertical: verticalPadding),
       child: InkWell(

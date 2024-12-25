@@ -27,7 +27,7 @@ class ChangePassword extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        var cubit = ChangePasswordCubit.get(context);
+        final ChangePasswordCubit cubit = ChangePasswordCubit.get(context);
         return Scaffold(
           appBar: AppBar(),
           body: Form(

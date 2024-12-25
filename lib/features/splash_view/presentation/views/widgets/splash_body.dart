@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/socket_service.dart';
@@ -28,7 +29,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: Container(
         color: theme.primaryColor,
@@ -70,7 +71,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
           SocketService.instance.connect();
           Navigator.pushReplacementNamed(
             context,
-            UserModel.instance.role == 'Admin' ? RoutesNames.adminLayout : RoutesNames.layoutView,
+            UserModel.instance.role == Role.Admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
           );
         } else {
           Navigator.pushReplacementNamed(

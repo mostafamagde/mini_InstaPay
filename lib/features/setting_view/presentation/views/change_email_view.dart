@@ -34,7 +34,7 @@ class ChangeEmailView extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        var cubit = ChangeEmailCubit.get(context);
+        final ChangeEmailCubit cubit = ChangeEmailCubit.get(context);
         return ModalProgressHUD(
           inAsyncCall: cubit.state is ChangeEmailLoading,
           child: Scaffold(

@@ -49,7 +49,7 @@ class _OTPScreenState extends State<OtpView> {
 
   @override
   void dispose() {
-    for (var controller in _otpControllers) {
+    for (final TextEditingController controller in _otpControllers) {
       controller.dispose();
     }
     super.dispose();

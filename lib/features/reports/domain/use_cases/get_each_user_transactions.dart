@@ -1,3 +1,4 @@
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/reports/data/models/one_user_transactions_model.dart';
 import 'package:untitled2/features/reports/domain/repo_interface/one_user_transactions_repo.dart';
@@ -13,7 +14,7 @@ class GetEachUserTransactions {
   Future<List<OneUserTransactionsModel>> getEachUserTransactions() async {
     try {
       late List<TransactionModel> result;
-      if (UserModel.instance.role == 'Admin') {
+      if (UserModel.instance.role == Role.Admin) {
         result = await _transactionRepo.getAllTransactions();
         return _oneUserTransactionsRepo.getOneUserTransactionsForAdmin(result);
       } else {

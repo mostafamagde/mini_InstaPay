@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled2/core/enums/transaction_status_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
@@ -8,26 +9,27 @@ import 'package:untitled2/features/transactions/data/model/transaction_model.dar
 class TransactionCard extends StatelessWidget {
   const TransactionCard({super.key, required this.transaction});
   final TransactionModel transaction;
-  Color getColor(String status) {
+
+  Color getColor(TransactionStatus status) {
     Color color;
 
     switch (status) {
-      case Constants.kSuccessString:
+      case TransactionStatus.Success:
         color = Colors.green;
         break;
-      case Constants.kFailedString:
+      case TransactionStatus.Failed:
         color = Colors.red;
         break;
-      case Constants.kPendingString:
+      case TransactionStatus.Pending:
         color = Colors.orange;
         break;
-      case Constants.kSuspiciousString:
+      case TransactionStatus.Suspicious:
         color = Colors.amber;
         break;
-      case Constants.kRefundingString:
+      case TransactionStatus.Refunding:
         color = Colors.blue;
         break;
-      case Constants.kRefundedString:
+      case TransactionStatus.Refunded:
         color = Colors.teal;
         break;
       default:
@@ -40,8 +42,9 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isReceiver = transaction.receiver.id == UserModel.instance.id;
-    var theme = Theme.of(context);
-    var media = MediaQuery.of(context).size;
+    final ThemeData theme = Theme.of(context);
+    final Size media = MediaQuery.of(context).size;
+
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, RoutesNames.transactionDetails, arguments: transaction);
@@ -73,7 +76,7 @@ class TransactionCard extends StatelessWidget {
                   child: Center(
                     child: FittedBox(
                       child: Text(
-                        transaction.status,
+                        transaction.status.value,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: Colors.black,
                         ),

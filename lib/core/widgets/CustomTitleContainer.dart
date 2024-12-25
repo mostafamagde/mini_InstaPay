@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 class CustomTitleContainer extends StatelessWidget {
   const CustomTitleContainer({super.key, required this.title});
+
   final String title;
 
   @override
   Widget build(BuildContext context) {
-    // Size media = MediaQuery.of(context).size;
-    var theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
+
     return Container(
       padding: EdgeInsets.only(bottom: 32),
       width: double.infinity,

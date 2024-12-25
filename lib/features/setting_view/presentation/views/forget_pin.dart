@@ -1,14 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/routes_manager/routes_names.dart';
+import 'package:untitled2/core/utils/Constants.dart';
+import 'package:untitled2/core/utils/validation.dart';
+import 'package:untitled2/core/widgets/custom_snackbar.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/confirm_forget_pin/cinfirm_forget_pin_cubit.dart';
 
-import '../../../../core/routes_manager/routes_names.dart';
-import '../../../../core/utils/Constants.dart';
-import '../../../../core/utils/validation.dart';
-import '../../../../core/widgets/custom_snackbar.dart';
-import '../../../../core/widgets/custom_text_field.dart';
-import '../manager/confirm_forget_pin/cinfirm_forget_pin_cubit.dart';
+
 
 class ForgetPin extends StatelessWidget {
   final int pinLength = 6;
@@ -35,7 +34,7 @@ class ForgetPin extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Enter PIN Code'),
       ),
-      body: BlocConsumer<CinfirmForgetPinCubit, CinfirmForgetPinState>(
+      body: BlocConsumer<ConfirmForgetPinCubit, ConfirmForgetPinState>(
           listener: (context, state) {
         if (state is CinfirmForgetPinFailed) {
           snackBar(content: state.errorMessage, context: context);
@@ -48,7 +47,7 @@ class ForgetPin extends StatelessWidget {
               context, RoutesNames.layoutView, (Route<dynamic> route) => false);
         }
       }, builder: (context, state) {
-        var cubit = CinfirmForgetPinCubit.get(context);
+        final ConfirmForgetPinCubit cubit = ConfirmForgetPinCubit.get(context);
 
         return ModalProgressHUD(
           inAsyncCall: state is CinfirmForgetPinLoading,

@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/transaction_module/data/models/receive_model.dart';
@@ -13,7 +14,7 @@ class ReceiveCubit extends Cubit<ReceiveState> {
 
   Future<void> receiveMoney(ReceiveModel receive) async {
     emit(ReceiveLoading());
-    var data = await transRepo.receiveMoney(receive);
+    final Either data = await transRepo.receiveMoney(receive);
     data.fold(
       (failure) => emit(
         ReceiveFailed(errorMessage: failure.errMessage),

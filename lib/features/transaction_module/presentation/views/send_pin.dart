@@ -28,7 +28,7 @@ class SendPin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var data = ModalRoute.of(context)?.settings.arguments as List<String>;
+    final List<String> data = ModalRoute.of(context)?.settings.arguments as List<String>;
 
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +42,7 @@ class SendPin extends StatelessWidget {
           Navigator.pushNamedAndRemoveUntil(context, RoutesNames.layoutView, (Route<dynamic> route) => false);
         }
       }, builder: (context, state) {
-        var cubit = SendCubit.get(context);
+        final SendCubit cubit = SendCubit.get(context);
 
         return ModalProgressHUD(
           inAsyncCall: state is SendLoading,
@@ -92,7 +92,7 @@ class SendPin extends StatelessWidget {
                                   account: accId.text,
                                   reiceverData: data[0],
                                   pin: controllers.map((controller) => controller.text).join(),
-                                  amount: int.parse(
+                                  amount: double.parse(
                                     data[1],
                                   ),
                                 ),

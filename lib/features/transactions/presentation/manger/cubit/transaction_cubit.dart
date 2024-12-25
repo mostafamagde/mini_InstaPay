@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:untitled2/core/utils/Constants.dart';
+import 'package:untitled2/core/enums/transaction_status_enum.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
 import 'package:untitled2/features/transactions/data/repository/transaction_repo.dart';
 
@@ -42,7 +42,7 @@ class TransactionCubit extends Cubit<TransactionState> {
     try {
       emit(ManageTransactionLoading());
       await transactionRepository.markAsSuspicious(transactionId);
-      emit(ManageTransactSuccess(massage: "Transaction Marked As Suspicious", transactionStatus: Constants.kSuspiciousString));
+      emit(ManageTransactSuccess(massage: "Transaction Marked As Suspicious", transactionStatus: TransactionStatus.Suspicious));
     } catch (e) {
       if (e is DioException) {
         emit(ManageTransactFailed(error: e.response?.data["message"] ?? e.message));
@@ -56,7 +56,7 @@ class TransactionCubit extends Cubit<TransactionState> {
     try {
       emit(ManageTransactionLoading());
       await transactionRepository.requestRefund(transactionId);
-      emit(ManageTransactSuccess(massage: "Refund Requested", transactionStatus: Constants.kRefundingString));
+      emit(ManageTransactSuccess(massage: "Refund Requested", transactionStatus: TransactionStatus.Refunding));
     } catch (e) {
       if (e is DioException) {
         print(e.response);

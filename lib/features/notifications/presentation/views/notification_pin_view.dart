@@ -25,7 +25,7 @@ class NotificationPinView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     NotificationModel notification = ModalRoute.of(context)?.settings.arguments as NotificationModel;
-    var formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Enter PIN Code'),

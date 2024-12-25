@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/core/navigation_cubit/navigation_cubit.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/widgets/custom_small_button.dart';
 
 class ServicesSection extends StatelessWidget {
-  const ServicesSection({super.key, required this.onTap});
-
-  final void Function(int) onTap;
+  const ServicesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final NavigationCubit cubit = NavigationCubit.get(context);
+
     return Column(
       children: [
         Padding(
@@ -20,7 +21,7 @@ class ServicesSection extends StatelessWidget {
                   icon: Icons.call_made_rounded,
                   name: "Send Money",
                   padding: 5,
-                  onTap: () => onTap(1),
+                  onTap: () => cubit.selectTab(1),
                 ),
               ),
               Expanded(
@@ -28,7 +29,7 @@ class ServicesSection extends StatelessWidget {
                   icon: Icons.call_received_rounded,
                   name: "Receive Money",
                   padding: 5,
-                  onTap: () => onTap(2),
+                  onTap: () => cubit.selectTab(2),
                 ),
               ),
               Expanded(
@@ -71,7 +72,7 @@ class ServicesSection extends StatelessWidget {
                   icon: Icons.settings,
                   name: "Settings",
                   padding: 5,
-                  onTap: () => onTap(3),
+                  onTap: () => cubit.selectTab(3),
                 ),
               )
             ],

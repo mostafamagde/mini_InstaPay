@@ -8,10 +8,10 @@ class AdminTransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
     AdminTransactionSummaryModel summaryModel = AdminTransactionSummaryModel.init();
 
     for (TransactionModel model in transactionModels) {
-      if (model.status == TransactionStatus.SUCCESS.value) {
+      if (model.status == TransactionStatus.Success.value) {
         summaryModel.totalTransactionsAmount += model.amount;
         summaryModel.totalSuccessTransactions++;
-      } else if (model.status != TransactionStatus.SUCCESS.value) {
+      } else if (model.status != TransactionStatus.Success.value) {
         summaryModel.totalFailedTransactions++;
       }
     }

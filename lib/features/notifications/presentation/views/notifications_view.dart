@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/socket_service.dart';
@@ -28,7 +29,7 @@ class NotificationsView extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
-              UserModel.instance.role == "Admin"
+              UserModel.instance.role == Role.Admin
                   ? Navigator.pushNamedAndRemoveUntil(
                       context,
                       RoutesNames.adminLayout,

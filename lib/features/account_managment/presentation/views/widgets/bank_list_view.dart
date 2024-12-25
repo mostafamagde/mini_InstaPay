@@ -7,6 +7,7 @@ import 'banks_list_item.dart';
 
 class BankListView extends StatelessWidget {
   const BankListView({super.key, required this.search});
+
   final String search;
 
   @override
@@ -22,7 +23,7 @@ class BankListView extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         } else if (state is BanksLoaded) {
           List<BankModel> filterd = [];
-          for (var bank in state.banks) {
+          for (BankModel bank in state.banks) {
             if (bank.name.toUpperCase().contains(search.toUpperCase())) {
               filterd.add(bank);
             }

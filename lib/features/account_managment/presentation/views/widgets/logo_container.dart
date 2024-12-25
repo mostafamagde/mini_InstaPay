@@ -6,8 +6,9 @@ class LogoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size media = MediaQuery.of(context).size;
-    var theme = Theme.of(context);
+    final Size media = MediaQuery.of(context).size;
+    final ThemeData theme = Theme.of(context);
+
     return Stack(
       alignment: Alignment.topRight,
       children: [

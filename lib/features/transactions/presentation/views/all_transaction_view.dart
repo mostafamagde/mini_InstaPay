@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/widgets/notification_icon.dart';
 import 'package:untitled2/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
@@ -14,11 +15,11 @@ class AllTransactionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(UserModel.instance.token);
-    if (UserModel.instance.role == "Admin") {
+    if (UserModel.instance.role == Role.Admin) {
       BlocProvider.of<NotificationsCubit>(context).getNotification();
     }
     getTransactions() {
-      UserModel.instance.role == "Admin" ? BlocProvider.of<TransactionCubit>(context).getAllTransaction() : BlocProvider.of<TransactionCubit>(context).getUserTransaction();
+      UserModel.instance.role == Role.Admin ? BlocProvider.of<TransactionCubit>(context).getAllTransaction() : BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     }
 
     getTransactions();
@@ -29,7 +30,7 @@ class AllTransactionView extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        leading: UserModel.instance.role == "Admin"
+        leading: UserModel.instance.role == Role.Admin
             ? SizedBox()
             : IconButton(
                 onPressed: () {
@@ -39,7 +40,7 @@ class AllTransactionView extends StatelessWidget {
                   Icons.arrow_back_ios,
                   color: Colors.white,
                 )),
-        actions: [UserModel.instance.role == "Admin" ? NotificationIcon() : SizedBox()],
+        actions: [UserModel.instance.role == Role.Admin ? NotificationIcon() : SizedBox()],
       ),
       body: BlocConsumer<TransactionCubit, TransactionState>(
         listener: (context, state) {

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
@@ -39,7 +40,7 @@ class OtpLoginRepo extends OtpRepository {
         }
         Navigator.pushNamedAndRemoveUntil(
           context,
-          UserModel.instance.role == 'Admin' ? RoutesNames.adminLayout : RoutesNames.layoutView,
+          UserModel.instance.role == Role.Admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
           (Route<dynamic> route) => false,
         );
       }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/Constants.dart';
@@ -28,7 +29,7 @@ class NotificationItem extends StatelessWidget {
         notification.createdAt.toLocal().toString(),
         style: const TextStyle(fontSize: 12),
       ),
-      trailing: (notification.type == Constants.RequestSendString && UserModel.instance.role != "Admin") || (notification.type == Constants.kRequestRefund && UserModel.instance.role == "Admin")
+      trailing: (notification.type == Constants.RequestSendString && UserModel.instance.role != Role.Admin) || (notification.type == Constants.kRequestRefund && UserModel.instance.role == Role.Admin)
           ? notification.isRead
               ? Text("Closed")
               : Row(

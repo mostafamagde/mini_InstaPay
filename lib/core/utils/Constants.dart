@@ -11,12 +11,6 @@ abstract class Constants {
   static const String transactionString = 'TRANSACTION';
   static const String ConfirmChangeEmailString = 'CHANGE_EMAIL';
   static const String RequestSendString = 'Request_Send';
-  static const String kSuccessString = 'Success';
-  static const String kFailedString = 'Failed';
-  static const String kPendingString = 'Pending';
-  static const String kSuspiciousString = 'Suspicious';
-  static const String kRefundingString = 'Refunding';
-  static const String kRefundedString = 'Refunded';
   static const String kRequestRefund = 'Request_Refund';
   static const String forgetPin='forgetPin';
 }

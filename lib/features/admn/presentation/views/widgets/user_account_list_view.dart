@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/features/admn/data/models/AdminUsersModel.dart';
 import 'package:untitled2/features/admn/presentation/views/widgets/user_item.dart';
-import '../../../data/models/AdminUsersModel.dart';
 
 class UserAccountListView extends StatelessWidget {
   const UserAccountListView({super.key, required this.users, required this.onPressed});

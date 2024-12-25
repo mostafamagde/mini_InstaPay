@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
@@ -12,7 +13,7 @@ class LogOutCubit extends Cubit<LogOutState> {
 
   Future<void> logOut() async {
     emit(LogOutLoading());
-    var data = await _settingRepo.logOut();
+    final Either data = await _settingRepo.logOut();
     data.fold(
       (failure) => emit(LogOutFailure(errorMessage: failure.errMessage)),
       (message) => emit(

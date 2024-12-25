@@ -1,3 +1,4 @@
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/reports/data/enums/months_enum.dart';
 import 'package:untitled2/features/reports/data/models/admin_transaction_summary_model.dart';
@@ -18,7 +19,7 @@ class GetMonthlyTransactions {
   Future<TransactionSummaryModel> getMonthlyTransactions(String month, int year) async {
     try {
       late List<TransactionModel> result;
-      if (UserModel.instance.role == 'Admin') {
+      if (UserModel.instance.role == Role.Admin) {
         result = await _transactionRepo.getAllTransactions();
         return _adminTransactionsSummaryRepoImpl.getTransactionSummaryModel(
           result.where((TransactionModel model) => model.createdAt.month - 1 == Month.getMonthNum(month) && model.createdAt.year == year).toList(),
@@ -30,7 +31,7 @@ class GetMonthlyTransactions {
         );
       }
     } catch (_) {
-      if (UserModel.instance.role == 'Admin') {
+      if (UserModel.instance.role == Role.Admin) {
         return AdminTransactionSummaryModel.init();
       } else {
         return UserTransactionSummaryModel.init();

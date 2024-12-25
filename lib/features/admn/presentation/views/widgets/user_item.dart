@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
-import '../../../../../core/utils/Constants.dart';
-import '../../../data/models/AdminUsersModel.dart';
+import 'package:untitled2/core/utils/Constants.dart';
+import 'package:untitled2/features/admn/data/models/AdminUsersModel.dart';
 
 class UserItem extends StatelessWidget {
   const UserItem({super.key, required this.users, required this.onPressed});

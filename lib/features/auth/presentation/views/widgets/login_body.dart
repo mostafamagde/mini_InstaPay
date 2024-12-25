@@ -33,7 +33,8 @@ class _LoginBodyState extends State<LoginBody> {
 
   @override
   Widget build(BuildContext context) {
-    var formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    
     return SafeArea(
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {

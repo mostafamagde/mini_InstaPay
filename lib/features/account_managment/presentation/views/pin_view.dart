@@ -23,8 +23,8 @@ class PinCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var accountId = ModalRoute.of(context)?.settings.arguments as String;
-    var formKey = GlobalKey<FormState>();
+    final String accountId = ModalRoute.of(context)?.settings.arguments as String;
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
           title: const Text(
@@ -47,7 +47,8 @@ class PinCodeScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          var cubit = GetBalanceCubit.get(context);
+          final GetBalanceCubit cubit = GetBalanceCubit.get(context);
+
           if (state is GetBalanceLoading) {
             return Center(
               child: CircularProgressIndicator(),

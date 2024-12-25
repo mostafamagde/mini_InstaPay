@@ -5,8 +5,7 @@ import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
-
-import '../manager/change_pin_cubit/change_pin_cubit.dart';
+import 'package:untitled2/features/account_managment/presentation/manager/change_pin_cubit/change_pin_cubit.dart';
 
 class ChangePin extends StatelessWidget {
   final int pinLength = 6;
@@ -29,8 +28,9 @@ class ChangePin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var id = ModalRoute.of(context)?.settings.arguments as String;
+    final String id = ModalRoute.of(context)?.settings.arguments as String;
     final cubit = ChangePinCubit.get(context);
+
     return BlocConsumer<ChangePinCubit, ChangePinState>(
       listener: (context, state) {
         if (state is ChangePinSuccess) {

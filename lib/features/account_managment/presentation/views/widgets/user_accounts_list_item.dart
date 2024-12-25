@@ -9,12 +9,8 @@ import 'package:untitled2/core/utils/validation.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/account_managment/data/models/account_data.dart';
-import 'package:untitled2/features/otp/presentation/views/otp_view.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
-
-import '../../../../setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
-
-import '../../../../setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
+import 'package:untitled2/features/setting_view/presentation/manager/forget_pin_cubit/forget_pin_cubit.dart';
 
 class UserAccountsListItem extends StatelessWidget {
   UserAccountsListItem({super.key, required this.banks, required this.index, required this.deleteAccount});
@@ -26,8 +22,9 @@ class UserAccountsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size media = MediaQuery.of(context).size;
-    var theme = Theme.of(context);
+    final Size media = MediaQuery.of(context).size;
+    final ThemeData theme = Theme.of(context);
+
     return Container(
       width: media.width * .9,
       padding: EdgeInsets.symmetric(vertical: 8),
@@ -128,13 +125,14 @@ class UserAccountsListItem extends StatelessWidget {
                                   "Are you sure you want to delete this account",
                                 ),
                                 content: CustomTextField(
-                                    controller: inputController,
-                                    label: "IPIN",
-                                    icon: Icons.pin,
-                                    pass: true,
-                                    obsecure: true,
-                                    inputType: TextInputType.visiblePassword,
-                                    valid: Validation.validateRegularTextField),
+                                  controller: inputController,
+                                  label: "IPIN",
+                                  icon: Icons.pin,
+                                  pass: true,
+                                  obsecure: true,
+                                  inputType: TextInputType.visiblePassword,
+                                  valid: Validation.validateRegularTextField,
+                                ),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
@@ -175,17 +173,13 @@ class UserAccountsListItem extends StatelessWidget {
                       value: '6',
                       child: Text('forget pin'),
                       onTap: () {
-                        BlocProvider.of<ForgetPinCubit>(context)
-                           .forgetPin(banks[index].id!);
-
+                        BlocProvider.of<ForgetPinCubit>(context).forgetPin(banks[index].id!);
                       },
                     ),
                   ];
                 },
               ),
-              SizedBox(
-                width: 5,
-              )
+              SizedBox(width: 5)
             ],
           ),
         ],

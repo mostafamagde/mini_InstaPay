@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import '../../../data/repos/bank_repo.dart';
+import 'package:untitled2/features/account_managment/data/repos/bank_repo.dart';
 
 part 'change_pin_state.dart';
 

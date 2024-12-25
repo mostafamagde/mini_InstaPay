@@ -2,11 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:untitled2/core/api_helper/api_constants.dart';
 import 'package:untitled2/core/api_helper/api_manger.dart';
+import 'package:untitled2/core/errors/errors.dart';
+import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/admn/data/models/AdminUsersModel.dart';
 import 'package:untitled2/features/admn/data/repo/admin_repo.dart';
-
-import '../../../../core/errors/errors.dart';
-import '../../../../core/models/user_model.dart';
 
 class AdminRepoImpl implements AdminRepo {
   ApiManager service = ApiManager();
@@ -20,7 +19,7 @@ class AdminRepoImpl implements AdminRepo {
         return right(usersList);
       } else {
         List<AdminUsersModel> filterd = [];
-        for (var item in usersList) {
+        for (AdminUsersModel item in usersList) {
           if (item.email!.toLowerCase().contains(search.toLowerCase()) ||
               item.mobileNumber!.toLowerCase().contains(search.toLowerCase()) ||
               item.userName!.toLowerCase().contains(search.toLowerCase()) ||

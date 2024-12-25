@@ -26,5 +26,11 @@ class RoutesNames {
   static const String changePin = 'ChangePin';
   static const String analyticsView = 'analyticsView';
   static const String changeLimit = 'changeLimit';
-  static const String forgotPin='forgotPin';
+  static const String forgotPin = 'forgotPin';
+  static const String allUsersView = 'allUsersView';
+  static const String adminSetting = 'adminSetting';
+  static const String homeView = 'homeView';
+  static const String sendMoneyView = 'sendMoneyView';
+  static const String receiveMoneyView = 'receiveMoneyView';
+  static const String settingView = 'settingView';
 }

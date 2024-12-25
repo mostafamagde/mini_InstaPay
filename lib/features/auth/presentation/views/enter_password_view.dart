@@ -11,11 +11,14 @@ import 'package:untitled2/core/utils/validation.dart';
 
 class EnterPasswordView extends StatelessWidget {
   EnterPasswordView({super.key});
+
   final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final String token = ModalRoute.of(context)?.settings.arguments as String;
-    var formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {

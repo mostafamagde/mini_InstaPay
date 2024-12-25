@@ -8,8 +8,7 @@ import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/core/widgets/custom_text_field.dart';
 import 'package:untitled2/features/account_managment/data/models/add_account_model.dart';
 import 'package:untitled2/features/account_managment/data/models/bank_model.dart';
-
-import '../manager/add_account/add_account_cubit.dart';
+import 'package:untitled2/features/account_managment/presentation/manager/add_account/add_account_cubit.dart';
 
 class AddBankAccount extends StatefulWidget {
   @override
@@ -33,24 +32,30 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
   @override
   void dispose() {
-    for (var controller in _cardNumberControllers) {
+    for (TextEditingController controller in _cardNumberControllers) {
       controller.dispose();
     }
-    for (var node in _cardNumberFocusNodes) {
+
+    for (FocusNode node in _cardNumberFocusNodes) {
       node.dispose();
     }
-    for (var controller in _pinControllers) {
+
+    for (TextEditingController controller in _pinControllers) {
       controller.dispose();
     }
-    for (var node in _pinFocusNodes) {
+
+    for (FocusNode node in _pinFocusNodes) {
       node.dispose();
     }
-    for (var controller in _additionalFieldControllers) {
+
+    for (TextEditingController controller in _additionalFieldControllers) {
       controller.dispose();
     }
-    for (var node in _additionalFieldFocusNodes) {
+
+    for (FocusNode node in _additionalFieldFocusNodes) {
       node.dispose();
     }
+
     _cardHolderController.dispose();
     _cvvController.dispose();
     _expirationController.dispose();
@@ -111,9 +116,10 @@ class _AddBankAccountState extends State<AddBankAccount> {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = AddAccountCubit.get(context);
-    var bank = ModalRoute.of(context)?.settings.arguments as BankModel;
-    var formKey = GlobalKey<FormState>();
+    final AddAccountCubit cubit = AddAccountCubit.get(context);
+    final BankModel bank = ModalRoute.of(context)?.settings.arguments as BankModel;
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
     return BlocConsumer<AddAccountCubit, AddAccountState>(
       listener: (context, state) {
         if (state is AddAccountSuccess) {

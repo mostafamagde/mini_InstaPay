@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/transaction_module/data/models/send_model.dart';
@@ -13,7 +14,7 @@ class SendCubit extends Cubit<SendState> {
 
   Future<void> sendMoney(SendModel send) async {
     emit(SendLoading());
-    var data = await transactionRepo.sendMoney(send);
+    final Either data = await transactionRepo.sendMoney(send);
     data.fold(
       (failure) => emit(
         SendFailed(error: failure.errMessage),

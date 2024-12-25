@@ -1,3 +1,4 @@
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/features/account_managment/data/models/account_data.dart';
 import 'DefaultAcc.dart';
 
@@ -10,7 +11,7 @@ class UserModel {
   String? address;
   String? id;
   List<BankAccountData>? bankAccounts;
-  String? role;
+  Role? role;
   DefaultAcc? defaultAcc;
 
   UserModel._();
@@ -25,6 +26,6 @@ class UserModel {
     this.email = json['email'];
     this.mobileNumber = json['mobileNumber'];
     this.address = json['address'];
-    this.role = json['role'];
+    this.role = Role.fromJson(json['role']);
   }
 }

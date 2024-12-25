@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/setting_view/data/models/credinitials_model.dart';
@@ -14,7 +15,8 @@ class ChangeCredinitialsCubit extends Cubit<ChangeCredinitialsState> {
 
   Future<void> changeCredinitials(CredinitialsModel model) async {
     emit(ChangeCredinitialsLoading());
-    var data = await _settingRepo.changeCredintials(model: model);
+    final Either data = await _settingRepo.changeCredintials(model: model);
+    
     data.fold(
       (failure) => emit(ChangeCredinitialsFailure(failure.errMessage)),
       (message) => emit(

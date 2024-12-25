@@ -28,7 +28,7 @@ class ReceiveMoneyView extends StatelessWidget {
         snackBar(content: state.errorMessage, context: context);
       }
     }, builder: (context, state) {
-      var cubit = ReceiveCubit.get(context);
+      final ReceiveCubit cubit = ReceiveCubit.get(context);
 
       return ModalProgressHUD(
         inAsyncCall: state is ReceiveLoading,

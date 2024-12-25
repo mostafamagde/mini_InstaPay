@@ -10,7 +10,7 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
     return SliverToBoxAdapter(
       child: Column(
         children: [

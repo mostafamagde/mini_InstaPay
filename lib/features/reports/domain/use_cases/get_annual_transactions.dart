@@ -1,3 +1,4 @@
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/features/reports/data/models/admin_transaction_summary_model.dart';
 import 'package:untitled2/features/reports/data/models/transaction_summary_model.dart';
@@ -17,7 +18,7 @@ class GetAnnualTransactions {
   Future<TransactionSummaryModel> getAnnualTransactions(int year) async {
     try {
       late List<TransactionModel> result;
-      if (UserModel.instance.role == 'Admin') {
+      if (UserModel.instance.role == Role.Admin) {
         result = await _transactionRepo.getAllTransactions();
         return _adminTransactionsSummaryRepoImpl.getTransactionSummaryModel(
           result.where((TransactionModel model) => model.createdAt.year == year).toList(),
@@ -29,7 +30,7 @@ class GetAnnualTransactions {
         );
       }
     } catch (_) {
-      if (UserModel.instance.role == 'Admin') {
+      if (UserModel.instance.role == Role.Admin) {
         return AdminTransactionSummaryModel.init();
       } else {
         return UserTransactionSummaryModel.init();

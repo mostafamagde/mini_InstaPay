@@ -1,10 +1,10 @@
 enum TransactionStatus {
-  REFUNDED('Refunded'),
-  REFUNDING('Refunding'),
-  SUCCESS('Success'),
-  PENDING('Pending'),
-  FAILED('Failed'),
-  SUSPICIOUS('Suspicious');
+  Refunded('Refunded'),
+  Refunding('Refunding'),
+  Success('Success'),
+  Pending('Pending'),
+  Failed('Failed'),
+  Suspicious('Suspicious');
 
   final String value;
 
@@ -14,5 +14,15 @@ enum TransactionStatus {
     return TransactionStatus.values.map<String>((TransactionStatus element) {
       return element.value;
     }).toList();
+  }
+
+  factory TransactionStatus.fromJson(String value) {
+    for (TransactionStatus status in TransactionStatus.values) {
+      if (status.value == value) {
+        return status;
+      }
+    }
+
+    return TransactionStatus.Failed;
   }
 }

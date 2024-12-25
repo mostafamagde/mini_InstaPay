@@ -33,7 +33,7 @@ class Validation {
     if (value == null || value.isEmpty) {
       return 'Please fill this field';
     }
-    if (int.parse(value) < 1) {
+    if (double.parse(value) < 1) {
       return 'Minimum amount is 1 Pound';
     }
 

@@ -21,7 +21,7 @@ class ChangeCredintials extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
 
     return BlocConsumer<ChangeCredinitialsCubit, ChangeCredinitialsState>(
       listener: (context, state) {
@@ -37,7 +37,7 @@ class ChangeCredintials extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        var cubit = ChangeCredinitialsCubit.get(context);
+        final ChangeCredinitialsCubit cubit = ChangeCredinitialsCubit.get(context);
         return ModalProgressHUD(
           inAsyncCall: cubit.state is ChangeCredinitialsLoading,
           child: Scaffold(

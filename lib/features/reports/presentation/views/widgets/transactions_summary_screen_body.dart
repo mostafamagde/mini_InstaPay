@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/enums/role_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/reports/data/enums/months_enum.dart';
@@ -18,7 +19,7 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TransactionSummaryViewCubit cubit = BlocProvider.of<TransactionSummaryViewCubit>(context);
-    late TransactionSummaryModel transactionSummaryModel = UserModel.instance.role == 'Admin' ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
+    late TransactionSummaryModel transactionSummaryModel = UserModel.instance.role == Role.Admin ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
     final String initMonth = Month.values[DateTime.now().month - 1].value;
     final int initYear = DateTime.now().year;
     String month = initMonth;
@@ -31,7 +32,7 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
     return BlocConsumer<TransactionSummaryViewCubit, TransactionSummaryViewState>(
       listener: (context, state) {
         if (state is TransactionSummaryViewLoading) {
-          transactionSummaryModel = UserModel.instance.role == 'Admin' ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
+          transactionSummaryModel = UserModel.instance.role == Role.Admin ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
         }
         if (state is TransactionSummaryViewSuccess) {
           transactionSummaryModel = state.transactionSummaryModel;

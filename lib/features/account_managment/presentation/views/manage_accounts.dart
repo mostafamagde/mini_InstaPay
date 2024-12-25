@@ -5,6 +5,7 @@ import 'package:untitled2/core/models/user_model.dart';
 import 'package:untitled2/core/routes_manager/routes_names.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
+import 'package:untitled2/features/account_managment/data/models/account_data.dart';
 import 'package:untitled2/features/account_managment/presentation/manager/manage_user_bank_accounts/manage_bank_accounts_cubit.dart';
 import 'package:untitled2/features/account_managment/presentation/views/widgets/user_accounts_list_view.dart';
 import 'package:untitled2/features/setting_view/presentation/manager/change_default_cubit/change_cubit.dart';
@@ -19,7 +20,7 @@ class ManageAccounts extends StatelessWidget {
         if (state is ChangeFailed) {
           snackBar(content: state.message, context: context);
         } else if (state is ChangeSuccess) {
-          for (var item in UserModel.instance.bankAccounts!) {
+          for (BankAccountData item in UserModel.instance.bankAccounts!) {
             if (item.id == state.Id) {
               UserModel.instance.defaultAcc?.cardInfo?.cardNo = item.cardNo;
               UserModel.instance.defaultAcc?.bankId?.logo = item.bankId?.logo;
@@ -52,7 +53,8 @@ class ManageAccounts extends StatelessWidget {
               }
             },
             builder: (context, state) {
-              var cubit = ManageBankAccountsCubit.get(context);
+              final ManageBankAccountsCubit cubit = ManageBankAccountsCubit.get(context);
+              
               return Scaffold(
                 bottomNavigationBar: CustomButton(
                   onTap: () => Navigator.pushNamed(context, RoutesNames.chooseBank),

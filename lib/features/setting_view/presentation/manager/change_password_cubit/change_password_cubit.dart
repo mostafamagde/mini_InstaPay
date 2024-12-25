@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:untitled2/features/setting_view/data/repos/setting_repo.dart';
@@ -13,7 +14,7 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
 
   Future<void> changePassword({required String newPass, required oldPass}) async {
     emit(ChangePasswordLoading());
-    var data = await _settingRepo.changePassword(
+    final Either data = await _settingRepo.changePassword(
       newPass: newPass,
       oldPass: oldPass,
     );

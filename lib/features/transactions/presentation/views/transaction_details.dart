@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:untitled2/core/enums/role_enum.dart';
+import 'package:untitled2/core/enums/transaction_status_enum.dart';
 import 'package:untitled2/core/models/user_model.dart';
-import 'package:untitled2/core/utils/Constants.dart';
 import 'package:untitled2/core/widgets/custom_button.dart';
 import 'package:untitled2/core/widgets/custom_snackbar.dart';
 import 'package:untitled2/features/transactions/data/model/transaction_model.dart';
@@ -16,7 +17,7 @@ class TransactionDetailsScreen extends StatelessWidget {
   }) : super(key: key);
 
   Widget showButton(TransactionModel transaction, context) {
-    if (UserModel.instance.role != 'Admin' && UserModel.instance.id == transaction.sender.id && transaction.status == Constants.kSuccessString) {
+    if (UserModel.instance.role != Role.Admin && UserModel.instance.id == transaction.sender.id && transaction.status == TransactionStatus.Success) {
       return CustomButton(
         onTap: () {
           BlocProvider.of<TransactionCubit>(context).requestRefund(transaction.id);
@@ -24,7 +25,7 @@ class TransactionDetailsScreen extends StatelessWidget {
         label: "Request Refund",
         color: Colors.red.shade700,
       );
-    } else if (UserModel.instance.role == 'Admin' && transaction.status == Constants.kSuccessString) {
+    } else if (UserModel.instance.role == Role.Admin && transaction.status == TransactionStatus.Success) {
       return CustomButton(
         onTap: () {
           BlocProvider.of<TransactionCubit>(context).markAsSuspicious(transaction.id);
@@ -127,26 +128,26 @@ class TransactionDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusBadge(String status) {
+  Widget _buildStatusBadge(TransactionStatus status) {
     Color color;
 
     switch (status) {
-      case 'Success':
+      case TransactionStatus.Success:
         color = Colors.green;
         break;
-      case 'Failed':
+      case TransactionStatus.Failed:
         color = Colors.red;
         break;
-      case 'Pending':
+      case TransactionStatus.Pending:
         color = Colors.orange;
         break;
-      case 'Suspicious':
+      case TransactionStatus.Suspicious:
         color = Colors.amber;
         break;
-      case 'Refunding':
+      case TransactionStatus.Refunding:
         color = Colors.blue;
         break;
-      case 'Refunded':
+      case TransactionStatus.Refunded:
         color = Colors.teal;
         break;
       default:
@@ -155,7 +156,7 @@ class TransactionDetailsScreen extends StatelessWidget {
 
     return Chip(
       label: Text(
-        status,
+        status.value,
         style: const TextStyle(color: Colors.black),
       ),
       backgroundColor: color,
