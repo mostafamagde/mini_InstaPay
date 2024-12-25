@@ -25,8 +25,13 @@ class LayoutView extends StatelessWidget {
       builder: (context, state) {
         var cubit = NavigationCubit.get(context);
         final List<Widget> screens = [
-          HomeView(
-            onTap: cubit.selectTab,
+          BlocProvider(
+            create: (context) => ForgetPinCubit(
+              ServiceLocator.getIt.get<SettingRepoImpl>(),
+            ),
+            child: HomeView(
+              onTap: cubit.selectTab,
+            ),
           ),
           SendMoneyView(),
           BlocProvider(
