@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mini_instapay/features/account_managment/data/repos/save_time.dart';
 import 'package:mini_instapay/features/otp/data/repositories/otp_factory.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mini_instapay/core/api_helper/api_manger.dart';
@@ -28,6 +29,8 @@ class ServiceLocator {
     getIt.registerSingleton<ApiManager>(ApiManager(getIt.get<Dio>()));
     getIt.registerSingleton<OtpFactory>(OtpFactory());
     getIt.registerSingleton<SettingRepoImpl>(SettingRepoImpl(getIt.get<ApiManager>()));
+    getIt.registerSingleton<SharedPreferences>(await SharedPreferences.getInstance());
+    getIt.registerSingleton<TimeSaving>(TimeSaving(getIt.get<SharedPreferences>()));
     getIt.registerSingleton<NotificationsRepo>(NotificationsRepo(getIt.get<ApiManager>()));
     getIt.registerSingleton<BankRepoImpl>(BankRepoImpl(getIt.get<ApiManager>()));
     getIt.registerSingleton<AllBanksRepoImpl>(AllBanksRepoImpl(getIt.get<ApiManager>()));
@@ -41,6 +44,5 @@ class ServiceLocator {
     getIt.registerSingleton<GetAnnualTransactions>(GetAnnualTransactions(getIt<TransactionRepository>(), getIt<UserTransactionsSummaryRepoImpl>(), getIt<AdminTransactionsSummaryRepoImpl>()));
     getIt.registerSingleton<OneUserTransactionsRepoImpl>(OneUserTransactionsRepoImpl());
     getIt.registerSingleton<GetEachUserTransactions>(GetEachUserTransactions(getIt<TransactionRepository>(), getIt<OneUserTransactionsRepoImpl>()));
-    getIt.registerSingleton<SharedPreferences>(await SharedPreferences.getInstance());
   }
 }

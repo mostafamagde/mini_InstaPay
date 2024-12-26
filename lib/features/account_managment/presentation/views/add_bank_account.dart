@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
 import 'package:mini_instapay/core/utils/validation.dart';
-import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
 import 'package:mini_instapay/core/widgets/custom_text_field.dart';
 import 'package:mini_instapay/features/account_managment/data/models/add_account_model.dart';
@@ -137,19 +136,18 @@ class _AddBankAccountState extends State<AddBankAccount> {
         }
       },
       builder: (BuildContext context, AddAccountState state) {
-        return SingleChildScrollView(
-          child: ModalProgressHUD(
-            inAsyncCall: cubit.state is AddAccountLoading,
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text('Add Bank Account'),
-                centerTitle: true,
-              ),
-              body: Form(
-                key: formKey,
+        return ModalProgressHUD(
+          inAsyncCall: cubit.state is AddAccountLoading,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text('Enter card Info', style: TextStyle(color: Colors.white)),
+              centerTitle: true,
+            ),
+            body: Form(
+              key: formKey,
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomTitleContainer(title: "Enter card Info"),
                     CustomTextField(
                       label: 'Card Holder Name',
                       icon: Icons.person,
@@ -249,55 +247,61 @@ class _AddBankAccountState extends State<AddBankAccount> {
                       }),
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: TextFormField(
-                            onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
-                            maxLines: 1,
-                            validator: Validation.validateCVVNumberTextField,
-                            controller: _cvvController,
-                            focusNode: _cvvFocusNode,
-                            keyboardType: TextInputType.number,
-                            maxLength: 3,
-                            decoration: InputDecoration(
-                              labelText: 'CVV',
-                              border: OutlineInputBorder(),
-                              counterText: "",
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: TextFormField(
+                              onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
+                              maxLines: 1,
+                              validator: Validation.validateCVVNumberTextField,
+                              controller: _cvvController,
+                              focusNode: _cvvFocusNode,
+                              keyboardType: TextInputType.number,
+                              maxLength: 3,
+                              decoration: InputDecoration(
+                                labelText: 'CVV',
+                                border: OutlineInputBorder(),
+                                counterText: "",
+                              ),
+                              onChanged: _onCvvChanged,
                             ),
-                            onChanged: _onCvvChanged,
                           ),
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          flex: 3,
-                          child: TextFormField(
-                            onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
-                            maxLines: 1,
-                            validator: Validation.validateExpDateTextField,
-                            controller: _expirationController,
-                            focusNode: _expirationFocusNode,
-                            keyboardType: TextInputType.datetime,
-                            decoration: InputDecoration(
-                              labelText: 'Expiration Date (MM/YY)',
-                              border: OutlineInputBorder(),
+                          SizedBox(width: 10),
+                          Expanded(
+                            flex: 3,
+                            child: TextFormField(
+                              onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
+                              maxLines: 1,
+                              validator: Validation.validateExpDateTextField,
+                              controller: _expirationController,
+                              focusNode: _expirationFocusNode,
+                              keyboardType: TextInputType.datetime,
+                              decoration: InputDecoration(
+                                labelText: 'Expiration Date (MM/YY)',
+                                border: OutlineInputBorder(),
+                              ),
+                              onChanged: _onExpirationChanged,
+                              onFieldSubmitted: (value) async {
+                                if (formKey.currentState!.validate()) {
+                                  await cubit.addAccount(
+                                    AddAccountModel(
+                                      cardNumber: _cardNumberControllers.map((controller) => controller.text).join(),
+                                      cardHolderName: _cardHolderController.text,
+                                      expirationDate: _expirationController.text,
+                                      cvv: _cvvController.text,
+                                      pin: _pinControllers.map((controller) => controller.text).join(),
+                                      bankId: bank.id,
+                                    ),
+                                  );
+                                }
+                              },
                             ),
-                            onChanged: _onExpirationChanged,
-                            onFieldSubmitted: (value) async {
-                              if (formKey.currentState!.validate()) {
-                                await cubit.addAccount(AddAccountModel(
-                                    cardNumber: _cardNumberControllers.map((controller) => controller.text).join(),
-                                    cardHolderName: _cardHolderController.text,
-                                    expirationDate: _expirationController.text,
-                                    cvv: _cvvController.text,
-                                    pin: _pinControllers.map((controller) => controller.text).join(),
-                                    bankId: bank.id));
-                              }
-                            },
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
