@@ -19,7 +19,6 @@ class NotificationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<NotificationsCubit>(context).getNotification();
-    final s = SocketService.instance.stream;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -66,7 +65,7 @@ class NotificationsView extends StatelessWidget {
           }
 
           return StreamBuilder<NotificationModel>(
-            stream: s,
+            stream: SocketService.instance.stream,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));

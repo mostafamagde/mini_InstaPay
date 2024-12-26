@@ -46,8 +46,8 @@ class SocketService {
     _socket.emit('message', message);
   }
 
-  void disconnect() {
+  Future<void> disconnect() async {
     _socket.disconnect();
-    _controller.close();
+    await _controller.close();
   }
 }

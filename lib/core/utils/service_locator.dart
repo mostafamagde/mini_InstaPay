@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mini_instapay/features/account_managment/data/repos/save_time.dart';
+import 'package:mini_instapay/features/account_management/data/repos/save_time.dart';
 import 'package:mini_instapay/features/otp/data/repositories/otp_factory.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mini_instapay/core/api_helper/api_manger.dart';
-import 'package:mini_instapay/features/account_managment/data/repos/all_banks_repo_impl.dart';
-import 'package:mini_instapay/features/account_managment/data/repos/bank_repo_impl.dart';
-import 'package:mini_instapay/features/admn/data/repo/admin_repo_impl.dart';
+import 'package:mini_instapay/features/account_management/data/repos/all_banks_repo_impl.dart';
+import 'package:mini_instapay/features/account_management/data/repos/bank_repo_impl.dart';
+import 'package:mini_instapay/features/admin/data/repo/admin_repo_impl.dart';
 import 'package:mini_instapay/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:mini_instapay/features/notifications/data/repository/notifications_repo.dart';
 import 'package:mini_instapay/features/reports/data/repo_impl/admin_transactions_summary_repo_impl.dart';
