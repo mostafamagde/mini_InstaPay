@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/features/account_management/data/repos/save_time.dart';
+import 'package:mini_instapay/features/onboarding/presentation/views/warning_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mini_instapay/core/navigation_cubit/navigation_cubit.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
@@ -284,6 +285,8 @@ class RouteGenerator {
           ],
           child: SettingView(),
         );
+      case RoutesNames.warningView:
+        return const WarningView();
       default:
         return const SplashView();
     }

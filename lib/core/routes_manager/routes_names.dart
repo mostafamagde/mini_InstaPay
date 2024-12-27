@@ -33,4 +33,5 @@ class RoutesNames {
   static const String sendMoneyView = 'sendMoneyView';
   static const String receiveMoneyView = 'receiveMoneyView';
   static const String settingView = 'settingView';
+  static const String warningView = 'warningView';
 }

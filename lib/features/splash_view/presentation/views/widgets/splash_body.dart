@@ -54,38 +54,41 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
   }
 
   void navigatingToHome() {
-    Future.delayed(const Duration(seconds: 3), () async {
-      final storage = new FlutterSecureStorage();
-      try {
-        final token = await storage.read(key: "token");
-        if (token != null && token.isNotEmpty) {
-          UserModel.instance.token = token;
-          final apiManager = ServiceLocator.getIt<ApiManager>();
-          final userDataResponse = await apiManager.get(
-            ApiConstants.getUserData,
-            headers: {
-              "token": token,
-            },
-          );
-          UserModel.instance.setFromjson(userDataResponse.data["data"]);
-          SocketService.instance.connect();
+    Future.delayed(
+      const Duration(seconds: 3),
+      () async {
+        final storage = new FlutterSecureStorage();
+        try {
+          final token = await storage.read(key: "token");
+          if (token != null && token.isNotEmpty) {
+            UserModel.instance.token = token;
+            final apiManager = ServiceLocator.getIt<ApiManager>();
+            final userDataResponse = await apiManager.get(
+              ApiConstants.getUserData,
+              headers: {
+                "token": token,
+              },
+            );
+            UserModel.instance.setFromjson(userDataResponse.data["data"]);
+            SocketService.instance.connect();
+            Navigator.pushReplacementNamed(
+              context,
+              UserModel.instance.role == Role.Admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
+            );
+          } else {
+            Navigator.pushReplacementNamed(
+              context,
+              RoutesNames.warningView,
+            );
+          }
+        } catch (e) {
           Navigator.pushReplacementNamed(
             context,
-            UserModel.instance.role == Role.Admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
-          );
-        } else {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutesNames.onBoarding,
+            RoutesNames.warningView,
           );
         }
-      } catch (e) {
-        Navigator.pushReplacementNamed(
-          context,
-          RoutesNames.onBoarding,
-        );
-      }
-    });
+      },
+    );
   }
 
   void initSlidingAnimation() {
