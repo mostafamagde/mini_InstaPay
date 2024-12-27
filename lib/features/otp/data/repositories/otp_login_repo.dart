@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mini_instapay/core/api_helper/api_constants.dart';
 import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:mini_instapay/core/enums/role_enum.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
 import 'otp_repo.dart';
 
 class OtpLoginRepo extends OtpRepository {
@@ -57,7 +57,7 @@ class OtpLoginRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": Constants.loginString},
+        {"token": token, "type":OtpType.LoginOtp},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

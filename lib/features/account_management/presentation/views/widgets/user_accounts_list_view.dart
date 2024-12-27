@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
 import 'package:mini_instapay/features/account_management/data/models/account_data.dart';
 import 'package:mini_instapay/features/account_management/presentation/views/widgets/user_accounts_list_item.dart';
 import 'package:mini_instapay/features/otp/presentation/views/otp_view.dart';
@@ -21,7 +21,7 @@ class UserAccountsListView extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => OtpView(userToken: state.userToken, function: Constants.forgetPin),
+              builder: (context) => OtpView(userToken: state.userToken, type: OtpType.ForgetPinOtp),
             ),
           );
         }

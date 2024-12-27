@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mini_instapay/core/api_helper/api_constants.dart';
 import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
 import 'package:mini_instapay/features/otp/data/repositories/otp_repo.dart';
 
 class OtpChangeEmailRepo extends OtpRepository {
@@ -45,7 +45,7 @@ class OtpChangeEmailRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": Constants.ConfirmChangeEmailString},
+        {"token": token, "type": OtpType.ChangeEmailConfirmationOtp},
         headers: {"token": UserModel.instance.token},
       );
       if (response.statusCode != 201) {

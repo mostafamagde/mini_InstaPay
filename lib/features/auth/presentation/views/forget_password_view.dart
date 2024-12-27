@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
 import 'package:mini_instapay/core/utils/validation.dart';
 import 'package:mini_instapay/core/widgets/custom_button.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
@@ -39,10 +39,11 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
           if (state is AuthSuccess) {
             Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => OtpView(
-                        userToken: state.otpModel.token,
-                        function: Constants.forgetPasswordString,
-                      )),
+                builder: (context) => OtpView(
+                  userToken: state.otpModel.token,
+                  type: OtpType.ForgetPasswordOtp,
+                ),
+              ),
             );
           } else if (state is AuthFail) {
             snackBar(content: state.message, context: context);

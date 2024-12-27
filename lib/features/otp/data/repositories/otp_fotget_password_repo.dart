@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mini_instapay/core/api_helper/api_constants.dart';
 import 'package:mini_instapay/core/api_helper/api_manger.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
 import 'package:mini_instapay/features/otp/data/repositories/otp_repo.dart';
 
 class OtpForgetPasswordRepo extends OtpRepository {
@@ -39,7 +39,7 @@ class OtpForgetPasswordRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": Constants.forgetPasswordString},
+        {"token": token, "type": OtpType.ForgetPasswordOtp},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
 import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
 import 'package:mini_instapay/core/widgets/custom_small_button.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
@@ -89,7 +89,7 @@ class SettingView extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => OtpView(userToken: state.userToken, function: Constants.forgetPin),
+              builder: (context) => OtpView(userToken: state.userToken, type: OtpType.ForgetPinOtp),
             ),
           );
         }

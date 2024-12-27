@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
 import 'package:mini_instapay/core/utils/validation.dart';
 import 'package:mini_instapay/core/widgets/custom_button.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
@@ -41,10 +41,11 @@ class _LoginBodyState extends State<LoginBody> {
           if (state is AuthSuccess) {
             Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => OtpView(
-                        userToken: state.otpModel.token,
-                        function: Constants.loginString,
-                      )),
+                builder: (context) => OtpView(
+                  userToken: state.otpModel.token,
+                  type: OtpType.LoginOtp,
+                ),
+              ),
             );
           } else if (state is AuthFail) {
             snackBar(content: state.message, context: context);

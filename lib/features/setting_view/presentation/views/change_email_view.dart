@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
 import 'package:mini_instapay/core/utils/validation.dart';
 import 'package:mini_instapay/core/widgets/custom_button.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
@@ -24,7 +24,7 @@ class ChangeEmailView extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => OtpView(userToken: state.message, function: Constants.ConfirmChangeEmailString),
+              builder: (context) => OtpView(userToken: state.message, type: OtpType.ChangeEmailConfirmationOtp),
             ),
           );
         } else if (state is ChangeEmailFailure) {

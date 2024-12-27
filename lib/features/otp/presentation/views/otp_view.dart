@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:mini_instapay/core/utils/service_locator.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mini_instapay/core/widgets/custom_button.dart';
@@ -11,9 +12,9 @@ import 'package:mini_instapay/features/otp/presentation/views/widgets/resend_but
 
 class OtpView extends StatefulWidget {
   final String userToken;
-  final String function;
+  final OtpType type;
 
-  OtpView({required this.userToken, required this.function});
+  OtpView({required this.userToken, required this.type});
 
   @override
   _OTPScreenState createState() => _OTPScreenState();
@@ -32,7 +33,7 @@ class _OTPScreenState extends State<OtpView> {
   void initState() {
     super.initState();
     final factory = ServiceLocator.getIt<OtpFactory>();
-    repository = factory.createOtpRepo(widget.function, context);
+    repository = factory.createOtpRepo(widget.type, context);
   }
 
   void _submitFunction() {
