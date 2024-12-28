@@ -7,6 +7,7 @@ import 'package:mini_instapay/core/enums/otp_type.dart';
 import 'package:mini_instapay/core/enums/role_enum.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
+import 'package:mini_instapay/core/utils/socket_service.dart';
 import 'otp_repo.dart';
 
 class OtpLoginRepo extends OtpRepository {
@@ -37,7 +38,7 @@ class OtpLoginRepo extends OtpRepository {
         } else {
           UserModel.instance.setFromjson(userDataResponse.data["data"]);
         }
-
+        SocketService.instance.connect();
         Navigator.pushNamedAndRemoveUntil(
           context,
           UserModel.instance.role == Role.Admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
