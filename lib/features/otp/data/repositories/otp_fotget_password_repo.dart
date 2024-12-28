@@ -39,7 +39,7 @@ class OtpForgetPasswordRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": OtpType.ForgetPasswordOtp},
+        {"token": token, "type": OtpType.ForgetPasswordOtp.value},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

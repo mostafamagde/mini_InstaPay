@@ -148,7 +148,7 @@ class RouteGenerator {
           create: (context) => AuthCubit(ServiceLocator.getIt<AuthRepoImpl>()),
           child: const SignupView(),
         );
-      case RoutesNames.ForgetPasswordView:
+      case RoutesNames.forgetPasswordView:
         return BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(ServiceLocator.getIt<AuthRepoImpl>()),
           child: ForgetPasswordView(),

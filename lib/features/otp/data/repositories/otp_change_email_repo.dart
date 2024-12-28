@@ -45,7 +45,7 @@ class OtpChangeEmailRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": OtpType.ChangeEmailConfirmationOtp},
+        {"token": token, "type": OtpType.ChangeEmailConfirmationOtp.value},
         headers: {"token": UserModel.instance.token},
       );
       if (response.statusCode != 201) {

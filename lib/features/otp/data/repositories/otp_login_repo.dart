@@ -57,7 +57,7 @@ class OtpLoginRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type":OtpType.LoginOtp},
+        {"token": token, "type": OtpType.LoginOtp.value},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

@@ -84,7 +84,7 @@ class _LoginBodyState extends State<LoginBody> {
                     CustomTextButton(
                       label: "Forget Password",
                       onTap: () {
-                        Navigator.pushNamed(context, RoutesNames.ForgetPasswordView);
+                        Navigator.pushNamed(context, RoutesNames.forgetPasswordView);
                       },
                     ),
                     SizedBox(

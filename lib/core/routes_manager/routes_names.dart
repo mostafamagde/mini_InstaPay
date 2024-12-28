@@ -5,7 +5,7 @@ class RoutesNames {
   static const String signupView = "signupViewView";
   static const String otpView = "otpView";
   static const String chooseBank = "chooseBank";
-  static const String ForgetPasswordView = "ForgetPasswordView";
+  static const String forgetPasswordView = "forgetPasswordView";
   static const String changeCridintials = "changeCridintials";
   static const String privacySetting = "privacySetting";
   static const String changePassword = "changePassword";

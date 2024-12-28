@@ -40,7 +40,7 @@ class OtpSignUpRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": OtpType.SignupOtp},
+        {"token": token, "type": OtpType.SignupOtp.value},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
