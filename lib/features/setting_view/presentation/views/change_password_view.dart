@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/core/utils/validation.dart';
@@ -11,6 +12,7 @@ class ChangePassword extends StatelessWidget {
 
   final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController reNewPasswordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -54,7 +56,32 @@ class ChangePassword extends StatelessWidget {
                         label: "Enter new Password",
                         icon: Icons.password,
                         inputType: TextInputType.visiblePassword,
-                        valid: Validation.validatePasswordTextField,
+                        valid:(value) {
+                          Validation.validatePasswordTextField(value);
+                          if(reNewPasswordController.text.compareTo(newPasswordController.text)!=0 ){
+                            return "Your password doesn't match";
+                          } if (oldPasswordController.text.compareTo(newPasswordController.text)==0){
+                            return "Your password should not be same as old password";
+                          }
+                          return null;
+                        },
+                        obsecure: true,
+                        pass: true,
+                      ),
+                      CustomTextField(
+                        controller: reNewPasswordController,
+                        label: "Renter new Password",
+                        icon: Icons.password,
+                        inputType: TextInputType.visiblePassword,
+                        valid:(value) {
+                          Validation.validatePasswordTextField(value);
+                          if(reNewPasswordController.text.compareTo(newPasswordController.text)!=0 ){
+                            return "Your password doesn't match";
+                          } if (oldPasswordController.text.compareTo(newPasswordController.text)==0){
+                            return "Your password should not be same as old password";
+                          }
+                          return null;
+                        },
                         obsecure: true,
                         pass: true,
                       ),
