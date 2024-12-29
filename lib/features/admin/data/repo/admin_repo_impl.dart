@@ -40,9 +40,14 @@ class AdminRepoImpl implements AdminRepo {
   }
 
   @override
-  Future<Either<ServerError, String>> banUsers(String id) async {
+  Future<Either<ServerError, String>> banUsers(AdminUsersModel user) async {
     try {
-      final data = await _apiManager.post(ApiConstants.banUsersAdmin, {"userId": id}, headers: {"token": UserModel.instance.token});
+      if (user.status =="Suspended") {
+        return left(ServerError("This user is already banned"));
+      } else if (user.role =="Admin"){
+        return left(ServerError("You can't ban an admin"));
+      }
+      final data = await _apiManager.post(ApiConstants.banUsersAdmin, {"userId": user.id}, headers: {"token": UserModel.instance.token});
       return right(data.data["message"] ?? "banned Succeeded");
     } catch (e) {
       if (e is DioException) {

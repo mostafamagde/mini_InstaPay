@@ -9,9 +9,9 @@ final class BanUsersLoading extends BanUsersState {}
 
 final class BanUsersSuccess extends BanUsersState {
   final String mssg;
-  final String id;
+  final AdminUsersModel user;
 
-  BanUsersSuccess({required this.mssg, required this.id});
+  BanUsersSuccess({required this.mssg, required this.user});
 }
 
 final class BanUsersFailure extends BanUsersState {

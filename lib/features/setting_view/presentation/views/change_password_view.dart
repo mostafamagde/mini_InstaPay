@@ -31,8 +31,8 @@ class ChangePassword extends StatelessWidget {
             centerTitle: true,
             title: Text("Change Password", style: TextStyle(color: Colors.white)),
           ),
-          body: SingleChildScrollView(
-            child: Form(
+          body:
+             Form(
               key: formKey,
               child: Column(
                 children: [
@@ -69,7 +69,7 @@ class ChangePassword extends StatelessWidget {
                   ),
                   SizedBox(height: 15),
                 ],
-              ),
+
             ),
           ),
         );

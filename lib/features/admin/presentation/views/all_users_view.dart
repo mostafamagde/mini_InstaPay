@@ -24,7 +24,7 @@ class AllUsersView extends StatelessWidget {
       listener: (context, state) {
         if (state is BanUsersSuccess) {
           snackBar(content: state.mssg, context: context, color: Colors.green);
-          id = state.id;
+          id = state.user.id;
         }
         if (state is BanUsersFailure) {
           snackBar(content: state.error, context: context, color: Colors.red);
