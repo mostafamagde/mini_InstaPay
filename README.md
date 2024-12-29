@@ -6,9 +6,8 @@ Mini Instapay is a user-friendly financial app designed to simplify money manage
 
 - ### [Main Packages Used =>](#main-packages-used)
 - ### [Folder Structure =>](#folder-structure)
-- ### [Screen Shots =>](#screen-shots)
 - ### [Video Link =>](#video-link)
-- ### [Apk Link =>](#apk-link)
+- ### [Screen Shots =>](#screen-shots)
 
 ## Main Packages Used 🛠
 
@@ -77,6 +76,8 @@ features
 
 ```
 
+# [Video Link](https://drive.google.com/file/d/1RsZyH3VKmvxXWYCOWiNxQprIyTBDww6-/view?usp=sharing)
+
 ## Screen Shots 📸
 
 <img src="https://github.com/mostafamagde/mini_InstaPay/blob/screen_shots/screen_shots/1.PNG" width="300"><img src="https://github.com/mostafamagde/mini_InstaPay/blob/screen_shots/screen_shots/2.PNG" width="300"><img src="https://github.com/mostafamagde/mini_InstaPay/blob/screen_shots/screen_shots/3.PNG" width="300">
@@ -110,5 +111,3 @@ features
 <img src="https://github.com/mostafamagde/mini_InstaPay/blob/screen_shots/screen_shots/43.png" width="300"><img src="https://github.com/mostafamagde/mini_InstaPay/blob/screen_shots/screen_shots/44.png" width="300"><img src="https://github.com/mostafamagde/mini_InstaPay/blob/screen_shots/screen_shots/45.png" width="300">
 
 <img src="https://github.com/mostafamagde/mini_InstaPay/blob/screen_shots/screen_shots/46.PNG" width="300">
-
-# [Video Link](https://drive.google.com/file/d/1RsZyH3VKmvxXWYCOWiNxQprIyTBDww6-/view?usp=sharing)
