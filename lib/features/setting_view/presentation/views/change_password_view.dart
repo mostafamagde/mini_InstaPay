@@ -31,46 +31,51 @@ class ChangePassword extends StatelessWidget {
             centerTitle: true,
             title: Text("Change Password", style: TextStyle(color: Colors.white)),
           ),
-          body:
-             Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  Expanded(child: SizedBox(height: 5)),
-                  CustomTextField(
-                    controller: oldPasswordController,
-                    label: "Enter old Password",
-                    icon: Icons.password,
-                    inputType: TextInputType.visiblePassword,
-                    valid: Validation.validatePasswordTextField,
-                    obsecure: true,
-                    pass: true,
+          body: CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      Expanded(child: SizedBox(height: 5)),
+                      CustomTextField(
+                        controller: oldPasswordController,
+                        label: "Enter old Password",
+                        icon: Icons.password,
+                        inputType: TextInputType.visiblePassword,
+                        valid: Validation.validatePasswordTextField,
+                        obsecure: true,
+                        pass: true,
+                      ),
+                      CustomTextField(
+                        controller: newPasswordController,
+                        label: "Enter new Password",
+                        icon: Icons.password,
+                        inputType: TextInputType.visiblePassword,
+                        valid: Validation.validatePasswordTextField,
+                        obsecure: true,
+                        pass: true,
+                      ),
+                      Expanded(child: SizedBox(height: 5)),
+                      CustomButton(
+                        label: "Submit",
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            cubit.changePassword(
+                              newPass: newPasswordController.text,
+                              oldPass: oldPasswordController.text,
+                            );
+                          }
+                        },
+                      ),
+                      SizedBox(height: 15),
+                    ],
                   ),
-                  CustomTextField(
-                    controller: newPasswordController,
-                    label: "Enter new Password",
-                    icon: Icons.password,
-                    inputType: TextInputType.visiblePassword,
-                    valid: Validation.validatePasswordTextField,
-                    obsecure: true,
-                    pass: true,
-                  ),
-                  Expanded(child: SizedBox(height: 5)),
-                  CustomButton(
-                    label: "Submit",
-                    onTap: () async {
-                      if (formKey.currentState!.validate()) {
-                        cubit.changePassword(
-                          newPass: newPasswordController.text,
-                          oldPass: oldPasswordController.text,
-                        );
-                      }
-                    },
-                  ),
-                  SizedBox(height: 15),
-                ],
-
-            ),
+                ),
+              ),
+            ],
           ),
         );
       },
