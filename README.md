@@ -111,6 +111,4 @@ features
 
 <img src="https://github.com/mostafamagde/mini_InstaPay/blob/screen_shots/screen_shots/46.PNG" width="300">
 
-# [Video Link](https://drive.google.com/file/d/1x6cjlIgZXG7CABhK7s3l8UVLTrnbKH-g/view?usp=sharing)
-
-# [Apk Link](https://drive.google.com/file/d/15FCHU3Yde7MDqUIL2rgiKEf6e7xnpSOS/view?usp=sharing)
+# [Video Link](https://drive.google.com/file/d/1RsZyH3VKmvxXWYCOWiNxQprIyTBDww6-/view?usp=sharing)
