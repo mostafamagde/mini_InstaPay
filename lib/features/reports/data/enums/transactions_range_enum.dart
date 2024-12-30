@@ -1,6 +1,6 @@
 enum TransactionRange {
-  Annual('Annual'),
-  Monthly('Monthly');
+  annual('Annual'),
+  monthly('Monthly');
 
   final String value;
 

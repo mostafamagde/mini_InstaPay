@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
+import 'package:mini_instapay/core/widgets/custom_title_container.dart';
 import 'package:mini_instapay/core/widgets/custom_small_button.dart';
 import 'package:mini_instapay/features/setting_view/presentation/manager/log_out_cubit/log_out_cubit.dart';
 

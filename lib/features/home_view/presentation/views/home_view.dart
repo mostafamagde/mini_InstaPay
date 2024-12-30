@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
-import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
+import 'package:mini_instapay/core/utils/constants.dart';
+import 'package:mini_instapay/core/widgets/custom_title_container.dart';
 import 'package:mini_instapay/core/widgets/notification_icon.dart';
 import 'package:mini_instapay/features/home_view/presentation/views/widgets/services_section.dart';
 import 'package:mini_instapay/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
-import 'package:mini_instapay/features/home_view/presentation/views/widgets/BankAccountManagment.dart';
+import 'package:mini_instapay/features/home_view/presentation/views/widgets/bank_account_managment.dart';
 import 'package:mini_instapay/features/home_view/presentation/views/widgets/transaction_list.dart';
 import 'package:mini_instapay/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 
@@ -60,26 +60,24 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                   ),
                   if (user.defaultAcc != null) BankAccountManagment(),
                   if (user.defaultAcc == null)
-                    Container(
-                      child: Center(
-                        child: TextButton(
-                          onPressed: () => Navigator.pushNamed(context, RoutesNames.chooseBank),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Add Account",
-                                style: theme.textTheme.bodyMedium,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Icon(
-                                Icons.add,
-                                color: Constants.secondaryOrangeColor,
-                                size: 30,
-                              )
-                            ],
-                          ),
+                    Center(
+                      child: TextButton(
+                        onPressed: () => Navigator.pushNamed(context, RoutesNames.chooseBank),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Add Account",
+                              style: theme.textTheme.bodyMedium,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Icon(
+                              Icons.add,
+                              color: Constants.secondaryOrangeColor,
+                              size: 30,
+                            )
+                          ],
                         ),
                       ),
                     ),

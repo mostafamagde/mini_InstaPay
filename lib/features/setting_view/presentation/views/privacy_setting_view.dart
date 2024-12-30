@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/widgets/CustomTitleContainer.dart';
+import 'package:mini_instapay/core/widgets/custom_title_container.dart';
 import 'package:mini_instapay/core/widgets/custom_small_button.dart';
 
 class PrivacySettingView extends StatelessWidget {

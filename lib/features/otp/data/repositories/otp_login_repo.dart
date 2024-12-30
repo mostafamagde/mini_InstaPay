@@ -39,11 +39,14 @@ class OtpLoginRepo extends OtpRepository {
           UserModel.instance.setFromjson(userDataResponse.data["data"]);
         }
         SocketService.instance.connect();
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          UserModel.instance.role == Role.Admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
-          (Route<dynamic> route) => false,
-        );
+
+        if (context.mounted) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            UserModel.instance.role == Role.admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
+            (Route<dynamic> route) => false,
+          );
+        }
       }
     } catch (e) {
       if (e is DioException) {
@@ -58,7 +61,7 @@ class OtpLoginRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": OtpType.LoginOtp.value},
+        {"token": token, "type": OtpType.loginOtp.value},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

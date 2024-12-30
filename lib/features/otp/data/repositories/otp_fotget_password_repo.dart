@@ -15,7 +15,7 @@ class OtpForgetPasswordRepo extends OtpRepository {
   Future<void> submitOtp({required String token, required String otp}) async {
     try {
       final response = await _apiManager.post(
-        ApiConstants.ConfirmOtpForgetEdnPoint,
+        ApiConstants.confirmOtpForgetEdnPoint,
         {
           "token": token,
           "otp": int.parse(otp),
@@ -24,7 +24,9 @@ class OtpForgetPasswordRepo extends OtpRepository {
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
       } else {
-        Navigator.pushReplacementNamed(context, RoutesNames.enterPasswordView, arguments: response.data["token"]);
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(context, RoutesNames.enterPasswordView, arguments: response.data["token"]);
+        }
       }
     } catch (e) {
       if (e is DioException) {
@@ -39,7 +41,7 @@ class OtpForgetPasswordRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": OtpType.ForgetPasswordOtp.value},
+        {"token": token, "type": OtpType.forgetPasswordOtp.value},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

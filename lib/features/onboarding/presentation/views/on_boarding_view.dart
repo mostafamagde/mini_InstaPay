@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/constants.dart';
 import 'package:mini_instapay/features/onboarding/presentation/manger/on_boarding/on_boarding_cubit.dart';
 
 class OnBoardingView extends StatefulWidget {

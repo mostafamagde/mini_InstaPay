@@ -4,7 +4,7 @@ import 'package:mini_instapay/core/api_helper/api_constants.dart';
 import 'package:mini_instapay/core/api_helper/api_manger.dart';
 import 'package:mini_instapay/core/errors/errors.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
-import 'package:mini_instapay/features/admin/data/models/AdminUsersModel.dart';
+import 'package:mini_instapay/features/admin/data/models/admin_user_model.dart';
 import 'package:mini_instapay/features/admin/data/repo/admin_repo.dart';
 
 class AdminRepoImpl implements AdminRepo {
@@ -42,9 +42,9 @@ class AdminRepoImpl implements AdminRepo {
   @override
   Future<Either<ServerError, String>> banUsers(AdminUsersModel user) async {
     try {
-      if (user.status =="Suspended") {
+      if (user.status == "Suspended") {
         return left(ServerError("This user is already banned"));
-      } else if (user.role =="Admin"){
+      } else if (user.role == "Admin") {
         return left(ServerError("You can't ban an admin"));
       }
       final data = await _apiManager.post(ApiConstants.banUsersAdmin, {"userId": user.id}, headers: {"token": UserModel.instance.token});

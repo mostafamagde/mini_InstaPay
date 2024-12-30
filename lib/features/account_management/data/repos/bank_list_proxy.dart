@@ -11,12 +11,13 @@ class BankListProxy implements AllBanksRepo {
   final SharedPreferences _sharedPreferences;
   final TimeSaving _timeSaving;
 
+  @override
   Future<List<BankModel>> getAllBanks() async {
     List<BankModel> list = await getList();
     DateTime? savedDate = await _timeSaving.getSavedTime();
     savedDate = savedDate?.add(Duration(minutes: 1));
     DateTime currentDate = DateTime.now();
-    if (list.length == 0 || currentDate.isAfter(savedDate!)) {
+    if (list.isEmpty || currentDate.isAfter(savedDate!)) {
       list = await _allBanksRepo.getAllBanks();
       await saveList(list);
       await _timeSaving.saveCurrentTime();

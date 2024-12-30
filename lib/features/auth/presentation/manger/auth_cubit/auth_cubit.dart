@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/features/auth/data/models/otp_model.dart';
 import 'package:mini_instapay/features/auth/data/models/signup_model.dart';
 import 'package:mini_instapay/features/auth/data/repository/auth_repo.dart';
@@ -19,8 +19,9 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       if (e is DioException) {
         emit(AuthFail(e.response?.data["message"] ?? e.message));
-      } else
+      } else {
         emit(AuthFail(e.toString()));
+      }
     }
   }
 
@@ -32,8 +33,9 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       if (e is DioException) {
         emit(AuthFail(e.response?.data["message"] ?? e.message));
-      } else
+      } else {
         emit(AuthFail(e.toString()));
+      }
     }
   }
 
@@ -45,12 +47,13 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       if (e is DioException) {
         emit(AuthFail(e.response?.data["message"] ?? e.message));
-      } else
+      } else {
         emit(AuthFail(e.toString()));
+      }
     }
   }
 
-  Future<void> SubmitNewPassword(String token, password) async {
+  Future<void> submitNewPassword(String token, password) async {
     emit(AuthLoading());
     try {
       await _authRepository.enterPassword(token, password);
@@ -58,8 +61,9 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       if (e is DioException) {
         emit(AuthFail(e.response?.data["message"] ?? e.message));
-      } else
+      } else {
         emit(AuthFail(e.toString()));
+      }
     }
   }
 }

@@ -10,8 +10,10 @@ import 'package:mini_instapay/features/account_management/data/models/bank_model
 import 'package:mini_instapay/features/account_management/presentation/manager/add_account/add_account_cubit.dart';
 
 class AddBankAccount extends StatefulWidget {
+  const AddBankAccount({super.key});
+
   @override
-  _AddBankAccountState createState() => _AddBankAccountState();
+  State<AddBankAccount> createState() => _AddBankAccountState();
 }
 
 class _AddBankAccountState extends State<AddBankAccount> {

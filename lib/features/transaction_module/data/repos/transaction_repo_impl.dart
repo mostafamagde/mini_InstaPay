@@ -20,7 +20,7 @@ class TransactionRepoImpl implements TransactionRepo {
         "receiverData": send.reiceverData,
         "PIN": send.pin,
         "amount": send.amount,
-        "accountId": send.account ?? null,
+        "accountId": send.account,
       }, headers: {
         "token": UserModel.instance.token,
       });
@@ -40,7 +40,7 @@ class TransactionRepoImpl implements TransactionRepo {
       final response = await service.post(ApiConstants.receiveMoney, {
         "reciverData": receive.receiveData,
         "amount": receive.amount,
-        "accountId": receive.accountId ?? null,
+        "accountId": receive.accountId,
       }, headers: {
         "token": UserModel.instance.token,
       });

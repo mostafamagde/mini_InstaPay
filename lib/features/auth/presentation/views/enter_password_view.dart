@@ -60,7 +60,7 @@ class EnterPasswordView extends StatelessWidget {
                   CustomButton(
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          BlocProvider.of<AuthCubit>(context).SubmitNewPassword(token, passwordController.text);
+                          BlocProvider.of<AuthCubit>(context).submitNewPassword(token, passwordController.text);
                         }
                       },
                       label: "Submit")

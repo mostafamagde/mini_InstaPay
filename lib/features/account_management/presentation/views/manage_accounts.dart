@@ -21,7 +21,7 @@ class ManageAccounts extends StatelessWidget {
           snackBar(content: state.message, context: context);
         } else if (state is ChangeSuccess) {
           for (BankAccountData item in UserModel.instance.bankAccounts!) {
-            if (item.id == state.Id) {
+            if (item.id == state.id) {
               UserModel.instance.defaultAcc?.cardInfo?.cardNo = item.cardNo;
               UserModel.instance.defaultAcc?.bankId?.logo = item.bankId?.logo;
               UserModel.instance.defaultAcc?.bankId?.name = item.bankId?.name;

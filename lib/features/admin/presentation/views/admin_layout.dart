@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/core/navigation_cubit/navigation_cubit.dart';
 import 'package:mini_instapay/core/routes_manager/route_generator.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/constants.dart';
 
 class AdminLayout extends StatelessWidget {
   const AdminLayout({super.key});

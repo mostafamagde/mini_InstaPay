@@ -1,6 +1,6 @@
 enum Role {
-  Admin('Admin'),
-  User('User');
+  admin('Admin'),
+  user('User');
 
   final String value;
 
@@ -13,6 +13,6 @@ enum Role {
       }
     }
 
-    return Role.User;
+    return Role.user;
   }
 }

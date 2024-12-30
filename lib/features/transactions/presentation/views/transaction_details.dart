@@ -12,12 +12,10 @@ import 'package:mini_instapay/features/transactions/data/model/transaction_user_
 import 'package:mini_instapay/features/transactions/presentation/manger/cubit/transaction_cubit.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
-  const TransactionDetailsScreen({
-    Key? key,
-  }) : super(key: key);
+  const TransactionDetailsScreen({super.key});
 
   Widget showButton(TransactionModel transaction, context) {
-    if (UserModel.instance.role != Role.Admin && UserModel.instance.id == transaction.sender.id && transaction.status == TransactionStatus.Success) {
+    if (UserModel.instance.role != Role.admin && UserModel.instance.id == transaction.sender.id && transaction.status == TransactionStatus.success) {
       return CustomButton(
         onTap: () {
           BlocProvider.of<TransactionCubit>(context).requestRefund(transaction.id);
@@ -25,7 +23,7 @@ class TransactionDetailsScreen extends StatelessWidget {
         label: "Request Refund",
         color: Colors.red.shade700,
       );
-    } else if (UserModel.instance.role == Role.Admin && transaction.status == TransactionStatus.Success) {
+    } else if (UserModel.instance.role == Role.admin && transaction.status == TransactionStatus.success) {
       return CustomButton(
         onTap: () {
           BlocProvider.of<TransactionCubit>(context).markAsSuspicious(transaction.id);
@@ -132,22 +130,22 @@ class TransactionDetailsScreen extends StatelessWidget {
     Color color;
 
     switch (status) {
-      case TransactionStatus.Success:
+      case TransactionStatus.success:
         color = Colors.green;
         break;
-      case TransactionStatus.Failed:
+      case TransactionStatus.failed:
         color = Colors.red;
         break;
-      case TransactionStatus.Pending:
+      case TransactionStatus.pending:
         color = Colors.orange;
         break;
-      case TransactionStatus.Suspicious:
+      case TransactionStatus.suspicious:
         color = Colors.amber;
         break;
-      case TransactionStatus.Refunding:
+      case TransactionStatus.refunding:
         color = Colors.blue;
         break;
-      case TransactionStatus.Refunded:
+      case TransactionStatus.refunded:
         color = Colors.teal;
         break;
       default:

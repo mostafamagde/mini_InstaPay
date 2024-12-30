@@ -1,10 +1,10 @@
 enum TransactionStatus {
-  Refunded('Refunded'),
-  Refunding('Refunding'),
-  Success('Success'),
-  Pending('Pending'),
-  Failed('Failed'),
-  Suspicious('Suspicious');
+  refunded('Refunded'),
+  refunding('Refunding'),
+  success('Success'),
+  pending('Pending'),
+  failed('Failed'),
+  suspicious('Suspicious');
 
   final String value;
 
@@ -23,6 +23,6 @@ enum TransactionStatus {
       }
     }
 
-    return TransactionStatus.Failed;
+    return TransactionStatus.failed;
   }
 }

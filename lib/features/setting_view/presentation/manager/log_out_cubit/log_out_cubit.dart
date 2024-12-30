@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 import 'package:mini_instapay/features/setting_view/data/repos/setting_repo.dart';
 
 part 'log_out_state.dart';
 
 class LogOutCubit extends Cubit<LogOutState> {
   LogOutCubit(this._settingRepo) : super(LogOutInitial());
-  SettingRepo _settingRepo;
+  final SettingRepo _settingRepo;
 
   static LogOutCubit get(context) => BlocProvider.of(context);
 

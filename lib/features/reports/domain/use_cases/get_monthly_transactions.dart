@@ -19,7 +19,7 @@ class GetMonthlyTransactions {
   Future<TransactionSummaryModel> getMonthlyTransactions(String month, int year) async {
     try {
       late List<TransactionModel> result;
-      if (UserModel.instance.role == Role.Admin) {
+      if (UserModel.instance.role == Role.admin) {
         result = await _transactionRepo.getAllTransactions();
         return _adminTransactionsSummaryRepoImpl.getTransactionSummaryModel(
           result.where((TransactionModel model) => model.createdAt.month - 1 == Month.getMonthNum(month) && model.createdAt.year == year).toList(),
@@ -31,7 +31,7 @@ class GetMonthlyTransactions {
         );
       }
     } catch (_) {
-      if (UserModel.instance.role == Role.Admin) {
+      if (UserModel.instance.role == Role.admin) {
         return AdminTransactionSummaryModel.init();
       } else {
         return UserTransactionSummaryModel.init();

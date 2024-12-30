@@ -14,10 +14,10 @@ class OtpView extends StatefulWidget {
   final String userToken;
   final OtpType type;
 
-  OtpView({required this.userToken, required this.type});
+  const OtpView({super.key, required this.userToken, required this.type});
 
   @override
-  _OTPScreenState createState() => _OTPScreenState();
+  State<OtpView> createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OtpView> {

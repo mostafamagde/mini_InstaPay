@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/features/notifications/data/models/notfication_model.dart';
 import 'package:mini_instapay/features/notifications/data/repository/notifications_repo.dart';
 
@@ -9,6 +9,7 @@ part 'notifications_state.dart';
 class NotificationsCubit extends Cubit<NotificationsState> {
   final NotificationsRepo notificationsRepo;
   NotificationsCubit(this.notificationsRepo) : super(NotificationsInitial());
+
   getNotification() async {
     try {
       emit(NotificationsLoading());
@@ -42,7 +43,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       emit(ReadNotificationsLoading());
 
       await notificationsRepo.acceptRequest(transactionId: notification.transactionId, pin: pin, accountId: accountId);
-      this.readNotification(notification.id);
+      readNotification(notification.id);
     } catch (e) {
       if (e is DioException) {
         emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
@@ -59,7 +60,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       emit(ReadNotificationsLoading());
       await notificationsRepo.rejectRequest(transactionId: notification.transactionId);
 
-      this.readNotification(notification.id);
+      readNotification(notification.id);
     } catch (e) {
       if (e is DioException) {
         emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
@@ -76,7 +77,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       emit(ReadNotificationsLoading());
       await notificationsRepo.rejectRefund(transactionId: notification.transactionId);
 
-      this.readNotification(notification.id);
+      readNotification(notification.id);
     } catch (e) {
       if (e is DioException) {
         emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));
@@ -91,7 +92,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       emit(ReadNotificationsLoading());
 
       await notificationsRepo.acceptRefund(transactionId: notification.transactionId);
-      this.readNotification(notification.id);
+      readNotification(notification.id);
     } catch (e) {
       if (e is DioException) {
         emit(ReadNotificationsFailed(errorMessage: e.response?.data["message"] ?? e.message));

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 import 'package:mini_instapay/features/setting_view/data/repos/setting_repo.dart';
 
 part 'cinfirm_forget_pin_state.dart';

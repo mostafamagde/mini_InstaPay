@@ -13,7 +13,8 @@ import 'package:mini_instapay/features/notifications/presentation/views/widget/n
 
 // ignore: must_be_immutable
 class NotificationsView extends StatelessWidget {
-  NotificationsView({Key? key}) : super(key: key);
+  NotificationsView({super.key});
+
   List<NotificationModel> notifications = [];
 
   @override
@@ -28,7 +29,7 @@ class NotificationsView extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            UserModel.instance.role == Role.Admin
+            UserModel.instance.role == Role.admin
                 ? Navigator.pushNamedAndRemoveUntil(
                     context,
                     RoutesNames.adminLayout,
@@ -71,7 +72,7 @@ class NotificationsView extends StatelessWidget {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
                 if (snapshot.data != null) {
-                  if (notifications.length != 0) {
+                  if (notifications.isNotEmpty) {
                     if ((snapshot.data as NotificationModel).id != notifications[0].id) {
                       notifications.insert(0, snapshot.data);
                     }

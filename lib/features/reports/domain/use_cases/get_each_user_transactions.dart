@@ -14,7 +14,7 @@ class GetEachUserTransactions {
   Future<List<OneUserTransactionsModel>> getEachUserTransactions() async {
     try {
       late List<TransactionModel> result;
-      if (UserModel.instance.role == Role.Admin) {
+      if (UserModel.instance.role == Role.admin) {
         result = await _transactionRepo.getAllTransactions();
         return _oneUserTransactionsRepo.getOneUserTransactionsForAdmin(result);
       } else {

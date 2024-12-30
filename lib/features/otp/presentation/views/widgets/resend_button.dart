@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ResendButton extends StatefulWidget {
   final VoidCallback onPressed;
 
-  const ResendButton({required this.onPressed, Key? key}) : super(key: key);
+  const ResendButton({required this.onPressed, super.key});
 
   @override
-  _ResendButtonState createState() => _ResendButtonState();
+  State<ResendButton> createState() => _ResendButtonState();
 }
 
 class _ResendButtonState extends State<ResendButton> {

@@ -50,7 +50,7 @@ class _SignupBodyState extends State<SignupBody> {
               MaterialPageRoute(
                 builder: (context) => OtpView(
                   userToken: state.otpModel.token,
-                  type: OtpType.SignupOtp,
+                  type: OtpType.signupOtp,
                 ),
               ),
             );

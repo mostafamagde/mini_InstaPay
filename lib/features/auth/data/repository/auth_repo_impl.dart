@@ -21,6 +21,7 @@ class AuthRepoImpl implements AuthRepository {
     });
   }
 
+  @override
   Future<void> enterPassword(String token, String password) async {
     final body = {"token": token, "password": password};
     await _apiManager.post(ApiConstants.forgetPasswordEdnPoint, body);

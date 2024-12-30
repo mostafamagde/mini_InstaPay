@@ -15,7 +15,7 @@ class ChangePin extends StatelessWidget {
   final List<FocusNode> newPinFocusNodes = List.generate(6, (_) => FocusNode());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  ChangePin({Key? key}) : super(key: key);
+  ChangePin({super.key});
 
   void _onTextChanged(String value, int index, List<FocusNode> focusNodes, BuildContext context) {
     if (value.isNotEmpty && index < pinLength - 1) {

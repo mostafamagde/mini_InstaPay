@@ -7,7 +7,7 @@ import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
 import 'package:mini_instapay/core/utils/service_locator.dart';
 import 'package:mini_instapay/core/utils/socket_service.dart';
-import 'AnimatedBuilder.dart';
+import 'animated_builder.dart';
 
 class SplashBody extends StatefulWidget {
   const SplashBody({super.key});
@@ -57,7 +57,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
     Future.delayed(
       const Duration(seconds: 3),
       () async {
-        final storage = new FlutterSecureStorage();
+        final storage = FlutterSecureStorage();
         try {
           final token = await storage.read(key: "token");
           if (token != null && token.isNotEmpty) {
@@ -71,21 +71,27 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
             );
             UserModel.instance.setFromjson(userDataResponse.data["data"]);
             SocketService.instance.connect();
-            Navigator.pushReplacementNamed(
-              context,
-              UserModel.instance.role == Role.Admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
-            );
+            if (mounted) {
+              Navigator.pushReplacementNamed(
+                context,
+                UserModel.instance.role == Role.admin ? RoutesNames.adminLayout : RoutesNames.layoutView,
+              );
+            }
           } else {
+            if (mounted) {
+              Navigator.pushReplacementNamed(
+                context,
+                RoutesNames.warningView,
+              );
+            }
+          }
+        } catch (e) {
+          if (mounted) {
             Navigator.pushReplacementNamed(
               context,
               RoutesNames.warningView,
             );
           }
-        } catch (e) {
-          Navigator.pushReplacementNamed(
-            context,
-            RoutesNames.warningView,
-          );
         }
       },
     );

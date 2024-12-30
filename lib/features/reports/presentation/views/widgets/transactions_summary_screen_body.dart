@@ -19,7 +19,7 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TransactionSummaryViewCubit cubit = BlocProvider.of<TransactionSummaryViewCubit>(context);
-    late TransactionSummaryModel transactionSummaryModel = UserModel.instance.role == Role.Admin ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
+    late TransactionSummaryModel transactionSummaryModel = UserModel.instance.role == Role.admin ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
     final String initMonth = Month.values[DateTime.now().month - 1].value;
     final int initYear = DateTime.now().year;
     String month = initMonth;
@@ -32,7 +32,7 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
     return BlocConsumer<TransactionSummaryViewCubit, TransactionSummaryViewState>(
       listener: (context, state) {
         if (state is TransactionSummaryViewLoading) {
-          transactionSummaryModel = UserModel.instance.role == Role.Admin ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
+          transactionSummaryModel = UserModel.instance.role == Role.admin ? AdminTransactionSummaryModel.init() : UserTransactionSummaryModel.init();
         }
         if (state is TransactionSummaryViewSuccess) {
           transactionSummaryModel = state.transactionSummaryModel;
@@ -51,7 +51,7 @@ class TransactionsSummaryScreenBody extends StatelessWidget {
                   initialSelection: TransactionRange.values[0].value,
                   values: TransactionRange.allValues,
                   onSelected: (value) async {
-                    if (value == TransactionRange.Monthly.value) {
+                    if (value == TransactionRange.monthly.value) {
                       cubit.showMonth = true;
                       await BlocProvider.of<TransactionSummaryViewCubit>(context).getMonthlyTransactions(month, year);
                     } else {

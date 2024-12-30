@@ -1,6 +1,6 @@
 enum TransactionType {
-  Send('Send'),
-  Recieve('Recieve');
+  send('Send'),
+  recieve('Recieve');
 
   final String value;
 
@@ -13,6 +13,6 @@ enum TransactionType {
       }
     }
 
-    return TransactionType.Send;
+    return TransactionType.send;
   }
 }

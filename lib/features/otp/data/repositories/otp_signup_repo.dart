@@ -25,7 +25,9 @@ class OtpSignUpRepo extends OtpRepository {
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);
       } else {
-        Navigator.pushReplacementNamed(context, RoutesNames.loginView);
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(context, RoutesNames.loginView);
+        }
       }
     } catch (e) {
       if (e is DioException) {
@@ -40,7 +42,7 @@ class OtpSignUpRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": OtpType.SignupOtp.value},
+        {"token": token, "type": OtpType.signupOtp.value},
       );
       if (response.statusCode != 201) {
         throw Exception(response.data["message"]);

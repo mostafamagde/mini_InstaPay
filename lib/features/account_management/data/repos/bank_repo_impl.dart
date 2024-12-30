@@ -27,7 +27,7 @@ class BankRepoImpl implements BankRepository {
 
   @override
   Future<void> deleteBankAccounts(List<BankAccountData> banks, int index, TextEditingController inputController) async {
-    final date = await _apiManager.delete('${ApiConstants.deleteAccount + banks[index].id!}', body: {"PIN": inputController.text}, headers: {"token": UserModel.instance.token});
+    final date = await _apiManager.delete(ApiConstants.deleteAccount + banks[index].id!, body: {"PIN": inputController.text}, headers: {"token": UserModel.instance.token});
     if (date.statusCode == 200 || date.statusCode == 201) {
       if (UserModel.instance.bankAccounts != null) {
         UserModel.instance.bankAccounts!.removeWhere((element) => element.id == banks[index].id!);
@@ -37,7 +37,7 @@ class BankRepoImpl implements BankRepository {
 
   @override
   Future<int> getBalance(String accId, String pin) async {
-    final data = await _apiManager.post("${ApiConstants.getBalance}${accId}", {
+    final data = await _apiManager.post("${ApiConstants.getBalance}$accId", {
       "PIN": pin
     }, headers: {
       "token": UserModel.instance.token,
@@ -58,7 +58,7 @@ class BankRepoImpl implements BankRepository {
         "bankId": account.bankId,
         "cardNo": account.cardNumber,
         "date": {
-          "year": "20" + account.expirationDate.split("/")[1],
+          "year": "20${account.expirationDate.split("/")[1]}",
           "month": account.expirationDate.split("/")[0],
         },
         "CVV": account.cvv,
@@ -77,7 +77,7 @@ class BankRepoImpl implements BankRepository {
           },
         );
         UserModel.instance.setFromjson(userDataResponse.data["data"]);
-      } catch (e) {}
+      } catch (_) {}
     }
   }
 

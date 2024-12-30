@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/core/enums/role_enum.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/constants.dart';
 import 'package:mini_instapay/features/notifications/data/models/notfication_model.dart';
 import 'package:mini_instapay/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
 
@@ -29,7 +29,7 @@ class NotificationItem extends StatelessWidget {
         notification.createdAt.toLocal().toString(),
         style: const TextStyle(fontSize: 12),
       ),
-      trailing: (notification.type == Constants.RequestSendString && UserModel.instance.role != Role.Admin) || (notification.type == Constants.kRequestRefund && UserModel.instance.role == Role.Admin)
+      trailing: (notification.type == Constants.requestSendString && UserModel.instance.role != Role.admin) || (notification.type == Constants.kRequestRefund && UserModel.instance.role == Role.admin)
           ? notification.isRead
               ? Text("Closed")
               : Row(
@@ -37,7 +37,7 @@ class NotificationItem extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        if (notification.type == Constants.RequestSendString) {
+                        if (notification.type == Constants.requestSendString) {
                           BlocProvider.of<NotificationsCubit>(context).rejectRequest(notification: notification);
                         } else {
                           BlocProvider.of<NotificationsCubit>(context).rejectRefund(notification: notification);
@@ -53,7 +53,7 @@ class NotificationItem extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        if (notification.type == Constants.RequestSendString) {
+                        if (notification.type == Constants.requestSendString) {
                           Navigator.pushNamed(context, RoutesNames.notificationsPin, arguments: notification);
                         } else {
                           BlocProvider.of<NotificationsCubit>(context).acceptRefund(notification: notification);
@@ -78,7 +78,7 @@ class NotificationItem extends StatelessWidget {
                 ),
       onTap: () {
         if (!notification.isRead) {
-          if (notification.type != Constants.RequestSendString) {
+          if (notification.type != Constants.requestSendString) {
             BlocProvider.of<NotificationsCubit>(context).readNotification(notification.id);
           }
         }

@@ -42,7 +42,7 @@ class SettingRepoImpl implements SettingRepo {
             },
           );
           UserModel.instance.setFromjson(userDataResponse.data["data"]);
-        } catch (e) {}
+        } catch (_) {}
       }
       return right("Chang");
     } catch (e) {
@@ -121,7 +121,7 @@ class SettingRepoImpl implements SettingRepo {
   @override
   Future<Either<Errors, String>> changeDefault(String id) async {
     try {
-      final response = await _apiManager.patch(ApiConstants.ChangeDefaultAccount, headers: {
+      final response = await _apiManager.patch(ApiConstants.changeDefaultAccount, headers: {
         "token": UserModel.instance.token
       }, data: {
         "accountId": id,

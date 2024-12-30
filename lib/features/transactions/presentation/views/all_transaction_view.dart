@@ -14,12 +14,12 @@ class AllTransactionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (UserModel.instance.role == Role.Admin) {
+    if (UserModel.instance.role == Role.admin) {
       BlocProvider.of<NotificationsCubit>(context).getNotification();
     }
 
     void getTransactions() {
-      UserModel.instance.role == Role.Admin ? BlocProvider.of<TransactionCubit>(context).getAllTransaction() : BlocProvider.of<TransactionCubit>(context).getUserTransaction();
+      UserModel.instance.role == Role.admin ? BlocProvider.of<TransactionCubit>(context).getAllTransaction() : BlocProvider.of<TransactionCubit>(context).getUserTransaction();
     }
 
     getTransactions();
@@ -31,7 +31,7 @@ class AllTransactionView extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        leading: UserModel.instance.role == Role.Admin
+        leading: UserModel.instance.role == Role.admin
             ? SizedBox()
             : IconButton(
                 onPressed: () {
@@ -41,7 +41,7 @@ class AllTransactionView extends StatelessWidget {
                   Icons.arrow_back_ios,
                   color: Colors.white,
                 )),
-        actions: [UserModel.instance.role == Role.Admin ? NotificationIcon() : SizedBox()],
+        actions: [UserModel.instance.role == Role.admin ? NotificationIcon() : SizedBox()],
       ),
       body: BlocConsumer<TransactionCubit, TransactionState>(
         listener: (context, state) {

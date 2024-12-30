@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/core/enums/transaction_status_enum.dart';
 import 'package:mini_instapay/features/transactions/data/model/transaction_model.dart';
 import 'package:mini_instapay/features/transactions/data/repository/transaction_repo.dart';
@@ -42,7 +42,7 @@ class TransactionCubit extends Cubit<TransactionState> {
     try {
       emit(ManageTransactionLoading());
       await transactionRepository.markAsSuspicious(transactionId);
-      emit(ManageTransactSuccess(massage: "Transaction Marked As Suspicious", transactionStatus: TransactionStatus.Suspicious));
+      emit(ManageTransactSuccess(massage: "Transaction Marked As Suspicious", transactionStatus: TransactionStatus.suspicious));
     } catch (e) {
       if (e is DioException) {
         emit(ManageTransactFailed(error: e.response?.data["message"] ?? e.message));
@@ -56,7 +56,7 @@ class TransactionCubit extends Cubit<TransactionState> {
     try {
       emit(ManageTransactionLoading());
       await transactionRepository.requestRefund(transactionId);
-      emit(ManageTransactSuccess(massage: "Refund Requested", transactionStatus: TransactionStatus.Refunding));
+      emit(ManageTransactSuccess(massage: "Refund Requested", transactionStatus: TransactionStatus.refunding));
     } catch (e) {
       if (e is DioException) {
         emit(ManageTransactFailed(error: e.response?.data["message"] ?? e.message));

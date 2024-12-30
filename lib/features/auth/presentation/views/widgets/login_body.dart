@@ -17,7 +17,7 @@ class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
 
   @override
-  _LoginBodyState createState() => _LoginBodyState();
+  State<LoginBody> createState() => _LoginBodyState();
 }
 
 class _LoginBodyState extends State<LoginBody> {
@@ -43,7 +43,7 @@ class _LoginBodyState extends State<LoginBody> {
               MaterialPageRoute(
                 builder: (context) => OtpView(
                   userToken: state.otpModel.token,
-                  type: OtpType.LoginOtp,
+                  type: OtpType.loginOtp,
                 ),
               ),
             );

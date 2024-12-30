@@ -1,9 +1,9 @@
 enum OtpType {
-  ChangeEmailConfirmationOtp('CHANGE_EMAIL'),
-  LoginOtp('PRE_LOGIN'),
-  SignupOtp('SIGNUP'),
-  ForgetPasswordOtp('FORGET_PASSWORD'),
-  ForgetPinOtp('forgetPin');
+  changeEmailConfirmationOtp('CHANGE_EMAIL'),
+  loginOtp('PRE_LOGIN'),
+  signupOtp('SIGNUP'),
+  forgetPasswordOtp('FORGET_PASSWORD'),
+  forgetPinOtp('forgetPin');
 
   final String value;
 

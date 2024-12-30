@@ -16,7 +16,7 @@ class OtpChangeEmailRepo extends OtpRepository {
   Future<void> submitOtp({required String token, required String otp}) async {
     try {
       final response = await _apiManager.patch(
-        ApiConstants.ConfirmChangeEmail,
+        ApiConstants.confirmChangeEmail,
         data: {
           "token": token,
           "otp": int.parse(otp),
@@ -26,11 +26,13 @@ class OtpChangeEmailRepo extends OtpRepository {
       if (response.statusCode != 201 && response.statusCode != 200) {
         throw Exception(response.data["message"]);
       } else {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          RoutesNames.layoutView,
-          (route) => false,
-        );
+        if (context.mounted) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesNames.layoutView,
+            (route) => false,
+          );
+        }
       }
     } catch (e) {
       if (e is DioException) {
@@ -45,7 +47,7 @@ class OtpChangeEmailRepo extends OtpRepository {
     try {
       final response = await _apiManager.post(
         ApiConstants.resendOtpEndPoint,
-        {"token": token, "type": OtpType.ChangeEmailConfirmationOtp.value},
+        {"token": token, "type": OtpType.changeEmailConfirmationOtp.value},
         headers: {"token": UserModel.instance.token},
       );
       if (response.statusCode != 201) {

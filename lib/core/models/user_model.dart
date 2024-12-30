@@ -19,13 +19,13 @@ class UserModel {
   static UserModel get instance => _singletonInstance;
 
   setFromjson(Map<String, dynamic> json) {
-    this.firstName = json['firstName'];
-    this.id = json['_id'];
-    this.defaultAcc = json["defaultAcc"] == null ? null : DefaultAcc.fromJson(json["defaultAcc"]);
-    this.lastName = json['lastName'];
-    this.email = json['email'];
-    this.mobileNumber = json['mobileNumber'];
-    this.address = json['address'];
-    this.role = Role.fromJson(json['role']);
+    firstName = json['firstName'];
+    id = json['_id'];
+    defaultAcc = json["defaultAcc"] == null ? null : DefaultAcc.fromJson(json["defaultAcc"]);
+    lastName = json['lastName'];
+    email = json['email'];
+    mobileNumber = json['mobileNumber'];
+    address = json['address'];
+    role = Role.fromJson(json['role']);
   }
 }

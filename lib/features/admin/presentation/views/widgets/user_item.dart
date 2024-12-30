@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
-import 'package:mini_instapay/features/admin/data/models/AdminUsersModel.dart';
+import 'package:mini_instapay/core/utils/constants.dart';
+import 'package:mini_instapay/features/admin/data/models/admin_user_model.dart';
 
 class UserItem extends StatelessWidget {
   const UserItem({super.key, required this.users, required this.onPressed});
@@ -66,14 +66,14 @@ class UserItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "${users.email!}",
+                      users.email!,
                       maxLines: 1,
                       overflow: TextOverflow.fade,
                       style: TextStyle(fontSize: 15, color: Colors.black),
                     ),
                     Text(
                       overflow: TextOverflow.fade,
-                      "${users.userName!}",
+                      users.userName!,
                       maxLines: 1,
                       style: TextStyle(fontSize: 15, color: Colors.black),
                     ),

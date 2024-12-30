@@ -14,7 +14,7 @@ class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key});
 
   @override
-  _ForgetPasswordViewState createState() => _ForgetPasswordViewState();
+  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
 }
 
 class _ForgetPasswordViewState extends State<ForgetPasswordView> {
@@ -41,7 +41,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
               MaterialPageRoute(
                 builder: (context) => OtpView(
                   userToken: state.otpModel.token,
-                  type: OtpType.ForgetPasswordOtp,
+                  type: OtpType.forgetPasswordOtp,
                 ),
               ),
             );

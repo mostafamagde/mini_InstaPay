@@ -14,15 +14,15 @@ class OtpFactory {
   const OtpFactory();
 
   OtpRepository createOtpRepo(OtpType type, BuildContext context) {
-    if (type == OtpType.ChangeEmailConfirmationOtp) {
+    if (type == OtpType.changeEmailConfirmationOtp) {
       return OtpChangeEmailRepo(context, ServiceLocator.getIt<ApiManager>());
-    } else if (type == OtpType.LoginOtp) {
+    } else if (type == OtpType.loginOtp) {
       return OtpLoginRepo(context, ServiceLocator.getIt<ApiManager>(), ServiceLocator.getIt<FlutterSecureStorage>());
-    } else if (type == OtpType.SignupOtp) {
+    } else if (type == OtpType.signupOtp) {
       return OtpSignUpRepo(context, ServiceLocator.getIt<ApiManager>());
-    } else if (type == OtpType.ForgetPasswordOtp) {
+    } else if (type == OtpType.forgetPasswordOtp) {
       return OtpForgetPasswordRepo(context, ServiceLocator.getIt<ApiManager>());
-    } else if (type == OtpType.ForgetPinOtp) {
+    } else if (type == OtpType.forgetPinOtp) {
       return OtpForgetPinRepo(context, ServiceLocator.getIt<ApiManager>());
     } else {
       throw Exception("Invalid OTP type");

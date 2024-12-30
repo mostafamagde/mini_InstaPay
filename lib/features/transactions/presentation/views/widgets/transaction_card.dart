@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mini_instapay/core/enums/transaction_status_enum.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/constants.dart';
 import 'package:mini_instapay/features/transactions/data/model/transaction_model.dart';
 
 class TransactionCard extends StatelessWidget {
@@ -14,22 +14,22 @@ class TransactionCard extends StatelessWidget {
     Color color;
 
     switch (status) {
-      case TransactionStatus.Success:
+      case TransactionStatus.success:
         color = Colors.green;
         break;
-      case TransactionStatus.Failed:
+      case TransactionStatus.failed:
         color = Colors.red;
         break;
-      case TransactionStatus.Pending:
+      case TransactionStatus.pending:
         color = Colors.orange;
         break;
-      case TransactionStatus.Suspicious:
+      case TransactionStatus.suspicious:
         color = Colors.amber;
         break;
-      case TransactionStatus.Refunding:
+      case TransactionStatus.refunding:
         color = Colors.blue;
         break;
-      case TransactionStatus.Refunded:
+      case TransactionStatus.refunded:
         color = Colors.teal;
         break;
       default:

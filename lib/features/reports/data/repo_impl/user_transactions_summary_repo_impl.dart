@@ -5,11 +5,12 @@ import 'package:mini_instapay/features/reports/domain/repo_interface/transaction
 import 'package:mini_instapay/features/transactions/data/model/transaction_model.dart';
 
 class UserTransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
+  @override
   UserTransactionSummaryModel getTransactionSummaryModel(List<TransactionModel> transactionModels) {
     UserTransactionSummaryModel summaryModel = UserTransactionSummaryModel.init();
 
     for (TransactionModel model in transactionModels) {
-      if (model.status == TransactionStatus.Success) {
+      if (model.status == TransactionStatus.success) {
         if (model.sender.id == UserModel.instance.id) {
           summaryModel.totalSendTransactions++;
         } else if (model.receiver.id == UserModel.instance.id) {
@@ -22,7 +23,7 @@ class UserTransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
           summaryModel.totalReceive += model.amount;
         }
         summaryModel.totalSuccessTransactions++;
-      } else if (model.status != TransactionStatus.Success) {
+      } else if (model.status != TransactionStatus.success) {
         summaryModel.totalFailedTransactions++;
       }
     }

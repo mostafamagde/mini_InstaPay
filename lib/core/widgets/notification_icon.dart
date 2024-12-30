@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/Constants.dart';
+import 'package:mini_instapay/core/utils/constants.dart';
 import 'package:mini_instapay/core/utils/socket_service.dart';
 import 'package:mini_instapay/features/notifications/data/models/notfication_model.dart';
 import 'package:mini_instapay/features/notifications/presentation/manger/notifications/notifications_cubit.dart';
@@ -45,7 +45,7 @@ class NotificationIcon extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: Text(
-                          '${unreadCount}',
+                          '$unreadCount',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12.sp,

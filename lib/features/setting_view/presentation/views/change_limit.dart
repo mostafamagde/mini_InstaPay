@@ -15,7 +15,7 @@ class ChangeLimit extends StatefulWidget {
 
 class _ChangeLimitState extends State<ChangeLimit> {
   String _selectedOption = "Daily";
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final accountId = ModalRoute.of(context)?.settings.arguments as String?;

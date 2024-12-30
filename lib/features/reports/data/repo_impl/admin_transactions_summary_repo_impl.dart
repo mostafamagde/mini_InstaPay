@@ -4,14 +4,15 @@ import 'package:mini_instapay/features/reports/domain/repo_interface/transaction
 import 'package:mini_instapay/features/transactions/data/model/transaction_model.dart';
 
 class AdminTransactionsSummaryRepoImpl extends TransactionsSummaryRepo {
+  @override
   AdminTransactionSummaryModel getTransactionSummaryModel(List<TransactionModel> transactionModels) {
     AdminTransactionSummaryModel summaryModel = AdminTransactionSummaryModel.init();
 
     for (TransactionModel model in transactionModels) {
-      if (model.status == TransactionStatus.Success) {
+      if (model.status == TransactionStatus.success) {
         summaryModel.totalTransactionsAmount += model.amount;
         summaryModel.totalSuccessTransactions++;
-      } else if (model.status != TransactionStatus.Success) {
+      } else if (model.status != TransactionStatus.success) {
         summaryModel.totalFailedTransactions++;
       }
     }

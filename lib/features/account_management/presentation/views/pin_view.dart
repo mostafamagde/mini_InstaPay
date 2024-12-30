@@ -9,9 +9,7 @@ class PinCodeScreen extends StatelessWidget {
   final List<TextEditingController> controllers = List.generate(6, (_) => TextEditingController());
   final List<FocusNode> focusNodes = List.generate(6, (_) => FocusNode());
 
-  PinCodeScreen({
-    Key? key,
-  }) : super(key: key);
+  PinCodeScreen({super.key});
 
   void _onTextChanged(String value, int index, BuildContext context) {
     if (value.isNotEmpty && index < pinLength - 1) {

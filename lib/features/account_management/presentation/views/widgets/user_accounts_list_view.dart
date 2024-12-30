@@ -21,7 +21,7 @@ class UserAccountsListView extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => OtpView(userToken: state.userToken, type: OtpType.ForgetPinOtp),
+              builder: (context) => OtpView(userToken: state.userToken, type: OtpType.forgetPinOtp),
             ),
           );
         }

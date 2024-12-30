@@ -24,7 +24,7 @@ class ChangeEmailView extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => OtpView(userToken: state.message, type: OtpType.ChangeEmailConfirmationOtp),
+              builder: (context) => OtpView(userToken: state.message, type: OtpType.changeEmailConfirmationOtp),
             ),
           );
         } else if (state is ChangeEmailFailure) {
