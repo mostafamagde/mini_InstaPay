@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mini_instapay/core/utils/constants.dart';
+
+import '../utils/Constants.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onTap;

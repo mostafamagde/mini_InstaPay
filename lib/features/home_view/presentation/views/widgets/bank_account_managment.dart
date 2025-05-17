@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/constants.dart';
+import '../../../../../core/utils/Constants.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
 import 'custom_card_button.dart';
 

@@ -20,14 +20,14 @@ class ApiConstants {
   static const String getAllNotifications = '/notification';
   static const String readNotifications = '/notification/markAsRead/';
   static const String sendMoney = "/transaction/send-money";
-  static const String receiveMoney = "transaction/request-recieve-money";
+  static const String receiveMoney = "transaction/request-receive-money";
   static const String forgetPasswordEdnPoint = 'auth/forget-password';
   static const String confirmOtpForgetEdnPoint = 'auth/confirm-otp-forget';
   static const String sendforgetPasswordMailEndPoint = 'auth/send-forget-password-mail/';
   static const String changeDefaultAccount = 'transaction/change-default';
   static const String getAllTransactionEndPoint = "/transaction/admin";
-  static const String confirmReceive = "transaction/confirm-recieve/";
-  static const String rejectReceive = "transaction/reject-recieve/";
+  static const String confirmReceive = "transaction/confirm-receive/";
+  static const String rejectReceive = "transaction/reject-receive/";
   static const String markAsSuspicious = "/transaction/admin/suspiciousTransaction";
   static const String allUsersAdmin = "user/admin";
   static const String banUsersAdmin = "user/admin/banned";

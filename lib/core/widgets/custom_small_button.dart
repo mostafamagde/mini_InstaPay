@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mini_instapay/core/utils/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../utils/Constants.dart';
 
 class CustomSmallButton extends StatelessWidget {
   const CustomSmallButton({super.key, required this.name, required this.icon, this.onTap, this.padding = 0, this.verticalPadding = 0});

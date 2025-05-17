@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mini_instapay/core/enums/transaction_status_enum.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/constants.dart';
+import '../../../../../core/utils/Constants.dart';
 import 'package:mini_instapay/features/transactions/data/model/transaction_model.dart';
 
 class TransactionCard extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_instapay/core/models/user_model.dart';
 import 'package:mini_instapay/core/routes_manager/routes_names.dart';
-import 'package:mini_instapay/core/utils/constants.dart';
+import '../../../../../core/utils/Constants.dart';
 import 'package:mini_instapay/core/widgets/custom_title_container.dart';
 import 'package:mini_instapay/core/widgets/notification_icon.dart';
 import 'package:mini_instapay/features/home_view/presentation/views/widgets/services_section.dart';

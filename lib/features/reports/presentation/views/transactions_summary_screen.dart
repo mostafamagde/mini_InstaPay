@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_instapay/core/utils/constants.dart';
+import '../../../../../core/utils/Constants.dart';
 import 'package:mini_instapay/features/reports/presentation/views/widgets/transactions_summary_screen_body.dart';
 
 class TransactionsSummaryScreen extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:mini_instapay/core/utils/constants.dart';
+import '../../../../../core/utils/Constants.dart';
 import 'package:mini_instapay/features/admin/data/models/admin_user_model.dart';
 
 class UserItem extends StatelessWidget {

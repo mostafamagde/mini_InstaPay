@@ -23,7 +23,7 @@ class OtpLoginRepo extends OtpRepository {
         ApiConstants.loginEndPoint,
         {
           "token": token,
-          "otp": int.parse(otp),
+          "otp": otp,
         },
       );
       if (response.statusCode != 201) {

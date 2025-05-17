@@ -28,7 +28,7 @@ class TransactionModel {
       type: TransactionType.fromJson(json['type']),
       amount: (json['amount'] as num).toDouble(),
       sender: TransactionUserModel.fromJson(json['sender']),
-      receiver: TransactionUserModel.fromJson(json['reciever']), // Corrected to match JSON key
+      receiver: TransactionUserModel.fromJson(json['receiver']), // Corrected to match JSON key
       createdAt: DateTime.parse(json['createdAt']),
     );
   }
@@ -40,7 +40,7 @@ class TransactionModel {
       'type': type.value,
       'amount': amount,
       'sender': sender.toJson(),
-      'reciever': receiver.toJson(), // Corrected to match JSON key
+      'receiver': receiver.toJson(), // Corrected to match JSON key
       'createdAt': createdAt.toIso8601String(),
     };
   }

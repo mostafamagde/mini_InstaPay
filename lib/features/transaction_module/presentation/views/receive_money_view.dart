@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:mini_instapay/core/utils/constants.dart';
+import '../../../../../core/utils/Constants.dart';
 import 'package:mini_instapay/core/widgets/custom_title_container.dart';
 import 'package:mini_instapay/core/widgets/custom_button.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
