@@ -162,13 +162,13 @@ class UserAccountsListItem extends StatelessWidget {
                         BlocProvider.of<ChangeDefaultAccCubit>(context).changeDefault(banks[index].id!);
                       },
                     ),
-                    PopupMenuItem(
-                      value: '6',
-                      child: Text('forget pin'),
-                      onTap: () {
-                        BlocProvider.of<ForgetPinCubit>(context).forgetPin(banks[index].id!);
-                      },
-                    ),
+                    // PopupMenuItem(
+                    //   value: '6',
+                    //   child: Text('forget pin'),
+                    //   onTap: () {
+                    //     BlocProvider.of<ForgetPinCubit>(context).forgetPin(banks[index].id!);
+                    //   },
+                    // ),
                   ];
                 },
               ),

@@ -16,6 +16,7 @@ class ChangeLimit extends StatefulWidget {
 class _ChangeLimitState extends State<ChangeLimit> {
   String _selectedOption = "Daily";
   final TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final accountId = ModalRoute.of(context)?.settings.arguments as String?;
@@ -33,9 +34,9 @@ class _ChangeLimitState extends State<ChangeLimit> {
           }
         },
         builder: (context, state) {
-          return SingleChildScrollView(
-            child: ModalProgressHUD(
-              inAsyncCall: state is ChangeLimitLoading,
+          return ModalProgressHUD(
+            inAsyncCall: state is ChangeLimitLoading,
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

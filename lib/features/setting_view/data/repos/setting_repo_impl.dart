@@ -173,7 +173,7 @@ class SettingRepoImpl implements SettingRepo {
     try {
       final response = await _apiManager.post(ApiConstants.forgetPin + id, headers: {"token": UserModel.instance.token}, {});
 
-      return right(response.data["token"]);
+      return right(response.data["token"] ?? "");
     } catch (e) {
       if (e is DioException) {
         return left(ServerError(e.response?.data["message"] ?? "error"));

@@ -24,7 +24,7 @@ class OtpForgetPinRepo extends OtpRepository {
       );
 
       if (context.mounted) {
-        Navigator.pushReplacementNamed(context, RoutesNames.forgotPin, arguments: response.data["token"]);
+        Navigator.pushReplacementNamed(context, RoutesNames.forgotPin, arguments: response.data["token"] ?? "");
       }
     } catch (e) {
       if (e is DioException) {

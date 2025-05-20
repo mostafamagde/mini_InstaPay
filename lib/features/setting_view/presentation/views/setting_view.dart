@@ -32,15 +32,22 @@ class SettingView extends StatelessWidget {
           Navigator.pushNamed(context, RoutesNames.changeLimit, arguments: UserModel.instance.defaultAcc?.id);
         },
       ),
+      // ButtonModel(
+      //   name: "Forget PIN",
+      //   icon: Icons.security,
+      //   onTap: () {
+      //     if (UserModel.instance.defaultAcc != null) {
+      //       BlocProvider.of<ForgetPinCubit>(context).forgetPin(UserModel.instance.defaultAcc!.id!);
+      //     } else {
+      //       snackBar(content: "You don't have account yet", context: context);
+      //     }
+      //   },
+      // ),
       ButtonModel(
-        name: "Forget PIN",
-        icon: Icons.security,
+        name: "Analytics",
+        icon: Icons.analytics_sharp,
         onTap: () {
-          if (UserModel.instance.defaultAcc != null) {
-            BlocProvider.of<ForgetPinCubit>(context).forgetPin(UserModel.instance.defaultAcc!.id!);
-          } else {
-            snackBar(content: "You don't have account yet", context: context);
-          }
+          Navigator.pushNamed(context, RoutesNames.analyticsView);
         },
       ),
       ButtonModel(
@@ -72,13 +79,6 @@ class SettingView extends StatelessWidget {
               ],
             ),
           );
-        },
-      ),
-      ButtonModel(
-        name: "Analytics",
-        icon: Icons.analytics_sharp,
-        onTap: () {
-          Navigator.pushNamed(context, RoutesNames.analyticsView);
         },
       ),
     ];
