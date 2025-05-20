@@ -19,7 +19,7 @@ class NotificationsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<NotificationsCubit>(context).getNotification();
+    // BlocProvider.of<NotificationsCubit>(context).getNotification();
     return Scaffold(
       appBar: AppBar(
         title: const Text(

@@ -58,8 +58,8 @@ class BankRepoImpl implements BankRepository {
         "bankId": account.bankId,
         "cardNo": account.cardNumber,
         "date": {
-          "year": "20${account.expirationDate.split("/")[1]}",
-          "month": account.expirationDate.split("/")[0],
+          "year": int.parse("20${account.expirationDate.split("/")[1]}"),
+          "month": int.parse(account.expirationDate.split("/")[0]),
         },
         "CVV": account.cvv,
         "PIN": account.pin
@@ -90,7 +90,11 @@ class BankRepoImpl implements BankRepository {
         "oldPIN": oldPin,
         "newPIN": newPin,
       });
-      return right(response.statusMessage ?? "PIN updated");
+      if (response.statusCode! >= 200 && response.statusCode! < 400) {
+        return right("Updated successfully");
+      } else {
+        return left(ServerError(response.data["message"]));
+      }
     } catch (e) {
       if (e is DioException) {
         return left(ServerError(e.response?.data["message"] ?? "error"));

@@ -18,7 +18,7 @@ class OtpForgetPasswordRepo extends OtpRepository {
         ApiConstants.confirmOtpForgetEdnPoint,
         {
           "token": token,
-          "otp": int.parse(otp),
+          "otp": otp,
         },
       );
       if (response.statusCode != 201) {

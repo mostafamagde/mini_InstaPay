@@ -70,7 +70,7 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
               },
             );
             UserModel.instance.setFromjson(userDataResponse.data["data"]);
-            SocketService.instance.connect();
+            // SocketService.instance.connect();
             if (mounted) {
               Navigator.pushReplacementNamed(
                 context,
@@ -109,3 +109,5 @@ class _SplashBodyState extends State<SplashBody> with SingleTickerProviderStateM
     animationController.forward();
   }
 }
+
+

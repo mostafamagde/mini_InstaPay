@@ -38,7 +38,7 @@ class TransactionRepoImpl implements TransactionRepo {
   Future<Either<Errors, String>> receiveMoney(ReceiveModel receive) async {
     try {
       final response = await service.post(ApiConstants.receiveMoney, {
-        "receiveData": receive.receiveData,
+        "receiverData": receive.receiveData,
         "amount": receive.amount,
         "accountId": receive.accountId,
       }, headers: {

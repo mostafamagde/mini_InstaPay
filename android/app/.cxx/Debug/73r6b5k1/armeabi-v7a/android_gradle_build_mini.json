@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "C:\\Flutter\\packages\\flutter_tools\\gradle\\src\\main\\groovy\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\Zeyad\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "C:\\Users\\Zeyad\\Desktop\\mini_instapay\\mini_InstaPay\\android\\app\\.cxx\\Debug\\73r6b5k1\\armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\Zeyad\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "C:\\Users\\Zeyad\\Desktop\\mini_instapay\\mini_InstaPay\\android\\app\\.cxx\\Debug\\73r6b5k1\\armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

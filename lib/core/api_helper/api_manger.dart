@@ -32,6 +32,7 @@ class ApiManager {
       data: data,
       options: Options(
         headers: headers,
+        validateStatus: (status) => true,
       ),
     );
   }

@@ -18,7 +18,7 @@ class OtpSignUpRepo extends OtpRepository {
         ApiConstants.vetifyEmailEndPoint,
         {
           "token": token,
-          "otp": int.parse(otp),
+          "otp": otp,
         },
       );
 

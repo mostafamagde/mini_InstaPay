@@ -19,7 +19,14 @@ class AddAccountCubit extends Cubit<AddAccountState> {
       emit(AddAccountSuccess(msg: "added successfully"));
     } catch (e) {
       if (e is DioException) {
-        emit(AddAccountFailed(errorMessage: e.response?.data['message'] ?? e.message));
+        late final String errMessage;
+        if (e.response?.data['message'] is List) {
+          errMessage = e.response?.data['message'].join('\n') ?? e.message;
+        } else {
+          errMessage = e.response?.data['message'] ?? e.message;
+        }
+
+        emit(AddAccountFailed(errorMessage: errMessage));
       } else {
         emit(AddAccountFailed(errorMessage: e.toString()));
       }

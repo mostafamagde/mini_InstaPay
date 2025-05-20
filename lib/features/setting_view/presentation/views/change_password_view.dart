@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mini_instapay/core/routes_manager/routes_names.dart';
 import 'package:mini_instapay/core/utils/validation.dart';
 import 'package:mini_instapay/core/widgets/custom_button.dart';
 import 'package:mini_instapay/core/widgets/custom_snackbar.dart';
@@ -20,7 +21,11 @@ class ChangePassword extends StatelessWidget {
       listener: (context, state) {
         if (state is ChangePasswordSuccess) {
           snackBar(content: state.message, context: context, color: Colors.green);
-          Navigator.pop(context);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesNames.loginView,
+            (route) => false,
+          );
         } else if (state is ChangePasswordFailure) {
           snackBar(content: state.errMessage, context: context);
         }

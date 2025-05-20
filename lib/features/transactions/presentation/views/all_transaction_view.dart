@@ -14,9 +14,9 @@ class AllTransactionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (UserModel.instance.role == Role.admin) {
-      BlocProvider.of<NotificationsCubit>(context).getNotification();
-    }
+    // if (UserModel.instance.role == Role.admin) {
+    //   BlocProvider.of<NotificationsCubit>(context).getNotification();
+    // }
 
     void getTransactions() {
       UserModel.instance.role == Role.admin ? BlocProvider.of<TransactionCubit>(context).getAllTransaction() : BlocProvider.of<TransactionCubit>(context).getUserTransaction();

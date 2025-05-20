@@ -1,0 +1,2 @@
+C:/Users/Zeyad/Desktop/mini_instapay/mini_InstaPay/android/app/.cxx/Debug/73r6b5k1/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Zeyad/Desktop/mini_instapay/mini_InstaPay/android/app/.cxx/Debug/73r6b5k1/arm64-v8a/CMakeFiles/rebuild_cache.dir

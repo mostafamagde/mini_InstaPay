@@ -38,7 +38,7 @@ class OtpLoginRepo extends OtpRepository {
         } else {
           UserModel.instance.setFromjson(userDataResponse.data["data"]);
         }
-        SocketService.instance.connect();
+        // SocketService.instance.connect();
 
         if (context.mounted) {
           Navigator.pushNamedAndRemoveUntil(

@@ -21,7 +21,7 @@ class _ChangeLimitState extends State<ChangeLimit> {
     final accountId = ModalRoute.of(context)?.settings.arguments as String?;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Limit"),
+        title: const Text("Change Limit", style: TextStyle(color: Colors.white)),
       ),
       body: BlocConsumer<ChangeLimitCubit, ChangeLimitState>(
         listener: (context, state) {

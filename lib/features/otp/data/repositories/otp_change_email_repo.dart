@@ -19,11 +19,11 @@ class OtpChangeEmailRepo extends OtpRepository {
         ApiConstants.confirmChangeEmail,
         data: {
           "token": token,
-          "otp": int.parse(otp),
+          "otp": otp,
         },
         headers: {"token": UserModel.instance.token},
       );
-      if (response.statusCode != 201 && response.statusCode != 200) {
+      if (response.statusCode != 201 && response.statusCode != 200 && response.statusCode != 300 && response.statusCode != 301) {
         throw Exception(response.data["message"]);
       } else {
         if (context.mounted) {

@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<TransactionCubit>(context).getUserTransaction();
-    BlocProvider.of<NotificationsCubit>(context).getNotification();
+    // BlocProvider.of<NotificationsCubit>(context).getNotification();
     final user = UserModel.instance;
     final ThemeData theme = Theme.of(context);
 
@@ -102,11 +102,11 @@ ${user.lastName![0].toUpperCase() + user.lastName!.substring(1)}''',
                   SizedBox(height: 10),
                 ],
               ),
-              Positioned(
-                top: 32,
-                right: 24,
-                child: NotificationIcon(),
-              )
+              // Positioned(
+              //   top: 32,
+              //   right: 24,
+              //   child: NotificationIcon(),
+              // )
             ],
           ),
         ),
