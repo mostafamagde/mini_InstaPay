@@ -73,14 +73,14 @@ class ChangeCredintials extends StatelessWidget {
                       controller: lastNameController,
                     ),
                     SizedBox(height: 20),
-                    CustomTextField(
-                      label: "Address",
-                      icon: Icons.location_on,
-                      inputType: TextInputType.streetAddress,
-                      valid: Validation.validateRegularTextField,
-                      controller: addressController,
-                    ),
-                    SizedBox(height: 20),
+                    // CustomTextField(
+                    //   label: "Address",
+                    //   icon: Icons.location_on,
+                    //   inputType: TextInputType.streetAddress,
+                    //   valid: Validation.validateRegularTextField,
+                    //   controller: addressController,
+                    // ),
+                    // SizedBox(height: 20),
                     CustomTextField(
                       label: "Phone Number",
                       icon: Icons.phone,
